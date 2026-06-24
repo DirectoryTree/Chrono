@@ -1,0 +1,33 @@
+{
+    "name": "stevebauman/chrono",
+    "description": "A PHP port of chrono-node for natural language date parsing.",
+    "license": "MIT",
+    "type": "library",
+    "require": {
+        "php": "^8.2",
+        "nesbot/carbon": "^3.0"
+    },
+    "require-dev": {
+        "pestphp/pest": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chrono\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Chrono\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "pest"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "stable"
+}
