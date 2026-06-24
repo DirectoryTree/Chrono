@@ -20,9 +20,6 @@ class EnMonthNameMiddleEndianParser implements Parser
      * Create an English middle-endian month-name parser.
      */
     public function __construct(
-        /**
-         * Whether year-like month dates should be skipped.
-         */
         protected readonly bool $shouldSkipYearLikeDate = false,
     ) {}
 

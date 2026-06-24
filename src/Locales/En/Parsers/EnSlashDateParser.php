@@ -19,9 +19,6 @@ class EnSlashDateParser implements Parser
      * Create an English slash-date parser.
      */
     public function __construct(
-        /**
-         * Whether numeric slash dates should be read as day/month/year.
-         */
         protected readonly bool $littleEndian = false,
     ) {}
 

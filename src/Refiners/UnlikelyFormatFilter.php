@@ -12,9 +12,6 @@ class UnlikelyFormatFilter extends Filter
      * Create an unlikely-format result filter.
      */
     public function __construct(
-        /**
-         * Whether strict filtering rules should be applied.
-         */
         protected readonly bool $strictMode = false,
     ) {}
 

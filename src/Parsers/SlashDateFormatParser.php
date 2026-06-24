@@ -18,24 +18,12 @@ class SlashDateFormatParser implements Parser
      * Create a slash date parser.
      */
     public function __construct(
-        /**
-         * Whether the date parser should read dates as day/month/year.
-         */
         protected readonly bool $littleEndian = false,
 
-        /**
-         * Whether implied dates should default to future dates.
-         */
         protected readonly bool $forwardDateByDefault = false,
 
-        /**
-         * Whether future-date inference should include the year.
-         */
         protected readonly bool $includeYearWhenForwardDate = false,
 
-        /**
-         * The threshold used to resolve two-digit years into the past.
-         */
         protected readonly int $twoDigitYearPastThreshold = 50,
     ) {}
 

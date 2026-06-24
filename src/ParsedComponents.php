@@ -15,30 +15,12 @@ class ParsedComponents
      * @param  array<int, string>  $tags
      */
     public function __construct(
-        /**
-         * The resolved date represented by these components.
-         */
         protected CarbonImmutable $date,
 
-        /**
-         * Component values explicitly known from the parsed text.
-         *
-         * @var array<string, mixed>
-         */
         protected array $knownValues = [],
 
-        /**
-         * Component values implied from the reference date or parser rules.
-         *
-         * @var array<string, int>
-         */
         protected array $impliedValues = [],
 
-        /**
-         * Tags assigned by parsers and refiners.
-         *
-         * @var array<int, string>
-         */
         protected array $tags = [],
     ) {
         $this->impliedValues = array_replace([

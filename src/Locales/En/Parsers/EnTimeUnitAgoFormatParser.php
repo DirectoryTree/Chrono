@@ -16,9 +16,6 @@ class EnTimeUnitAgoFormatParser extends AbstractParserWithWordBoundary
      * Create an English past relative-duration parser.
      */
     public function __construct(
-        /**
-         * Whether strict relative-duration parsing is enabled.
-         */
         protected readonly bool $strictMode = false,
     ) {}
 

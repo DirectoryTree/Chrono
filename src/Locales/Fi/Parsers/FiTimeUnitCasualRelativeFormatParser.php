@@ -16,9 +16,6 @@ class FiTimeUnitCasualRelativeFormatParser extends AbstractParserWithWordBoundar
      * Create a Finnish casual relative time-unit parser.
      */
     public function __construct(
-        /**
-         * Whether abbreviated time units are accepted.
-         */
         protected readonly bool $allowAbbreviations = true,
     ) {}
 

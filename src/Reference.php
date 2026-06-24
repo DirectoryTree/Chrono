@@ -11,9 +11,6 @@ class Reference
      * Create a reference date wrapper.
      */
     public function __construct(
-        /**
-         * The reference date.
-         */
         public readonly CarbonImmutable $date,
     ) {}
 

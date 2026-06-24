@@ -29,16 +29,8 @@ class Chrono
      * @param  array<string, mixed>  $defaultOptions
      */
     public function __construct(
-        /**
-         * The parser engine implementation.
-         */
         protected readonly ChronoEngine $engine = new EnChrono(),
 
-        /**
-         * The default options applied to each parse call.
-         *
-         * @var array<string, mixed>
-         */
         protected readonly array $defaultOptions = [],
     ) {}
 

@@ -10,11 +10,6 @@ class Options
      * @param  array<string, mixed>  $options
      */
     public function __construct(
-        /**
-         * The raw parser options.
-         *
-         * @var array<string, mixed>
-         */
         protected readonly array $options = [],
     ) {}
 
