@@ -11,7 +11,18 @@ class Configuration
      * @param  array<int, Refiner>  $refiners
      */
     public function __construct(
+        /**
+         * The configured parsers.
+         *
+         * @var array<int, Parser>
+         */
         public readonly array $parsers = [],
+
+        /**
+         * The configured refiners.
+         *
+         * @var array<int, Refiner>
+         */
         public readonly array $refiners = [],
     ) {}
 

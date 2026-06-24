@@ -9,6 +9,9 @@ use Chrono\Refiners\MergingRefiner;
 
 class JaMergeWeekdayComponentRefiner extends MergingRefiner
 {
+    /**
+     * Determine whether the parsed results should be merged.
+     */
     protected function shouldMergeResults(string $textBetween, ParsedResult $date, ParsedResult $weekday, string $text, Reference $reference, Options $options): bool
     {
         return $date->start->isCertain('day')
@@ -17,6 +20,9 @@ class JaMergeWeekdayComponentRefiner extends MergingRefiner
             && preg_match('/^[,、の]?\s*$/u', $textBetween) === 1;
     }
 
+    /**
+     * Merge the parsed results.
+     */
     protected function mergeResults(string $textBetween, ParsedResult $date, ParsedResult $weekday, string $text, Reference $reference, Options $options): ParsedResult
     {
         $date->start->assign('weekday', (int) $weekday->start->get('weekday'));

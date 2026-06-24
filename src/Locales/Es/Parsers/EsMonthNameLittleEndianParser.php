@@ -81,11 +81,17 @@ class EsMonthNameLittleEndianParser implements Parser
         ]);
     }
 
+    /**
+     * Resolve the month value.
+     */
     protected function month(string $month): int
     {
         return EsConstants::monthNumber($month);
     }
 
+    /**
+     * Resolve the year value.
+     */
     protected function year(string $year): int
     {
         $normalized = $this->normalize($year);
@@ -102,6 +108,9 @@ class EsMonthNameLittleEndianParser implements Parser
         return $number < 100 && $number > 50 ? 1900 + $number : $number;
     }
 
+    /**
+     * Normalize the value.
+     */
     protected function normalize(string $value): string
     {
         return EsConstants::normalize($value);

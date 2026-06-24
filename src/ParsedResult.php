@@ -12,11 +12,26 @@ class ParsedResult
      * @param  array<int, string>  $tags
      */
     public function __construct(
+        /**
+         * The zero-based index where the result starts.
+         */
         public readonly int $index,
+
+        /**
+         * The matched text.
+         */
         public string $text,
+
+        /**
+         * The parsed start components.
+         */
         public readonly ParsedComponents $start,
+
+        /**
+         * The parsed end components, when this result is a range.
+         */
         public readonly ?ParsedComponents $end = null,
-        array $tags = []
+        array $tags = [],
     ) {
         $this->addTags($tags);
     }

@@ -82,6 +82,9 @@ class DeWeekdayParser implements Parser
         }, $matches);
     }
 
+    /**
+     * Resolve the weekday value.
+     */
     protected function daysToWeekday(Reference $reference, int $weekday, ?string $modifier = null, ?Options $options = null): int
     {
         if ($modifier === null && ($options?->forwardDate() ?? false)) {
@@ -91,6 +94,9 @@ class DeWeekdayParser implements Parser
         return Weekdays::getDaysToWeekday($reference->date, $weekday, $modifier);
     }
 
+    /**
+     * Resolve parsed date components from the match.
+     */
     protected function components(CarbonImmutable $date, int $weekday): ParsedComponents
     {
         $components = new ParsedComponents($date->setTime(12, 0, 0)->millisecond(0), []);
@@ -105,11 +111,17 @@ class DeWeekdayParser implements Parser
         return $components;
     }
 
+    /**
+     * Resolve the weekday value.
+     */
     protected function weekday(string $weekday): int
     {
         return DeConstants::weekdayNumber($weekday);
     }
 
+    /**
+     * Get modifier.
+     */
     protected function modifier(string $modifier): ?string
     {
         $modifier = $this->normalize($modifier);
@@ -122,11 +134,17 @@ class DeWeekdayParser implements Parser
         };
     }
 
+    /**
+     * Get the parser pattern.
+     */
     protected function weekdayPattern(): string
     {
         return DeConstants::weekdayPattern();
     }
 
+    /**
+     * Normalize the value.
+     */
     protected function normalize(string $value): string
     {
         return DeConstants::normalize($value);

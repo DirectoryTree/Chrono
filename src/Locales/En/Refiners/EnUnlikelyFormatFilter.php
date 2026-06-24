@@ -9,6 +9,9 @@ use Chrono\Refiners\Filter;
 
 class EnUnlikelyFormatFilter extends Filter
 {
+    /**
+     * Determine whether the parsed result is valid.
+     */
     protected function isValid(string $text, ParsedResult $result, Reference $reference, Options $options): bool
     {
         $resultText = trim($result->text);

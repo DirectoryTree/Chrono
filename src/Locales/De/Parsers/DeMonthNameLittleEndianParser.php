@@ -81,11 +81,17 @@ class DeMonthNameLittleEndianParser implements Parser
         ]);
     }
 
+    /**
+     * Resolve the month value.
+     */
     protected function month(string $month): int
     {
         return DeConstants::monthNumber($month);
     }
 
+    /**
+     * Resolve the year value.
+     */
     protected function year(string $year): int
     {
         if (preg_match('/v/iu', $year) === 1) {
@@ -105,6 +111,9 @@ class DeMonthNameLittleEndianParser implements Parser
         return $year;
     }
 
+    /**
+     * Normalize the value.
+     */
     protected function normalize(string $value): string
     {
         return DeConstants::normalize($value);

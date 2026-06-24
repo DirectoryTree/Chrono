@@ -34,6 +34,9 @@ class ItTimeExpressionParser extends AbstractTimeExpressionParser
         return '(?:\s*(?:in punto|o\W*in punto|sera|(?:di|del|della|in|al|alla|alle)\s*(?:mattina|pomeriggio|sera)))?(?!\/)(?=\W|$)';
     }
 
+    /**
+     * Resolve parsed date components from the match.
+     */
     protected function primaryTimeComponents(array $match, Reference $reference): ?ParsedComponents
     {
         $components = parent::primaryTimeComponents($match, $reference);
@@ -69,12 +72,18 @@ class ItTimeExpressionParser extends AbstractTimeExpressionParser
         return $components;
     }
 
+    /**
+     * Determine whether the parsed result should be rejected.
+     */
     protected function shouldRejectResult(array $match, string $text, ?ParsedComponents $end): bool
     {
         return $end === null
             && preg_match('/^\d{1,4}$/', $text) === 1;
     }
 
+    /**
+     * Get result.
+     */
     protected function result(string $text, array $match, Reference $reference): ?ParsedResult
     {
         $result = parent::result($text, $match, $reference);

@@ -76,6 +76,9 @@ trait InteractsWithVietnameseRelativeDates
         return $units;
     }
 
+    /**
+     * Get the parser pattern.
+     */
     protected function durationPattern(): string
     {
         $single = '(?:'.ViConstants::numberPattern().')\s{0,5}(?:'.ViConstants::timeUnitPattern().')\s{0,5}';

@@ -15,6 +15,9 @@ class NlMergeDateRangeRefiner extends AbstractMergeDateRangeRefiner
         return '/^\s*(?:tot|-)\s*$/iu';
     }
 
+    /**
+     * Imply missing component values.
+     */
     protected function implyMissingComponents(ParsedComponents $start, ParsedComponents $end): void
     {
         if (! $start->isCertain('year') && $end->isCertain('year')) {

@@ -23,6 +23,9 @@ class DeTimeExpressionParser extends AbstractTimeExpressionParser
         return '\s*(?:-|–|~|〜|bis)\s*';
     }
 
+    /**
+     * Determine whether the parsed result should be rejected.
+     */
     protected function shouldRejectResult(array $match, string $text, ?ParsedComponents $end): bool
     {
         return $end === null

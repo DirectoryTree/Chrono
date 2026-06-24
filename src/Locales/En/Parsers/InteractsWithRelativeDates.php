@@ -78,6 +78,9 @@ trait InteractsWithRelativeDates
         return $date;
     }
 
+    /**
+     * Resolve the duration amount.
+     */
     protected function amount(string $amount, ?string $unit = null): int
     {
         $amount = strtolower($amount);
@@ -107,6 +110,9 @@ trait InteractsWithRelativeDates
         ][$amount] ?? (int) $amount;
     }
 
+    /**
+     * Resolve the duration unit.
+     */
     protected function unit(string $unit): string
     {
         return match (strtolower($unit)) {
@@ -183,6 +189,9 @@ trait InteractsWithRelativeDates
         return 'year';
     }
 
+    /**
+     * Determine whether the duration contains a strict abbreviated unit.
+     */
     protected function hasStrictAbbreviatedUnit(string $duration): bool
     {
         return preg_match('/(?:\d+(?:\.\d+)?|a|an|one|two|three|four|five|six|seven|eight|nine|ten|few)\s*(?:secs?|mins?|hrs?|[smhdw]|mo|mons?|qtrs?|yrs?|y)\b/i', $duration) === 1;

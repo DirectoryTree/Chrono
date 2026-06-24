@@ -145,6 +145,9 @@ class EnMonthNameTrailingYearParser implements Parser
         ];
     }
 
+    /**
+     * Resolve parsed date components from the match.
+     */
     protected function dateTimeComponents(CarbonImmutable $date): ParsedComponents
     {
         $components = $this->components($date, $this->dateTimeKnown($date));
@@ -156,6 +159,9 @@ class EnMonthNameTrailingYearParser implements Parser
         return $components->imply('meridiem', $date->hour < 12 ? Meridiem::AM->value : Meridiem::PM->value);
     }
 
+    /**
+     * Resolve the timezone offset.
+     */
     protected function timezoneOffset(string $timezone): ?int
     {
         return [

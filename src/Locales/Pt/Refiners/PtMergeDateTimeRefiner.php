@@ -60,6 +60,9 @@ class PtMergeDateTimeRefiner extends MergingRefiner
         return $date;
     }
 
+    /**
+     * Determine whether the result is a casual time reference.
+     */
     protected function isCasualTimeReference(ParsedResult $result): bool
     {
         return in_array('parser/PTCasualTimeParser', $result->tags(), true)
@@ -70,6 +73,9 @@ class PtMergeDateTimeRefiner extends MergingRefiner
             ]) !== [];
     }
 
+    /**
+     * Resolve the hour value.
+     */
     protected function hour(ParsedResult $date, ParsedResult $time): int
     {
         $hour = $time->start->date()->hour;

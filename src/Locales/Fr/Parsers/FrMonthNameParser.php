@@ -184,16 +184,25 @@ class FrMonthNameParser implements Parser
         }, $matches)));
     }
 
+    /**
+     * Resolve the month value.
+     */
     protected function month(string $month): int
     {
         return FrConstants::monthNumber($month);
     }
 
+    /**
+     * Resolve the weekday value.
+     */
     protected function weekday(string $weekday): int
     {
         return FrConstants::weekdayNumber($weekday);
     }
 
+    /**
+     * Resolve the year value.
+     */
     protected function closestYear(Reference $reference, int $month, int $day): int
     {
         $year = $reference->date->year;
@@ -210,6 +219,9 @@ class FrMonthNameParser implements Parser
         return $year;
     }
 
+    /**
+     * Resolve the year value.
+     */
     protected function year(int $year, string $era): int
     {
         $era = $this->normalize($era);
@@ -221,6 +233,9 @@ class FrMonthNameParser implements Parser
         return $year < 100 && $year > 50 ? 1900 + $year : $year;
     }
 
+    /**
+     * Resolve the hour value.
+     */
     protected function meridiemHour(int $hour, ?string $meridiem): int
     {
         $meridiem = strtolower((string) $meridiem);
@@ -236,6 +251,9 @@ class FrMonthNameParser implements Parser
         return $hour;
     }
 
+    /**
+     * Normalize the value.
+     */
     protected function normalize(string $value): string
     {
         return FrConstants::normalize($value);

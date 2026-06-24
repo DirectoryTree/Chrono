@@ -53,6 +53,9 @@ class JaCasualDateParser implements Parser
         }, $matches);
     }
 
+    /**
+     * Normalize the value.
+     */
     protected function normalize(string $text): string
     {
         return match ($text) {

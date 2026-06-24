@@ -49,6 +49,9 @@ class JaStandardParser implements Parser
         }, $matches)));
     }
 
+    /**
+     * Resolve the year value.
+     */
     protected function year(array $match, Reference $reference, int $day, int $month): int
     {
         if (($match['special'][0] ?? '') !== '') {

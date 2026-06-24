@@ -18,7 +18,12 @@ class EnSlashDateParser implements Parser
     /**
      * Create an English slash-date parser.
      */
-    public function __construct(protected readonly bool $littleEndian = false) {}
+    public function __construct(
+        /**
+         * Whether numeric slash dates should be read as day/month/year.
+         */
+        protected readonly bool $littleEndian = false,
+    ) {}
 
     /**
      * Parse English slash-style dates and English slash-date extensions.
@@ -115,6 +120,9 @@ class EnSlashDateParser implements Parser
         }, $matches)));
     }
 
+    /**
+     * Resolve the year value.
+     */
     protected function year(string $year, Reference $reference): int
     {
         if ($year === '') {

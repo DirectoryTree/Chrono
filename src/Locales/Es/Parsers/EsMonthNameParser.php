@@ -138,11 +138,17 @@ class EsMonthNameParser implements Parser
         }, $matches)));
     }
 
+    /**
+     * Resolve the month value.
+     */
     protected function month(string $month): int
     {
         return EsConstants::monthNumber($month);
     }
 
+    /**
+     * Resolve the year value.
+     */
     protected function closestYear(Reference $reference, int $month, int $day): int
     {
         $year = $reference->date->year;
@@ -159,6 +165,9 @@ class EsMonthNameParser implements Parser
         return $year;
     }
 
+    /**
+     * Resolve the year value.
+     */
     protected function year(int $year, string $era): int
     {
         $era = $this->normalize($era);
@@ -170,6 +179,9 @@ class EsMonthNameParser implements Parser
         return $year < 100 && $year > 50 ? 1900 + $year : $year;
     }
 
+    /**
+     * Normalize the value.
+     */
     protected function normalize(string $value): string
     {
         return EsConstants::normalize($value);

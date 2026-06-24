@@ -42,6 +42,9 @@ class ExtractTimezoneOffsetRefiner implements Refiner
         return $results;
     }
 
+    /**
+     * Assign the parsed component value.
+     */
     protected function assignTimezone(ParsedResult $result, int $offset): void
     {
         $result->start->assign('timezoneOffset', $offset);

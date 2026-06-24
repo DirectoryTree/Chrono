@@ -78,6 +78,9 @@ class EsSlashDateParser implements Parser
         return $results;
     }
 
+    /**
+     * Resolve the year value.
+     */
     protected function year(int $year): int
     {
         if ($year < 100) {

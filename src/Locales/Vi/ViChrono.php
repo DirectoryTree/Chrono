@@ -31,8 +31,9 @@ class ViChrono extends ConfiguredChronoEngine
     /**
      * Create a configured Vietnamese Chrono engine.
      */
-    public function __construct(?Configuration $configuration = null)
-    {
+    public function __construct(
+        ?Configuration $configuration = null,
+    ) {
         parent::__construct($configuration ?? self::createCasualConfiguration());
     }
 

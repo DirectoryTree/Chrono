@@ -117,6 +117,9 @@ trait InteractsWithGermanRelativeDates
         return $units;
     }
 
+    /**
+     * Get the parser pattern.
+     */
     protected function durationPattern(): string
     {
         $numberPattern = $this->numberPattern();
@@ -126,11 +129,17 @@ trait InteractsWithGermanRelativeDates
         return "{$single}(?:\\s*(?:,?\\s*(?:und)|,)?\\s*{$single})*";
     }
 
+    /**
+     * Get the parser pattern.
+     */
     protected function numberPattern(): string
     {
         return '(?:'.$this->alternation(array_keys($this->integers)).'|[0-9]+|[0-9]+\.[0-9]+|halb?|halbe?|einigen?|wenigen?|mehreren?)';
     }
 
+    /**
+     * Resolve the number value.
+     */
     protected function number(string $number): float
     {
         $number = $this->normalize($number);
@@ -158,16 +167,25 @@ trait InteractsWithGermanRelativeDates
         return (float) $number;
     }
 
+    /**
+     * Get the parser pattern.
+     */
     protected function timeUnitPattern(): string
     {
         return $this->alternation(array_keys($this->timeUnits));
     }
 
+    /**
+     * Resolve the time unit value.
+     */
     protected function timeUnit(string $unit): ?string
     {
         return $this->timeUnits[$this->normalize($unit)] ?? null;
     }
 
+    /**
+     * Normalize the value.
+     */
     protected function normalize(string $value): string
     {
         return strtr(strtolower($value), [

@@ -24,6 +24,9 @@ class FrTimeExpressionParser extends AbstractTimeExpressionParser
         return '\s*(?:-|–|~|〜|[àa]|\?)\s*';
     }
 
+    /**
+     * Get result.
+     */
     protected function result(string $text, array $match, Reference $reference): ?ParsedResult
     {
         $result = parent::result($text, $match, $reference);

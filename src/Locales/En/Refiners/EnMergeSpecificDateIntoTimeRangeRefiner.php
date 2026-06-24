@@ -11,6 +11,9 @@ class EnMergeSpecificDateIntoTimeRangeRefiner extends MergingRefiner
 {
     use InteractsWithEnglishRefiners;
 
+    /**
+     * Determine whether the parsed results should be merged.
+     */
     protected function shouldMergeResults(string $textBetween, ParsedResult $timeRange, ParsedResult $date, string $text, Reference $reference, Options $options): bool
     {
         if ($timeRange->end === null || ! $timeRange->start->isCertain('hour') || ! in_array('refiner/mergeTimeFollowedByDate', $timeRange->tags(), true)) {
@@ -24,6 +27,9 @@ class EnMergeSpecificDateIntoTimeRangeRefiner extends MergingRefiner
         return $this->isDateTimeConnector($textBetween);
     }
 
+    /**
+     * Merge the parsed results.
+     */
     protected function mergeResults(string $textBetween, ParsedResult $timeRange, ParsedResult $date, string $text, Reference $reference, Options $options): ParsedResult
     {
         $timeRange->start

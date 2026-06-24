@@ -53,6 +53,9 @@ class DeDashDateParser implements Parser
         }, $matches)));
     }
 
+    /**
+     * Resolve the year value.
+     */
     protected function year(int $year): int
     {
         if ($year < 100) {

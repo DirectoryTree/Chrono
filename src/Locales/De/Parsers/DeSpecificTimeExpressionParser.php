@@ -150,6 +150,9 @@ class DeSpecificTimeExpressionParser implements Parser
         return $components;
     }
 
+    /**
+     * Normalize the value.
+     */
     protected function normalize(string $value): string
     {
         return strtr(mb_strtolower(str_replace(' ', '', $value)), [

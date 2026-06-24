@@ -11,6 +11,9 @@ class EnMergeRelativeAfterDateRefiner extends MergingRefiner
 {
     use InteractsWithEnglishRefiners;
 
+    /**
+     * Determine whether the parsed results should be merged.
+     */
     protected function shouldMergeResults(string $textBetween, ParsedResult $date, ParsedResult $relative, string $text, Reference $reference, Options $options): bool
     {
         if (preg_match('/^\s*$/', $textBetween) !== 1) {
@@ -20,6 +23,9 @@ class EnMergeRelativeAfterDateRefiner extends MergingRefiner
         return $this->isSignedRelativeResult($relative);
     }
 
+    /**
+     * Merge the parsed results.
+     */
     protected function mergeResults(string $textBetween, ParsedResult $date, ParsedResult $relative, string $text, Reference $reference, Options $options): ParsedResult
     {
         $duration = $this->relativeDuration($relative->text);
@@ -40,6 +46,9 @@ class EnMergeRelativeAfterDateRefiner extends MergingRefiner
         return $date;
     }
 
+    /**
+     * Determine whether the result is a signed relative result.
+     */
     protected function isSignedRelativeResult(ParsedResult $result): bool
     {
         return in_array('result/relativeDate', $result->tags(), true)

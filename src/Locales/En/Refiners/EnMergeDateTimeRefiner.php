@@ -15,6 +15,9 @@ class EnMergeDateTimeRefiner extends MergingRefiner
 {
     use InteractsWithEnglishRefiners;
 
+    /**
+     * Determine whether the parsed results should be merged.
+     */
     protected function shouldMergeResults(string $textBetween, ParsedResult $date, ParsedResult $time, string $text, Reference $reference, Options $options): bool
     {
         if (! $date->start->isCertain('day') && ! $date->start->isOnlyWeekdayComponent()) {
@@ -32,12 +35,18 @@ class EnMergeDateTimeRefiner extends MergingRefiner
         return $this->isDateTimeConnector($textBetween);
     }
 
+    /**
+     * Determine whether the result is a time result.
+     */
     protected function isTimeResult(ParsedResult $result): bool
     {
         return $result->start->isCertain('hour')
             || in_array('parser/ENCasualTimeParser', $result->start->tags(), true);
     }
 
+    /**
+     * Merge the parsed results.
+     */
     protected function mergeResults(string $textBetween, ParsedResult $date, ParsedResult $time, string $text, Reference $reference, Options $options): ParsedResult
     {
         $this->mergeTimeComponents($date->start, $time->start);
@@ -63,6 +72,9 @@ class EnMergeDateTimeRefiner extends MergingRefiner
         return $date;
     }
 
+    /**
+     * Resolve the timezone offset.
+     */
     protected function timezoneOffset(ParsedResult $time, ParsedResult $date, Options $options): ?int
     {
         if (preg_match('/\b(?<abbr>[A-Z]{2,4})\s*$/', $time->text, $match) !== 1) {
@@ -72,6 +84,9 @@ class EnMergeDateTimeRefiner extends MergingRefiner
         return Timezone::offset($match['abbr'], $date->start->date(), $options);
     }
 
+    /**
+     * Merge the parsed results.
+     */
     protected function mergeTimeComponents(ParsedComponents $date, ParsedComponents $time): void
     {
         foreach (['hour', 'minute', 'second', 'millisecond'] as $component) {
@@ -95,6 +110,9 @@ class EnMergeDateTimeRefiner extends MergingRefiner
         $date->addTags($time->tags());
     }
 
+    /**
+     * Merge the parsed results.
+     */
     protected function mergeDateComponents(ParsedComponents $target, ParsedComponents $source, ?CarbonImmutable $date = null): void
     {
         $date ??= $source->date();

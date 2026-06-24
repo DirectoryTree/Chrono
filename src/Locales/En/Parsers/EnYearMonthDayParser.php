@@ -18,6 +18,9 @@ class EnYearMonthDayParser implements Parser
      * Create an English year-month-day parser.
      */
     public function __construct(
+        /**
+         * Whether month/day ordering should be enforced strictly.
+         */
         protected readonly bool $strictMonthDateOrder = false,
     ) {}
 

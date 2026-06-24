@@ -52,6 +52,9 @@ abstract class AbstractMergeDateRangeRefiner extends MergingRefiner
         return $range;
     }
 
+    /**
+     * Imply missing component values.
+     */
     protected function implyMissingComponents(ParsedComponents $start, ParsedComponents $end): void
     {
         if ($start->isOnlyWeekdayComponent() || $end->isOnlyWeekdayComponent()) {

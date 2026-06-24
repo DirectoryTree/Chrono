@@ -20,6 +20,9 @@ class EnMonthNameMiddleEndianParser implements Parser
      * Create an English middle-endian month-name parser.
      */
     public function __construct(
+        /**
+         * Whether year-like month dates should be skipped.
+         */
         protected readonly bool $shouldSkipYearLikeDate = false,
     ) {}
 
@@ -98,6 +101,9 @@ class EnMonthNameMiddleEndianParser implements Parser
         }, $matches)));
     }
 
+    /**
+     * Create a parsed result from a month/date match.
+     */
     protected function monthDateResult(array $match, Reference $reference, string $monthText, string $dayText, string $yearText = '', string $era = ''): ?ParsedResult
     {
         $month = EnConstants::MONTHS[strtolower($monthText)];
@@ -117,6 +123,9 @@ class EnMonthNameMiddleEndianParser implements Parser
         ])))->addTag('parser/ENMonthNameMiddleEndianParser');
     }
 
+    /**
+     * Get known.
+     */
     protected function known(array $match, string $yearText, int $year, int $month, int $day, int $hour, int $minute): array
     {
         return [
@@ -127,6 +136,9 @@ class EnMonthNameMiddleEndianParser implements Parser
         ];
     }
 
+    /**
+     * Resolve parsed date components from the match.
+     */
     protected function endComponents(array $match, CarbonImmutable $start): ?ParsedComponents
     {
         $endDay = $match['endday'][0] ?? '';
@@ -166,6 +178,9 @@ class EnMonthNameMiddleEndianParser implements Parser
         return $components;
     }
 
+    /**
+     * Resolve the year value.
+     */
     protected function year(int $year, string $era): int
     {
         $year = match (strtoupper($era)) {

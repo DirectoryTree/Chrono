@@ -24,11 +24,17 @@ abstract class AbstractZhTimeExpressionParser implements Parser
 
     abstract protected function tag(): string;
 
+    /**
+     * Get the parser pattern.
+     */
     protected function dayWordPattern(): string
     {
         return '今|明|前|大前|后|後|大后|大後|昨';
     }
 
+    /**
+     * Normalize the value.
+     */
     protected function normalizeDay(string $day): string
     {
         return $day;
@@ -87,6 +93,9 @@ abstract class AbstractZhTimeExpressionParser implements Parser
         }, $matches)));
     }
 
+    /**
+     * Resolve parsed date components from the match.
+     */
     protected function componentsFromMatch(array $match, Reference $reference): ?ParsedComponents
     {
         $hour = ZhConstants::number($match['hour'][0], $this->numbers());
@@ -170,6 +179,9 @@ abstract class AbstractZhTimeExpressionParser implements Parser
         return $components;
     }
 
+    /**
+     * Return the match with offsets removed.
+     */
     protected function offsetlessMatch(array $match): array
     {
         $offsetless = [];

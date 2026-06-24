@@ -255,6 +255,9 @@ class Timezone
             : (int) $timezone['timezoneOffsetNonDst'];
     }
 
+    /**
+     * Resolve the timezone offset.
+     */
     protected static function ambiguousOffset(string $timezone, CarbonImmutable $date): ?int
     {
         return match ($timezone) {
@@ -267,6 +270,9 @@ class Timezone
         };
     }
 
+    /**
+     * Determine whether the date is in North American daylight saving time.
+     */
     protected static function isNorthAmericanDst(CarbonImmutable $date): bool
     {
         $start = self::getNthWeekdayOfMonth($date->year, Month::MARCH, Weekday::SUNDAY, 2, 2);
@@ -275,6 +281,9 @@ class Timezone
         return $date->greaterThan($start) && ! $date->greaterThan($end);
     }
 
+    /**
+     * Determine whether the date is in Central European daylight saving time.
+     */
     protected static function isCentralEuropeanDst(CarbonImmutable $date): bool
     {
         $start = self::getLastWeekdayOfMonth($date->year, Month::MARCH, Weekday::SUNDAY, 2);
@@ -318,11 +327,17 @@ class Timezone
         return $date;
     }
 
+    /**
+     * Resolve the month value.
+     */
     protected static function monthValue(Month|int $month): int
     {
         return $month instanceof Month ? $month->value : $month;
     }
 
+    /**
+     * Resolve the weekday value.
+     */
     protected static function weekdayValue(Weekday|int $weekday): int
     {
         return $weekday instanceof Weekday ? $weekday->value : $weekday;

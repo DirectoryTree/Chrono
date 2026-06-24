@@ -23,6 +23,9 @@ class JaWeekdayParser implements Parser
         return array_values(array_filter(array_map(fn (array $match): ?ParsedResult => $this->result($match, $reference, $options, 'parser/JPWeekdayParser'), $matches)));
     }
 
+    /**
+     * Get result.
+     */
     protected function result(array $match, Reference $reference, Options $options, string $tag): ?ParsedResult
     {
         $weekday = JaConstants::WEEKDAYS[$match['weekday'][0]] ?? null;

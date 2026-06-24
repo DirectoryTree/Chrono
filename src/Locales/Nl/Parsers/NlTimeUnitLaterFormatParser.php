@@ -15,6 +15,9 @@ class NlTimeUnitLaterFormatParser extends AbstractParserWithWordBoundary
      * Create a parser instance.
      */
     public function __construct(
+        /**
+         * Whether strict relative-duration parsing is enabled.
+         */
         protected readonly bool $strictMode = false,
     ) {}
 

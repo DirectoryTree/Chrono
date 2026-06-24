@@ -142,16 +142,25 @@ class DeMonthNameParser implements Parser
         }, $matches)));
     }
 
+    /**
+     * Resolve the month value.
+     */
     protected function month(string $month): int
     {
         return DeConstants::monthNumber($month);
     }
 
+    /**
+     * Resolve the weekday value.
+     */
     protected function weekday(string $weekday): int
     {
         return DeConstants::weekdayNumber($weekday);
     }
 
+    /**
+     * Resolve the year value.
+     */
     protected function closestYear(Reference $reference, int $month, int $day): int
     {
         $year = $reference->date->year;
@@ -168,6 +177,9 @@ class DeMonthNameParser implements Parser
         return $year;
     }
 
+    /**
+     * Resolve the year value.
+     */
     protected function year(int $year, string $era): int
     {
         $era = $this->normalize($era);
@@ -179,6 +191,9 @@ class DeMonthNameParser implements Parser
         return $year < 100 && $year > 50 ? 1900 + $year : $year;
     }
 
+    /**
+     * Normalize the value.
+     */
     protected function normalize(string $value): string
     {
         return DeConstants::normalize($value);

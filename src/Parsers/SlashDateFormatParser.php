@@ -18,9 +18,24 @@ class SlashDateFormatParser implements Parser
      * Create a slash date parser.
      */
     public function __construct(
+        /**
+         * Whether the date parser should read dates as day/month/year.
+         */
         protected readonly bool $littleEndian = false,
+
+        /**
+         * Whether implied dates should default to future dates.
+         */
         protected readonly bool $forwardDateByDefault = false,
+
+        /**
+         * Whether future-date inference should include the year.
+         */
         protected readonly bool $includeYearWhenForwardDate = false,
+
+        /**
+         * The threshold used to resolve two-digit years into the past.
+         */
         protected readonly int $twoDigitYearPastThreshold = 50,
     ) {}
 
@@ -94,6 +109,9 @@ class SlashDateFormatParser implements Parser
         }, $matches)));
     }
 
+    /**
+     * Resolve the year value.
+     */
     protected function year(string $year, Reference $reference, int $day, int $month): int
     {
         if ($year === '') {
@@ -121,6 +139,9 @@ class SlashDateFormatParser implements Parser
         return Years::findYearClosestToReference($reference->date, $day, $month);
     }
 
+    /**
+     * Determine whether the date is followed by a separated time.
+     */
     protected function isFollowedBySeparatedTime(string $text, array $match): bool
     {
         $after = substr($text, $match[0][1] + strlen($match[0][0]));
@@ -128,6 +149,9 @@ class SlashDateFormatParser implements Parser
         return preg_match('/^[.:-]\d{1,2}:\d{2}(?::\d{2})?\b/', $after) === 1;
     }
 
+    /**
+     * Determine whether the text looks like a version number.
+     */
     protected function looksLikeVersionNumber(string $dateText, string $yearText): bool
     {
         if ($yearText === '' && (str_contains($dateText, '.') || str_contains($dateText, '-'))) {

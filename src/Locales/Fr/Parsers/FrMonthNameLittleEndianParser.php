@@ -89,16 +89,25 @@ class FrMonthNameLittleEndianParser implements Parser
         ]);
     }
 
+    /**
+     * Get ordinal.
+     */
     protected function ordinal(string $value): int
     {
         return (int) preg_replace('/er$/iu', '', $value);
     }
 
+    /**
+     * Resolve the month value.
+     */
     protected function month(string $month): int
     {
         return FrConstants::monthNumber($month);
     }
 
+    /**
+     * Resolve the year value.
+     */
     protected function year(string $year): int
     {
         $normalized = $this->normalize($year);
@@ -115,6 +124,9 @@ class FrMonthNameLittleEndianParser implements Parser
         return $number < 100 ? ($number > 50 ? $number + 1900 : $number + 2000) : $number;
     }
 
+    /**
+     * Normalize the value.
+     */
     protected function normalize(string $value): string
     {
         return FrConstants::normalize($value);

@@ -8,6 +8,9 @@ use Chrono\Reference;
 
 class MergeWeekdayComponentRefiner extends MergingRefiner
 {
+    /**
+     * Determine whether the parsed results should be merged.
+     */
     protected function shouldMergeResults(string $textBetween, ParsedResult $current, ParsedResult $next, string $text, Reference $reference, Options $options): bool
     {
         return $current->start->isOnlyWeekdayComponent()
@@ -17,6 +20,9 @@ class MergeWeekdayComponentRefiner extends MergingRefiner
             && preg_match('/^,?\s*$/', $textBetween) === 1;
     }
 
+    /**
+     * Merge the parsed results.
+     */
     protected function mergeResults(string $textBetween, ParsedResult $current, ParsedResult $next, string $text, Reference $reference, Options $options): ParsedResult
     {
         $next->start->assign('weekday', (int) $current->start->get('weekday'));

@@ -75,6 +75,9 @@ class EnMonthNameOrdinalParser implements Parser
         return $this->ordinalWordRangeResults($matches, $reference);
     }
 
+    /**
+     * Create a parsed result from a month/date match.
+     */
     protected function monthDateResult(array $match, Reference $reference, string $monthText, string $dayText, string $yearText = '', string $era = ''): ?ParsedResult
     {
         $month = EnConstants::MONTHS[strtolower($monthText)];
@@ -131,6 +134,9 @@ class EnMonthNameOrdinalParser implements Parser
         }, $matches)));
     }
 
+    /**
+     * Get the parser pattern.
+     */
     protected function ordinalWordPattern(): string
     {
         return implode('|', [
@@ -160,6 +166,9 @@ class EnMonthNameOrdinalParser implements Parser
         ]);
     }
 
+    /**
+     * Resolve the ordinal word value.
+     */
     protected function ordinalWord(string $word): int
     {
         return $this->ordinalWords()[$this->normalizeOrdinalWord($word)];
@@ -205,11 +214,17 @@ class EnMonthNameOrdinalParser implements Parser
         ];
     }
 
+    /**
+     * Normalize the value.
+     */
     protected function normalizeOrdinalWord(string $word): string
     {
         return str_replace(['-', ' '], '', strtolower($word));
     }
 
+    /**
+     * Resolve the year value.
+     */
     protected function year(int $year, string $era): int
     {
         $year = match (strtoupper($era)) {

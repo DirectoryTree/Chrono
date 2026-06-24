@@ -57,6 +57,9 @@ class FrTimeUnitRelativeFormatParser extends AbstractParserWithWordBoundary
             ->addTag('parser/FRTimeUnitRelativeFormatParser');
     }
 
+    /**
+     * Determine whether the modifier points to the past.
+     */
     protected function isPastModifier(string $modifier): bool
     {
         return preg_match('/derni[eè]re?s?|pass[ée]e?s?|pr[ée]c[ée]dents?/iu', $modifier) === 1;

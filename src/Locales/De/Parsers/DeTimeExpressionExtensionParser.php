@@ -63,6 +63,9 @@ class DeTimeExpressionExtensionParser implements Parser
         return array_values(array_filter(array_map(fn (array $match): ?ParsedResult => $this->rangeResult($match, $reference), $matches)));
     }
 
+    /**
+     * Create a parsed result for a time range.
+     */
     protected function rangeResult(array $match, Reference $reference): ?ParsedResult
     {
         $start = $this->time($match, '', $match['endSuffix'][0] ?? '');
@@ -120,6 +123,9 @@ class DeTimeExpressionExtensionParser implements Parser
         return compact('hour', 'minute', 'meridiemCertain');
     }
 
+    /**
+     * Get result.
+     */
     protected function result(array $match, Reference $reference): ?ParsedResult
     {
         $time = $this->time($match, '', '');
@@ -140,6 +146,9 @@ class DeTimeExpressionExtensionParser implements Parser
         return new ParsedResult($match[0][1], trim($match[0][0]), $components);
     }
 
+    /**
+     * Create a parsed result for a midday expression.
+     */
     protected function middayResult(array $match, Reference $reference): ParsedResult
     {
         $date = $reference->date->hour(12)->minute(0)->second(0)->millisecond(0);
@@ -151,6 +160,9 @@ class DeTimeExpressionExtensionParser implements Parser
         );
     }
 
+    /**
+     * Resolve parsed date components from the match.
+     */
     protected function timeComponents(\Carbon\CarbonImmutable $date, bool $meridiemCertain): ParsedComponents
     {
         return $this->components($date, [
@@ -160,6 +172,9 @@ class DeTimeExpressionExtensionParser implements Parser
         ]);
     }
 
+    /**
+     * Resolve the hour value.
+     */
     protected function hour(int $hour, string $suffix): int
     {
         $suffix = $this->normalize($suffix);
@@ -175,11 +190,17 @@ class DeTimeExpressionExtensionParser implements Parser
         return $hour;
     }
 
+    /**
+     * Get the parser pattern.
+     */
     protected function suffixPattern(): string
     {
         return 'morgens|vormittags|nachmittags|abends|am\s+abend|in\s+der\s+nacht';
     }
 
+    /**
+     * Normalize the value.
+     */
     protected function normalize(string $value): string
     {
         return strtr(strtolower(str_replace(' ', '', $value)), [

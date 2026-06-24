@@ -30,6 +30,9 @@ class EnMonthNameWeekdayParser implements Parser
         }, $matches)));
     }
 
+    /**
+     * Create a parsed result from a month/date match.
+     */
     protected function monthDateResult(array $match, Reference $reference, string $monthText, string $dayText, string $yearText = '', string $era = '', string $weekdayText = ''): ?ParsedResult
     {
         $month = EnConstants::MONTHS[strtolower($monthText)];
@@ -50,6 +53,9 @@ class EnMonthNameWeekdayParser implements Parser
         ]));
     }
 
+    /**
+     * Resolve the year value.
+     */
     protected function year(int $year, string $era): int
     {
         $year = match (strtoupper($era)) {

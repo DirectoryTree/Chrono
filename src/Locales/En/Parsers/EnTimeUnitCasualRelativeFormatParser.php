@@ -16,6 +16,9 @@ class EnTimeUnitCasualRelativeFormatParser extends AbstractParserWithWordBoundar
      * Create an English casual relative time-unit parser.
      */
     public function __construct(
+        /**
+         * Whether abbreviated time units are accepted.
+         */
         protected readonly bool $allowAbbreviations = true,
     ) {}
 

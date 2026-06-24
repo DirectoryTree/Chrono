@@ -12,6 +12,9 @@ class EnMergeTimeFollowedByDateRefiner extends MergingRefiner
 {
     use InteractsWithEnglishRefiners;
 
+    /**
+     * Determine whether the parsed results should be merged.
+     */
     protected function shouldMergeResults(string $textBetween, ParsedResult $time, ParsedResult $date, string $text, Reference $reference, Options $options): bool
     {
         if (! $time->start->isCertain('hour') || $time->start->isCertain('day')) {
@@ -25,6 +28,9 @@ class EnMergeTimeFollowedByDateRefiner extends MergingRefiner
         return $this->isDateTimeConnector($textBetween);
     }
 
+    /**
+     * Merge the parsed results.
+     */
     protected function mergeResults(string $textBetween, ParsedResult $time, ParsedResult $date, string $text, Reference $reference, Options $options): ParsedResult
     {
         $this->mergeDateComponents($time->start, $date->start);

@@ -32,6 +32,9 @@ trait InteractsWithSwedishRelativeDates
         return $units;
     }
 
+    /**
+     * Get the parser pattern.
+     */
     protected function durationPattern(): string
     {
         $numberPattern = SvConstants::numberPattern();

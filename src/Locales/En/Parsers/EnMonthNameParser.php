@@ -75,6 +75,9 @@ class EnMonthNameParser implements Parser
         }, $matches)));
     }
 
+    /**
+     * Determine whether the match is followed by a range.
+     */
     protected function isFollowedByRange(string $text, array $match): bool
     {
         $after = substr($text, $match[0][1] + strlen($match[0][0]));
@@ -127,6 +130,9 @@ class EnMonthNameParser implements Parser
         }, $matches)));
     }
 
+    /**
+     * Determine whether the match is an unlikely bare abbreviation.
+     */
     protected function isUnlikelyBareAbbreviation(string $text, array $match): bool
     {
         $month = strtolower($match['month'][0]);
@@ -140,6 +146,9 @@ class EnMonthNameParser implements Parser
         return preg_match('/\bin\s+$/i', $before) !== 1;
     }
 
+    /**
+     * Resolve the year value.
+     */
     protected function impliedYear(Reference $reference, Options $options, int $month): int
     {
         if (! $options->forwardDate()) {
@@ -151,6 +160,9 @@ class EnMonthNameParser implements Parser
             : $reference->date->year;
     }
 
+    /**
+     * Determine whether the match is the modal word may.
+     */
     protected function isModalMay(string $text, array $match): bool
     {
         $after = substr($text, $match[0][1] + strlen($match[0][0]));
@@ -158,6 +170,9 @@ class EnMonthNameParser implements Parser
         return preg_match('/^\s+not\b/i', $after) === 1;
     }
 
+    /**
+     * Determine whether the match is followed by a numeric token.
+     */
     protected function isFollowedByNumericToken(string $text, array $match): bool
     {
         $after = substr($text, $match[0][1] + strlen($match[0][0]));
@@ -165,6 +180,9 @@ class EnMonthNameParser implements Parser
         return preg_match('/^\s+\d/', $after) === 1;
     }
 
+    /**
+     * Resolve the year value.
+     */
     protected function year(int $year): int
     {
         if ($year < 100) {

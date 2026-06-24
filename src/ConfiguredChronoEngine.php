@@ -8,6 +8,9 @@ class ConfiguredChronoEngine implements ChronoEngine
      * Create a Chrono engine from the given configuration.
      */
     public function __construct(
+        /**
+         * The parser and refiner configuration.
+         */
         protected readonly Configuration $configuration,
     ) {}
 

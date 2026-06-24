@@ -247,6 +247,9 @@ class EnMonthNameRangeParser implements Parser
         }, $matches)));
     }
 
+    /**
+     * Resolve the year value.
+     */
     protected function year(int $year, string $era): int
     {
         $year = match (strtoupper($era)) {

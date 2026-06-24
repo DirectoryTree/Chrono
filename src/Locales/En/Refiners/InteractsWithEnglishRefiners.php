@@ -7,6 +7,9 @@ use Chrono\ParsedResult;
 
 trait InteractsWithEnglishRefiners
 {
+    /**
+     * Get the text between two parsed results.
+     */
     protected function textBetween(string $text, ParsedResult $current, ParsedResult $next): string
     {
         $afterCurrent = $current->index + strlen($current->text);
@@ -14,11 +17,17 @@ trait InteractsWithEnglishRefiners
         return substr($text, $afterCurrent, $next->index - $afterCurrent);
     }
 
+    /**
+     * Determine whether the text connects date and time results.
+     */
     protected function isDateTimeConnector(string $between): bool
     {
         return preg_match('/^\s*(?:T|at|after|before|on|of|,|-|\.|∙|:)?\s*$/', $between) === 1;
     }
 
+    /**
+     * Resolve an hour with an optional meridiem.
+     */
     protected function hourWithMeridiem(int $hour, ?string $meridiem): int
     {
         return match (strtolower($meridiem ?? '')) {
@@ -47,6 +56,9 @@ trait InteractsWithEnglishRefiners
         return $duration;
     }
 
+    /**
+     * Get the parser pattern.
+     */
     protected function relativeDurationPattern(): string
     {
         return '(?:(?<number>\d+)\s*|(?<word>an?|the|one|two|three|four|five|six|seven|eight|nine|ten|few)\s+)(?<unit>seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|months?|mons?|mos?|mo|quarters?|qtrs?|years?|yrs?|y)\b';
@@ -64,6 +76,9 @@ trait InteractsWithEnglishRefiners
         return $date;
     }
 
+    /**
+     * Resolve the relative duration amount.
+     */
     protected function relativeAmount(string $amount): int
     {
         return [
@@ -84,6 +99,9 @@ trait InteractsWithEnglishRefiners
         ][strtolower($amount)];
     }
 
+    /**
+     * Resolve the relative duration unit.
+     */
     protected function relativeUnit(string $unit): string
     {
         return match (strtolower($unit)) {

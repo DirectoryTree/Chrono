@@ -12,9 +12,15 @@ class UnlikelyFormatFilter extends Filter
      * Create an unlikely-format result filter.
      */
     public function __construct(
+        /**
+         * Whether strict filtering rules should be applied.
+         */
         protected readonly bool $strictMode = false,
     ) {}
 
+    /**
+     * Determine whether the parsed result should be kept.
+     */
     protected function isValid(string $text, ParsedResult $result, Reference $reference, Options $options): bool
     {
         $normalizedText = preg_replace('/ /', '', $result->text, 1) ?? $result->text;

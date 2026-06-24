@@ -21,6 +21,9 @@ trait CreatesParsedComponents
         return $components;
     }
 
+    /**
+     * Resolve the hour value.
+     */
     protected function meridiemHour(int $hour, ?string $meridiem): int
     {
         if ($meridiem === null) {

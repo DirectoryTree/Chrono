@@ -15,10 +15,31 @@ class ParsedComponents
      * @param  array<int, string>  $tags
      */
     public function __construct(
+        /**
+         * The resolved date represented by these components.
+         */
         protected CarbonImmutable $date,
+
+        /**
+         * Component values explicitly known from the parsed text.
+         *
+         * @var array<string, mixed>
+         */
         protected array $knownValues = [],
+
+        /**
+         * Component values implied from the reference date or parser rules.
+         *
+         * @var array<string, int>
+         */
         protected array $impliedValues = [],
-        protected array $tags = []
+
+        /**
+         * Tags assigned by parsers and refiners.
+         *
+         * @var array<int, string>
+         */
+        protected array $tags = [],
     ) {
         $this->impliedValues = array_replace([
             'year' => $this->date->year,
@@ -359,6 +380,9 @@ class ParsedComponents
         );
     }
 
+    /**
+     * Return the date with the given component value applied.
+     */
     protected function dateWith(string $component, int $value): CarbonImmutable
     {
         return match ($component) {
@@ -374,6 +398,9 @@ class ParsedComponents
         };
     }
 
+    /**
+     * Resolve parsed date components from the match.
+     */
     protected function dateComponentValue(string $component): int|bool
     {
         return match ($component) {
@@ -390,6 +417,9 @@ class ParsedComponents
         };
     }
 
+    /**
+     * Get a known or implied component value.
+     */
     protected function componentValue(string $component): ?int
     {
         if (isset($this->knownValues[$component]) && is_int($this->knownValues[$component])) {
@@ -403,6 +433,9 @@ class ParsedComponents
         return null;
     }
 
+    /**
+     * Get the assigned meridiem value.
+     */
     protected function meridiemValue(): ?Meridiem
     {
         $value = $this->componentValue('meridiem');
@@ -414,6 +447,9 @@ class ParsedComponents
         return null;
     }
 
+    /**
+     * Resolve the timezone offset.
+     */
     protected function timezoneNameFromOffset(int $offset): string
     {
         $sign = $offset < 0 ? '-' : '+';
@@ -422,6 +458,9 @@ class ParsedComponents
         return sprintf('%s%02d:%02d', $sign, intdiv($offset, 60), $offset % 60);
     }
 
+    /**
+     * Resolve the month value.
+     */
     protected function daysInMonth(int $year, int $month): int
     {
         if ($month === 2) {
@@ -431,6 +470,9 @@ class ParsedComponents
         return in_array($month, [4, 6, 9, 11], true) ? 30 : 31;
     }
 
+    /**
+     * Determine whether the year is a leap year.
+     */
     protected function isLeapYear(int $year): bool
     {
         return $year % 4 === 0 && ($year % 100 !== 0 || $year % 400 === 0);

@@ -52,6 +52,9 @@ class EnMonthNameLittleEndianDateTimeParser implements Parser
         }, $matches)));
     }
 
+    /**
+     * Normalize the value.
+     */
     protected function normalizeMeridiem(string $meridiem): ?string
     {
         $meridiem = strtolower(str_replace('.', '', $meridiem));
@@ -59,6 +62,9 @@ class EnMonthNameLittleEndianDateTimeParser implements Parser
         return $meridiem !== '' ? $meridiem : null;
     }
 
+    /**
+     * Resolve the year value.
+     */
     protected function year(int $year, string $era): int
     {
         $year = match (strtoupper($era)) {

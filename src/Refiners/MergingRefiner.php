@@ -45,6 +45,9 @@ abstract class MergingRefiner implements Refiner
 
     abstract protected function mergeResults(string $textBetween, ParsedResult $current, ParsedResult $next, string $text, Reference $reference, Options $options): ParsedResult;
 
+    /**
+     * Get the text between two parsed results.
+     */
     protected function textBetween(string $text, ParsedResult $current, ParsedResult $next): string
     {
         $afterCurrent = $current->index + strlen($current->text);

@@ -10,6 +10,9 @@ use Chrono\Refiners\MergingRefiner;
 
 class ZhMergeDateTimeRefiner extends MergingRefiner
 {
+    /**
+     * Determine whether the parsed results should be merged.
+     */
     protected function shouldMergeResults(string $textBetween, ParsedResult $date, ParsedResult $time, string $text, Reference $reference, Options $options): bool
     {
         return ($date->start->isCertain('day') || $date->start->isCertain('weekday'))
@@ -19,6 +22,9 @@ class ZhMergeDateTimeRefiner extends MergingRefiner
             && preg_match('/^\s*$/u', $textBetween) === 1;
     }
 
+    /**
+     * Merge the parsed results.
+     */
     protected function mergeResults(string $textBetween, ParsedResult $date, ParsedResult $time, string $text, Reference $reference, Options $options): ParsedResult
     {
         $date = MergingCalculation::mergeDateTimeResult($date, $time);

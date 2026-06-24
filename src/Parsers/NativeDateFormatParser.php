@@ -43,6 +43,9 @@ class NativeDateFormatParser implements Parser
         return $results;
     }
 
+    /**
+     * Get result.
+     */
     protected function result(string $text, int $index): ?ParsedResult
     {
         $date = $this->date($text);
@@ -70,6 +73,9 @@ class NativeDateFormatParser implements Parser
         return new ParsedResult($index, $text, $components);
     }
 
+    /**
+     * Get date.
+     */
     protected function date(string $text): ?CarbonImmutable
     {
         $normalized = preg_replace('/\s*\([^)]*\)\s*$/', '', trim($text)) ?? trim($text);
@@ -89,6 +95,9 @@ class NativeDateFormatParser implements Parser
         return $date;
     }
 
+    /**
+     * Normalize the value.
+     */
     protected function normalizeFractionalSeconds(string $text): string
     {
         return preg_replace_callback('/\.(\d{1,6})/', function (array $match): string {
@@ -96,6 +105,9 @@ class NativeDateFormatParser implements Parser
         }, $text) ?? $text;
     }
 
+    /**
+     * Resolve the timezone offset.
+     */
     protected function timezoneOffset(string $text): ?int
     {
         if (preg_match('/(?:GMT|UTC)?([+-])(\d{2}):?(\d{2})?\b/i', $text, $match) === 1) {

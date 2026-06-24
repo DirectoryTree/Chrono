@@ -41,6 +41,9 @@ class EnTimeExpressionParser extends AbstractTimeExpressionParser
         return '(?:\s*(?<suffix>at\s*night|tonight|in\s*the\s*(?:morning|afternoon)))?(?!\/)(?=\W|$)';
     }
 
+    /**
+     * Resolve parsed date components from the match.
+     */
     protected function primaryTimeComponents(array $match, Reference $reference): ?ParsedComponents
     {
         $components = parent::primaryTimeComponents($match, $reference);
@@ -82,6 +85,9 @@ class EnTimeExpressionParser extends AbstractTimeExpressionParser
         return $components;
     }
 
+    /**
+     * Resolve parsed date components from the match.
+     */
     protected function followingTimeComponents(array $match, Reference $reference, ParsedComponents $start): ?ParsedComponents
     {
         $components = parent::followingTimeComponents($match, $reference, $start);
@@ -95,6 +101,9 @@ class EnTimeExpressionParser extends AbstractTimeExpressionParser
         return $components;
     }
 
+    /**
+     * Apply the following time suffix to parsed components.
+     */
     protected function applyFollowingSuffix(array $match, ParsedComponents $start, ParsedComponents $end): void
     {
         $suffix = strtolower($match['suffix'][0] ?? '');
@@ -148,12 +157,18 @@ class EnTimeExpressionParser extends AbstractTimeExpressionParser
         }
     }
 
+    /**
+     * Assign the parsed component value.
+     */
     protected function assignPm(ParsedComponents $components): void
     {
         $components->assign('meridiem', Meridiem::PM->value);
         $components->addTag('meridiem');
     }
 
+    /**
+     * Determine whether the parsed result should be rejected.
+     */
     protected function shouldRejectResult(array $match, string $text, ?ParsedComponents $end): bool
     {
         $plain = trim($text);
@@ -173,6 +188,9 @@ class EnTimeExpressionParser extends AbstractTimeExpressionParser
         return preg_match('/^\d{1,2}-\d{1,2}(?:-\d{1,2})?$/', $plain) === 1;
     }
 
+    /**
+     * Determine whether the match should be rejected without a following time.
+     */
     protected function shouldRejectWithoutFollowingTime(string $text): bool
     {
         if (preg_match('/^\d{1,4}$/', $text) === 1) {
@@ -198,6 +216,9 @@ class EnTimeExpressionParser extends AbstractTimeExpressionParser
         return (int) $match['ending'] > 24;
     }
 
+    /**
+     * Determine whether the match should be rejected with a following time.
+     */
     protected function shouldRejectWithFollowingTime(string $text): bool
     {
         if (preg_match('/[^\d:.](?<start>\d[\d.]+)\s*-\s*(?<end>\d[\d.]+)$/', $text, $match) !== 1) {
@@ -215,6 +236,9 @@ class EnTimeExpressionParser extends AbstractTimeExpressionParser
         return (int) $match['start'] > 24 || (int) $match['end'] > 24;
     }
 
+    /**
+     * Determine whether the match is a loose strict-mode guess.
+     */
     protected function isLooseStrictGuess(array $match, ?ParsedComponents $end): bool
     {
         return ($match['minute'][0] ?? '') === ''

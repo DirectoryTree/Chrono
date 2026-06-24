@@ -30,6 +30,9 @@ class FrSpecificTimeExpressionParser implements Parser
         return array_values(array_filter(array_map(fn (array $match): ?ParsedResult => $this->result($text, $match, $reference), $matches)));
     }
 
+    /**
+     * Get result.
+     */
     protected function result(string $text, array $match, Reference $reference): ?ParsedResult
     {
         $leading = $match[1][0] ?? '';
@@ -66,6 +69,9 @@ class FrSpecificTimeExpressionParser implements Parser
         return new ParsedResult($index, trim($matchedText), $start, $end);
     }
 
+    /**
+     * Resolve parsed date components from the match.
+     */
     protected function timeComponents(array $match, Reference $reference, ?ParsedComponents $base = null, string $pairedMeridiem = ''): ?ParsedComponents
     {
         $hour = (int) $match['hour'][0];

@@ -25,12 +25,18 @@ class FiTimeExpressionParser extends AbstractTimeExpressionParser
         return '\s*(?:-|–|~|〜)\s*';
     }
 
+    /**
+     * Determine whether the parsed result should be rejected.
+     */
     protected function shouldRejectResult(array $match, string $text, ?ParsedComponents $end): bool
     {
         return $end === null
             && preg_match('/^\d{1,4}$/', $text) === 1;
     }
 
+    /**
+     * Get result.
+     */
     protected function result(string $text, array $match, Reference $reference): ?ParsedResult
     {
         $result = parent::result($text, $match, $reference);

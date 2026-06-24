@@ -56,6 +56,9 @@ abstract class AbstractZhWeekdayParser implements Parser
         }, $matches)));
     }
 
+    /**
+     * Resolve the weekday value.
+     */
     protected function daysToWeekday(Reference $reference, int $weekday, string $modifier, Options $options): int
     {
         $referenceWeekday = $reference->date->dayOfWeek;

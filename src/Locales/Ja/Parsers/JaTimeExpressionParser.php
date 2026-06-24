@@ -77,6 +77,9 @@ class JaTimeExpressionParser implements Parser
         return [$index, trim($text)];
     }
 
+    /**
+     * Resolve parsed date components from the match.
+     */
     protected function components(array $match, Reference $reference): ?ParsedComponents
     {
         $hour = JaConstants::number($match['hour'][0]);
@@ -141,6 +144,9 @@ class JaTimeExpressionParser implements Parser
         return $components;
     }
 
+    /**
+     * Imply missing component values.
+     */
     protected function implyMeridiemFromStart(ParsedComponents $start, ParsedComponents $end): void
     {
         if ($start->get('meridiem') === Meridiem::PM) {

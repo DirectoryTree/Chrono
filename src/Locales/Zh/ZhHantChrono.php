@@ -24,8 +24,9 @@ class ZhHantChrono extends ConfiguredChronoEngine
     /**
      * Create a configured traditional Chinese Chrono engine.
      */
-    public function __construct(?Configuration $configuration = null)
-    {
+    public function __construct(
+        ?Configuration $configuration = null,
+    ) {
         parent::__construct($configuration ?? self::createCasualConfiguration());
     }
 

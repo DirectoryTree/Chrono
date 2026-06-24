@@ -10,7 +10,12 @@ class Reference
     /**
      * Create a reference date wrapper.
      */
-    public function __construct(public readonly CarbonImmutable $date) {}
+    public function __construct(
+        /**
+         * The reference date.
+         */
+        public readonly CarbonImmutable $date,
+    ) {}
 
     /**
      * Get the reference date adjusted into the requested reference timezone.
@@ -48,6 +53,9 @@ class Reference
         return new self(self::date($reference));
     }
 
+    /**
+     * Create the base reference date.
+     */
     protected static function date(CarbonInterface|string|null $reference = null): CarbonImmutable
     {
         if ($reference instanceof CarbonInterface) {
@@ -61,6 +69,9 @@ class Reference
         return new CarbonImmutable($reference ?? 'now');
     }
 
+    /**
+     * Parse a JavaScript date string into a Carbon instance.
+     */
     protected static function javascriptDateString(string $reference): ?CarbonImmutable
     {
         $reference = trim(preg_replace('/\s*\([^)]*\)\s*$/', '', $reference) ?? $reference);
@@ -77,6 +88,9 @@ class Reference
         return $date === false ? null : CarbonImmutable::instance($date);
     }
 
+    /**
+     * Resolve a Chrono-compatible timezone into a PHP timezone name.
+     */
     protected static function timezone(int|string|null $timezone, CarbonImmutable $date, ?Options $options): ?string
     {
         if ($timezone === null || $timezone === '') {
@@ -92,6 +106,9 @@ class Reference
         return $offset === null ? null : self::timezoneNameFromOffset($offset);
     }
 
+    /**
+     * Resolve the timezone offset.
+     */
     protected static function timezoneNameFromOffset(int $offset): string
     {
         $sign = $offset < 0 ? '-' : '+';

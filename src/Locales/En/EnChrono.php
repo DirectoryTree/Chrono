@@ -47,8 +47,9 @@ class EnChrono extends ConfiguredChronoEngine
     /**
      * Create a configured English Chrono engine.
      */
-    public function __construct(?Configuration $configuration = null)
-    {
+    public function __construct(
+        ?Configuration $configuration = null,
+    ) {
         parent::__construct($configuration ?? self::createCasualConfiguration());
     }
 
@@ -108,6 +109,9 @@ class EnChrono extends ConfiguredChronoEngine
         return self::createCasualConfiguration(littleEndian: true);
     }
 
+    /**
+     * Create the English parser configuration.
+     */
     protected static function createConfiguration(bool $casual, bool $littleEndian = false): Configuration
     {
         return new Configuration(

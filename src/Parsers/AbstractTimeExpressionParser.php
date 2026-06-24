@@ -12,6 +12,9 @@ use Chrono\Reference;
 
 abstract class AbstractTimeExpressionParser implements Parser
 {
+    /**
+     * The options.
+     */
     protected ?Options $options = null;
 
     /**
@@ -46,16 +49,25 @@ abstract class AbstractTimeExpressionParser implements Parser
         return array_values(array_filter(array_map(fn (array $match): ?ParsedResult => $this->result($text, $match, $reference), $matches)));
     }
 
+    /**
+     * Get the primary time suffix pattern.
+     */
     protected function primarySuffix(): string
     {
         return '(?!\/)(?=\W|$)';
     }
 
+    /**
+     * Get the following time suffix pattern.
+     */
     protected function followingSuffix(): string
     {
         return '(?!\/)(?=\W|$)';
     }
 
+    /**
+     * Get result.
+     */
     protected function result(string $text, array $match, Reference $reference): ?ParsedResult
     {
         $start = $this->primaryTimeComponents($match, $reference);
@@ -89,6 +101,9 @@ abstract class AbstractTimeExpressionParser implements Parser
         return new ParsedResult($index, trim($resultText), $start, $end);
     }
 
+    /**
+     * Get the parser pattern.
+     */
     protected function followingPattern(): string
     {
         $phase = $this->followingPhase();
@@ -97,6 +112,9 @@ abstract class AbstractTimeExpressionParser implements Parser
         return "/^({$phase})(?<hour>\\d{1,4})(?:(?:\\.|:|：)(?<minute>\\d{1,2})(?:(?:\\.|:|：)(?<second>\\d{1,2})(?:\\.(?<millisecond>\\d{1,6}))?)?)?(?:\\s*(?<meridiem>a\\.?m\\.?|p\\.?m\\.?|am?|pm?))?{$suffix}/iu";
     }
 
+    /**
+     * Resolve parsed date components from the match.
+     */
     protected function primaryTimeComponents(array $match, Reference $reference): ?ParsedComponents
     {
         $time = $this->time($match, false);
@@ -114,6 +132,9 @@ abstract class AbstractTimeExpressionParser implements Parser
         return $this->components($date, $time);
     }
 
+    /**
+     * Resolve parsed date components from the match.
+     */
     protected function followingTimeComponents(array $match, Reference $reference, ParsedComponents $start): ?ParsedComponents
     {
         $time = $this->time($match, true);
@@ -271,6 +292,9 @@ abstract class AbstractTimeExpressionParser implements Parser
         return $components;
     }
 
+    /**
+     * Determine whether the text looks like a year range.
+     */
     protected function looksLikeYearRange(string $text, string $followingText): bool
     {
         if (preg_match('/^\d{3,4}/', $text) !== 1) {
@@ -281,11 +305,17 @@ abstract class AbstractTimeExpressionParser implements Parser
             || preg_match('/^\s*([+-])\s*\d{2}\W\d{2}/', $followingText) === 1;
     }
 
+    /**
+     * Determine whether the parsed result should be rejected.
+     */
     protected function shouldRejectResult(array $match, string $text, ?ParsedComponents $end): bool
     {
         return false;
     }
 
+    /**
+     * Determine whether the components have an assigned meridiem.
+     */
     protected function hasAssignedMeridiem(ParsedComponents $components): bool
     {
         return in_array('meridiem', $components->tags(), true);
