@@ -13,5 +13,4 @@ class EsMergeDateTimeRefiner extends AbstractMergeDateTimeRefiner
     {
         return '/^\s*(?:,|de|aslas|a)?\s*$/iu';
     }
-
 }

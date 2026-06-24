@@ -4,19 +4,19 @@ namespace Chrono\Locales\It;
 
 use Chrono\Configuration;
 use Chrono\ConfiguredChronoEngine;
-use Chrono\Locales\It\Parsers\ItCasualYearMonthDayParser;
 use Chrono\Locales\It\Parsers\ItCasualDateParser;
 use Chrono\Locales\It\Parsers\ItCasualTimeParser;
+use Chrono\Locales\It\Parsers\ItCasualYearMonthDayParser;
 use Chrono\Locales\It\Parsers\ItMonthNameLittleEndianParser;
 use Chrono\Locales\It\Parsers\ItMonthNameMiddleEndianParser;
 use Chrono\Locales\It\Parsers\ItMonthNameParser;
+use Chrono\Locales\It\Parsers\ItRelativeDateFormatParser;
+use Chrono\Locales\It\Parsers\ItSlashMonthFormatParser;
 use Chrono\Locales\It\Parsers\ItTimeExpressionParser;
 use Chrono\Locales\It\Parsers\ItTimeUnitAgoFormatParser;
 use Chrono\Locales\It\Parsers\ItTimeUnitCasualRelativeFormatParser;
 use Chrono\Locales\It\Parsers\ItTimeUnitLaterFormatParser;
 use Chrono\Locales\It\Parsers\ItTimeUnitWithinFormatParser;
-use Chrono\Locales\It\Parsers\ItRelativeDateFormatParser;
-use Chrono\Locales\It\Parsers\ItSlashMonthFormatParser;
 use Chrono\Locales\It\Parsers\ItWeekdayParser;
 use Chrono\Locales\It\Refiners\ItMergeDateRangeRefiner;
 use Chrono\Locales\It\Refiners\ItMergeDateTimeRefiner;
@@ -56,34 +56,34 @@ class ItChrono extends ConfiguredChronoEngine
     {
         return new Configuration(
             parsers: [
-                new ItTimeUnitCasualRelativeFormatParser(),
-                new ItRelativeDateFormatParser(),
-                new ItMonthNameParser(),
-                new ItCasualTimeParser(),
-                new ItCasualDateParser(),
-                new IsoFormatParser(),
-                new SlashDateFormatParser(),
-                new ItTimeUnitWithinFormatParser(),
-                new ItMonthNameLittleEndianParser(),
-                new ItMonthNameMiddleEndianParser(),
-                new ItWeekdayParser(),
-                new ItCasualYearMonthDayParser(),
-                new ItSlashMonthFormatParser(),
-                new ItTimeExpressionParser(),
-                new ItTimeUnitAgoFormatParser(),
-                new ItTimeUnitLaterFormatParser(),
+                new ItTimeUnitCasualRelativeFormatParser,
+                new ItRelativeDateFormatParser,
+                new ItMonthNameParser,
+                new ItCasualTimeParser,
+                new ItCasualDateParser,
+                new IsoFormatParser,
+                new SlashDateFormatParser,
+                new ItTimeUnitWithinFormatParser,
+                new ItMonthNameLittleEndianParser,
+                new ItMonthNameMiddleEndianParser,
+                new ItWeekdayParser,
+                new ItCasualYearMonthDayParser,
+                new ItSlashMonthFormatParser,
+                new ItTimeExpressionParser,
+                new ItTimeUnitAgoFormatParser,
+                new ItTimeUnitLaterFormatParser,
             ],
             refiners: [
-                new OverlapRemovalRefiner(),
-                new ExtractTimezoneOffsetRefiner(),
-                new MergeWeekdayComponentRefiner(),
-                new ItMergeRelativeDateRefiner(),
-                new ItMergeDateTimeRefiner(),
-                new ItMergeDateRangeRefiner(),
-                new ExtractTimezoneAbbrRefiner(),
-                new OverlapRemovalRefiner(),
-                new ForwardDateRefiner(),
-                new UnlikelyFormatFilter(),
+                new OverlapRemovalRefiner,
+                new ExtractTimezoneOffsetRefiner,
+                new MergeWeekdayComponentRefiner,
+                new ItMergeRelativeDateRefiner,
+                new ItMergeDateTimeRefiner,
+                new ItMergeDateRangeRefiner,
+                new ExtractTimezoneAbbrRefiner,
+                new OverlapRemovalRefiner,
+                new ForwardDateRefiner,
+                new UnlikelyFormatFilter,
             ],
         );
     }
@@ -95,28 +95,28 @@ class ItChrono extends ConfiguredChronoEngine
     {
         return new Configuration(
             parsers: [
-                new IsoFormatParser(),
-                new SlashDateFormatParser(),
-                new ItTimeUnitWithinFormatParser(),
-                new ItMonthNameLittleEndianParser(),
-                new ItMonthNameMiddleEndianParser(),
-                new ItWeekdayParser(),
-                new ItCasualYearMonthDayParser(),
-                new ItSlashMonthFormatParser(),
-                new ItTimeExpressionParser(),
+                new IsoFormatParser,
+                new SlashDateFormatParser,
+                new ItTimeUnitWithinFormatParser,
+                new ItMonthNameLittleEndianParser,
+                new ItMonthNameMiddleEndianParser,
+                new ItWeekdayParser,
+                new ItCasualYearMonthDayParser,
+                new ItSlashMonthFormatParser,
+                new ItTimeExpressionParser,
                 new ItTimeUnitAgoFormatParser(strictMode: true),
                 new ItTimeUnitLaterFormatParser(strictMode: true),
             ],
             refiners: [
-                new OverlapRemovalRefiner(),
-                new ExtractTimezoneOffsetRefiner(),
-                new MergeWeekdayComponentRefiner(),
-                new ItMergeRelativeDateRefiner(),
-                new ItMergeDateTimeRefiner(),
-                new ItMergeDateRangeRefiner(),
-                new ExtractTimezoneAbbrRefiner(),
-                new OverlapRemovalRefiner(),
-                new ForwardDateRefiner(),
+                new OverlapRemovalRefiner,
+                new ExtractTimezoneOffsetRefiner,
+                new MergeWeekdayComponentRefiner,
+                new ItMergeRelativeDateRefiner,
+                new ItMergeDateTimeRefiner,
+                new ItMergeDateRangeRefiner,
+                new ExtractTimezoneAbbrRefiner,
+                new OverlapRemovalRefiner,
+                new ForwardDateRefiner,
                 new UnlikelyFormatFilter(strictMode: true),
             ],
         );

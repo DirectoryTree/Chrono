@@ -17,7 +17,10 @@ class ZhHansCasualDateParser extends AbstractZhCasualDateParser
     /**
      * Normalize the value.
      */
-    protected function normalizeDay(string $day): string { return $day; }
+    protected function normalizeDay(string $day): string
+    {
+        return $day;
+    }
 
     /**
      * Resolve the hour value.
@@ -37,5 +40,8 @@ class ZhHansCasualDateParser extends AbstractZhCasualDateParser
     /**
      * Get the parser tag.
      */
-    protected function tag(): string { return 'parser/ZHHansCasualDateParser'; }
+    protected function tag(): string
+    {
+        return 'parser/ZHHansCasualDateParser';
+    }
 }

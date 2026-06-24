@@ -13,5 +13,4 @@ class DeMergeDateTimeRefiner extends AbstractMergeDateTimeRefiner
     {
         return '/^\s*(?:T|um|am|,|-)?\s*$/iu';
     }
-
 }

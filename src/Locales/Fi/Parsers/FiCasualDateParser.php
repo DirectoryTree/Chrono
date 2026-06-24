@@ -72,7 +72,7 @@ class FiCasualDateParser extends AbstractParserWithWordBoundary
         }
 
         if (($match['time'][0] ?? '') !== '') {
-            $components = (new FiCasualTimeParser())->timeComponents($components, mb_strtolower($match['time'][0]));
+            $components = (new FiCasualTimeParser)->timeComponents($components, mb_strtolower($match['time'][0]));
         }
 
         $components->addTag('parser/FICasualDateParser');

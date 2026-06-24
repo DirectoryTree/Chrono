@@ -77,5 +77,4 @@ class SvMonthNameLittleEndianParser implements Parser
             'day' => $endDay,
         ])->addTag('parser/SVMonthNameLittleEndianParser');
     }
-
 }

@@ -2,7 +2,6 @@
 
 namespace Chrono\Locales\Ja\Parsers;
 
-use Carbon\CarbonImmutable;
 use Chrono\Locales\Ja\JaConstants;
 use Chrono\Meridiem;
 use Chrono\Options;

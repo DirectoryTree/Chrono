@@ -13,5 +13,4 @@ class NlMergeDateTimeRefiner extends AbstractMergeDateTimeRefiner
     {
         return '/^\s*(?:om|na|voor|in de|,|-)?\s*$/iu';
     }
-
 }

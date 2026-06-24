@@ -2,6 +2,8 @@
 
 namespace Chrono\Locales\Ja;
 
+use Chrono\Reference;
+
 class JaConstants
 {
     /**
@@ -75,7 +77,7 @@ class JaConstants
     /**
      * Find the year that places the month and day closest to the reference date.
      */
-    public static function closestYear(\Chrono\Reference $reference, int $day, int $month): int
+    public static function closestYear(Reference $reference, int $day, int $month): int
     {
         $date = $reference->date->month($month)->day($day);
         $nextYear = $date->addYear();

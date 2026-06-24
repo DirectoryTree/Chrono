@@ -4,8 +4,8 @@ namespace Chrono\Locales\Ru\Parsers;
 
 use Carbon\CarbonImmutable;
 use Chrono\Locales\Ru\RuConstants;
-use Chrono\Pattern;
 use Chrono\ParsedComponents;
+use Chrono\Pattern;
 
 trait InteractsWithRussianRelativeDates
 {

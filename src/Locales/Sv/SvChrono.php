@@ -43,21 +43,21 @@ class SvChrono extends ConfiguredChronoEngine
     {
         return new Configuration(
             parsers: [
-                new SvCasualDateParser(),
-                new IsoFormatParser(),
+                new SvCasualDateParser,
+                new IsoFormatParser,
                 new SlashDateFormatParser(littleEndian: true),
-                new SvMonthNameLittleEndianParser(),
-                new SvWeekdayParser(),
-                new SvTimeUnitCasualRelativeFormatParser(),
+                new SvMonthNameLittleEndianParser,
+                new SvWeekdayParser,
+                new SvTimeUnitCasualRelativeFormatParser,
             ],
             refiners: [
-                new OverlapRemovalRefiner(),
-                new ExtractTimezoneOffsetRefiner(),
-                new MergeWeekdayComponentRefiner(),
-                new ExtractTimezoneAbbrRefiner(),
-                new OverlapRemovalRefiner(),
-                new ForwardDateRefiner(),
-                new UnlikelyFormatFilter(),
+                new OverlapRemovalRefiner,
+                new ExtractTimezoneOffsetRefiner,
+                new MergeWeekdayComponentRefiner,
+                new ExtractTimezoneAbbrRefiner,
+                new OverlapRemovalRefiner,
+                new ForwardDateRefiner,
+                new UnlikelyFormatFilter,
             ],
         );
     }
@@ -69,19 +69,19 @@ class SvChrono extends ConfiguredChronoEngine
     {
         return new Configuration(
             parsers: [
-                new IsoFormatParser(),
+                new IsoFormatParser,
                 new SlashDateFormatParser(littleEndian: true),
-                new SvMonthNameLittleEndianParser(),
-                new SvWeekdayParser(),
-                new SvTimeUnitCasualRelativeFormatParser(),
+                new SvMonthNameLittleEndianParser,
+                new SvWeekdayParser,
+                new SvTimeUnitCasualRelativeFormatParser,
             ],
             refiners: [
-                new OverlapRemovalRefiner(),
-                new ExtractTimezoneOffsetRefiner(),
-                new MergeWeekdayComponentRefiner(),
-                new ExtractTimezoneAbbrRefiner(),
-                new OverlapRemovalRefiner(),
-                new ForwardDateRefiner(),
+                new OverlapRemovalRefiner,
+                new ExtractTimezoneOffsetRefiner,
+                new MergeWeekdayComponentRefiner,
+                new ExtractTimezoneAbbrRefiner,
+                new OverlapRemovalRefiner,
+                new ForwardDateRefiner,
                 new UnlikelyFormatFilter(strictMode: true),
             ],
         );

@@ -2,6 +2,7 @@
 
 namespace Chrono\Locales\De\Parsers;
 
+use Carbon\CarbonImmutable;
 use Chrono\Locales\De\CreatesParsedComponents;
 use Chrono\Options;
 use Chrono\ParsedComponents;
@@ -47,7 +48,7 @@ class DeTimeExpressionExtensionParser implements Parser
 
         usort($results, fn (ParsedResult $a, ParsedResult $b) => $a->index <=> $b->index ?: strlen($b->text) <=> strlen($a->text));
 
-        return (new ExtractTimezoneRefiner())->refine($text, $results, $reference, $options);
+        return (new ExtractTimezoneRefiner)->refine($text, $results, $reference, $options);
     }
 
     /**
@@ -163,7 +164,7 @@ class DeTimeExpressionExtensionParser implements Parser
     /**
      * Resolve parsed date components from the match.
      */
-    protected function timeComponents(\Carbon\CarbonImmutable $date, bool $meridiemCertain): ParsedComponents
+    protected function timeComponents(CarbonImmutable $date, bool $meridiemCertain): ParsedComponents
     {
         return $this->components($date, [
             'hour' => $date->hour,

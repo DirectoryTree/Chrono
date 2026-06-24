@@ -20,6 +20,14 @@ use Chrono\Locales\De\Parsers\DeMonthNameParser;
 use Chrono\Locales\De\Parsers\DeTimeUnitRelativeFormatParser;
 use Chrono\Locales\De\Refiners\DeMergeDateRangeRefiner;
 use Chrono\Locales\De\Refiners\DeMergeDateTimeRefiner;
+use Chrono\Locales\En\EnChrono;
+use Chrono\Locales\En\Parsers\EnSlashDateParser;
+use Chrono\Locales\En\Parsers\EnTimeUnitCasualRelativeFormatParser;
+use Chrono\Locales\En\Refiners\EnExtractYearSuffixRefiner;
+use Chrono\Locales\En\Refiners\EnMergeDateRangeRefiner;
+use Chrono\Locales\En\Refiners\EnMergeDateTimeRefiner;
+use Chrono\Locales\En\Refiners\EnMergeRelativeAfterDateRefiner;
+use Chrono\Locales\En\Refiners\EnMergeRelativeFollowByDateRefiner;
 use Chrono\Locales\Es\EsChrono;
 use Chrono\Locales\Es\Parsers\EsMonthNameLittleEndianParser;
 use Chrono\Locales\Es\Parsers\EsMonthNameParser;
@@ -30,14 +38,6 @@ use Chrono\Locales\Fi\Parsers\FiMonthNameLittleEndianParser;
 use Chrono\Locales\Fi\Parsers\FiTimeUnitCasualRelativeFormatParser;
 use Chrono\Locales\Fi\Refiners\FiMergeDateRangeRefiner;
 use Chrono\Locales\Fi\Refiners\FiMergeDateTimeRefiner;
-use Chrono\Locales\En\EnChrono;
-use Chrono\Locales\En\Parsers\EnSlashDateParser;
-use Chrono\Locales\En\Parsers\EnTimeUnitCasualRelativeFormatParser;
-use Chrono\Locales\En\Refiners\EnExtractYearSuffixRefiner;
-use Chrono\Locales\En\Refiners\EnMergeDateRangeRefiner;
-use Chrono\Locales\En\Refiners\EnMergeDateTimeRefiner;
-use Chrono\Locales\En\Refiners\EnMergeRelativeAfterDateRefiner;
-use Chrono\Locales\En\Refiners\EnMergeRelativeFollowByDateRefiner;
 use Chrono\Locales\Fr\FrChrono;
 use Chrono\Locales\Fr\Parsers\FrCasualDateParser;
 use Chrono\Locales\Fr\Parsers\FrCasualTimeParser;
@@ -98,25 +98,25 @@ use Chrono\Locales\Zh\ZhHantChrono;
 use Chrono\Meridiem;
 use Chrono\Month;
 use Chrono\Options;
+use Chrono\ParsedComponents;
+use Chrono\ParsedResult;
+use Chrono\Parser;
 use Chrono\Parsers\AbstractParserWithWordBoundary;
 use Chrono\Parsers\IsoFormatParser;
 use Chrono\Parsers\SlashDateFormatParser;
 use Chrono\Pattern;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Parser;
+use Chrono\Reference;
 use Chrono\Refiner;
 use Chrono\Refiners\ExtractTimezoneAbbrRefiner;
 use Chrono\Refiners\ExtractTimezoneOffsetRefiner;
 use Chrono\Refiners\ForwardDateRefiner;
 use Chrono\Refiners\MergeWeekdayComponentRefiner;
 use Chrono\Refiners\OverlapRemovalRefiner;
-use Chrono\Reference;
 use Chrono\Timezone;
 use Chrono\Weekday;
 
 it('buffers debug callbacks until explicitly executed', function () {
-    $debugHandler = new BufferedDebugHandler();
+    $debugHandler = new BufferedDebugHandler;
     $calls = [];
 
     $debugHandler->debug(function () use (&$calls) {
@@ -524,37 +524,37 @@ it('exposes source-shaped casual parser order for German French Finnish Italian 
             ExtractTimezoneOffsetRefiner::class,
             MergeWeekdayComponentRefiner::class,
         ])->and(array_search(FrMergeDateTimeRefiner::class, $frenchRefiners, true))
-            ->toBeLessThan(array_search(FrMergeDateRangeRefiner::class, $frenchRefiners, true))
+        ->toBeLessThan(array_search(FrMergeDateRangeRefiner::class, $frenchRefiners, true))
         ->and(array_slice($finnishParsers, 0, 3))->toBe([
-        FiTimeUnitCasualRelativeFormatParser::class,
-        FiCasualDateParser::class,
-        FiCasualTimeParser::class,
-    ])->and(array_slice($italianParsers, 0, 5))->toBe([
-        ItTimeUnitCasualRelativeFormatParser::class,
-        ItRelativeDateFormatParser::class,
-        ItMonthNameParser::class,
-        ItCasualTimeParser::class,
-        ItCasualDateParser::class,
-    ])->and(array_slice($dutchParsers, 0, 6))->toBe([
-        NlTimeUnitCasualRelativeFormatParser::class,
-        NlRelativeDateFormatParser::class,
-        NlMonthNameParser::class,
-        NlCasualDateTimeParser::class,
-        NlCasualTimeParser::class,
-        NlCasualDateParser::class,
-    ])->and(array_slice($russianParsers, 0, 5))->toBe([
-        RuTimeUnitCasualRelativeFormatParser::class,
-        RuRelativeDateFormatParser::class,
-        RuMonthNameParser::class,
-        RuCasualTimeParser::class,
-        RuCasualDateParser::class,
-    ])->and(array_slice($ukrainianParsers, 0, 5))->toBe([
-        UkTimeUnitCasualRelativeFormatParser::class,
-        UkRelativeDateFormatParser::class,
-        UkMonthNameParser::class,
-        UkCasualTimeParser::class,
-        UkCasualDateParser::class,
-    ]);
+            FiTimeUnitCasualRelativeFormatParser::class,
+            FiCasualDateParser::class,
+            FiCasualTimeParser::class,
+        ])->and(array_slice($italianParsers, 0, 5))->toBe([
+            ItTimeUnitCasualRelativeFormatParser::class,
+            ItRelativeDateFormatParser::class,
+            ItMonthNameParser::class,
+            ItCasualTimeParser::class,
+            ItCasualDateParser::class,
+        ])->and(array_slice($dutchParsers, 0, 6))->toBe([
+            NlTimeUnitCasualRelativeFormatParser::class,
+            NlRelativeDateFormatParser::class,
+            NlMonthNameParser::class,
+            NlCasualDateTimeParser::class,
+            NlCasualTimeParser::class,
+            NlCasualDateParser::class,
+        ])->and(array_slice($russianParsers, 0, 5))->toBe([
+            RuTimeUnitCasualRelativeFormatParser::class,
+            RuRelativeDateFormatParser::class,
+            RuMonthNameParser::class,
+            RuCasualTimeParser::class,
+            RuCasualDateParser::class,
+        ])->and(array_slice($ukrainianParsers, 0, 5))->toBe([
+            UkTimeUnitCasualRelativeFormatParser::class,
+            UkRelativeDateFormatParser::class,
+            UkMonthNameParser::class,
+            UkCasualTimeParser::class,
+            UkCasualDateParser::class,
+        ]);
 });
 
 it('calculates weekdays like upstream helpers', function () {
@@ -818,7 +818,7 @@ it('forwards same-day weekday components by a full week like upstream refiner', 
         'weekday' => Weekday::FRIDAY->value,
     ]));
 
-    $results = (new ForwardDateRefiner())->refine(
+    $results = (new ForwardDateRefiner)->refine(
         'Friday',
         [$result],
         Reference::make('2023-04-07 13:00:00'),
@@ -836,11 +836,11 @@ it('ignores lowercase timezone abbreviations when an implied offset conflicts li
 
     $result = new ParsedResult(0, 'tomorrow', $components);
 
-    $results = (new ExtractTimezoneAbbrRefiner())->refine(
+    $results = (new ExtractTimezoneAbbrRefiner)->refine(
         'tomorrow est',
         [$result],
         Reference::make('2023-04-06 12:00:00'),
-        new Options(),
+        new Options,
     );
 
     expect($results[0]->text)->toBe('tomorrow')
@@ -1231,9 +1231,9 @@ it('parses trailing years after month date time ranges', function () {
 });
 
 it('extracts english year suffixes from unknown-year dates', function () {
-    $refiner = new EnExtractYearSuffixRefiner();
+    $refiner = new EnExtractYearSuffixRefiner;
     $reference = Reference::make('2012-08-10');
-    $options = new Options();
+    $options = new Options;
     $date = CarbonImmutable::parse('2012-03-14 12:00');
 
     $components = new ParsedComponents($date);
@@ -1766,7 +1766,7 @@ it('exposes parsed result date clone and string helpers', function () {
         ->and($clone->tags())->not->toContain('custom/end')
         ->and($clone->tags())->not->toContain('custom/result')
         ->and($clone->tags())->toContain('custom/clone')
-        ->and((string) $result)->toContain("index: 4")
+        ->and((string) $result)->toContain('index: 4')
         ->and((string) $result)->toContain("text: '9-10'")
         ->and((string) $result)->toContain('custom/start')
         ->and((string) $result)->toContain('custom/end');

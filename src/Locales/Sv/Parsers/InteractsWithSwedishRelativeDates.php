@@ -43,5 +43,4 @@ trait InteractsWithSwedishRelativeDates
 
         return Pattern::repeatedTimeunitPattern('', $single, '\\s*(?:,?\\s*(?:och)|,)?\\s*');
     }
-
 }

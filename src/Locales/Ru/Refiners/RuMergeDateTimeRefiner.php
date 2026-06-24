@@ -13,5 +13,4 @@ class RuMergeDateTimeRefiner extends AbstractMergeDateTimeRefiner
     {
         return '/^\s*(?:T|в|,|-)?\s*$/iu';
     }
-
 }

@@ -4,8 +4,8 @@ namespace Chrono\Locales\Uk\Parsers;
 
 use Carbon\CarbonImmutable;
 use Chrono\Locales\Uk\UkConstants;
-use Chrono\Pattern;
 use Chrono\ParsedComponents;
+use Chrono\Pattern;
 
 trait InteractsWithUkrainianRelativeDates
 {

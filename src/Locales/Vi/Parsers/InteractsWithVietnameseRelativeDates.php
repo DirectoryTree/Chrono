@@ -4,8 +4,8 @@ namespace Chrono\Locales\Vi\Parsers;
 
 use Carbon\CarbonImmutable;
 use Chrono\Locales\Vi\ViConstants;
-use Chrono\Pattern;
 use Chrono\ParsedComponents;
+use Chrono\Pattern;
 
 trait InteractsWithVietnameseRelativeDates
 {

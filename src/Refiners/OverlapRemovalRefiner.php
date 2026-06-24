@@ -28,6 +28,7 @@ class OverlapRemovalRefiner implements Refiner
             if ($result->index >= $previous->index + strlen($previous->text)) {
                 $accepted[] = $previous;
                 $previous = $result;
+
                 continue;
             }
 

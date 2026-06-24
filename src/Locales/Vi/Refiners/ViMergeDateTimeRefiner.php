@@ -13,5 +13,4 @@ class ViMergeDateTimeRefiner extends AbstractMergeDateTimeRefiner
     {
         return '/^\s*(?:lúc|vào|,|T|-)?\s*$/iu';
     }
-
 }

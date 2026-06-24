@@ -29,7 +29,7 @@ class Chrono
      * @param  array<string, mixed>  $defaultOptions
      */
     public function __construct(
-        protected readonly ChronoEngine $engine = new EnChrono(),
+        protected readonly ChronoEngine $engine = new EnChrono,
         protected readonly array $defaultOptions = [],
     ) {}
 
@@ -78,7 +78,7 @@ class Chrono
      */
     public static function spanish(): self
     {
-        return new self(new EsChrono());
+        return new self(new EsChrono);
     }
 
     /**
@@ -102,7 +102,7 @@ class Chrono
      */
     public static function german(): self
     {
-        return new self(new DeChrono());
+        return new self(new DeChrono);
     }
 
     /**
@@ -126,7 +126,7 @@ class Chrono
      */
     public static function french(): self
     {
-        return new self(new FrChrono());
+        return new self(new FrChrono);
     }
 
     /**
@@ -150,7 +150,7 @@ class Chrono
      */
     public static function italian(): self
     {
-        return new self(new ItChrono());
+        return new self(new ItChrono);
     }
 
     /**
@@ -174,7 +174,7 @@ class Chrono
      */
     public static function finnish(): self
     {
-        return new self(new FiChrono());
+        return new self(new FiChrono);
     }
 
     /**
@@ -198,7 +198,7 @@ class Chrono
      */
     public static function dutch(): self
     {
-        return new self(new NlChrono());
+        return new self(new NlChrono);
     }
 
     /**
@@ -222,7 +222,7 @@ class Chrono
      */
     public static function swedish(): self
     {
-        return new self(new SvChrono());
+        return new self(new SvChrono);
     }
 
     /**
@@ -246,7 +246,7 @@ class Chrono
      */
     public static function ukrainian(): self
     {
-        return new self(new UkChrono());
+        return new self(new UkChrono);
     }
 
     /**
@@ -270,7 +270,7 @@ class Chrono
      */
     public static function portuguese(): self
     {
-        return new self(new PtChrono());
+        return new self(new PtChrono);
     }
 
     /**
@@ -294,7 +294,7 @@ class Chrono
      */
     public static function russian(): self
     {
-        return new self(new RuChrono());
+        return new self(new RuChrono);
     }
 
     /**
@@ -318,7 +318,7 @@ class Chrono
      */
     public static function japanese(): self
     {
-        return new self(new JaChrono());
+        return new self(new JaChrono);
     }
 
     /**
@@ -342,7 +342,7 @@ class Chrono
      */
     public static function vietnamese(): self
     {
-        return new self(new ViChrono());
+        return new self(new ViChrono);
     }
 
     /**
@@ -366,7 +366,7 @@ class Chrono
      */
     public static function chinese(): self
     {
-        return new self(new ZhChrono());
+        return new self(new ZhChrono);
     }
 
     /**
@@ -390,7 +390,7 @@ class Chrono
      */
     public static function zhHans(): self
     {
-        return new self(new ZhHansChrono());
+        return new self(new ZhHansChrono);
     }
 
     /**
@@ -406,7 +406,7 @@ class Chrono
      */
     public static function zhHant(): self
     {
-        return new self(new ZhHantChrono());
+        return new self(new ZhHantChrono);
     }
 
     /**
@@ -515,7 +515,7 @@ class Chrono
         CarbonInterface|string|array|null $reference = null,
         array $options = []
     ): array {
-        return (new self())->parseText($text, $reference, $options);
+        return (new self)->parseText($text, $reference, $options);
     }
 
     /**

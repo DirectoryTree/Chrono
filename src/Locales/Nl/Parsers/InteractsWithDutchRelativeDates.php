@@ -5,8 +5,8 @@ namespace Chrono\Locales\Nl\Parsers;
 use Carbon\CarbonImmutable;
 use Chrono\Dates;
 use Chrono\Locales\Nl\NlConstants;
-use Chrono\Pattern;
 use Chrono\ParsedComponents;
+use Chrono\Pattern;
 
 trait InteractsWithDutchRelativeDates
 {

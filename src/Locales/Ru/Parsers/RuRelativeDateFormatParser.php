@@ -2,6 +2,7 @@
 
 namespace Chrono\Locales\Ru\Parsers;
 
+use Carbon\CarbonImmutable;
 use Chrono\Locales\Ru\RuConstants;
 use Chrono\Options;
 use Chrono\ParsedResult;
@@ -43,7 +44,7 @@ class RuRelativeDateFormatParser implements Parser
     /**
      * Apply the relative shift and normalize coarse units to their start.
      */
-    protected function relativeDate(Reference $reference, string $unit, int $direction): \Carbon\CarbonImmutable
+    protected function relativeDate(Reference $reference, string $unit, int $direction): CarbonImmutable
     {
         $date = $direction === 0 ? $reference->date : $reference->date->add($unit, $direction);
 

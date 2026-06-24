@@ -7,11 +7,11 @@ use Chrono\ConfiguredChronoEngine;
 use Chrono\Locales\De\Parsers\DeCasualDateParser;
 use Chrono\Locales\De\Parsers\DeCasualTimeParser;
 use Chrono\Locales\De\Parsers\DeDashDateParser;
-use Chrono\Locales\De\Parsers\DeMonthNameParser;
 use Chrono\Locales\De\Parsers\DeMonthNameLittleEndianParser;
+use Chrono\Locales\De\Parsers\DeMonthNameParser;
 use Chrono\Locales\De\Parsers\DeSpecificTimeExpressionParser;
-use Chrono\Locales\De\Parsers\DeTimeExpressionParser as DeCommonTimeExpressionParser;
 use Chrono\Locales\De\Parsers\DeTimeExpressionExtensionParser;
+use Chrono\Locales\De\Parsers\DeTimeExpressionParser as DeCommonTimeExpressionParser;
 use Chrono\Locales\De\Parsers\DeTimeUnitRelativeFormatParser;
 use Chrono\Locales\De\Parsers\DeTimeUnitWithinFormatParser;
 use Chrono\Locales\De\Parsers\DeWeekdayParser;
@@ -52,30 +52,30 @@ class DeChrono extends ConfiguredChronoEngine
     {
         return new Configuration(
             parsers: [
-                new DeTimeUnitRelativeFormatParser(),
-                new DeCasualDateParser(),
-                new DeCasualTimeParser(),
-                new IsoFormatParser(),
+                new DeTimeUnitRelativeFormatParser,
+                new DeCasualDateParser,
+                new DeCasualTimeParser,
+                new IsoFormatParser,
                 new SlashDateFormatParser(littleEndian: true),
-                new DeMonthNameLittleEndianParser(),
-                new DeMonthNameParser(),
-                new DeDashDateParser(),
-                new DeSpecificTimeExpressionParser(),
-                new DeCommonTimeExpressionParser(),
-                new DeTimeExpressionExtensionParser(),
-                new DeWeekdayParser(),
-                new DeTimeUnitWithinFormatParser(),
+                new DeMonthNameLittleEndianParser,
+                new DeMonthNameParser,
+                new DeDashDateParser,
+                new DeSpecificTimeExpressionParser,
+                new DeCommonTimeExpressionParser,
+                new DeTimeExpressionExtensionParser,
+                new DeWeekdayParser,
+                new DeTimeUnitWithinFormatParser,
             ],
             refiners: [
-                new OverlapRemovalRefiner(),
-                new ExtractTimezoneOffsetRefiner(),
-                new MergeWeekdayComponentRefiner(),
-                new DeMergeDateRangeRefiner(),
-                new DeMergeDateTimeRefiner(),
-                new ExtractTimezoneAbbrRefiner(),
-                new OverlapRemovalRefiner(),
-                new ForwardDateRefiner(),
-                new UnlikelyFormatFilter(),
+                new OverlapRemovalRefiner,
+                new ExtractTimezoneOffsetRefiner,
+                new MergeWeekdayComponentRefiner,
+                new DeMergeDateRangeRefiner,
+                new DeMergeDateTimeRefiner,
+                new ExtractTimezoneAbbrRefiner,
+                new OverlapRemovalRefiner,
+                new ForwardDateRefiner,
+                new UnlikelyFormatFilter,
             ],
         );
     }
@@ -87,23 +87,23 @@ class DeChrono extends ConfiguredChronoEngine
     {
         return new Configuration(
             parsers: [
-                new IsoFormatParser(),
+                new IsoFormatParser,
                 new SlashDateFormatParser(littleEndian: true),
-                new DeCommonTimeExpressionParser(),
-                new DeSpecificTimeExpressionParser(),
-                new DeMonthNameLittleEndianParser(),
-                new DeWeekdayParser(),
-                new DeTimeUnitWithinFormatParser(),
+                new DeCommonTimeExpressionParser,
+                new DeSpecificTimeExpressionParser,
+                new DeMonthNameLittleEndianParser,
+                new DeWeekdayParser,
+                new DeTimeUnitWithinFormatParser,
             ],
             refiners: [
-                new OverlapRemovalRefiner(),
-                new ExtractTimezoneOffsetRefiner(),
-                new MergeWeekdayComponentRefiner(),
-                new DeMergeDateRangeRefiner(),
-                new DeMergeDateTimeRefiner(),
-                new ExtractTimezoneAbbrRefiner(),
-                new OverlapRemovalRefiner(),
-                new ForwardDateRefiner(),
+                new OverlapRemovalRefiner,
+                new ExtractTimezoneOffsetRefiner,
+                new MergeWeekdayComponentRefiner,
+                new DeMergeDateRangeRefiner,
+                new DeMergeDateTimeRefiner,
+                new ExtractTimezoneAbbrRefiner,
+                new OverlapRemovalRefiner,
+                new ForwardDateRefiner,
                 new UnlikelyFormatFilter(strictMode: true),
             ],
         );

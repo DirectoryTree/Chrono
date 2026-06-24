@@ -13,5 +13,4 @@ class UkMergeDateTimeRefiner extends AbstractMergeDateTimeRefiner
     {
         return '/^\s*(?:T|в|у|о|,|-)?\s*$/iu';
     }
-
 }

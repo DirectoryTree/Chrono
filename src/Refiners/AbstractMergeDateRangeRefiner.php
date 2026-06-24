@@ -109,5 +109,4 @@ abstract class AbstractMergeDateRangeRefiner extends MergingRefiner
 
         return [$end, $start];
     }
-
 }

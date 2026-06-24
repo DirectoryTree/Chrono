@@ -7,8 +7,8 @@ use Chrono\ConfiguredChronoEngine;
 use Chrono\Locales\Fr\Parsers\FrCasualDateParser;
 use Chrono\Locales\Fr\Parsers\FrCasualTimeParser;
 use Chrono\Locales\Fr\Parsers\FrIsoDateTimeRangeParser;
-use Chrono\Locales\Fr\Parsers\FrMonthNameParser;
 use Chrono\Locales\Fr\Parsers\FrMonthNameLittleEndianParser;
+use Chrono\Locales\Fr\Parsers\FrMonthNameParser;
 use Chrono\Locales\Fr\Parsers\FrSlashDateParser;
 use Chrono\Locales\Fr\Parsers\FrSpecificTimeExpressionParser;
 use Chrono\Locales\Fr\Parsers\FrTimeExpressionParser as FrCommonTimeExpressionParser;
@@ -52,30 +52,30 @@ class FrChrono extends ConfiguredChronoEngine
     {
         return new Configuration(
             parsers: [
-                new FrTimeUnitRelativeFormatParser(),
-                new FrCasualTimeParser(),
-                new FrCasualDateParser(),
-                new FrIsoDateTimeRangeParser(),
-                new IsoFormatParser(),
-                new FrSlashDateParser(),
-                new FrMonthNameLittleEndianParser(),
-                new FrMonthNameParser(),
-                new FrCommonTimeExpressionParser(),
-                new FrSpecificTimeExpressionParser(),
-                new FrTimeUnitAgoFormatParser(),
-                new FrTimeUnitWithinFormatParser(),
-                new FrWeekdayParser(),
+                new FrTimeUnitRelativeFormatParser,
+                new FrCasualTimeParser,
+                new FrCasualDateParser,
+                new FrIsoDateTimeRangeParser,
+                new IsoFormatParser,
+                new FrSlashDateParser,
+                new FrMonthNameLittleEndianParser,
+                new FrMonthNameParser,
+                new FrCommonTimeExpressionParser,
+                new FrSpecificTimeExpressionParser,
+                new FrTimeUnitAgoFormatParser,
+                new FrTimeUnitWithinFormatParser,
+                new FrWeekdayParser,
             ],
             refiners: [
-                new OverlapRemovalRefiner(),
-                new ExtractTimezoneOffsetRefiner(),
-                new MergeWeekdayComponentRefiner(),
-                new FrMergeDateTimeRefiner(),
-                new FrMergeDateRangeRefiner(),
-                new ExtractTimezoneAbbrRefiner(),
-                new OverlapRemovalRefiner(),
-                new ForwardDateRefiner(),
-                new UnlikelyFormatFilter(),
+                new OverlapRemovalRefiner,
+                new ExtractTimezoneOffsetRefiner,
+                new MergeWeekdayComponentRefiner,
+                new FrMergeDateTimeRefiner,
+                new FrMergeDateRangeRefiner,
+                new ExtractTimezoneAbbrRefiner,
+                new OverlapRemovalRefiner,
+                new ForwardDateRefiner,
+                new UnlikelyFormatFilter,
             ],
         );
     }
@@ -87,24 +87,24 @@ class FrChrono extends ConfiguredChronoEngine
     {
         return new Configuration(
             parsers: [
-                new IsoFormatParser(),
-                new FrSlashDateParser(),
-                new FrMonthNameLittleEndianParser(),
-                new FrCommonTimeExpressionParser(),
-                new FrSpecificTimeExpressionParser(),
-                new FrTimeUnitAgoFormatParser(),
-                new FrTimeUnitWithinFormatParser(),
-                new FrWeekdayParser(),
+                new IsoFormatParser,
+                new FrSlashDateParser,
+                new FrMonthNameLittleEndianParser,
+                new FrCommonTimeExpressionParser,
+                new FrSpecificTimeExpressionParser,
+                new FrTimeUnitAgoFormatParser,
+                new FrTimeUnitWithinFormatParser,
+                new FrWeekdayParser,
             ],
             refiners: [
-                new OverlapRemovalRefiner(),
-                new ExtractTimezoneOffsetRefiner(),
-                new MergeWeekdayComponentRefiner(),
-                new FrMergeDateTimeRefiner(),
-                new FrMergeDateRangeRefiner(),
-                new ExtractTimezoneAbbrRefiner(),
-                new OverlapRemovalRefiner(),
-                new ForwardDateRefiner(),
+                new OverlapRemovalRefiner,
+                new ExtractTimezoneOffsetRefiner,
+                new MergeWeekdayComponentRefiner,
+                new FrMergeDateTimeRefiner,
+                new FrMergeDateRangeRefiner,
+                new ExtractTimezoneAbbrRefiner,
+                new OverlapRemovalRefiner,
+                new ForwardDateRefiner,
                 new UnlikelyFormatFilter(strictMode: true),
             ],
         );

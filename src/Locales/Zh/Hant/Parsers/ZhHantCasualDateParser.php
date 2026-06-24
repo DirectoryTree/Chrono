@@ -44,5 +44,8 @@ class ZhHantCasualDateParser extends AbstractZhCasualDateParser
     /**
      * Get the parser tag.
      */
-    protected function tag(): string { return 'parser/ZHHantCasualDateParser'; }
+    protected function tag(): string
+    {
+        return 'parser/ZHHantCasualDateParser';
+    }
 }

@@ -15,8 +15,8 @@ class ExtractTimezoneRefiner implements Refiner
      */
     public function refine(string $text, array $results, Reference $reference, Options $options): array
     {
-        $results = (new ExtractTimezoneOffsetRefiner())->refine($text, $results, $reference, $options);
+        $results = (new ExtractTimezoneOffsetRefiner)->refine($text, $results, $reference, $options);
 
-        return (new ExtractTimezoneAbbrRefiner())->refine($text, $results, $reference, $options);
+        return (new ExtractTimezoneAbbrRefiner)->refine($text, $results, $reference, $options);
     }
 }

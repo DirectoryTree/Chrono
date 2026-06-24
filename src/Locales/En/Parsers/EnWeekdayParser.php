@@ -5,7 +5,6 @@ namespace Chrono\Locales\En\Parsers;
 use Chrono\Calculation\Weekdays;
 use Chrono\Locales\En\EnConstants;
 use Chrono\Options;
-use Chrono\ParsedComponents;
 use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
@@ -26,7 +25,7 @@ class EnWeekdayParser implements Parser
             PREG_SET_ORDER | PREG_OFFSET_CAPTURE,
         );
 
-        return array_values(array_filter(array_map(function (array $match) use ($reference, $options): ?ParsedResult {
+        return array_values(array_filter(array_map(function (array $match) use ($reference): ?ParsedResult {
             $modifier = $this->modifier(($match['modifier'][0] ?? '') ?: ($match['postmodifier'][0] ?? ''));
             $weekday = $this->weekday(mb_strtolower($match['weekday'][0]), $modifier, $reference);
 

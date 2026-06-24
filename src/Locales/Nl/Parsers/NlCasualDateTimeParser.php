@@ -4,7 +4,6 @@ namespace Chrono\Locales\Nl\Parsers;
 
 use Chrono\Locales\Nl\CreatesParsedComponents;
 use Chrono\Options;
-use Chrono\ParsedComponents;
 use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
@@ -37,7 +36,7 @@ class NlCasualDateTimeParser implements Parser
                 'day' => $date->day,
             ]);
 
-            $components = (new NlCasualTimeParser())->timeComponents($components, $timeText);
+            $components = (new NlCasualTimeParser)->timeComponents($components, $timeText);
             $components->addTag('parser/NLCasualDateTimeParser');
 
             return new ParsedResult($match[0][1], trim($match[0][0]), $components);

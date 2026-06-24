@@ -196,5 +196,4 @@ class CasualReferences
             ->imply('millisecond', 0)
             ->addTag('casualReference/noon');
     }
-
 }
