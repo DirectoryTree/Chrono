@@ -79,13 +79,13 @@ it('parses ukrainian weekdays times and relative durations', function () {
         ->and($within->start->tags())->toContain('parser/UKTimeUnitWithinFormatParser')
         ->and($within->start->isCertain('month'))->toBeTrue()
         ->and($within->start->isCertain('day'))->toBeFalse()
-        ->and($withinMinute->index)->toBe(26)
+        ->and($withinMinute->index)->toBe(14)
         ->and($withinMinute->text)->toBe('протягом хвилини')
         ->and($withinMinute->start->date()->toDateTimeString())->toBe('2012-08-10 00:01:00')
         ->and($withinMinute->start->isCertain('hour'))->toBeTrue()
         ->and($withinMinute->start->isCertain('minute'))->toBeTrue()
         ->and($withinMinute->start->tags())->toContain('result/relativeDateAndTime')
-        ->and($withinHours->index)->toBe(26)
+        ->and($withinHours->index)->toBe(14)
         ->and($withinHours->text)->toBe('на протязі 2 годин')
         ->and($withinHours->start->date()->toDateTimeString())->toBe('2012-08-10 02:00:00')
         ->and($withinHours->start->isCertain('hour'))->toBeTrue()
@@ -106,3 +106,47 @@ it('parses ukrainian weekdays times and relative durations', function () {
         ->and(Chrono::strictUkrainian()->parseText('Це в 10 - 20', '2012-08-10'))->toBe([])
         ->and(Chrono::strictUkrainian()->parseText('7-730', '2012-08-10'))->toBe([]);
 });
+
+it('matches upstream ukrainian positive casual relative time units', function (string $text, string $expected) {
+    $result = Chrono::uk()->parseText($text, '2016-10-01 12:00')[0];
+
+    expect($result->index)->toBe(0)
+        ->and($result->text)->toBe($text)
+        ->and($result->start->date()->toDateTimeString())->toBe($expected);
+})->with([
+    ['наступні 2 тижні', '2016-10-15 12:00:00'],
+    ['наступні 2 дні', '2016-10-03 12:00:00'],
+    ['наступні два роки', '2018-10-01 12:00:00'],
+    ['наступні 2 тижні 3 дні', '2016-10-18 12:00:00'],
+    ['через декілька хвилин', '2016-10-01 12:02:00'],
+    ['через півгодини', '2016-10-01 12:30:00'],
+    ['через 2 години', '2016-10-01 14:00:00'],
+    ['через три місяці', '2017-01-01 12:00:00'],
+    ['через тиждень', '2016-10-08 12:00:00'],
+    ['через місяць', '2016-11-01 12:00:00'],
+    ['через рік', '2017-10-01 12:00:00'],
+]);
+
+it('matches upstream ukrainian negative casual relative time units', function (string $text, string $expected) {
+    $result = Chrono::uk()->parseText($text, '2016-10-01 12:00')[0];
+
+    expect($result->index)->toBe(0)
+        ->and($result->text)->toBe($text)
+        ->and($result->start->date()->toDateTimeString())->toBe($expected);
+})->with([
+    ['минулі 2 тижні', '2016-09-17 12:00:00'],
+    ['минулі два дні', '2016-09-29 12:00:00'],
+]);
+
+it('matches upstream ukrainian signed casual relative time units', function (string $text, string $reference, string $expected) {
+    $result = Chrono::uk()->parseText($text, $reference)[0];
+
+    expect($result->index)->toBe(0)
+        ->and($result->text)->toBe($text)
+        ->and($result->start->date()->toDateTimeString())->toBe($expected);
+})->with([
+    ['+15 хвилин', '2012-07-10 12:14', '2012-07-10 12:29:00'],
+    ['+15хв', '2012-07-10 12:14', '2012-07-10 12:29:00'],
+    ['+1 день 2 години', '2012-07-10 12:14', '2012-07-11 14:14:00'],
+    ['-3 роки', '2015-07-10 12:14', '2012-07-10 12:14:00'],
+]);

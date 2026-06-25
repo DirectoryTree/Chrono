@@ -25,7 +25,7 @@ it('parses japanese standard dates', function () {
 
     expect($standard->start->date()->toDateTimeString())->toBe('2014-07-12 12:00:00')
         ->and($standard->start->tags())->toContain('parser/JPStandardParser')
-        ->and($prefixedStandard->index)->toBe(15)
+        ->and($prefixedStandard->index)->toBe(5)
         ->and($prefixedStandard->text)->toBe('2012年3月31日')
         ->and($prefixedStandard->start->get('year'))->toBe(2012)
         ->and($prefixedStandard->start->get('month'))->toBe(3)

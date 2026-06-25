@@ -243,6 +243,31 @@ it('parses timezone abbreviations', function () {
         ->and($result->start->date()->format('Y-m-d H:i:s P'))->toBe('2026-06-23 11:00:00 +09:00');
 });
 
+it('parses ambiguous timezone abbreviations across DST transitions', function (string $text, int $offset) {
+    $result = Chrono::parse($text)[0];
+
+    expect($result->text)->toBe($text)
+        ->and($result->start->get('hour'))->toBe(23)
+        ->and($result->start->timezoneOffset())->toBe($offset);
+})->with([
+    ['2022-03-12 23:00 ET', -300],
+    ['2022-03-13 23:00 ET', -240],
+    ['2021-03-13 23:00 ET', -300],
+    ['2021-03-14 23:00 ET', -240],
+    ['2021-11-06 23:00 ET', -240],
+    ['2021-11-07 23:00 ET', -300],
+    ['2020-10-31 23:00 ET', -240],
+    ['2020-11-01 23:00 ET', -300],
+    ['2022-03-26 23:00 CET', 60],
+    ['2022-03-27 23:00 CET', 120],
+    ['2021-03-27 23:00 CET', 60],
+    ['2021-03-28 23:00 CET', 120],
+    ['2022-10-29 23:00 CET', 120],
+    ['2022-10-30 23:00 CET', 60],
+    ['2021-10-30 23:00 CET', 120],
+    ['2021-10-31 23:00 CET', 60],
+]);
+
 it('extracts timezone abbreviations onto range ends independently like upstream', function () {
     $start = (new ParsedComponents(CarbonImmutable::parse('2026-06-23 10:00:00')))
         ->assign('hour', 10)

@@ -181,6 +181,18 @@ it('merges slash dates followed by separated time expressions', function () {
         ->toBe('2024-05-31 14:15:00');
 });
 
+it('parses slash date ranges', function () {
+    $result = Chrono::en()->parseText('8/10/2012 - 8/15/2012', '2012-08-10')[0];
+
+    expect($result->index)->toBe(0)
+        ->and($result->text)->toBe('8/10/2012 - 8/15/2012')
+        ->and($result->tags())->toContain('parser/SlashDateFormatParser')
+        ->and($result->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
+        ->and($result->start->tags())->toContain('parser/SlashDateFormatParser')
+        ->and($result->end?->date()->toDateTimeString())->toBe('2012-08-15 12:00:00')
+        ->and($result->end?->tags())->toContain('parser/SlashDateFormatParser');
+});
+
 it('parses slash date ranges with times', function () {
     $plain = Chrono::parse('from 01/21/2021 10:00 to 01/01/2023 07:00', '2012-08-10 12:00')[0];
     $meridiem = Chrono::parse('08/08/2023, 09:15 AM to 08/29/2023, 09:15 AM', '2012-08-10 12:00')[0];

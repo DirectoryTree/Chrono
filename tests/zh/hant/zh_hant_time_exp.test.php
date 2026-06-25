@@ -50,6 +50,8 @@ it('parses traditional chinese random date time expressions', function () {
         ->toBe('上個禮拜五16時')
         ->and($chinese->parseText('3月17日 20點15', '2012-08-10')[0]->text)
         ->toBe('3月17日 20點15')
+        ->and($chinese->parseText('10點', '2012-08-10')[0]->text)
+        ->toBe('10點')
         ->and($chinese->parseText('中午12點', '2012-08-10')[0]->start->get('hour'))
         ->toBe(12);
 });

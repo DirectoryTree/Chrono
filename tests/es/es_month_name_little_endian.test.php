@@ -10,7 +10,7 @@ it('parses spanish month name dates', function () {
     $compact = $spanish->parseText('Dom 15Sep', '2013-08-10')[0];
     $uppercaseCompact = $spanish->parseText('DOM 15SEP', '2013-08-10')[0];
     $prefixed = $spanish->parseText('La fecha límite es 10 Agosto', '2012-08-10')[0];
-    $inferred = $spanish->parseText('La fecha limite es el martes, 10 de enero', '2012-08-10')[0];
+    $inferred = $spanish->parseText('La fecha límite es el martes, 10 de enero', '2012-08-10')[0];
     $accentedInferred = $spanish->parseText('La fecha límite es el miércoles, 10 de enero ', '2012-08-10')[0];
     $deDate = $spanish->parseText('10 de Agosto de 2012', '2010-02-01')[0];
     $withTime = $spanish->parseText('12 de julio a las 19:00', '2012-08-10')[0];
@@ -32,13 +32,14 @@ it('parses spanish month name dates', function () {
         ->and($uppercaseCompact->start->get('year'))->toBe(2013)
         ->and($uppercaseCompact->start->get('month'))->toBe(9)
         ->and($uppercaseCompact->start->get('day'))->toBe(15)
-        ->and($prefixed->index)->toBe(20)
+        ->and($prefixed->index)->toBe(19)
         ->and($prefixed->text)->toBe('10 Agosto')
         ->and($prefixed->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
         ->and($inferred->text)->toBe('martes, 10 de enero')
+        ->and($inferred->index)->toBe(22)
         ->and($inferred->start->date()->toDateTimeString())->toBe('2013-01-10 12:00:00')
         ->and($inferred->start->isCertain('weekday'))->toBeTrue()
-        ->and($accentedInferred->index)->toBe(23)
+        ->and($accentedInferred->index)->toBe(22)
         ->and($accentedInferred->text)->toBe('miércoles, 10 de enero')
         ->and($accentedInferred->start->get('weekday'))->toBe(3)
         ->and($accentedInferred->start->date()->toDateTimeString())->toBe('2013-01-10 12:00:00')
@@ -73,4 +74,10 @@ it('parses spanish month name ranges', function () {
         ->and($crossYear->text)->toBe('10 Agosto - 12 Septiembre 2013')
         ->and($crossYear->start->date()->toDateTimeString())->toBe('2013-08-10 12:00:00')
         ->and($crossYear->end?->date()->toDateTimeString())->toBe('2013-09-12 12:00:00');
+});
+
+it('rejects impossible spanish month name dates in strict mode', function () {
+    expect(Chrono::strictSpanish()->parseText('32 Agosto 2014', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictSpanish()->parseText('29 Febrero 2014', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictSpanish()->parseText('32 Agosto', '2012-08-10'))->toBe([]);
 });

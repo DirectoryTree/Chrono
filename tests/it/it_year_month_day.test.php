@@ -21,7 +21,7 @@ it('parses italian casual year month day dates', function () {
         ->and($dotted->index)->toBe(0)
         ->and($dotted->text)->toBe('2012.08.10')
         ->and($dotted->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
-        ->and($prefixedDotted->index)->toBe(15)
+        ->and($prefixedDotted->index)->toBe(14)
         ->and($prefixedDotted->text)->toBe('2012.08.10')
         ->and($prefixedDotted->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
         ->and(Chrono::strictItalian()->parseText('2014.02.28')[0]->text)->toBe('2014.02.28')

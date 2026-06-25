@@ -15,7 +15,7 @@ it('parses vietnamese ago time unit expressions', function () {
     $wordMonth = $vietnamese->parseText('một tháng qua', '2012-08-10 12:00')[0];
 
     expect($result->start->date()->toDateTimeString())->toBe('2012-08-08 09:30:00')
-        ->and($prefixed->index)->toBe(12)
+        ->and($prefixed->index)->toBe(8)
         ->and($prefixed->text)->toBe('3 ngày trước')
         ->and($prefixed->start->date()->toDateTimeString())->toBe('2012-08-07 12:00:00')
         ->and($weeks->start->date()->toDateTimeString())->toBe('2012-07-27 12:00:00')

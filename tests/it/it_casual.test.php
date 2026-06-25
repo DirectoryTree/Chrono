@@ -8,7 +8,7 @@ it('parses italian casual dates', function () {
     $today = $italian->parseText('La scadenza è oggi', '2012-08-10 14:12')[0];
     $tomorrow = $italian->parseText('La scadenza è domani', '2012-08-10 17:10')[0];
 
-    expect($now->index)->toBe(15)
+    expect($now->index)->toBe(14)
         ->and($now->text)->toBe('ora')
         ->and($now->start->date()->format('Y-m-d H:i:s.v'))->toBe('2012-08-10 08:09:10.011')
         ->and($now->start->get('year'))->toBe(2012)
@@ -19,7 +19,7 @@ it('parses italian casual dates', function () {
         ->and($now->start->get('second'))->toBe(10)
         ->and($now->start->get('millisecond'))->toBe(11)
         ->and($now->start->tags())->toContain('parser/ITCasualDateParser')
-        ->and($today->index)->toBe(15)
+        ->and($today->index)->toBe(14)
         ->and($today->text)
         ->toBe('oggi')
         ->and($today->start->date()->toDateTimeString())
@@ -27,7 +27,7 @@ it('parses italian casual dates', function () {
         ->and($today->start->get('year'))->toBe(2012)
         ->and($today->start->get('month'))->toBe(8)
         ->and($today->start->get('day'))->toBe(10)
-        ->and($tomorrow->index)->toBe(15)
+        ->and($tomorrow->index)->toBe(14)
         ->and($tomorrow->text)
         ->toBe('domani')
         ->and($tomorrow->start->date()->toDateTimeString())

@@ -19,7 +19,7 @@ it('parses german within time units with upstream-shaped components', function (
     $years = $german->parseText('in 20 Jahren', '2012-08-10 12:14')[0];
     $abbreviated = $german->parseText('In 5 Min wird ein Auto fahren', '2012-08-10 12:14')[0];
 
-    expect($fiveDays->index)->toBe(18)
+    expect($fiveDays->index)->toBe(17)
         ->and($fiveDays->text)->toBe('in 5 Tagen')
         ->and($fiveDays->start->get('year'))->toBe(2012)
         ->and($fiveDays->start->get('month'))->toBe(8)
@@ -27,7 +27,7 @@ it('parses german within time units with upstream-shaped components', function (
         ->and($fiveDays->start->isCertain('day'))->toBeTrue()
         ->and($fiveDays->start->isCertain('hour'))->toBeFalse()
         ->and($fiveDays->start->date()->toDateTimeString())->toBe('2012-08-15 00:00:00')
-        ->and($fiveDaysWord->index)->toBe(18)
+        ->and($fiveDaysWord->index)->toBe(17)
         ->and($fiveDaysWord->text)->toBe('in fünf Tagen')
         ->and($fiveDaysWord->start->date()->toDateTimeString())->toBe('2012-08-15 11:12:00')
         ->and($minutes->index)->toBe(0)

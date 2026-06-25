@@ -29,7 +29,7 @@ it('parses russian month expressions', function () {
         ->and($monthOnlyWithPreposition->start->date()->toDateTimeString())->toBe('2021-01-01 12:00:00')
         ->and($shortMonthOnlyWithPreposition->start->date()->toDateTimeString())->toBe('2021-01-01 12:00:00')
         ->and($contextMonth->text)->toBe('в сентябре 2012')
-        ->and($contextMonth->index)->toBe(16)
+        ->and($contextMonth->index)->toBe(9)
         ->and($contextMonth->start->date()->toDateTimeString())->toBe('2012-09-01 12:00:00')
         ->and($abbreviatedYear->start->date()->toDateTimeString())->toBe('1996-08-01 12:00:00')
         ->and($abbreviatedYearWithPrefix->text)->toBe('авг 96')

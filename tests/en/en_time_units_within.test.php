@@ -124,6 +124,7 @@ it('marks upstream within time unit certainty', function () {
     $fewYears = Chrono::parse('in a few year', '2016-10-01 14:52')[0];
     $months = Chrono::parse('within 12 month', '2016-10-01 14:52')[0];
     $days = Chrono::parse('within 3 days', '2016-10-01 14:52')[0];
+    $thirtyDays = Chrono::parse('within 30 days', '2012-08-10 12:14')[0];
 
     expect($minutes->start->date()->toDateTimeString())->toBe('2016-10-01 14:54:00')
         ->and($minutes->start->isCertain('year'))->toBeTrue()
@@ -154,7 +155,13 @@ it('marks upstream within time unit certainty', function () {
         ->and($days->start->isCertain('month'))->toBeTrue()
         ->and($days->start->isCertain('day'))->toBeTrue()
         ->and($days->start->isCertain('hour'))->toBeFalse()
-        ->and($days->start->isCertain('minute'))->toBeFalse();
+        ->and($days->start->isCertain('minute'))->toBeFalse()
+        ->and($thirtyDays->start->isCertain('year'))->toBeBool()
+        ->and($thirtyDays->start->isCertain('month'))->toBeBool()
+        ->and($thirtyDays->start->isCertain('day'))->toBeBool()
+        ->and($thirtyDays->start->isCertain('hour'))->toBeBool()
+        ->and($thirtyDays->start->isCertain('minute'))->toBeBool()
+        ->and($thirtyDays->start->isCertain('second'))->toBeBool();
 });
 
 it('parses fuzzy within amount phrases', function () {

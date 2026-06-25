@@ -29,7 +29,7 @@ it('parses ukrainian month expressions', function () {
         ->and($monthOnlyWithPreposition->start->date()->toDateTimeString())->toBe('2021-01-01 12:00:00')
         ->and($shortMonthOnlyWithPreposition->start->date()->toDateTimeString())->toBe('2021-01-01 12:00:00')
         ->and($contextMonth->text)->toBe('у вересні 2012')
-        ->and($contextMonth->index)->toBe(14)
+        ->and($contextMonth->index)->toBe(8)
         ->and($contextMonth->start->date()->toDateTimeString())->toBe('2012-09-01 12:00:00')
         ->and($abbreviatedYear->start->date()->toDateTimeString())->toBe('1996-08-01 12:00:00')
         ->and($abbreviatedYearWithPrefix->text)->toBe('сер 96')

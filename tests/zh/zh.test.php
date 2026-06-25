@@ -122,7 +122,7 @@ it('parses simplified chinese casual dates dates weekdays and deadlines', functi
     $weeksLater = $chinese->parseText('2星期后', '2012-08-10 12:14')[0];
     $minutesAfter = $chinese->parseText('5分钟过后', '2012-08-10 12:14')[0];
 
-    expect($today->index)->toBe(3)
+    expect($today->index)->toBe(1)
         ->and($today->text)->toBe('今天')
         ->and($today->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
         ->and($tomorrowLateNight->text)->toBe('明天')
@@ -202,7 +202,7 @@ it('parses simplified chinese casual dates dates weekdays and deadlines', functi
         ->and($clockWithin->start->date()->toDateTimeString())->toBe('2012-08-10 13:14:00')
         ->and($digitsMinutesLater->text)->toBe('5分钟之后')
         ->and($digitsMinutesLater->start->date()->toDateTimeString())->toBe('2012-08-10 12:19:00')
-        ->and($secondsLater->index)->toBe(6)
+        ->and($secondsLater->index)->toBe(2)
         ->and($secondsLater->text)->toBe('5秒之后')
         ->and($secondsLater->start->date()->toDateTimeString())->toBe('2012-08-10 12:14:05')
         ->and($halfHour->text)->toBe('半小时之内')
@@ -262,7 +262,7 @@ it('parses traditional chinese casual dates dates weekdays and deadlines', funct
     $yearWithin = $chinese->parseText('一年內答覆我', '2012-08-10 12:14')[0];
     $digitsYearWithin = $chinese->parseText('1年之內答覆我', '2012-08-10 12:14')[0];
 
-    expect($now->index)->toBe(3)
+    expect($now->index)->toBe(1)
         ->and($now->text)->toBe('而家')
         ->and($now->start->date()->format('Y-m-d H:i:s.v'))->toBe('2012-08-10 08:09:10.011')
         ->and($today->text)->toBe('今日')
@@ -323,7 +323,7 @@ it('parses traditional chinese casual dates dates weekdays and deadlines', funct
         ->and($clockWithin->start->date()->toDateTimeString())->toBe('2012-08-10 13:14:00')
         ->and($digitsMinutesLater->text)->toBe('5分鐘之後')
         ->and($digitsMinutesLater->start->date()->toDateTimeString())->toBe('2012-08-10 12:19:00')
-        ->and($secondsLater->index)->toBe(3)
+        ->and($secondsLater->index)->toBe(1)
         ->and($secondsLater->text)->toBe('5秒之後')
         ->and($secondsLater->start->date()->toDateTimeString())->toBe('2012-08-10 12:14:05')
         ->and($halfHour->text)->toBe('半小時之內')

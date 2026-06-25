@@ -49,7 +49,7 @@ it('parses spanish time expressions', function () {
         ->and($dotRange->end?->isCertain('millisecond'))->toBeFalse()
         ->and($dotRange->end?->date()->toDateTimeString())->toBe('2012-08-10 12:32:00')
         ->and($milliseconds->start->date()->format('Y-m-d H:i:s.v'))->toBe('2012-08-10 08:10:30.123')
-        ->and($dateTime->index)->toBe(14)
+        ->and($dateTime->index)->toBe(13)
         ->and($dateTime->text)->toBe('10 de Agosto de 2012 10:12:59 pm')
         ->and($dateTime->start->get('year'))->toBe(2012)
         ->and($dateTime->start->get('month'))->toBe(8)

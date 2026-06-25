@@ -42,7 +42,7 @@ class ConfiguredChronoEngine implements ChronoEngine
             );
         }
 
-        return array_values($results);
+        return array_values($this->normalizeResultIndexes($text, $results));
     }
 
     /**
@@ -112,5 +112,28 @@ class ConfiguredChronoEngine implements ChronoEngine
             fn (ParsedResult $result): ParsedResult => $result->withReference($reference),
             $results,
         );
+    }
+
+    /**
+     * Convert internal byte offsets to upstream-style string indexes.
+     *
+     * @param  array<int, ParsedResult>  $results
+     * @return array<int, ParsedResult>
+     */
+    protected function normalizeResultIndexes(string $text, array $results): array
+    {
+        return array_map(function (ParsedResult $result) use ($text): ParsedResult {
+            $index = mb_strlen(substr($text, 0, $result->index), 'UTF-8');
+
+            return new ParsedResult(
+                $index,
+                $result->text,
+                $result->start,
+                $result->end,
+                $result->tags(),
+                $result->reference,
+                $result->refDate,
+            );
+        }, $results);
     }
 }

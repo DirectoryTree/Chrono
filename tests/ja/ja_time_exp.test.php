@@ -27,12 +27,12 @@ it('parses japanese time expressions and ranges', function () {
     $randomStandardTime = $japanese->parseText('3月17日 20時15', '2012-08-10')[0];
     $weekdayTime = $japanese->parseText('水曜日 22時', '2012-08-10')[0];
 
-    expect($prefixedMinuteTime->index)->toBe(6)
+    expect($prefixedMinuteTime->index)->toBe(2)
         ->and($prefixedMinuteTime->text)->toBe('午前6時13分')
         ->and($prefixedMinuteTime->start->get('hour'))->toBe(6)
         ->and($prefixedMinuteTime->start->get('minute'))->toBe(13)
         ->and($prefixedMinuteTime->start->date()->toDateTimeString())->toBe('2012-08-10 06:13:00')
-        ->and($prefixedHourTime->index)->toBe(6)
+        ->and($prefixedHourTime->index)->toBe(2)
         ->and($prefixedHourTime->text)->toBe('午前8時')
         ->and($prefixedHourTime->start->get('year'))->toBe(2012)
         ->and($prefixedHourTime->start->get('month'))->toBe(8)
@@ -52,7 +52,7 @@ it('parses japanese time expressions and ranges', function () {
         ->and($range->start->date()->toDateTimeString())->toBe('2012-08-10 22:00:00')
         ->and($range->end?->date()->toDateTimeString())->toBe('2012-08-11 01:00:00')
         ->and($range->end?->tags())->toContain('parser/JPTimeExpressionParser')
-        ->and($japaneseNumeralRange->index)->toBe(6)
+        ->and($japaneseNumeralRange->index)->toBe(2)
         ->and($japaneseNumeralRange->text)->toBe('本日午前八時十分から午後11時32分')
         ->and($japaneseNumeralRange->start->get('hour'))->toBe(8)
         ->and($japaneseNumeralRange->start->get('minute'))->toBe(10)

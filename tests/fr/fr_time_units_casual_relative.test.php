@@ -30,7 +30,7 @@ it('parses french relative durations', function () {
         ->and($french->parseDateText('pendant deux heures et trois minutes', '2012-08-10 12:14')?->toDateTimeString())
         ->toBe('2012-08-10 14:17:00')
         ->and($timer->index)
-        ->toBe(22)
+        ->toBe(21)
         ->and($timer->text)
         ->toBe('de 5 minutes')
         ->and($french->parseText('Dans 5 minutes je vais rentrer chez moi', '2012-08-10 12:14')[0]->text)

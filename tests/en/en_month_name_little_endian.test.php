@@ -6,6 +6,7 @@ it('parses little endian month name dates with two digit years', function () {
     $explicit = Chrono::parse('10 August 2012', '2012-08-10')[0];
     $result = Chrono::parse('3rd Feb 82', '2012-08-10')[0];
     $leadingZero = Chrono::parse('03 Aug 96', '2012-08-10')[0];
+    $withoutLeadingZero = Chrono::parse('3 Aug 96', '2012-08-10')[0];
     $singleDigit = Chrono::parse('9 Aug 96', '2012-08-10')[0];
     $deadline = Chrono::parse('The Deadline is 10 August', '2012-08-10')[0];
     $march = Chrono::parse('31st March, 2016', '2012-08-10')[0];
@@ -25,6 +26,8 @@ it('parses little endian month name dates with two digit years', function () {
         ->and($result->start->date()->toDateTimeString())->toBe('1982-02-03 12:00:00')
         ->and($leadingZero->text)->toBe('03 Aug 96')
         ->and($leadingZero->start->date()->toDateTimeString())->toBe('1996-08-03 12:00:00')
+        ->and($withoutLeadingZero->text)->toBe('3 Aug 96')
+        ->and($withoutLeadingZero->start->date()->toDateTimeString())->toBe('1996-08-03 12:00:00')
         ->and($singleDigit->text)->toBe('9 Aug 96')
         ->and($singleDigit->start->date()->toDateTimeString())->toBe('1996-08-09 12:00:00')
         ->and($deadline->text)->toBe('10 August')
@@ -126,8 +129,16 @@ it('parses little endian month name dates followed by times', function () {
         ->toBe('2012-07-12 19:00:00')
         ->and(Chrono::parseDate('5 May 12:00', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-05-05 12:00:00')
+        ->and(Chrono::parseDate('7 May 11:00', '2012-08-10')?->toDateTimeString())
+        ->toBe('2012-05-07 11:00:00')
         ->and(Chrono::parseDate('24th October, 9 am', '2017-07-07 15:00')?->toDateTimeString())
         ->toBe('2017-10-24 09:00:00')
+        ->and(Chrono::parseDate('24th October, 9 pm', '2017-07-07 15:00')?->toDateTimeString())
+        ->toBe('2017-10-24 21:00:00')
+        ->and(Chrono::parse('24 October, 9 pm', '2017-07-07 15:00')[0]->text)
+        ->toBe('24 October, 9 pm')
+        ->and(Chrono::parseDate('24 October, 9 pm', '2017-07-07 15:00')?->toDateTimeString())
+        ->toBe('2017-10-24 21:00:00')
         ->and(Chrono::parse('24 October, 9 p.m.', '2017-07-07 15:00')[0]->text)
         ->toBe('24 October, 9 p.m.')
         ->and(Chrono::parseDate('24 October, 9 p.m.', '2017-07-07 15:00')?->toDateTimeString())
@@ -154,4 +165,16 @@ it('rejects impossible little endian month name dates in strict mode', function 
         ->and(Chrono::strict()->parseText('29 February 2014', '2012-08-10'))->toBe([])
         ->and(Chrono::strict()->parseText('32 August', '2012-08-10'))->toBe([])
         ->and(Chrono::strict()->parseText('29 February', '2013-08-10'))->toBe([]);
+});
+
+it('parses little endian year 3000 and current-year dates with times', function () {
+    $future = Chrono::parse('Jan 1 3000, 9:30')[0];
+    $current = Chrono::parse('Jan 1 2025, 9:30')[0];
+
+    expect($future->index)->toBe(0)
+        ->and($future->text)->toBe('Jan 1 3000, 9:30')
+        ->and($future->start->date()->toDateTimeString())->toBe('3000-01-01 09:30:00')
+        ->and($current->index)->toBe(0)
+        ->and($current->text)->toBe('Jan 1 2025, 9:30')
+        ->and($current->start->date()->toDateTimeString())->toBe('2025-01-01 09:30:00');
 });

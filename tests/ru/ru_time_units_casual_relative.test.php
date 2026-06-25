@@ -78,13 +78,13 @@ it('parses russian weekdays times and relative durations', function () {
         ->and($within->start->tags())->toContain('parser/RUTimeUnitWithinFormatParser')
         ->and($within->start->isCertain('month'))->toBeTrue()
         ->and($within->start->isCertain('day'))->toBeFalse()
-        ->and($withinMinute->index)->toBe(26)
+        ->and($withinMinute->index)->toBe(14)
         ->and($withinMinute->text)->toBe('в течение минуты')
         ->and($withinMinute->start->date()->toDateTimeString())->toBe('2012-08-10 00:01:00')
         ->and($withinMinute->start->isCertain('hour'))->toBeTrue()
         ->and($withinMinute->start->isCertain('minute'))->toBeTrue()
         ->and($withinMinute->start->tags())->toContain('result/relativeDateAndTime')
-        ->and($withinHours->index)->toBe(26)
+        ->and($withinHours->index)->toBe(14)
         ->and($withinHours->text)->toBe('в течение 2 часов')
         ->and($withinHours->start->date()->toDateTimeString())->toBe('2012-08-10 02:00:00')
         ->and($withinHours->start->isCertain('hour'))->toBeTrue()
@@ -117,3 +117,61 @@ it('parses russian weekdays times and relative durations', function () {
         ->and(Chrono::strictRussian()->parseText('Это в 10 - 20', '2012-08-10'))->toBe([])
         ->and(Chrono::strictRussian()->parseText('7-730', '2012-08-10'))->toBe([]);
 });
+
+it('matches upstream russian positive casual relative time units', function (string $text, string $expected) {
+    $result = Chrono::ru()->parseText($text, '2016-10-01 12:00')[0];
+
+    expect($result->index)->toBe(0)
+        ->and($result->text)->toBe($text)
+        ->and($result->start->date()->toDateTimeString())->toBe($expected);
+})->with([
+    ['следующие 2 недели', '2016-10-15 12:00:00'],
+    ['следующие 2 дня', '2016-10-03 12:00:00'],
+    ['следующие два года', '2018-10-01 12:00:00'],
+    ['следующие 2 недели 3 дня', '2016-10-18 12:00:00'],
+    ['через пару минут', '2016-10-01 12:02:00'],
+    ['через полчаса', '2016-10-01 12:30:00'],
+    ['через 2 часа', '2016-10-01 14:00:00'],
+    ['спустя 2 часа', '2016-10-01 14:00:00'],
+    ['через три месяца', '2017-01-01 12:00:00'],
+    ['через неделю', '2016-10-08 12:00:00'],
+    ['через месяц', '2016-11-01 12:00:00'],
+]);
+
+it('matches upstream russian positive casual relative time units with reference timezones', function (string $instant, string $expected) {
+    $result = Chrono::ru()->parseText('через год', [
+        'instant' => $instant,
+        'timezone' => 'GMT',
+    ])[0];
+
+    expect($result->index)->toBe(0)
+        ->and($result->text)->toBe('через год')
+        ->and($result->start->date()->format('Y-m-d H:i:s.v'))->toBe($expected);
+})->with([
+    ['2020-11-22T03:11:02.006', '2021-11-22 03:11:02.006'],
+    ['2020-11-22T12:11:32.006', '2021-11-22 12:11:32.006'],
+]);
+
+it('matches upstream russian negative casual relative time units', function (string $text, string $expected) {
+    $result = Chrono::ru()->parseText($text, '2016-10-01 12:00')[0];
+
+    expect($result->index)->toBe(0)
+        ->and($result->text)->toBe($text)
+        ->and($result->start->date()->toDateTimeString())->toBe($expected);
+})->with([
+    ['прошлые 2 недели', '2016-09-17 12:00:00'],
+    ['прошлые два дня', '2016-09-29 12:00:00'],
+]);
+
+it('matches upstream russian signed casual relative time units', function (string $text, string $reference, string $expected) {
+    $result = Chrono::ru()->parseText($text, $reference)[0];
+
+    expect($result->index)->toBe(0)
+        ->and($result->text)->toBe($text)
+        ->and($result->start->date()->toDateTimeString())->toBe($expected);
+})->with([
+    ['+15 минут', '2012-07-10 12:14', '2012-07-10 12:29:00'],
+    ['+15мин', '2012-07-10 12:14', '2012-07-10 12:29:00'],
+    ['+1 день 2 часа', '2012-07-10 12:14', '2012-07-11 14:14:00'],
+    ['-3 года', '2015-07-10 12:14', '2012-07-10 12:14:00'],
+]);

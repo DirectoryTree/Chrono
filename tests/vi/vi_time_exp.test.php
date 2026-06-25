@@ -18,7 +18,7 @@ it('parses vietnamese time expressions', function () {
     $midnight = $vietnamese->parseText('12 giờ sáng', '2012-08-10 12:00')[0];
 
     expect($hour->text)->toBe('lúc 7 giờ')
-        ->and($hour->index)->toBe(13)
+        ->and($hour->index)->toBe(9)
         ->and($hour->start->get('hour'))->toBe(7)
         ->and($hour->start->get('minute'))->toBe(0)
         ->and($morning->start->get('hour'))->toBe(7)

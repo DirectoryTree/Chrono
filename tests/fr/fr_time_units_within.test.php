@@ -25,7 +25,7 @@ it('parses french within time unit expressions', function () {
         ->toBe('2012-08-10 12:19:00')
         ->and($french->parseDateText('en 1 heure', '2012-08-10 12:14')?->toDateTimeString())
         ->toBe('2012-08-10 13:14:00')
-        ->and($timer->index)->toBe(22)
+        ->and($timer->index)->toBe(21)
         ->and($timer->text)->toBe('de 5 minutes')
         ->and($timer->start->date()->toDateTimeString())->toBe('2012-08-10 12:19:00')
         ->and($minutes->index)->toBe(0)

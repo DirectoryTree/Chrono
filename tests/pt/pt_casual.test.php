@@ -21,7 +21,7 @@ it('parses portuguese casual date and time references', function () {
     $noon = $portuguese->parseText('ao meio-dia', '2020-09-01 11:00')[0];
     $midnight = $portuguese->parseText('a meia-noite', '2020-09-01 11:00')[0];
 
-    expect($prefixedNow->index)->toBe(11)
+    expect($prefixedNow->index)->toBe(10)
         ->and($prefixedNow->text)->toBe('agora')
         ->and($prefixedNow->start->get('year'))->toBe(2012)
         ->and($prefixedNow->start->get('month'))->toBe(8)
@@ -32,13 +32,13 @@ it('parses portuguese casual date and time references', function () {
         ->and($prefixedNow->start->get('millisecond'))->toBe(11)
         ->and($prefixedNow->start->date()->format('Y-m-d H:i:s.v'))->toBe('2012-08-10 08:09:10.011')
         ->and($prefixedNow->start->tags())->toContain('parser/PTCasualDateParser')
-        ->and($prefixedToday->index)->toBe(11)
+        ->and($prefixedToday->index)->toBe(10)
         ->and($prefixedToday->text)->toBe('hoje')
         ->and($prefixedToday->start->get('year'))->toBe(2012)
         ->and($prefixedToday->start->get('month'))->toBe(8)
         ->and($prefixedToday->start->get('day'))->toBe(10)
         ->and($prefixedToday->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
-        ->and($prefixedTomorrow->index)->toBe(11)
+        ->and($prefixedTomorrow->index)->toBe(10)
         ->and($prefixedTomorrow->text)->toBe('Amanhã')
         ->and($prefixedTomorrow->start->get('year'))->toBe(2012)
         ->and($prefixedTomorrow->start->get('month'))->toBe(8)

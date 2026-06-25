@@ -41,7 +41,7 @@ it('parses italian little endian month name dates and ranges', function () {
         ->and($explicitYear->index)->toBe(0)
         ->and($explicitYear->text)->toBe('10 Agosto 2012')
         ->and($explicitYear->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
-        ->and($prefixed->index)->toBe(18)
+        ->and($prefixed->index)->toBe(17)
         ->and($prefixed->text)->toBe('10 Agosto')
         ->and($prefixed->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
         ->and($italian->parseDateText('Evento il decimo agosto', '2012-08-10')?->toDateTimeString())
