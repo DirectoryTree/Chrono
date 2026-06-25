@@ -34,9 +34,9 @@ it('parses russian weekdays times and relative durations', function () {
     $lastYear = Chrono::ru()->parseText('в прошлом году', '2016-10-01 12:00')[0];
     $nextYear = Chrono::ru()->parseText('в следующем году', '2016-10-01 12:00')[0];
 
-    expect($weekday->start->date()->toDateTimeString())->toBe('2012-08-08 00:00:00')
+    expect($weekday->start->date()->toDateTimeString())->toBe('2012-08-08 12:00:00')
         ->and($weekday->start->tags())->toContain('parser/RUWeekdayParser')
-        ->and($nextWeekday->start->date()->toDateTimeString())->toBe('2012-08-13 00:00:00')
+        ->and($nextWeekday->start->date()->toDateTimeString())->toBe('2012-08-13 12:00:00')
         ->and($nextWeekday->start->tags())->toContain('parser/RUWeekdayParser')
         ->and($timeWithSeconds->index)->toBe(0)
         ->and($timeWithSeconds->text)->toBe('20:32:13')

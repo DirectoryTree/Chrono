@@ -70,10 +70,20 @@ abstract class AbstractZhTimeExpressionParser implements Parser
                 $end = $this->componentsFromMatch($this->offsetlessMatch($endMatch), $reference);
 
                 if ($end !== null) {
+                    $startPeriod = ($match['period1'][0] ?? '') ?: (($match['period2'][0] ?? '') ?: ($match['period3'][0] ?? ''));
                     $endPeriod = ($endMatch['period1'] ?? '') ?: (($endMatch['period2'] ?? '') ?: ($endMatch['period3'] ?? ''));
                     $startAmpm = $match['ampm'][0] ?? '';
+                    $endAmpm = $endMatch['ampm'] ?? '';
 
-                    if ($startAmpm === '' && $endPeriod === '' && ($endMatch['ampm'] ?? '') === '' && $start->date()->hour >= 12 && $end->date()->hour < 12) {
+                    if ($startPeriod === '' && $startAmpm === '' && str_starts_with(strtolower($endAmpm), 'p') && $start->date()->hour < 12) {
+                        $impliedHour = $start->date()->hour + 12;
+
+                        if ($impliedHour <= $end->date()->hour) {
+                            $start->assign('hour', $impliedHour);
+                        }
+                    }
+
+                    if ($startAmpm === '' && $endPeriod === '' && $endAmpm === '' && $start->date()->hour >= 12 && $end->date()->hour < 12) {
                         if (($start->date()->hour - 12) <= $end->date()->hour) {
                             $end->assign('hour', $end->date()->hour + 12);
                         }

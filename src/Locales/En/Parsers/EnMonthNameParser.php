@@ -55,6 +55,8 @@ class EnMonthNameParser implements Parser
 
         return array_values(array_filter(array_map(function (array $match) use ($text, $reference): ?ParsedResult {
             $yearText = $match['year'][0];
+            $month = EnConstants::MONTHS[strtolower($match['month'][0])];
+            $year = $this->year((int) $yearText);
 
             if (strlen($yearText) === 2 && $this->isFollowedByRange($text, $match)) {
                 return null;
@@ -64,8 +66,10 @@ class EnMonthNameParser implements Parser
                 return null;
             }
 
-            $month = EnConstants::MONTHS[strtolower($match['month'][0])];
-            $year = $this->year((int) $yearText);
+            if (strlen($yearText) > 2 && $this->isPrecededByImpossibleDay($text, $match, $month, $year)) {
+                return null;
+            }
+
             $date = CarbonImmutable::create($year, $month, 1, 12, 0, 0, $reference->date->timezone);
 
             return new ParsedResult($match[0][1], $match[0][0], $this->components($date, [
@@ -122,6 +126,11 @@ class EnMonthNameParser implements Parser
             $year = ($match['year'][0] ?? '') !== ''
                 ? (int) $match['year'][0]
                 : $this->impliedYear($reference, $options, $month);
+
+            if ($this->isPrecededByImpossibleDay($text, $match, $month, $year)) {
+                return null;
+            }
+
             $date = CarbonImmutable::create($year, $month, 1, 12, 0, 0, $reference->date->timezone);
             $text = $match[0][0];
 
@@ -184,6 +193,20 @@ class EnMonthNameParser implements Parser
         $after = substr($text, $match[0][1] + strlen($match[0][0]));
 
         return preg_match('/^\s+\d/', $after) === 1;
+    }
+
+    /**
+     * Determine whether a fallback month match is part of an impossible date.
+     */
+    protected function isPrecededByImpossibleDay(string $text, array $match, int $month, int $year): bool
+    {
+        $before = substr($text, 0, $match[0][1]);
+
+        if (preg_match('/(?<day>\d{1,2})(?:st|nd|rd|th)?\s+$/i', $before, $dayMatch) !== 1) {
+            return false;
+        }
+
+        return ! checkdate($month, (int) $dayMatch['day'], max(1, abs($year)));
     }
 
     /**

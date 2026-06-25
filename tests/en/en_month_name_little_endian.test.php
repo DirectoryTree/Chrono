@@ -8,6 +8,8 @@ it('parses little endian month name dates with two digit years', function () {
     $leadingZero = Chrono::parse('03 Aug 96', '2012-08-10')[0];
     $singleDigit = Chrono::parse('9 Aug 96', '2012-08-10')[0];
     $deadline = Chrono::parse('The Deadline is 10 August', '2012-08-10')[0];
+    $march = Chrono::parse('31st March, 2016', '2012-08-10')[0];
+    $february = Chrono::parse('23rd february, 2016', '2012-08-10')[0];
 
     expect($explicit->text)->toBe('10 August 2012')
         ->and($explicit->index)->toBe(0)
@@ -29,7 +31,11 @@ it('parses little endian month name dates with two digit years', function () {
         ->and($deadline->index)->toBe(16)
         ->and($deadline->start->get('year'))->toBe(2012)
         ->and($deadline->start->get('month'))->toBe(8)
-        ->and($deadline->start->get('day'))->toBe(10);
+        ->and($deadline->start->get('day'))->toBe(10)
+        ->and($march->text)->toBe('31st March, 2016')
+        ->and($march->start->date()->toDateTimeString())->toBe('2016-03-31 12:00:00')
+        ->and($february->text)->toBe('23rd february, 2016')
+        ->and($february->start->date()->toDateTimeString())->toBe('2016-02-23 12:00:00');
 });
 
 it('parses little endian weekday-prefixed month name dates', function () {
@@ -77,10 +83,14 @@ it('parses little endian ordinal word month name expressions', function () {
 
 it('parses little endian same month ranges', function () {
     $result = Chrono::parse('10 - 22 August 2012', '2012-08-10')[0];
+    $toRange = Chrono::parse('10 to 22 August 2012', '2012-08-10')[0];
 
     expect($result->text)->toBe('10 - 22 August 2012')
         ->and($result->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
-        ->and($result->end?->date()->toDateTimeString())->toBe('2012-08-22 12:00:00');
+        ->and($result->end?->date()->toDateTimeString())->toBe('2012-08-22 12:00:00')
+        ->and($toRange->text)->toBe('10 to 22 August 2012')
+        ->and($toRange->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
+        ->and($toRange->end?->date()->toDateTimeString())->toBe('2012-08-22 12:00:00');
 });
 
 it('parses little endian cross month ranges', function () {
@@ -124,4 +134,24 @@ it('parses little endian month name dates followed by times', function () {
         ->toBe('2017-10-24 21:00:00')
         ->and(Chrono::parseDate('24 October 10 o clock', '2017-07-07 15:00')?->toDateTimeString())
         ->toBe('2017-10-24 10:00:00');
+});
+
+it('moves little endian ranges forward when requested', function () {
+    $normal = Chrono::casual()->parseText('22-23 Feb at 7pm', '2016-03-15')[0];
+    $forward = Chrono::casual()->parseText('22-23 Feb at 7pm', '2016-03-15', ['forwardDate' => true])[0];
+    $explicitRange = Chrono::parse('17 August 2013 - 19 August 2013', '2012-08-10')[0];
+
+    expect($normal->start->date()->toDateTimeString())->toBe('2016-02-22 19:00:00')
+        ->and($normal->end?->date()->toDateTimeString())->toBe('2016-02-23 19:00:00')
+        ->and($forward->start->date()->toDateTimeString())->toBe('2017-02-22 19:00:00')
+        ->and($forward->end?->date()->toDateTimeString())->toBe('2017-02-23 19:00:00')
+        ->and($explicitRange->start->date()->toDateTimeString())->toBe('2013-08-17 12:00:00')
+        ->and($explicitRange->end?->date()->toDateTimeString())->toBe('2013-08-19 12:00:00');
+});
+
+it('rejects impossible little endian month name dates in strict mode', function () {
+    expect(Chrono::strict()->parseText('32 August 2014', '2012-08-10'))->toBe([])
+        ->and(Chrono::strict()->parseText('29 February 2014', '2012-08-10'))->toBe([])
+        ->and(Chrono::strict()->parseText('32 August', '2012-08-10'))->toBe([])
+        ->and(Chrono::strict()->parseText('29 February', '2013-08-10'))->toBe([]);
 });

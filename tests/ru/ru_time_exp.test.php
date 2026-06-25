@@ -26,3 +26,42 @@ it('parses russian time expressions', function () {
         ->and($eveningRange->start->date()->toDateTimeString())->toBe('2016-10-01 22:00:00')
         ->and($eveningRange->end?->date()->toDateTimeString())->toBe('2016-10-01 23:00:00');
 });
+
+it('parses russian casual numeric time expressions', function () {
+    $hour = Chrono::russian()->parseText('в 1', '2016-10-01 08:00')[0];
+    $noon = Chrono::russian()->parseText('в 12', '2016-10-01 08:00')[0];
+    $dotted = Chrono::russian()->parseText('в 12.30', '2016-10-01 08:00')[0];
+
+    expect($hour->index)->toBe(0)
+        ->and($hour->text)->toBe('в 1')
+        ->and($hour->start->get('hour'))->toBe(1)
+        ->and($noon->index)->toBe(0)
+        ->and($noon->text)->toBe('в 12')
+        ->and($noon->start->get('hour'))->toBe(12)
+        ->and($dotted->index)->toBe(0)
+        ->and($dotted->text)->toBe('в 12.30')
+        ->and($dotted->start->get('hour'))->toBe(12)
+        ->and($dotted->start->get('minute'))->toBe(30);
+});
+
+it('does not parse russian year-like and numeric non-time expressions', function () {
+    expect(Chrono::ru()->parseText('2020', '2012-08-10'))->toBe([])
+        ->and(Chrono::ru()->parseText('2020  ', '2012-08-10'))->toBe([])
+        ->and(Chrono::ru()->parseText('Температура 101,194 градусов!', '2012-08-10'))->toBe([])
+        ->and(Chrono::ru()->parseText('Температура 101 градусов!', '2012-08-10'))->toBe([])
+        ->and(Chrono::ru()->parseText('Температура 10.1', '2012-08-10'))->toBe([])
+        ->and(Chrono::ru()->parseText('Это в 10.1 - 10.12', '2012-08-10'))->toBe([])
+        ->and(Chrono::ru()->parseText('Это в 10 - 10.1', '2012-08-10'))->toBe([]);
+});
+
+it('does not parse russian strict numeric non-time expressions', function () {
+    expect(Chrono::strictRussian()->parseText('Это в 101,194 телефон!', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictRussian()->parseText('Это в 101 стул!', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictRussian()->parseText('Это в 10.1', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictRussian()->parseText('Это в 10', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictRussian()->parseText('2020', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictRussian()->parseText('Это в 10.1 - 10.12', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictRussian()->parseText('Это в 10 - 10.1', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictRussian()->parseText('Это в 10 - 20', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictRussian()->parseText('7-730', '2012-08-10'))->toBe([]);
+});

@@ -8,6 +8,8 @@ it('parses traditional chinese casual dates', function () {
     $today = $chinese->parseText('雞今日全部都係雞', '2012-08-10 12:00')[0];
     $tomorrow = $chinese->parseText('雞聽日全部都係雞', '2012-08-10 12:00')[0];
     $lateNightTomorrow = $chinese->parseText('雞明天全部都係雞', '2012-08-10 01:00')[0];
+    $dayAfterTomorrowMorning = $chinese->parseText('雞後天凌晨全部都係雞', '2012-08-10 00:00')[0];
+    $threeDaysAgoMorning = $chinese->parseText('雞大前天凌晨全部都係雞', '2012-08-10 00:00')[0];
     $dayBeforeYesterday = $chinese->parseText('雞前日全部都係雞', '2012-08-10 12:00')[0];
     $yesterday = $chinese->parseText('雞琴日全部都係雞', '2012-08-10 12:00')[0];
     $morning = $chinese->parseText('雞今日朝早全部都係雞', '2012-08-10 12:00')[0];
@@ -23,6 +25,10 @@ it('parses traditional chinese casual dates', function () {
         ->and($tomorrow->start->date()->toDateTimeString())->toBe('2012-08-11 12:00:00')
         ->and($lateNightTomorrow->text)->toBe('明天')
         ->and($lateNightTomorrow->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
+        ->and($dayAfterTomorrowMorning->text)->toBe('後天凌晨')
+        ->and($dayAfterTomorrowMorning->start->date()->toDateTimeString())->toBe('2012-08-12 00:00:00')
+        ->and($threeDaysAgoMorning->text)->toBe('大前天凌晨')
+        ->and($threeDaysAgoMorning->start->date()->toDateTimeString())->toBe('2012-08-07 00:00:00')
         ->and($dayBeforeYesterday->text)->toBe('前日')
         ->and($dayBeforeYesterday->start->date()->toDateTimeString())->toBe('2012-08-08 12:00:00')
         ->and($yesterday->text)->toBe('琴日')
@@ -44,6 +50,8 @@ it('parses traditional chinese casual date ranges and random casual text', funct
     $sameDayRange = $chinese->parseText('雞今日 - 下禮拜五全部都係雞', '2012-08-10 12:00')[0];
     $night = $chinese->parseText('今日夜晚', '2012-01-01 12:00')[0];
     $eveningTime = $chinese->parseText('今晚8點正', '2012-01-01 12:00')[0];
+    $evening = $chinese->parseText('晚上8點', '2012-01-01 12:00')[0];
+    $weekday = $chinese->parseText('星期四')[0];
 
     expect($combined->text)->toBe('今日晏晝5點')
         ->and($combined->start->date()->toDateTimeString())->toBe('2012-08-10 17:00:00')
@@ -56,5 +64,9 @@ it('parses traditional chinese casual date ranges and random casual text', funct
         ->and($night->text)->toBe('今日夜晚')
         ->and($night->start->date()->toDateTimeString())->toBe('2012-01-01 22:00:00')
         ->and($eveningTime->text)->toBe('今晚8點正')
-        ->and($eveningTime->start->date()->toDateTimeString())->toBe('2012-01-01 20:00:00');
+        ->and($eveningTime->start->date()->toDateTimeString())->toBe('2012-01-01 20:00:00')
+        ->and($evening->text)->toBe('晚上8點')
+        ->and($evening->start->date()->toDateTimeString())->toBe('2012-01-01 20:00:00')
+        ->and($weekday->text)->toBe('星期四')
+        ->and($weekday->start->get('weekday'))->toBe(4);
 });

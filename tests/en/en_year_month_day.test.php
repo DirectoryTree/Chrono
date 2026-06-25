@@ -10,6 +10,8 @@ it('parses year month day expressions', function () {
     $prefixedSpacedMonthName = Chrono::parse('The Deadline is 2018 March 18', '2012-08-10')[0];
     $strictShortMonth = Chrono::strict()->parseText('2014/2/28', '2012-08-10')[0];
     $strictFullMonth = Chrono::strict()->parseText('2014/12/28', '2012-08-10')[0];
+    $strictDot = Chrono::strict()->parseText('2014.12.28', '2012-08-10')[0];
+    $strictSpaced = Chrono::strict()->parseText('2014 12 28', '2012-08-10')[0];
 
     expect($slash->text)->toBe('2012/8/10')
         ->and($slash->index)->toBe(0)
@@ -24,12 +26,10 @@ it('parses year month day expressions', function () {
         ->and($strictShortMonth->text)->toBe('2014/2/28')
         ->and($strictFullMonth->text)->toBe('2014/12/28')
         ->and($strictFullMonth->start->date()->toDateTimeString())->toBe('2014-12-28 12:00:00')
-        ->and(Chrono::parseDate('2014.12.28', '2012-08-10')?->toDateTimeString())
-        ->toBe('2014-12-28 12:00:00')
-        ->and(Chrono::strict()->parseText('2014 12 28', '2012-08-10')[0]->text)
-        ->toBe('2014 12 28')
-        ->and(Chrono::strict()->parseDateText('2014 12 28', '2012-08-10')?->toDateTimeString())
-        ->toBe('2014-12-28 12:00:00')
+        ->and($strictDot->text)->toBe('2014.12.28')
+        ->and($strictDot->start->date()->toDateTimeString())->toBe('2014-12-28 12:00:00')
+        ->and($strictSpaced->text)->toBe('2014 12 28')
+        ->and($strictSpaced->start->date()->toDateTimeString())->toBe('2014-12-28 12:00:00')
         ->and($monthName->text)->toBe('2012/Aug/10')
         ->and($monthName->start->get('year'))->toBe(2012)
         ->and($monthName->start->get('month'))->toBe(8)
@@ -45,4 +45,25 @@ it('parses year month day expressions', function () {
         ->toBe('2018 Mar. 18')
         ->and(Chrono::parseDate('2018/Mar./18', '2012-08-10')?->toDateTimeString())
         ->toBe('2018-03-18 12:00:00');
+});
+
+it('swaps casual year month day order only when strict mode rejects it', function () {
+    $slash = Chrono::casual()->parseText('2024/13/1', '2012-08-10')[0];
+    $dash = Chrono::casual()->parseText('2024-13-01', '2012-08-10')[0];
+
+    expect(Chrono::strict()->parseText('2024/13/1', '2012-08-10'))->toBe([])
+        ->and(Chrono::strict()->parseText('2024-13-01', '2012-08-10'))->toBe([])
+        ->and($slash->start->get('year'))->toBe(2024)
+        ->and($slash->start->get('month'))->toBe(1)
+        ->and($slash->start->get('day'))->toBe(13)
+        ->and($dash->start->get('year'))->toBe(2024)
+        ->and($dash->start->get('month'))->toBe(1)
+        ->and($dash->start->get('day'))->toBe(13);
+});
+
+it('rejects unlikely and impossible year month day expressions', function () {
+    expect(Chrono::parse('2012/80/10', '2012-08-10'))->toBe([])
+        ->and(Chrono::parse('2012 80 10', '2012-08-10'))->toBe([])
+        ->and(Chrono::parse('2014-08-32', '2012-08-10'))->toBe([])
+        ->and(Chrono::parse('2014-02-30', '2012-08-10'))->toBe([]);
 });

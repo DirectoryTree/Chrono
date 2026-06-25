@@ -72,3 +72,64 @@ it('parses simplified chinese iso-like date time expressions', function () {
     expect($result->text)->toBe('2023-10-26 10:30:00')
         ->and($result->start->date()->toDateTimeString())->toBe('2023-10-26 10:30:00');
 });
+
+it('parses simplified chinese time ranges with relative days', function () {
+    $chinese = Chrono::zhHans();
+
+    expect($chinese->parseText('今晚10点 - 明天早上6点', '2012-08-10')[0]->start->date()->toDateTimeString())
+        ->toBe('2012-08-10 22:00:00')
+        ->and($chinese->parseText('今晚10点 - 明天早上6点', '2012-08-10')[0]->end?->date()->toDateTimeString())
+        ->toBe('2012-08-11 06:00:00')
+        ->and($chinese->parseText('今天早上9点 - 后天凌晨3点', '2012-08-10')[0]->start->date()->toDateTimeString())
+        ->toBe('2012-08-10 09:00:00')
+        ->and($chinese->parseText('今天早上9点 - 后天凌晨3点', '2012-08-10')[0]->end?->date()->toDateTimeString())
+        ->toBe('2012-08-12 03:00:00')
+        ->and($chinese->parseText('今晚10点 - 明早6点', '2012-08-10 12:00')[0]->end?->date()->toDateTimeString())
+        ->toBe('2012-08-11 06:00:00')
+        ->and($chinese->parseText('明天10点到明天11点', '2012-08-10 12:00')[0]->text)
+        ->toBe('明天10点到明天11点')
+        ->and($chinese->parseText('明天10点到明天11点', '2012-08-10 12:00')[0]->start->date()->toDateTimeString())
+        ->toBe('2012-08-11 10:00:00')
+        ->and($chinese->parseText('明天10点到明天11点', '2012-08-10 12:00')[0]->end?->date()->toDateTimeString())
+        ->toBe('2012-08-11 11:00:00');
+});
+
+it('parses simplified chinese time ranges with seconds and am pm variations', function () {
+    $chinese = Chrono::zhHans();
+    $secondsRange = $chinese->parseText('9:00:00 - 9:00:30', '2012-08-10')[0];
+    $afternoonRange = $chinese->parseText('下午2点 - 晚上8点', '2012-08-10')[0];
+    $pmSuffixRange = $chinese->parseText('3点 - 5点PM', '2012-08-10 12:00')[0];
+    $crossDayRange = $chinese->parseText('晚上10点 - 2点', '2012-08-10')[0];
+
+    expect($secondsRange->start->date()->toDateTimeString())->toBe('2012-08-10 09:00:00')
+        ->and($secondsRange->end?->date()->toDateTimeString())->toBe('2012-08-10 09:00:30')
+        ->and($afternoonRange->start->date()->toDateTimeString())->toBe('2012-08-10 14:00:00')
+        ->and($afternoonRange->end?->date()->toDateTimeString())->toBe('2012-08-10 20:00:00')
+        ->and($pmSuffixRange->start->date()->toDateTimeString())->toBe('2012-08-10 15:00:00')
+        ->and($pmSuffixRange->end?->date()->toDateTimeString())->toBe('2012-08-10 17:00:00')
+        ->and($crossDayRange->start->date()->toDateTimeString())->toBe('2012-08-10 22:00:00')
+        ->and($crossDayRange->end?->date()->toDateTimeString())->toBe('2012-08-11 02:00:00');
+});
+
+it('parses simplified chinese time ranges with relative day variations', function () {
+    $chinese = Chrono::zhHans();
+
+    expect($chinese->parseText('今晚10点 - 昨晚10点', '2012-08-10 12:00')[0]->end?->date()->toDateTimeString())
+        ->toBe('2012-08-09 22:00:00')
+        ->and($chinese->parseText('今晚10点 - 前天晚上10点', '2012-08-10 12:00')[0]->end?->date()->toDateTimeString())
+        ->toBe('2012-08-08 22:00:00')
+        ->and($chinese->parseText('今晚10点 - 大前天晚上10点', '2012-08-10 12:00')[0]->end?->date()->toDateTimeString())
+        ->toBe('2012-08-07 22:00:00')
+        ->and($chinese->parseText('今晚10点 - 后天晚上10点', '2012-08-10 12:00')[0]->end?->date()->toDateTimeString())
+        ->toBe('2012-08-12 22:00:00')
+        ->and($chinese->parseText('今晚10点 - 大后天晚上10点', '2012-08-10 12:00')[0]->end?->date()->toDateTimeString())
+        ->toBe('2012-08-13 22:00:00')
+        ->and($chinese->parseText('今早10点 - 明早10点', '2012-08-10 12:00')[0]->end?->date()->toDateTimeString())
+        ->toBe('2012-08-11 10:00:00')
+        ->and($chinese->parseText('今早10点 - 明天上午10点', '2012-08-10 12:00')[0]->end?->date()->toDateTimeString())
+        ->toBe('2012-08-11 10:00:00')
+        ->and($chinese->parseText('今早10点 - 明天凌晨2点', '2012-08-10 12:00')[0]->end?->date()->toDateTimeString())
+        ->toBe('2012-08-11 02:00:00')
+        ->and($chinese->parseText('下午2点 - 明天下午3点', '2012-08-10')[0]->end?->date()->toDateTimeString())
+        ->toBe('2012-08-11 15:00:00');
+});

@@ -27,7 +27,7 @@ class RuMonthNameLittleEndianParser implements Parser
         $monthPattern = RuConstants::monthPattern();
         $yearPattern = '[0-9]{1,4}(?![^\s]\d)(?:\s*(?:г\.?|года))?';
 
-        preg_match_all("/(?<![\\pL\\pN])(?:с\\s*)?(?<day>{$dayPattern})(?:\\s*(?:по|до|-|–)\\s*(?<endday>{$dayPattern}))?\\s*(?:-|\\/|\\s*)\\s*(?<month>{$monthPattern})(?:\\s*(?<year>{$yearPattern}))?(?=\\W|$)/iu", $text, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
+        preg_match_all("/(?<![\\pL\\pN])(?:с\\s*)?(?<day>{$dayPattern})(?:\\s*(?:по|до|-|–)\\s*(?<endday>{$dayPattern}))?\\s*(?:-|\\/|\\s*)\\s*(?<month>{$monthPattern})(?:(?:-|\\/|,?\\s*)(?<year>{$yearPattern}))?(?=\\W|$)/iu", $text, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
 
         return array_values(array_filter(array_map(function (array $match) use ($reference): ?ParsedResult {
             $month = RuConstants::MONTHS[mb_strtolower($match['month'][0])] ?? null;
@@ -53,8 +53,24 @@ class RuMonthNameLittleEndianParser implements Parser
                 'day' => $day,
             ])->addTag('parser/RUMonthNameLittleEndianParser');
 
-            return new ParsedResult($match[0][1], trim($match[0][0]), $components, $end);
+            [$index, $resultText] = $this->trimmedMatch($match[0][1], $match[0][0]);
+
+            return new ParsedResult($index, $resultText, $components, $end);
         }, $matches)));
+    }
+
+    /**
+     * Trim matched text while keeping the byte index aligned with the result.
+     *
+     * @return array{0: int, 1: string}
+     */
+    protected function trimmedMatch(int $index, string $text): array
+    {
+        if (preg_match('/^\s+/u', $text, $match) === 1) {
+            $index += strlen($match[0]);
+        }
+
+        return [$index, trim($text)];
     }
 
     /**

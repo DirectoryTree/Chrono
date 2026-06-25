@@ -193,3 +193,36 @@ it('parses french random date and time expressions', function () {
         ->and($french->parseText('that I need to know or am I covered?'))
         ->toBe([]);
 });
+
+it('extracts french timezones from time expressions', function () {
+    $french = Chrono::fr();
+    $plain = $french->parseText('Vendredi à 2 pm', '2016-04-28')[0];
+    $est = $french->parseText('vendredi 2 pm EST', '2016-04-28')[0];
+    $cet = $french->parseText('vendredi 15h CET', '2016-02-28')[0];
+    $cest = $french->parseText('vendredi 15h cest', '2016-02-28')[0];
+    $lowerEst = $french->parseText('Vendredi à 2 pm est', '2016-04-28')[0];
+    $sentence = $french->parseText("Vendredi à 2 pm j'ai rdv...", '2016-04-28')[0];
+    $sentenceWords = $french->parseText('Vendredi à 2 pm je vais faire quelque chose', '2016-04-28')[0];
+
+    expect($plain->text)->toBe('Vendredi à 2 pm')
+        ->and($plain->start->isCertain('timezoneOffset'))->toBeFalse()
+        ->and($plain->start->timezoneOffset())->toBeNull()
+        ->and($est->text)->toBe('vendredi 2 pm EST')
+        ->and($est->start->isCertain('timezoneOffset'))->toBeTrue()
+        ->and($est->start->timezoneOffset())->toBe(-300)
+        ->and($cet->text)->toBe('vendredi 15h CET')
+        ->and($cet->start->isCertain('timezoneOffset'))->toBeTrue()
+        ->and($cet->start->timezoneOffset())->toBe(60)
+        ->and($cest->text)->toBe('vendredi 15h cest')
+        ->and($cest->start->isCertain('timezoneOffset'))->toBeTrue()
+        ->and($cest->start->timezoneOffset())->toBe(120)
+        ->and($lowerEst->text)->toBe('Vendredi à 2 pm est')
+        ->and($lowerEst->start->isCertain('timezoneOffset'))->toBeTrue()
+        ->and($lowerEst->start->timezoneOffset())->toBe(-300)
+        ->and($sentence->text)->toBe('Vendredi à 2 pm')
+        ->and($sentence->start->isCertain('timezoneOffset'))->toBeFalse()
+        ->and($sentence->start->timezoneOffset())->toBeNull()
+        ->and($sentenceWords->text)->toBe('Vendredi à 2 pm')
+        ->and($sentenceWords->start->isCertain('timezoneOffset'))->toBeFalse()
+        ->and($sentenceWords->start->timezoneOffset())->toBeNull();
+});

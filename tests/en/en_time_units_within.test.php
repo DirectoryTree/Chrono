@@ -72,6 +72,7 @@ it('parses upstream within variants with exact text and references', function ()
     $aroundHours = Chrono::parse('In around 5 hours', '2016-10-01 13:00')[0];
     $aboutHours = Chrono::parse('In  about 5 hours', '2012-08-10 12:49')[0];
     $withinAroundHours = Chrono::parse('within around 3 hours', '2012-08-10 12:49')[0];
+    $oneMonth = Chrono::parse('in 1 month', '2016-10-01 14:52')[0];
 
     expect($tenDays->index)->toBe(26)
         ->and($tenDays->text)->toBe('within 10 day')
@@ -99,7 +100,9 @@ it('parses upstream within variants with exact text and references', function ()
         ->and($aboutHours->text)->toBe('In  about 5 hours')
         ->and($aboutHours->start->date()->toDateTimeString())->toBe('2012-08-10 17:49:00')
         ->and($withinAroundHours->text)->toBe('within around 3 hours')
-        ->and($withinAroundHours->start->date()->toDateTimeString())->toBe('2012-08-10 15:49:00');
+        ->and($withinAroundHours->start->date()->toDateTimeString())->toBe('2012-08-10 15:49:00')
+        ->and($oneMonth->text)->toBe('in 1 month')
+        ->and($oneMonth->start->date()->toDateTimeString())->toBe('2016-11-01 14:52:00');
 });
 
 it('parses upstream within repeated time unit variants', function () {
@@ -158,7 +161,7 @@ it('parses fuzzy within amount phrases', function () {
     expect(Chrono::parseDate('within a few months', '2012-08-10 12:49:00')?->toDateTimeString())
         ->toBe('2012-11-10 12:49:00')
         ->and(Chrono::parseDate('In several hours', '2012-08-10 12:49:00')?->toDateTimeString())
-        ->toBe('2012-08-10 18:49:00')
+        ->toBe('2012-08-10 19:49:00')
         ->and(Chrono::parseDate('In a couple of days', '2012-08-10 12:49:00')?->toDateTimeString())
         ->toBe('2012-08-12 12:49:00');
 });

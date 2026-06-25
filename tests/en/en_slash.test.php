@@ -4,8 +4,18 @@ use Chrono\Chrono;
 
 it('parses slash dates with forward date option', function () {
     $date = Chrono::parseDate('Book 6/20', '2026-06-23 09:00', ['forwardDate' => true]);
+    $monthDay = Chrono::parse('5/31', '1999-06-01', ['forwardDate' => true])[0];
+    $dateTime = Chrono::parse('1/8 at 12pm', '2021-09-25 12:00:00', ['forwardDate' => true])[0];
 
-    expect($date?->toDateTimeString())->toBe('2027-06-20 12:00:00');
+    expect($date?->toDateTimeString())->toBe('2027-06-20 12:00:00')
+        ->and($monthDay->text)->toBe('5/31')
+        ->and($monthDay->start->get('year'))->toBe(2000)
+        ->and($monthDay->start->get('month'))->toBe(5)
+        ->and($monthDay->start->get('day'))->toBe(31)
+        ->and($monthDay->start->isCertain('year'))->toBeFalse()
+        ->and($monthDay->start->date()->toDateTimeString())->toBe('2000-05-31 12:00:00')
+        ->and($dateTime->text)->toBe('1/8 at 12pm')
+        ->and($dateTime->start->date()->toDateTimeString())->toBe('2022-01-08 12:00:00');
 });
 
 it('uses the closest year for slash dates without explicit years', function () {
@@ -42,6 +52,10 @@ it('parses slash dates with leading slash and inferred day month order', functio
     $plain = Chrono::parse('8/10/2012', '2012-08-10')[0];
     $colonPrefixed = Chrono::parse(': 8/1/2012', '2012-08-10')[0];
     $deadline = Chrono::parse('The Deadline is 8/10/2012', '2012-08-10')[0];
+    $weekday = Chrono::parse('The Deadline is Tuesday 11/3/2015', '2015-11-03')[0];
+    $strict = Chrono::strict()->parseText('2/28/2014', '2012-08-10')[0];
+    $strictDash = Chrono::strict()->parseText('12-30-16', '2012-08-10')[0];
+    $strictWeekdayDash = Chrono::strict()->parseText('Friday 12-30-16', '2012-08-10')[0];
     $short = Chrono::parse('8/10', '2012-08-10')[0];
     $twoDigitPastYear = Chrono::parse('8/10/82', '2012-08-10')[0];
 
@@ -60,6 +74,13 @@ it('parses slash dates with leading slash and inferred day month order', functio
         ->and($deadline->text)->toBe('8/10/2012')
         ->and($deadline->index)->toBe(16)
         ->and($deadline->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
+        ->and($weekday->text)->toBe('Tuesday 11/3/2015')
+        ->and($weekday->index)->toBe(16)
+        ->and($weekday->start->date()->toDateTimeString())->toBe('2015-11-03 12:00:00')
+        ->and($strict->text)->toBe('2/28/2014')
+        ->and($strictDash->start->date()->toDateTimeString())->toBe('2016-12-30 12:00:00')
+        ->and($strictWeekdayDash->text)->toBe('Friday 12-30-16')
+        ->and($strictWeekdayDash->start->date()->toDateTimeString())->toBe('2016-12-30 12:00:00')
         ->and($short->text)->toBe('8/10')
         ->and($short->start->get('year'))->toBe(2012)
         ->and($short->start->get('month'))->toBe(8)
@@ -108,14 +129,19 @@ it('parses upstream slash date splitter variants', function () {
 
 it('supports british english slash dates', function () {
     $british = Chrono::gb()->parseText('Book 6/10/2018', '2012-08-10')[0];
+    $upstreamBritish = Chrono::gb()->parseText('8/10/2012', '2012-08-10')[0];
+    $strictDash = Chrono::strict()->parseText('30-12-16', '2012-08-10')[0];
     $weekday = Chrono::british()->parseText('Friday 30-12-16', '2012-08-10')[0];
 
     expect(Chrono::parseDate('6/10/2018', '2012-08-10')?->toDateTimeString())
         ->toBe('2018-06-10 12:00:00')
+        ->and($upstreamBritish->text)->toBe('8/10/2012')
+        ->and($upstreamBritish->start->date()->toDateTimeString())->toBe('2012-10-08 12:00:00')
         ->and($british->text)->toBe('6/10/2018')
         ->and($british->start->date()->toDateTimeString())->toBe('2018-10-06 12:00:00')
         ->and(Chrono::enGb()->parseDateText('6/10/2018', '2012-08-10')?->toDateTimeString())
         ->toBe('2018-10-06 12:00:00')
+        ->and($strictDash->start->date()->toDateTimeString())->toBe('2016-12-30 12:00:00')
         ->and($weekday->text)->toBe('Friday 30-12-16')
         ->and($weekday->start->date()->toDateTimeString())->toBe('2016-12-30 12:00:00')
         ->and($weekday->start->tags())->toContain('parser/ENSlashDateParser');
@@ -166,4 +192,19 @@ it('parses slash date ranges with times', function () {
         ->and($plain->end?->tags())->toContain('parser/SlashDateFormatParser')
         ->and($meridiem->start->date()->toDateTimeString())->toBe('2023-08-08 09:15:00')
         ->and($meridiem->end?->date()->toDateTimeString())->toBe('2023-08-29 09:15:00');
+});
+
+it('rejects impossible upstream slash dates', function () {
+    expect(Chrono::parse('8/32/2014', '2012-08-10'))->toBe([])
+        ->and(Chrono::parse('8/32', '2012-08-10'))->toBe([])
+        ->and(Chrono::parse('2/29/2014', '2012-08-10'))->toBe([])
+        ->and(Chrono::parse('2014/22/29', '2012-08-10'))->toBe([])
+        ->and(Chrono::parse('2014/13/22', '2012-08-10'))->toBe([])
+        ->and(Chrono::parse('80-32-89-89', '2012-08-10'))->toBe([])
+        ->and(Chrono::parse('02/29/2022', '2012-08-10'))->toBe([])
+        ->and(Chrono::parse('06/31/2022', '2012-08-10'))->toBe([])
+        ->and(Chrono::parse('06/-31/2022', '2012-08-10'))->toBe([])
+        ->and(Chrono::parse('18/13/2022', '2012-08-10'))->toBe([])
+        ->and(Chrono::parse('15/28/2022', '2012-08-10'))->toBe([])
+        ->and(Chrono::parse('4/13/1', '2012-08-10'))->toBe([]);
 });

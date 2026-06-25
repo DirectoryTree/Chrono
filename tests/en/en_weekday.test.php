@@ -127,6 +127,29 @@ it('parses past and postfix week weekday modifiers', function () {
         ->and($nextWeekWithComma->start->get('weekday'))->toBe(Weekday::TUESDAY->value);
 });
 
+it('parses weekdays with casual times', function () {
+    $result = Chrono::casual()->parseText('Lets meet on Tuesday morning', '2015-04-18')[0];
+
+    expect($result->index)->toBe(10)
+        ->and($result->text)->toBe('on Tuesday morning')
+        ->and($result->start->date()->toDateTimeString())->toBe('2015-04-21 06:00:00')
+        ->and($result->start->get('weekday'))->toBe(Weekday::TUESDAY->value);
+});
+
+it('merges weekday overlaps with explicit dates', function () {
+    $monthName = Chrono::casual()->parseText('Sunday, December 7, 2014', '2012-08-09')[0];
+    $slashDate = Chrono::casual()->parseText('Sunday 12/7/2014', '2012-08-09')[0];
+
+    expect($monthName->text)->toBe('Sunday, December 7, 2014')
+        ->and($monthName->start->date()->toDateTimeString())->toBe('2014-12-07 12:00:00')
+        ->and($monthName->start->get('weekday'))->toBe(Weekday::SUNDAY->value)
+        ->and($monthName->start->isCertain('weekday'))->toBeTrue()
+        ->and($slashDate->text)->toBe('Sunday 12/7/2014')
+        ->and($slashDate->start->date()->toDateTimeString())->toBe('2014-12-07 12:00:00')
+        ->and($slashDate->start->get('weekday'))->toBe(Weekday::SUNDAY->value)
+        ->and($slashDate->start->isCertain('weekday'))->toBeTrue();
+});
+
 it('uses chrono weekday modifier semantics', function () {
     $monday = Chrono::parse('Monday', '2012-08-09')[0];
     $thursday = Chrono::parse('Thursday', '2012-08-09')[0];

@@ -33,9 +33,9 @@ it('parses ukrainian weekdays times and relative durations', function () {
     $withinMinute = Chrono::uk()->parseText('буде зроблено протягом хвилини', '2012-08-10 00:00')[0];
     $withinHours = Chrono::uk()->parseText('буде виконано на протязі 2 годин.', '2012-08-10 00:00')[0];
 
-    expect($weekday->start->date()->toDateTimeString())->toBe('2012-08-08 00:00:00')
+    expect($weekday->start->date()->toDateTimeString())->toBe('2012-08-08 12:00:00')
         ->and($weekday->start->tags())->toContain('parser/UKWeekdayParser')
-        ->and($nextWeekday->start->date()->toDateTimeString())->toBe('2012-08-13 00:00:00')
+        ->and($nextWeekday->start->date()->toDateTimeString())->toBe('2012-08-13 12:00:00')
         ->and($nextWeekday->start->tags())->toContain('parser/UKWeekdayParser')
         ->and($time->start->date()->toDateTimeString())->toBe('2012-08-10 18:30:00')
         ->and($time->start->tags())->toContain('parser/UKTimeExpressionParser')

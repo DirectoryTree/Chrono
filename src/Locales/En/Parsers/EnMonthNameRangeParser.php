@@ -25,7 +25,7 @@ class EnMonthNameRangeParser implements Parser
             ...$this->parseMonthOnlyRanges($text, $reference, $options),
             ...$this->parseMiddleEndianCrossMonthRanges($text, $reference),
             ...$this->parseCrossMonthRanges($text, $reference),
-            ...$this->parseLittleEndianRanges($text, $reference),
+            ...$this->parseLittleEndianRanges($text, $reference, $options),
         ];
     }
 
@@ -208,13 +208,13 @@ class EnMonthNameRangeParser implements Parser
     /**
      * @return array<int, ParsedResult>
      */
-    protected function parseLittleEndianRanges(string $text, Reference $reference): array
+    protected function parseLittleEndianRanges(string $text, Reference $reference, Options $options): array
     {
         $monthPattern = EnConstants::monthPattern();
 
-        preg_match_all('/\b(?<startday>\d{1,2})(?:st|nd|rd|th)?\s*(?:-|to|until|through|till)\s*(?<endday>\d{1,2})(?:st|nd|rd|th)?\s+(?<month>'.$monthPattern.')\.?(?:,?\s+(?<year>\d{1,4})(?:\s*(?<era>BCE|CE|BC|AD|BE))?)?\b/i', $text, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
+        preg_match_all('/\b(?<startday>\d{1,2})(?:st|nd|rd|th)?\s*(?:-|to|until|through|till)\s*(?<endday>\d{1,2})(?:st|nd|rd|th)?\s+(?<month>'.$monthPattern.')\.?(?:,?\s+(?<year>\d{1,4})(?:\s*(?<era>BCE|CE|BC|AD|BE))?)?(?:\s+(?:at\s+|from\s+)?(?<hour>\d{1,2})(?::(?<minute>\d{2}))?\s*(?<meridiem>am|pm)?)?\b/i', $text, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
 
-        return array_values(array_filter(array_map(function (array $match) use ($reference): ?ParsedResult {
+        return array_values(array_filter(array_map(function (array $match) use ($reference, $options): ?ParsedResult {
             $month = EnConstants::MONTHS[strtolower($match['month'][0])];
             $startDay = (int) $match['startday'][0];
             $endDay = (int) $match['endday'][0];
@@ -222,13 +222,27 @@ class EnMonthNameRangeParser implements Parser
             $year = $yearText !== ''
                 ? $this->year((int) $yearText, $match['era'][0] ?? '')
                 : Years::findYearClosestToReference($reference->date, $startDay, $month);
+            $hour = ($match['hour'][0] ?? '') !== '' ? $this->meridiemHour((int) $match['hour'][0], ($match['meridiem'][0] ?? '') ?: null) : 12;
+            $minute = ($match['minute'][0] ?? '') !== '' ? (int) $match['minute'][0] : 0;
 
-            if (! checkdate($month, $startDay, max(1, abs($year))) || ! checkdate($month, $endDay, max(1, abs($year)))) {
+            if (
+                ! checkdate($month, $startDay, max(1, abs($year)))
+                || ! checkdate($month, $endDay, max(1, abs($year)))
+                || $hour > 23
+                || $minute > 59
+            ) {
                 return null;
             }
 
-            $start = CarbonImmutable::create($year, $month, $startDay, 12, 0, 0, $reference->date->timezone);
-            $end = CarbonImmutable::create($year, $month, $endDay, 12, 0, 0, $reference->date->timezone);
+            $start = CarbonImmutable::create($year, $month, $startDay, $hour, $minute, 0, $reference->date->timezone);
+
+            if ($yearText === '' && $options->forwardDate() && $start->lt($reference->date)) {
+                $start = $start->addYear();
+                $year = $start->year;
+            }
+
+            $end = CarbonImmutable::create($year, $month, $endDay, $hour, $minute, 0, $reference->date->timezone);
+            $hasTime = ($match['hour'][0] ?? '') !== '';
 
             return new ParsedResult(
                 $match[0][1],
@@ -237,11 +251,13 @@ class EnMonthNameRangeParser implements Parser
                     ...($yearText !== '' ? ['year' => $year] : []),
                     'month' => $month,
                     'day' => $startDay,
+                    ...($hasTime ? ['hour' => $hour, 'minute' => $minute] : []),
                 ]),
                 $this->components($end, [
                     ...($yearText !== '' ? ['year' => $year] : []),
                     'month' => $month,
                     'day' => $endDay,
+                    ...($hasTime ? ['hour' => $hour, 'minute' => $minute] : []),
                 ])
             );
         }, $matches)));

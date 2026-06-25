@@ -3,12 +3,20 @@
 use Chrono\Chrono;
 
 it('parses middle endian cross month ranges', function () {
+    $sameMonthDash = Chrono::parse('August 10 - 22, 2012', '2012-08-10')[0];
+    $sameMonthTo = Chrono::parse('August 10 to 22, 2012', '2012-08-10')[0];
     $result = Chrono::parse('August 10 - November 12', '2012-08-10')[0];
     $toRange = Chrono::parse('Aug 10 to Nov 12', '2012-08-10')[0];
     $nextYear = Chrono::parse('Aug 10 - Nov 12, 2013', '2012-08-10')[0];
     $previousYear = Chrono::parse('Aug 10 - Nov 12, 2011', '2012-08-10')[0];
 
-    expect($result->text)->toBe('August 10 - November 12')
+    expect($sameMonthDash->text)->toBe('August 10 - 22, 2012')
+        ->and($sameMonthDash->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
+        ->and($sameMonthDash->end?->date()->toDateTimeString())->toBe('2012-08-22 12:00:00')
+        ->and($sameMonthTo->text)->toBe('August 10 to 22, 2012')
+        ->and($sameMonthTo->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
+        ->and($sameMonthTo->end?->date()->toDateTimeString())->toBe('2012-08-22 12:00:00')
+        ->and($result->text)->toBe('August 10 - November 12')
         ->and($result->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
         ->and($result->end?->date()->toDateTimeString())->toBe('2012-11-12 12:00:00')
         ->and($toRange->text)->toBe('Aug 10 to Nov 12')
@@ -27,10 +35,15 @@ it('parses middle endian dates and ranges with compact comma years', function ()
     $monthOnly = Chrono::parse('She is leaving in August.', '2012-08-10')[0];
     $monthYearComma = Chrono::parse('I am arriving sometime in August, 2012, probably.', '2012-08-10')[0];
     $explicit = Chrono::parse('August 10, 2012', '2012-08-10')[0];
+    $shortExplicit = Chrono::parse('Nov 12, 2011', '2012-08-10')[0];
+    $deadline = Chrono::parse('The Deadline is August 10', '2012-08-10')[0];
     $date = Chrono::parse('Published November 1,2001', '2012-08-10')[0];
     $range = Chrono::parse('174 November 1,2001- March 31,2002', '2012-08-10')[0];
     $shortYearWithComma = Chrono::parse('Aug 9, 96', '2012-08-10')[0];
     $shortYear = Chrono::parse('Aug 9 96', '2012-08-10')[0];
+    $buddhistEra = Chrono::parse('The Deadline is August 10 2555 BE', '2012-08-10')[0];
+    $beforeCommonEra = Chrono::parse('The Deadline is August 10, 345 BC', '2012-08-10')[0];
+    $commonEra = Chrono::parse('The Deadline is August 10, 8 AD', '2012-08-10')[0];
 
     expect($monthYear->text)->toBe('July 2017')
         ->and($monthYear->index)->toBe(29)
@@ -45,6 +58,11 @@ it('parses middle endian dates and ranges with compact comma years', function ()
         ->and($explicit->start->get('year'))->toBe(2012)
         ->and($explicit->start->get('month'))->toBe(8)
         ->and($explicit->start->get('day'))->toBe(10)
+        ->and($shortExplicit->text)->toBe('Nov 12, 2011')
+        ->and($shortExplicit->start->date()->toDateTimeString())->toBe('2011-11-12 12:00:00')
+        ->and($deadline->text)->toBe('August 10')
+        ->and($deadline->index)->toBe(16)
+        ->and($deadline->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
         ->and($date->text)->toBe('November 1,2001')
         ->and($date->start->date()->toDateTimeString())->toBe('2001-11-01 12:00:00')
         ->and($date->tags())->toContain('parser/ENMonthNameMiddleEndianParser')
@@ -55,20 +73,41 @@ it('parses middle endian dates and ranges with compact comma years', function ()
         ->and($shortYearWithComma->start->date()->toDateTimeString())->toBe('1996-08-09 12:00:00')
         ->and($shortYear->text)->toBe('Aug 9 96')
         ->and($shortYear->start->date()->toDateTimeString())->toBe('1996-08-09 12:00:00')
+        ->and($buddhistEra->text)->toBe('August 10 2555 BE')
+        ->and($buddhistEra->start->get('year'))->toBe(2012)
+        ->and($buddhistEra->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
+        ->and($beforeCommonEra->text)->toBe('August 10, 345 BC')
+        ->and($beforeCommonEra->start->get('year'))->toBe(-345)
+        ->and($beforeCommonEra->start->date()->format('Y-m-d H:i:s'))->toBe('-0345-08-10 12:00:00')
+        ->and($commonEra->text)->toBe('August 10, 8 AD')
+        ->and($commonEra->start->get('year'))->toBe(8)
+        ->and($commonEra->start->date()->format('Y-m-d H:i:s'))->toBe('0008-08-10 12:00:00')
         ->and(Chrono::parse('Jan 1 3000, 9:30', '2012-08-10')[0]->text)->toBe('Jan 1 3000, 9:30')
         ->and(Chrono::parseDate('Jan 1 3000, 9:30', '2012-08-10')?->format('Y-m-d H:i:s'))->toBe('3000-01-01 09:30:00');
 });
 
 it('parses middle endian weekday-prefixed month name dates', function () {
+    $tuesday = Chrono::parse('The Deadline is Tuesday, January 10', '2012-08-10')[0];
     $short = Chrono::parse('Sun, Mar. 6, 2016', '2012-08-10')[0];
+    $fullShort = Chrono::parse('Sun, March 6, 2016', '2012-08-10')[0];
+    $dottedShort = Chrono::parse('Sun., March 6, 2016', '2012-08-10')[0];
+    $sunday = Chrono::parse('Sunday, March 6, 2016', '2012-08-10')[0];
     $long = Chrono::parse('Sunday, March, 6th 2016', '2012-08-10')[0];
     $padded = Chrono::parse('Wed, Jan 20th, 2016             ', '2012-08-10')[0];
 
-    expect($short->start->date()->toDateTimeString())->toBe('2016-03-06 12:00:00')
+    expect($tuesday->text)->toBe('Tuesday, January 10')
+        ->and($tuesday->start->date()->toDateTimeString())->toBe('2013-01-10 12:00:00')
+        ->and($tuesday->start->get('weekday'))->toBe(2)
+        ->and($short->start->date()->toDateTimeString())->toBe('2016-03-06 12:00:00')
+        ->and($fullShort->start->date()->toDateTimeString())->toBe('2016-03-06 12:00:00')
+        ->and($dottedShort->start->date()->toDateTimeString())->toBe('2016-03-06 12:00:00')
+        ->and($sunday->start->date()->toDateTimeString())->toBe('2016-03-06 12:00:00')
         ->and($long->text)->toBe('Sunday, March, 6th 2016')
         ->and($long->start->date()->toDateTimeString())->toBe('2016-03-06 12:00:00')
         ->and($padded->text)->toBe('Wed, Jan 20th, 2016')
-        ->and($padded->start->date()->toDateTimeString())->toBe('2016-01-20 12:00:00');
+        ->and($padded->start->date()->toDateTimeString())->toBe('2016-01-20 12:00:00')
+        ->and(Chrono::parse('Dec. 21', '2012-08-10')[0]->text)->toBe('Dec. 21')
+        ->and(Chrono::parseDate('Dec. 21', '2012-08-10')?->toDateTimeString())->toBe('2012-12-21 12:00:00');
 });
 
 it('parses middle endian month name dates with separators', function () {
@@ -102,6 +141,14 @@ it('moves middle endian dates forward when requested', function () {
 
     expect($normal->start->date()->toDateTimeString())->toBe('2016-01-01 12:00:00')
         ->and($forward->start->date()->toDateTimeString())->toBe('2017-01-01 12:00:00');
+});
+
+it('rejects impossible middle endian month name dates in strict mode', function () {
+    expect(Chrono::strict()->parseText('August 32, 2014', '2012-08-10'))->toBe([])
+        ->and(Chrono::strict()->parseText('February 29, 2014', '2012-08-10'))->toBe([])
+        ->and(Chrono::strict()->parseText('August 32', '2012-08-10'))->toBe([])
+        ->and(Chrono::strict()->parseText('February 29', '2014-08-10'))->toBe([])
+        ->and(Chrono::strict()->parseText('February 151998', '2014-08-10'))->toBe([]);
 });
 
 it('skips year-like middle endian month dates for british english', function () {

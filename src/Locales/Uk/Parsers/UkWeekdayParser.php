@@ -41,7 +41,7 @@ class UkWeekdayParser extends AbstractParserWithWordBoundary
         }
 
         return Weekdays::createParsingComponentsAtWeekday($reference, $weekday, $modifier)
-            ->imply('hour', 0)
+            ->imply('hour', 12)
             ->imply('minute', 0)
             ->imply('second', 0)
             ->imply('millisecond', 0)

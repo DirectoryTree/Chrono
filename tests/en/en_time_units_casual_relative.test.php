@@ -1,10 +1,18 @@
 <?php
 
 use Chrono\Chrono;
+use Chrono\Locales\En\Parsers\EnTimeUnitCasualRelativeFormatParser;
 
 it('parses signed relative durations', function () {
-    expect(Chrono::parseDate('+15min', '2012-07-10 12:14')?->toDateTimeString())
+    $plusMinutes = Chrono::casual()->parseText('+15 minutes', '2012-07-10 12:14')[0];
+    $plusShortMinute = Chrono::casual()->parseText('+1m', '2012-07-10 12:14')[0];
+
+    expect($plusMinutes->text)->toBe('+15 minutes')
+        ->and($plusMinutes->start->date()->toDateTimeString())->toBe('2012-07-10 12:29:00')
+        ->and(Chrono::parseDate('+15min', '2012-07-10 12:14')?->toDateTimeString())
         ->toBe('2012-07-10 12:29:00')
+        ->and($plusShortMinute->text)->toBe('+1m')
+        ->and($plusShortMinute->start->date()->toDateTimeString())->toBe('2012-07-10 12:15:00')
         ->and(Chrono::parseDate('+1 day 2 hour', '2012-07-10 12:14')?->toDateTimeString())
         ->toBe('2012-07-11 14:14:00')
         ->and(Chrono::parseDate('-3y', '2015-07-10 12:14')?->toDateTimeString())
@@ -65,4 +73,14 @@ it('rejects casual relative duration false positives', function () {
         ->and(Chrono::casual()->parseText('a day', '2015-07-10 12:14'))->toBe([])
         ->and(Chrono::parse('+am'))->toBe([])
         ->and(Chrono::parse('+them'))->toBe([]);
+});
+
+it('can disable casual relative duration abbreviations', function () {
+    $custom = Chrono::strict()->withParser(new EnTimeUnitCasualRelativeFormatParser(false));
+    $result = $custom->parseText('-2 hours 5 minutes', '2016-10-01 12:00')[0];
+
+    expect($custom->parseText('-3y'))->toBe([])
+        ->and($custom->parseText('last 2m'))->toBe([])
+        ->and($result->text)->toBe('-2 hours 5 minutes')
+        ->and($result->start->date()->toDateTimeString())->toBe('2016-10-01 09:55:00');
 });

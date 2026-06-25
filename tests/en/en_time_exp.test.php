@@ -211,6 +211,18 @@ it('moves standalone times forward when requested', function () {
         ->and($sameDayRange->end?->date()->toDateTimeString())->toBe('2016-10-02 12:00:00');
 });
 
+it('moves standalone times forward from timezone references', function () {
+    $result = Chrono::parse('1am', [
+        'instant' => 'Wed May 26 2022 01:57:00 GMT-0500 (CDT)',
+        'timezone' => 'CDT',
+    ], ['forwardDate' => true])[0];
+
+    expect($result->start->get('year'))->toBe(2022)
+        ->and($result->start->get('month'))->toBe(5)
+        ->and($result->start->get('day'))->toBe(27)
+        ->and($result->start->get('hour'))->toBe(1);
+});
+
 it('merges time expressions followed by dates', function () {
     $monthDay = Chrono::parse('8:23 AM, Jul 9', '2016-10-01 08:00')[0];
 
@@ -229,6 +241,17 @@ it('merges time expressions followed by dates', function () {
         ->toBe('2016-07-09 08:23:00');
 });
 
+it('merges time expressions after dates with upstream separators', function () {
+    expect(Chrono::parseDate('05/31/2024 14:15', '2016-10-01 08:00')?->toDateTimeString())
+        ->toBe('2024-05-31 14:15:00')
+        ->and(Chrono::parseDate('05/31/2024.14:15', '2016-10-01 08:00')?->toDateTimeString())
+        ->toBe('2024-05-31 14:15:00')
+        ->and(Chrono::parseDate('05/31/2024:14:15', '2016-10-01 08:00')?->toDateTimeString())
+        ->toBe('2024-05-31 14:15:00')
+        ->and(Chrono::parseDate('05/31/2024-14:15', '2016-10-01 08:00')?->toDateTimeString())
+        ->toBe('2024-05-31 14:15:00');
+});
+
 it('parses time expressions with day period clues', function () {
     expect(Chrono::parseDate('1 at night', '2016-10-01 08:00:00')?->toDateTimeString())
         ->toBe('2016-10-01 01:00:00')
@@ -240,6 +263,34 @@ it('parses time expressions with day period clues', function () {
         ->toBe('2026-06-23 13:00:00')
         ->and(Chrono::parseDate('6 in the afternoon', '2016-10-01 08:00:00')?->toDateTimeString())
         ->toBe('2016-10-01 18:00:00');
+});
+
+it('parses casual time number expressions', function () {
+    $atOne = Chrono::casual()->parseText('at 1')[0];
+    $atTwelve = Chrono::casual()->parseText('at 12')[0];
+    $atTwelveThirty = Chrono::casual()->parseText('at 12.30')[0];
+
+    expect($atOne->text)->toBe('at 1')
+        ->and($atOne->start->get('hour'))->toBe(1)
+        ->and($atTwelve->text)->toBe('at 12')
+        ->and($atTwelve->start->get('hour'))->toBe(12)
+        ->and($atTwelveThirty->text)->toBe('at 12.30')
+        ->and($atTwelveThirty->start->get('hour'))->toBe(12)
+        ->and($atTwelveThirty->start->get('minute'))->toBe(30);
+});
+
+it('rejects upstream English time expression false positives', function () {
+    expect(Chrono::parse('2020'))->toBe([])
+        ->and(Chrono::parse('2020  '))->toBe([])
+        ->and(Chrono::parse('2019 to 2020'))->toBe([])
+        ->and(Chrono::parse("I'm at 101,194 points!"))->toBe([])
+        ->and(Chrono::parse("I'm at 101 points!"))->toBe([])
+        ->and(Chrono::parse("I'm at 10.1"))->toBe([])
+        ->and(Chrono::parse("I'm at 10.1 - 10.12"))->toBe([])
+        ->and(Chrono::parse("I'm at 10 - 10.1"))->toBe([])
+        ->and(Chrono::strict()->parseText("I'm at 10"))->toBe([])
+        ->and(Chrono::strict()->parseText("I'm at 10 - 20"))->toBe([])
+        ->and(Chrono::strict()->parseText('7-730'))->toBe([]);
 });
 
 it('parses upstream top-level English date and time integrations', function () {

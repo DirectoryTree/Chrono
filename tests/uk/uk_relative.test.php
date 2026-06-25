@@ -2,14 +2,23 @@
 
 use Chrono\Chrono;
 
-it('parses ukrainian relative date expressions', function () {
-    $thisWeek = Chrono::uk()->parseText('на цьому тижні', '2017-11-19 12:00')[0];
-    $thisMonth = Chrono::uk()->parseText('у цьому місяці', '2017-11-19 12:00')[0];
-    $pastWeek = Chrono::uk()->parseText('на минулому тижні', '2016-10-01 12:00')[0];
-    $nextQuarter = Chrono::uk()->parseText('в наступному кварталі', '2016-10-01 12:00')[0];
+it('matches upstream ukrainian relative date expressions', function (string $text, string $reference, string $expectedDate) {
+    $result = Chrono::uk()->parseText($text, $reference)[0];
 
-    expect($thisWeek->start->date()->toDateTimeString())->toBe('2017-11-19 12:00:00')
-        ->and($thisMonth->start->date()->toDateTimeString())->toBe('2017-11-01 12:00:00')
-        ->and($pastWeek->start->date()->toDateTimeString())->toBe('2016-09-24 12:00:00')
-        ->and($nextQuarter->start->date()->toDateTimeString())->toBe('2017-01-01 12:00:00');
-});
+    expect($result->index)->toBe(0)
+        ->and($result->text)->toBe($text)
+        ->and($result->start->date()->toDateTimeString())->toBe($expectedDate)
+        ->and($result->start->tags())->toContain('parser/UKRelativeDateFormatParser');
+})->with([
+    ['на цьому тижні', '2017-11-19 12:00', '2017-11-19 12:00:00'],
+    ['у цьому місяці', '2017-11-19 12:00', '2017-11-01 12:00:00'],
+    ['цього місяця', '2017-11-01 12:00', '2017-11-01 12:00:00'],
+    ['у цьому році', '2017-11-19 12:00', '2017-01-01 12:00:00'],
+    ['на минулому тижні', '2016-10-01 12:00', '2016-09-24 12:00:00'],
+    ['минулого місяця', '2016-10-01 12:00', '2016-09-01 12:00:00'],
+    ['у минулому році', '2016-10-01 12:00', '2015-10-01 12:00:00'],
+    ['на наступному тижні', '2016-10-01 12:00', '2016-10-08 12:00:00'],
+    ['наступного місяця', '2016-10-01 12:00', '2016-11-01 12:00:00'],
+    ['в наступному кварталі', '2016-10-01 12:00', '2017-01-01 12:00:00'],
+    ['наступного року', '2016-10-01 12:00', '2017-10-01 12:00:00'],
+]);

@@ -106,7 +106,7 @@ trait InteractsWithRelativeDates
             'few' => 3,
             'a few' => 3,
             'a couple of' => 2,
-            'several' => 6,
+            'several' => 7,
         ][$amount] ?? (int) $amount;
     }
 

@@ -25,9 +25,13 @@ class RuMonthNameParser implements Parser
         $monthPattern = RuConstants::monthPattern();
         $yearPattern = '[0-9]{1,4}(?![^\s]\d)(?:\s*(?:г\.?|года))?';
 
-        preg_match_all("/(?<![\\pL\\pN])(?:в\\s*)?(?<month>{$monthPattern})(?:\\s*(?<year>{$yearPattern}))?(?=\\W|$)/iu", $text, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
+        preg_match_all("/(?<![\\pL\\pN])(?:в\\s*)?(?<month>{$monthPattern})(?:[\\s-]*(?<year>{$yearPattern}))?(?=\\W|$)/iu", $text, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
 
-        return array_values(array_filter(array_map(function (array $match) use ($reference): ?ParsedResult {
+        return array_values(array_filter(array_map(function (array $match) use ($reference, $text): ?ParsedResult {
+            if ($this->followsDayNumber($text, $match[0][1])) {
+                return null;
+            }
+
             $month = RuConstants::MONTHS[mb_strtolower($match['month'][0])] ?? null;
 
             if ($month === null) {
@@ -46,5 +50,18 @@ class RuMonthNameParser implements Parser
 
             return new ParsedResult($match[0][1], trim($match[0][0]), $components);
         }, $matches)));
+    }
+
+    protected function followsDayNumber(string $text, int $offset): bool
+    {
+        $before = substr($text, 0, $offset);
+
+        if (! preg_match('/(?:^|\\s)(\\d{1,2})\\s+$/u', $before, $match)) {
+            return false;
+        }
+
+        $day = (int) $match[1];
+
+        return $day >= 1 && $day <= 31;
     }
 }
