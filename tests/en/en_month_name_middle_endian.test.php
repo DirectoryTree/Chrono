@@ -59,6 +59,51 @@ it('parses middle endian dates and ranges with compact comma years', function ()
         ->and(Chrono::parseDate('Jan 1 3000, 9:30', '2012-08-10')?->format('Y-m-d H:i:s'))->toBe('3000-01-01 09:30:00');
 });
 
+it('parses middle endian weekday-prefixed month name dates', function () {
+    $short = Chrono::parse('Sun, Mar. 6, 2016', '2012-08-10')[0];
+    $long = Chrono::parse('Sunday, March, 6th 2016', '2012-08-10')[0];
+    $padded = Chrono::parse('Wed, Jan 20th, 2016             ', '2012-08-10')[0];
+
+    expect($short->start->date()->toDateTimeString())->toBe('2016-03-06 12:00:00')
+        ->and($long->text)->toBe('Sunday, March, 6th 2016')
+        ->and($long->start->date()->toDateTimeString())->toBe('2016-03-06 12:00:00')
+        ->and($padded->text)->toBe('Wed, Jan 20th, 2016')
+        ->and($padded->start->date()->toDateTimeString())->toBe('2016-01-20 12:00:00');
+});
+
+it('parses middle endian month name dates with separators', function () {
+    expect(Chrono::parseDate('August-10, 2012')?->toDateTimeString())
+        ->toBe('2012-08-10 12:00:00')
+        ->and(Chrono::parseDate('August/10, 2012')?->toDateTimeString())
+        ->toBe('2012-08-10 12:00:00')
+        ->and(Chrono::parseDate('August/10/2012')?->toDateTimeString())
+        ->toBe('2012-08-10 12:00:00')
+        ->and(Chrono::parseDate('August-10-2012')?->toDateTimeString())
+        ->toBe('2012-08-10 12:00:00');
+});
+
+it('parses middle endian ordinal word month name expressions', function () {
+    $date = Chrono::parse('May eighth, 2010', '2012-08-10')[0];
+    $impliedYear = Chrono::parse('May twenty-fourth', '2012-08-10')[0];
+    $range = Chrono::parse('May eighth - tenth, 2010', '2012-08-10')[0];
+
+    expect($date->text)->toBe('May eighth, 2010')
+        ->and($date->start->date()->toDateTimeString())->toBe('2010-05-08 12:00:00')
+        ->and($impliedYear->text)->toBe('May twenty-fourth')
+        ->and($impliedYear->start->date()->toDateTimeString())->toBe('2012-05-24 12:00:00')
+        ->and($range->text)->toBe('May eighth - tenth, 2010')
+        ->and($range->start->date()->toDateTimeString())->toBe('2010-05-08 12:00:00')
+        ->and($range->end?->date()->toDateTimeString())->toBe('2010-05-10 12:00:00');
+});
+
+it('moves middle endian dates forward when requested', function () {
+    $normal = Chrono::casual()->parseText('January 1st', '2016-02-15')[0];
+    $forward = Chrono::casual()->parseText('January 1st', '2016-02-15', ['forwardDate' => true])[0];
+
+    expect($normal->start->date()->toDateTimeString())->toBe('2016-01-01 12:00:00')
+        ->and($forward->start->date()->toDateTimeString())->toBe('2017-01-01 12:00:00');
+});
+
 it('skips year-like middle endian month dates for british english', function () {
     $middleEndian = Chrono::casual()->parseText('Dec. 21', '2024-01-10')[0];
     $littleEndian = Chrono::gb()->parseText('Dec. 21', '2024-01-10')[0];

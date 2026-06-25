@@ -144,3 +144,33 @@ it('marks relative unit certainty like chrono', function () {
         ->and($prefixedAfterThisYear->text)->toBe('after this year')
         ->and($prefixedAfterThisYear->start->date()->toDateTimeString())->toBe('2023-04-16 12:00:00');
 });
+
+it('parses relative date times when the reference timezone is known', function () {
+    $reference = 'Sun Nov 29 2020 13:24:13 GMT+0900 (Japan Standard Time)';
+    $jst = Chrono::parse('tomorrow at 5pm', ['instant' => $reference, 'timezone' => 'JST'])[0];
+    $bst = Chrono::parse('tomorrow at 5pm', ['instant' => $reference, 'timezone' => 'BST'])[0];
+    $pst = Chrono::parse('tomorrow at 5pm', ['instant' => $reference, 'timezone' => -420])[0];
+
+    expect($jst->start->date()->format('Y-m-d H:i:s P'))->toBe('2020-11-30 17:00:00 +09:00')
+        ->and($bst->start->date()->format('Y-m-d H:i:s P'))->toBe('2020-11-30 17:00:00 +01:00')
+        ->and($pst->start->date()->format('Y-m-d H:i:s P'))->toBe('2020-11-29 17:00:00 -07:00');
+
+    $jst->start->imply('timezoneOffset', 60);
+    $pst->start->imply('timezoneOffset', 540);
+
+    expect($jst->start->date()->format('Y-m-d H:i:s P'))->toBe('2020-11-30 17:00:00 +01:00')
+        ->and($pst->start->date()->format('Y-m-d H:i:s P'))->toBe('2020-11-29 17:00:00 +09:00');
+});
+
+it('parses relative date times across weeks with known timezone references', function () {
+    $reference = ['instant' => 'Thu Feb 27 2025 09:00:00 GMT-0800 (PST)', 'timezone' => 'PST'];
+
+    expect(Chrono::parse('tomorrow at 9am', $reference)[0]->start->date()->format('Y-m-d H:i:s P'))
+        ->toBe('2025-02-28 09:00:00 -08:00')
+        ->and(Chrono::parse('in 2 weeks at 9am', $reference)[0]->start->date()->format('Y-m-d H:i:s P'))
+        ->toBe('2025-03-13 09:00:00 -08:00')
+        ->and(Chrono::parse('2 weeks ago at 9am', $reference)[0]->start->date()->format('Y-m-d H:i:s P'))
+        ->toBe('2025-02-13 09:00:00 -08:00')
+        ->and(Chrono::parse('next friday at 9am', $reference)[0]->start->date()->format('Y-m-d H:i:s P'))
+        ->toBe('2025-03-07 09:00:00 -08:00');
+});

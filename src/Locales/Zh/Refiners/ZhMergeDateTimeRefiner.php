@@ -29,7 +29,14 @@ class ZhMergeDateTimeRefiner extends MergingRefiner
     {
         $date = MergingCalculation::mergeDateTimeResult($date, $time);
 
-        $date->text = substr($text, $date->index, $time->index + strlen($time->text) - $date->index);
+        $datePosition = strpos($text, $date->text, $date->index);
+        $dateEnd = $datePosition === false ? null : $datePosition + strlen($date->text);
+        $timePosition = $dateEnd === null ? false : strpos($text, $time->text, $dateEnd);
+        $separator = $dateEnd !== null && $timePosition !== false
+            ? substr($text, $dateEnd, $timePosition - $dateEnd)
+            : $textBetween;
+
+        $date->text = $date->text.$separator.$time->text;
         $date->addTag('refiner/mergeDateFollowedByTime');
 
         return $date;

@@ -226,3 +226,19 @@ it('parses central european timezone abbreviation using dst rules', function () 
         ->and(Chrono::parse('2022-10-30 23:00 CET')[0]->start->timezoneOffset())
         ->toBe(60);
 });
+
+it('minimizes pre-1900 timezone drift like upstream', function () {
+    $utc = Chrono::parse('1900-01-01T00:00:00-00:00')[0];
+    $minusOne = Chrono::parse('1900-01-01T00:00:00-01:00')[0];
+    $plusEight = Chrono::parse('1900-01-01T00:00:00+08:00')[0];
+    $jst = Chrono::parse('1900-01-01T00:00', ['timezone' => 'JST'])[0];
+
+    expect($utc->start->date()->format('Y-m-d H:i:s P'))->toBe('1900-01-01 00:00:00 +00:00')
+        ->and($minusOne->start->date()->format('Y-m-d H:i:s P'))->toBe('1900-01-01 00:00:00 -01:00')
+        ->and($plusEight->start->date()->format('Y-m-d H:i:s P'))->toBe('1900-01-01 00:00:00 +08:00')
+        ->and($jst->start->date()->format('Y-m-d H:i:s P'))->toBe('1900-01-01 00:00:00 +09:00')
+        ->and($utc->start->date()->getTimestamp())->toBe(CarbonImmutable::parse('1900-01-01 00:00:00 +00:00')->getTimestamp())
+        ->and($minusOne->start->date()->getTimestamp())->toBe(CarbonImmutable::parse('1900-01-01 00:00:00 -01:00')->getTimestamp())
+        ->and($plusEight->start->date()->getTimestamp())->toBe(CarbonImmutable::parse('1900-01-01 00:00:00 +08:00')->getTimestamp())
+        ->and($jst->start->date()->getTimestamp())->toBe(CarbonImmutable::parse('1900-01-01 00:00:00 +09:00')->getTimestamp());
+});

@@ -32,6 +32,49 @@ it('parses little endian month name dates with two digit years', function () {
         ->and($deadline->start->get('day'))->toBe(10);
 });
 
+it('parses little endian weekday-prefixed month name dates', function () {
+    $shortWeekday = Chrono::parse('Sun 15Sep', '2013-08-10')[0];
+    $upperWeekday = Chrono::parse('SUN 15SEP', '2013-08-10')[0];
+    $longWeekday = Chrono::parse('The Deadline is Tuesday, 10 January', '2012-08-10')[0];
+    $abbreviatedWeekday = Chrono::parse('The Deadline is Tue, 10 January', '2012-08-10')[0];
+
+    expect($shortWeekday->text)->toBe('Sun 15Sep')
+        ->and($shortWeekday->start->date()->toDateTimeString())->toBe('2013-09-15 12:00:00')
+        ->and($upperWeekday->text)->toBe('SUN 15SEP')
+        ->and($upperWeekday->start->date()->toDateTimeString())->toBe('2013-09-15 12:00:00')
+        ->and($longWeekday->text)->toBe('Tuesday, 10 January')
+        ->and($longWeekday->index)->toBe(16)
+        ->and($longWeekday->start->date()->toDateTimeString())->toBe('2013-01-10 12:00:00')
+        ->and($longWeekday->start->get('weekday'))->toBe(2)
+        ->and($abbreviatedWeekday->text)->toBe('Tue, 10 January')
+        ->and($abbreviatedWeekday->start->date()->toDateTimeString())->toBe('2013-01-10 12:00:00')
+        ->and($abbreviatedWeekday->start->get('weekday'))->toBe(2);
+});
+
+it('parses little endian month name dates with separators', function () {
+    expect(Chrono::parseDate('10-August 2012', '2012-08-08')?->toDateTimeString())
+        ->toBe('2012-08-10 12:00:00')
+        ->and(Chrono::parseDate('10-August-2012', '2012-08-08')?->toDateTimeString())
+        ->toBe('2012-08-10 12:00:00')
+        ->and(Chrono::parseDate('10/August 2012', '2012-08-08')?->toDateTimeString())
+        ->toBe('2012-08-10 12:00:00')
+        ->and(Chrono::parseDate('10/August/2012', '2012-08-08')?->toDateTimeString())
+        ->toBe('2012-08-10 12:00:00');
+});
+
+it('parses little endian ordinal word month name expressions', function () {
+    $date = Chrono::parse('Twenty-fourth of May', '2012-08-10')[0];
+    $range = Chrono::parse('Eighth to eleventh May 2010', '2012-08-10')[0];
+
+    expect($date->text)->toBe('Twenty-fourth of May')
+        ->and($date->start->get('year'))->toBe(2012)
+        ->and($date->start->get('month'))->toBe(5)
+        ->and($date->start->get('day'))->toBe(24)
+        ->and($range->text)->toBe('Eighth to eleventh May 2010')
+        ->and($range->start->date()->toDateTimeString())->toBe('2010-05-08 12:00:00')
+        ->and($range->end?->date()->toDateTimeString())->toBe('2010-05-11 12:00:00');
+});
+
 it('parses little endian same month ranges', function () {
     $result = Chrono::parse('10 - 22 August 2012', '2012-08-10')[0];
 
