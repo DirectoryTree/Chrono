@@ -117,13 +117,19 @@ class EnMonthNameParser implements Parser
                 return null;
             }
 
-            $month = EnConstants::MONTHS[strtolower($match['month'][0])];
+            $monthText = strtolower($match['month'][0]);
+            $month = EnConstants::MONTHS[$monthText];
             $year = ($match['year'][0] ?? '') !== ''
                 ? (int) $match['year'][0]
                 : $this->impliedYear($reference, $options, $month);
             $date = CarbonImmutable::create($year, $month, 1, 12, 0, 0, $reference->date->timezone);
+            $text = $match[0][0];
 
-            return new ParsedResult($match[0][1], $match[0][0], $this->components($date, [
+            if (isset(self::FULL_MONTHS[$monthText]) && str_ends_with($text, '.')) {
+                $text = substr($text, 0, -1);
+            }
+
+            return new ParsedResult($match[0][1], $text, $this->components($date, [
                 ...(($match['year'][0] ?? '') !== '' ? ['year' => $year] : []),
                 'month' => $month,
             ])->addTag('parser/ENMonthNameParser'));

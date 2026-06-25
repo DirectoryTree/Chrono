@@ -31,9 +31,9 @@ trait InteractsWithDutchRelativeDates
     protected function certainComponents(CarbonImmutable $date, string $unit): array
     {
         return match ($unit) {
-            'second' => ['year' => $date->year, 'month' => $date->month, 'day' => $date->day, 'hour' => $date->hour, 'minute' => $date->minute, 'second' => $date->second],
-            'minute' => ['year' => $date->year, 'month' => $date->month, 'day' => $date->day, 'hour' => $date->hour, 'minute' => $date->minute],
-            'hour' => ['year' => $date->year, 'month' => $date->month, 'day' => $date->day, 'hour' => $date->hour],
+            'second' => ['year' => $date->year, 'month' => $date->month, 'day' => $date->day, 'hour' => $date->hour, 'minute' => $date->minute, 'second' => $date->second, 'timezoneOffset' => $date->offsetMinutes],
+            'minute' => ['year' => $date->year, 'month' => $date->month, 'day' => $date->day, 'hour' => $date->hour, 'minute' => $date->minute, 'timezoneOffset' => $date->offsetMinutes],
+            'hour' => ['year' => $date->year, 'month' => $date->month, 'day' => $date->day, 'hour' => $date->hour, 'timezoneOffset' => $date->offsetMinutes],
             'day', 'week' => ['year' => $date->year, 'month' => $date->month, 'day' => $date->day],
             'month' => ['year' => $date->year, 'month' => $date->month],
             'year' => ['year' => $date->year],

@@ -23,6 +23,8 @@ class ConfiguredChronoEngine implements ChronoEngine
             $this->configuration->parsers,
         ));
 
+        $results = $this->attachReference($results, $reference);
+
         $results = array_map(
             fn (ParsedResult $result, int $order): array => [$result, $order],
             $results,
@@ -34,7 +36,10 @@ class ConfiguredChronoEngine implements ChronoEngine
         $results = array_map(fn (array $result): ParsedResult => $result[0], $results);
 
         foreach ($this->configuration->refiners as $refiner) {
-            $results = $refiner->refine($text, $results, $reference, $options);
+            $results = $this->attachReference(
+                $refiner->refine($text, $results, $reference, $options),
+                $reference,
+            );
         }
 
         return array_values($results);
@@ -93,5 +98,19 @@ class ConfiguredChronoEngine implements ChronoEngine
     protected function newInstance(Configuration $configuration): static
     {
         return new static($configuration);
+    }
+
+    /**
+     * Attach upstream-style reference metadata to each parsed result.
+     *
+     * @param  array<int, ParsedResult>  $results
+     * @return array<int, ParsedResult>
+     */
+    protected function attachReference(array $results, Reference $reference): array
+    {
+        return array_map(
+            fn (ParsedResult $result): ParsedResult => $result->withReference($reference),
+            $results,
+        );
     }
 }

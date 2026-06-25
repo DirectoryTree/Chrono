@@ -19,8 +19,11 @@ class SlashDateFormatParser implements Parser
      */
     public function __construct(
         protected readonly bool $littleEndian = false,
+
         protected readonly bool $forwardDateByDefault = false,
+
         protected readonly bool $includeYearWhenForwardDate = false,
+
         protected readonly int $twoDigitYearPastThreshold = 50,
     ) {}
 

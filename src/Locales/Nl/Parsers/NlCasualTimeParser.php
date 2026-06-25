@@ -70,10 +70,7 @@ class NlCasualTimeParser extends AbstractParserWithWordBoundary
                 'year' => $date->year,
                 'month' => $date->month,
                 'day' => $date->day,
-                'hour' => $hour,
-                'minute', 'second', 'millisecond' => 0,
                 'weekday' => $date->dayOfWeek,
-                'meridiem' => $hour < 12 ? Meridiem::AM->value : Meridiem::PM->value,
                 'timezoneOffset' => $date->offsetMinutes,
                 default => $components->get($component),
             };
@@ -82,9 +79,11 @@ class NlCasualTimeParser extends AbstractParserWithWordBoundary
         return $this->components($date, [
             ...$known,
             ...($assignDate || $time === 'middernacht' ? ['year' => $date->year, 'month' => $date->month, 'day' => $date->day] : []),
-            'hour' => $hour,
-            ...($time === 'middernacht' ? ['minute' => 0, 'second' => 0] : []),
-            'meridiem' => $hour < 12 ? Meridiem::AM->value : Meridiem::PM->value,
-        ]);
+        ])
+            ->imply('hour', $hour)
+            ->imply('minute', 0)
+            ->imply('second', 0)
+            ->imply('millisecond', 0)
+            ->imply('meridiem', $hour < 12 ? Meridiem::AM->value : Meridiem::PM->value);
     }
 }

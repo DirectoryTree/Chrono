@@ -13,12 +13,19 @@ class SvTimeUnitCasualRelativeFormatParser extends AbstractParserWithWordBoundar
     use InteractsWithSwedishRelativeDates;
 
     /**
+     * Create a Swedish casual relative time-unit parser.
+     */
+    public function __construct(
+        protected readonly bool $allowAbbreviations = true,
+    ) {}
+
+    /**
      * Get the casual Swedish relative time-unit parser pattern.
      */
     protected function innerPattern(Reference $reference, Options $options): string
     {
         return '(?<modifier>denna|den här|förra|passerade|nästa|kommande|efter|\+|-)\s*'.
-            '(?<duration>'.$this->durationPattern().')'.
+            '(?<duration>'.$this->durationPattern($this->allowAbbreviations).')'.
             '(?=\W|$)';
     }
 
@@ -29,7 +36,7 @@ class SvTimeUnitCasualRelativeFormatParser extends AbstractParserWithWordBoundar
      */
     protected function innerExtract(array $match, Reference $reference, Options $options): ?ParsedComponents
     {
-        $duration = $this->duration($match['duration'][0]);
+        $duration = $this->duration($match['duration'][0], $this->allowAbbreviations);
 
         if ($duration === []) {
             return null;

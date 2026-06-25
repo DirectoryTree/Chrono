@@ -8,11 +8,22 @@ use Carbon\CarbonInterface;
 class Reference
 {
     /**
+     * The original reference instant before timezone adjustment.
+     */
+    public readonly CarbonImmutable $instant;
+
+    /**
      * Create a reference date wrapper.
      */
     public function __construct(
         public readonly CarbonImmutable $date,
-    ) {}
+
+        public readonly ?int $timezoneOffset = null,
+
+        ?CarbonImmutable $instant = null,
+    ) {
+        $this->instant = $instant ?? $date;
+    }
 
     /**
      * Get the reference date adjusted into the requested reference timezone.
@@ -23,11 +34,23 @@ class Reference
     }
 
     /**
+     * Get the minute adjustment between the given date offset and the reference timezone.
+     */
+    public function getSystemTimezoneAdjustmentMinute(?CarbonInterface $date = null, ?int $overrideTimezoneOffset = null): int
+    {
+        $date = $date?->toImmutable() ?? CarbonImmutable::now();
+        $currentTimezoneOffset = $date->offsetMinutes;
+        $targetTimezoneOffset = $overrideTimezoneOffset ?? $this->timezoneOffset ?? $currentTimezoneOffset;
+
+        return $currentTimezoneOffset - $targetTimezoneOffset;
+    }
+
+    /**
      * Get the reference timezone offset in minutes.
      */
     public function getTimezoneOffset(): int
     {
-        return $this->date->offsetMinutes;
+        return $this->timezoneOffset ?? $this->date->offsetMinutes;
     }
 
     /**
@@ -38,13 +61,15 @@ class Reference
     public static function make(CarbonInterface|string|array|null $reference = null, ?Options $options = null): self
     {
         if (is_array($reference)) {
-            $date = self::date($reference['instant'] ?? null);
+            $instant = self::date($reference['instant'] ?? null);
+            $timezoneOffset = self::timezoneOffset($reference['timezone'] ?? null, $instant, $options);
+            $date = $instant;
 
-            if (($timezone = self::timezone($reference['timezone'] ?? null, $date, $options)) !== null) {
+            if (($timezone = self::timezoneName($timezoneOffset)) !== null) {
                 $date = $date->setTimezone($timezone);
             }
 
-            return new self($date);
+            return new self($date, timezoneOffset: $timezoneOffset, instant: $instant);
         }
 
         return new self(self::date($reference));
@@ -86,20 +111,26 @@ class Reference
     }
 
     /**
-     * Resolve a Chrono-compatible timezone into a PHP timezone name.
+     * Resolve a Chrono-compatible timezone into an offset in minutes.
      */
-    protected static function timezone(int|string|null $timezone, CarbonImmutable $date, ?Options $options): ?string
+    protected static function timezoneOffset(int|string|null $timezone, CarbonImmutable $date, ?Options $options): ?int
     {
         if ($timezone === null || $timezone === '') {
             return null;
         }
 
         if (is_int($timezone) || is_numeric($timezone)) {
-            return self::timezoneNameFromOffset((int) $timezone);
+            return (int) $timezone;
         }
 
-        $offset = Timezone::offset($timezone, $date, $options);
+        return Timezone::offset($timezone, $date, $options);
+    }
 
+    /**
+     * Resolve a timezone offset into a PHP timezone name.
+     */
+    protected static function timezoneName(?int $offset): ?string
+    {
         return $offset === null ? null : self::timezoneNameFromOffset($offset);
     }
 

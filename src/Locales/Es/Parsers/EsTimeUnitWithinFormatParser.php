@@ -34,7 +34,8 @@ class EsTimeUnitWithinFormatParser extends AbstractParserWithWordBoundary
             return null;
         }
 
-        return ParsedComponents::createRelativeFromReference($reference, $duration);
+        return ParsedComponents::createRelativeFromReference($reference, $duration)
+            ->addTag('parser/ESTimeUnitWithinFormatParser');
     }
 
     /**

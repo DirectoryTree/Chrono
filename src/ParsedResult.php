@@ -7,17 +7,38 @@ use Carbon\CarbonImmutable;
 class ParsedResult
 {
     /**
+     * The reference used to create this parsed result.
+     */
+    public readonly ?Reference $reference;
+
+    /**
+     * The reference instant used to create this parsed result.
+     */
+    public readonly ?CarbonImmutable $refDate;
+
+    /**
      * Create a parsed result.
      *
      * @param  array<int, string>  $tags
      */
     public function __construct(
         public readonly int $index,
+
         public string $text,
+
         public readonly ParsedComponents $start,
+
         public readonly ?ParsedComponents $end = null,
+
         array $tags = [],
+
+        ?Reference $reference = null,
+
+        ?CarbonImmutable $refDate = null,
     ) {
+        $this->reference = $reference;
+        $this->refDate = $refDate ?? $reference?->date;
+
         $this->addTags($tags);
     }
 
@@ -39,6 +60,25 @@ class ParsedResult
             $this->text,
             $this->start->clone(),
             $this->end?->clone(),
+            reference: $this->reference,
+            refDate: $this->refDate,
+        );
+    }
+
+    /**
+     * Return a copy of the result with upstream-style reference metadata.
+     */
+    public function withReference(Reference $reference): self
+    {
+        $this->start->attachReference($reference);
+        $this->end?->attachReference($reference);
+
+        return new self(
+            $this->index,
+            $this->text,
+            $this->start,
+            $this->end,
+            reference: $reference,
         );
     }
 

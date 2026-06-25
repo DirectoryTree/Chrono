@@ -2,7 +2,9 @@
 
 namespace Chrono\Locales\De\Parsers;
 
+use Chrono\Dates;
 use Chrono\Locales\De\CreatesParsedComponents;
+use Chrono\Meridiem;
 use Chrono\Options;
 use Chrono\ParsedComponents;
 use Chrono\ParsedResult;
@@ -79,11 +81,14 @@ class DeCasualDateParser extends AbstractParserWithWordBoundary
                 ->millisecond(0);
         }
 
+        $meridiem = $this->meridiem($word);
+
         $known = [
             'year' => $date->year,
             'month' => $date->month,
             'day' => $date->day,
             ...((($match['hour'][0] ?? '') !== '' || ! in_array($word, ['heute', 'morgen', 'gestern'], true)) ? ['hour' => $date->hour, 'minute' => $date->minute] : []),
+            ...($meridiem !== null ? ['meridiem' => $meridiem->value] : []),
         ];
 
         if ($word === 'jetzt') {
@@ -98,6 +103,11 @@ class DeCasualDateParser extends AbstractParserWithWordBoundary
         }
 
         $components = $this->components($date, $known);
+
+        if (($match['hour'][0] ?? '') === '' && in_array($word, ['heute', 'morgen', 'gestern', 'uebermorgen', 'ubermorgen', 'vorgestern'], true)) {
+            Dates::implySimilarTime($components, $date);
+        }
+
         $components->addTag('parser/DECasualDateParser');
 
         return new ParsedResult($match[0][1], $match[0][0], $components);
@@ -117,5 +127,25 @@ class DeCasualDateParser extends AbstractParserWithWordBoundary
             'Ö' => 'o',
             'Ü' => 'u',
         ]);
+    }
+
+    /**
+     * Resolve a German day period into its meridiem.
+     */
+    protected function meridiem(string $word): ?Meridiem
+    {
+        if (str_ends_with($word, 'morgen') || str_ends_with($word, 'vormittag')) {
+            return Meridiem::AM;
+        }
+
+        if ($word === 'mittags' || $word === 'mitternacht') {
+            return Meridiem::AM;
+        }
+
+        if (str_ends_with($word, 'nachmittag') || str_ends_with($word, 'abend') || ($word !== 'letztenacht' && str_ends_with($word, 'nacht'))) {
+            return Meridiem::PM;
+        }
+
+        return null;
     }
 }

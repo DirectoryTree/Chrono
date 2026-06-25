@@ -32,6 +32,9 @@ jobs:
           tools: composer:v2
           coverage: none
 
+      - name: Validate composer files
+        run: composer validate --strict --no-check-publish
+
       - name: Install dependencies
         run: composer install --prefer-dist --no-interaction --no-progress
 

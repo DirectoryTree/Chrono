@@ -37,11 +37,30 @@ class EnMergeRelativeFollowByDateRefiner extends MergingRefiner
 
         $relative->start
             ->assign('year', $resultDate->year)
-            ->assign('month', $resultDate->month)
-            ->assign('day', $resultDate->day)
+            ->assign('month', $resultDate->month);
+
+        if (str_contains($relative->text, 'month') || str_contains($relative->text, 'year')) {
+            $relative->start
+                ->delete('day')
+                ->imply('day', $resultDate->day);
+        } else {
+            $relative->start->assign('day', $resultDate->day);
+        }
+
+        $relative->start
             ->assign('hour', $resultDate->hour)
             ->assign('minute', $resultDate->minute)
             ->assign('second', $resultDate->second);
+
+        if ($relative->start->get('weekday') !== null) {
+            $weekdayWasCertain = $relative->start->isCertain('weekday');
+
+            $relative->start->delete('weekday');
+
+            $weekdayWasCertain
+                ? $relative->start->assign('weekday', $resultDate->dayOfWeek)
+                : $relative->start->imply('weekday', $resultDate->dayOfWeek);
+        }
 
         $relative->text .= $textBetween.$date->text;
         $relative->addTag('refiner/mergeRelativeFollowByDate');

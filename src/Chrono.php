@@ -30,8 +30,25 @@ class Chrono
      */
     public function __construct(
         protected readonly ChronoEngine $engine = new EnChrono,
+
         protected readonly array $defaultOptions = [],
     ) {}
+
+    /**
+     * Create the default English parser.
+     */
+    public static function english(): self
+    {
+        return new self(new EnChrono);
+    }
+
+    /**
+     * Create the default English parser.
+     */
+    public static function en(): self
+    {
+        return self::english();
+    }
 
     /**
      * Create the default casual English parser.

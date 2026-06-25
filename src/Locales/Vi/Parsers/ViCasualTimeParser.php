@@ -3,6 +3,7 @@
 namespace Chrono\Locales\Vi\Parsers;
 
 use Chrono\Locales\Vi\CreatesParsedComponents;
+use Chrono\Meridiem;
 use Chrono\Options;
 use Chrono\ParsedComponents;
 use Chrono\ParsedResult;
@@ -44,7 +45,9 @@ class ViCasualTimeParser extends AbstractParserWithWordBoundary
         return new ParsedResult($match[0][1], trim($match[0][0]), $this->components($date, [
             'hour' => $hour,
             'minute' => 0,
-        ])->addTag('parser/VICasualTimeParser'));
+        ])
+            ->imply('meridiem', $hour < 12 ? Meridiem::AM->value : Meridiem::PM->value)
+            ->addTag('parser/VICasualTimeParser'));
     }
 
     /**

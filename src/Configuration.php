@@ -12,6 +12,7 @@ class Configuration
      */
     public function __construct(
         public readonly array $parsers = [],
+
         public readonly array $refiners = [],
     ) {}
 

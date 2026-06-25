@@ -135,6 +135,26 @@ class SvConstants
     ];
 
     /**
+     * @var array<string, string>
+     */
+    protected const TIME_UNITS_NO_ABBR = [
+        'sekund' => 'second',
+        'sekunder' => 'second',
+        'minut' => 'minute',
+        'minuter' => 'minute',
+        'timme' => 'hour',
+        'timmar' => 'hour',
+        'dag' => 'day',
+        'dagar' => 'day',
+        'vecka' => 'week',
+        'veckor' => 'week',
+        'månad' => 'month',
+        'månader' => 'month',
+        'år' => 'year',
+        'kvartal' => 'quarter',
+    ];
+
+    /**
      * Build the Swedish weekday pattern.
      */
     public static function weekdayPattern(): string
@@ -164,6 +184,14 @@ class SvConstants
     public static function timeUnitPattern(): string
     {
         return self::pattern(array_keys(self::TIME_UNITS));
+    }
+
+    /**
+     * Build the Swedish unabbreviated time-unit pattern.
+     */
+    public static function timeUnitNoAbbrPattern(): string
+    {
+        return self::pattern(array_keys(self::TIME_UNITS_NO_ABBR));
     }
 
     /**
@@ -198,6 +226,14 @@ class SvConstants
     public static function timeUnit(string $unit): ?string
     {
         return self::TIME_UNITS[mb_strtolower($unit)] ?? null;
+    }
+
+    /**
+     * Resolve an unabbreviated Swedish time-unit token.
+     */
+    public static function timeUnitNoAbbr(string $unit): ?string
+    {
+        return self::TIME_UNITS_NO_ABBR[mb_strtolower($unit)] ?? null;
     }
 
     /**

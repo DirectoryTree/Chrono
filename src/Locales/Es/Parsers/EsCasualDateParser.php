@@ -3,6 +3,7 @@
 namespace Chrono\Locales\Es\Parsers;
 
 use Chrono\Locales\Es\CreatesParsedComponents;
+use Chrono\Meridiem;
 use Chrono\Options;
 use Chrono\ParsedComponents;
 use Chrono\ParsedResult;
@@ -30,6 +31,7 @@ class EsCasualDateParser extends AbstractParserWithWordBoundary
     {
         $word = strtr(mb_strtolower($match['word'][0]), ['Ñ' => 'ñ']);
         $date = $reference->date;
+        $meridiem = null;
 
         if ($word === 'mañana' || $word === 'manana') {
             $date = $date->addDay();
@@ -39,19 +41,25 @@ class EsCasualDateParser extends AbstractParserWithWordBoundary
 
         if (str_contains($word, 'de noche') || $word === 'esta noche') {
             $date = $date->hour(22)->minute(0)->second(0)->millisecond(0);
+            $meridiem = Meridiem::PM;
         } elseif (str_contains($word, 'mañana') || str_contains($word, 'manana')) {
             if (str_starts_with($word, 'esta')) {
                 $date = $date->hour(6)->minute(0)->second(0)->millisecond(0);
+                $meridiem = Meridiem::AM;
             }
         } elseif ($word === 'esta tarde') {
             $date = $date->hour(15)->minute(0)->second(0)->millisecond(0);
+            $meridiem = Meridiem::PM;
         }
 
         if (($match['hour'][0] ?? '') !== '') {
-            $meridiem = ($match['meridiem'][0] ?? '') ?: ($word === 'esta noche' ? 'pm' : null);
+            $explicitMeridiem = ($match['meridiem'][0] ?? '') ?: ($word === 'esta noche' ? 'pm' : null);
+            $meridiem = $explicitMeridiem !== null
+                ? (strtolower($explicitMeridiem) === 'am' ? Meridiem::AM : Meridiem::PM)
+                : $meridiem;
 
             $date = $date
-                ->hour($this->meridiemHour((int) $match['hour'][0], $meridiem))
+                ->hour($this->meridiemHour((int) $match['hour'][0], $explicitMeridiem))
                 ->minute(($match['minute'][0] ?? '') !== '' ? (int) $match['minute'][0] : 0)
                 ->second(0)
                 ->millisecond(0);
@@ -62,6 +70,7 @@ class EsCasualDateParser extends AbstractParserWithWordBoundary
             'month' => $date->month,
             'day' => $date->day,
             ...((($match['hour'][0] ?? '') !== '' || $word === 'esta noche' || str_contains($word, 'de noche') || str_starts_with($word, 'esta ')) ? ['hour' => $date->hour, 'minute' => $date->minute] : []),
+            ...($meridiem !== null ? ['meridiem' => $meridiem->value] : []),
         ];
 
         if ($word === 'ahora') {

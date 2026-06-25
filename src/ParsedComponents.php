@@ -8,6 +8,11 @@ use Chrono\Calculation\Duration;
 class ParsedComponents
 {
     /**
+     * The parse reference used to create these components.
+     */
+    protected ?Reference $reference;
+
+    /**
      * Create parsed date components around a Carbon date.
      *
      * @param  array<string, mixed>  $knownValues
@@ -16,10 +21,17 @@ class ParsedComponents
      */
     public function __construct(
         protected CarbonImmutable $date,
+
         protected array $knownValues = [],
+
         protected array $impliedValues = [],
+
         protected array $tags = [],
+
+        ?Reference $reference = null,
     ) {
+        $this->reference = $reference;
+
         $this->impliedValues = array_replace([
             'year' => $this->date->year,
             'month' => $this->date->month,
@@ -57,7 +69,7 @@ class ParsedComponents
     public static function createRelativeFromReference(Reference $reference, array $duration = Duration::EMPTY): self
     {
         [$date, $duration] = Duration::addWithNormalizedDuration($reference->date, $duration);
-        $components = (new self($reference->date))->addTag('result/relativeDate');
+        $components = (new self($reference->date, reference: $reference))->addTag('result/relativeDate');
 
         if (array_intersect(array_keys($duration), ['hour', 'minute', 'second', 'millisecond']) !== []) {
             $components->addTag('result/relativeDateAndTime');
@@ -109,6 +121,24 @@ class ParsedComponents
     public function date(): CarbonImmutable
     {
         return $this->date;
+    }
+
+    /**
+     * Get the parse reference used to create these components.
+     */
+    public function reference(): ?Reference
+    {
+        return $this->reference;
+    }
+
+    /**
+     * Attach upstream-style reference metadata to these components.
+     */
+    public function attachReference(Reference $reference): self
+    {
+        $this->reference = $reference;
+
+        return $this;
     }
 
     /**
@@ -226,7 +256,7 @@ class ParsedComponents
      */
     public function clone(): self
     {
-        return new self($this->date, $this->knownValues, $this->impliedValues);
+        return new self($this->date, $this->knownValues, $this->impliedValues, reference: $this->reference);
     }
 
     /**
@@ -293,10 +323,22 @@ class ParsedComponents
             return false;
         }
 
-        return $month >= 1
+        if (! ($month >= 1
             && $month <= 12
             && $day >= 1
-            && $day <= $this->daysInMonth($year, $month);
+            && $day <= $this->daysInMonth($year, $month))) {
+            return false;
+        }
+
+        if ($this->date->year !== $year || $this->date->month !== $month || $this->date->day !== $day) {
+            return false;
+        }
+
+        if ($hour !== null && $this->date->hour !== $hour) {
+            return false;
+        }
+
+        return $minute === null || $this->date->minute === $minute;
     }
 
     /**
@@ -352,11 +394,29 @@ class ParsedComponents
         sort($tags);
 
         return sprintf(
-            '[ParsedComponents {tags: %s, knownValues: %s, impliedValues: %s}]',
+            '[ParsedComponents {tags: %s, knownValues: %s, impliedValues: %s, reference: %s}]',
             json_encode($tags, JSON_UNESCAPED_SLASHES),
             json_encode($this->knownValues, JSON_UNESCAPED_SLASHES),
             json_encode($this->impliedValues, JSON_UNESCAPED_SLASHES),
+            json_encode($this->referenceContext(), JSON_UNESCAPED_SLASHES),
         );
+    }
+
+    /**
+     * Get the debug context for the attached reference.
+     *
+     * @return array{instant: string, timezoneOffset: int|null}|null
+     */
+    protected function referenceContext(): ?array
+    {
+        if ($this->reference === null) {
+            return null;
+        }
+
+        return [
+            'instant' => $this->reference->instant->format('Y-m-d H:i:s P'),
+            'timezoneOffset' => $this->reference->timezoneOffset,
+        ];
     }
 
     /**

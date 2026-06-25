@@ -98,7 +98,7 @@ class EnMonthNameLittleEndianParser implements Parser
             ...($yearText !== '' ? ['year' => $year] : []),
             'month' => $month,
             'day' => $day,
-            ...($weekdayText !== '' ? ['weekday' => $date->dayOfWeek] : []),
+            ...($weekdayText !== '' ? ['weekday' => EnConstants::WEEKDAYS[strtolower($weekdayText)]] : []),
         ]));
     }
 

@@ -71,12 +71,16 @@ class DeCasualTimeParser extends AbstractParserWithWordBoundary
 
         $date = $date->hour($hour)->minute(0)->second(0)->millisecond(0);
 
+        $meridiem = in_array($time, ['morgen', 'vormittag', 'mittag', 'mittags', 'mitternacht'], true)
+            ? Meridiem::AM
+            : Meridiem::PM;
+
         return $this->components($date, [
             ...($time === 'mitternacht' ? ['year' => $date->year, 'month' => $date->month, 'day' => $date->day] : []),
             'hour' => $hour,
             'minute' => 0,
             'second' => 0,
-            'meridiem' => $hour < 12 ? Meridiem::AM->value : Meridiem::PM->value,
+            'meridiem' => $meridiem->value,
         ]);
     }
 

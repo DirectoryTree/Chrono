@@ -85,5 +85,8 @@ $britishDate = Chrono::gb()->parseDateText('6/10/2018', '2012-08-10');
 ## Testing
 
 ```bash
+composer validate --strict --no-check-publish
 ./vendor/bin/pest
+./vendor/bin/pint --test
+find src tests -name '*.php' -print0 | xargs -0 -n1 php -l
 ```

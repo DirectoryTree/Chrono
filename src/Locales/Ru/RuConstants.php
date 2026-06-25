@@ -103,7 +103,7 @@ class RuConstants
      */
     public static function numberPattern(): string
     {
-        return self::pattern(array_keys(self::NUMBERS)).'|\d+';
+        return self::pattern(array_keys(self::NUMBERS)).'|[0-9]+|[0-9]+\\.[0-9]+|пол|несколько|пар(?:ы|у)|\\s{0,3}';
     }
 
     /**
@@ -125,9 +125,27 @@ class RuConstants
     /**
      * Normalize a Russian number word or digit string.
      */
-    public static function number(string $number): int
+    public static function number(string $number): int|float
     {
-        return self::NUMBERS[mb_strtolower($number)] ?? (int) $number;
+        $number = mb_strtolower(trim($number));
+
+        if ($number === '') {
+            return 1;
+        }
+
+        if ($number === 'несколько') {
+            return 3;
+        }
+
+        if ($number === 'пол') {
+            return 0.5;
+        }
+
+        if (preg_match('/^пар(?:ы|у)$/u', $number) === 1) {
+            return 2;
+        }
+
+        return self::NUMBERS[$number] ?? (float) $number;
     }
 
     /**
