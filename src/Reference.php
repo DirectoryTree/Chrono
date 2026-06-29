@@ -5,21 +5,19 @@ namespace Chrono;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 
-class Reference
+readonly class Reference
 {
     /**
      * The original reference instant before timezone adjustment.
      */
-    public readonly CarbonImmutable $instant;
+    public CarbonImmutable $instant;
 
     /**
      * Create a reference date wrapper.
      */
     public function __construct(
-        public readonly CarbonImmutable $date,
-
-        public readonly ?int $timezoneOffset = null,
-
+        public CarbonImmutable $date,
+        public ?int $timezoneOffset = null,
         ?CarbonImmutable $instant = null,
     ) {
         $this->instant = $instant ?? $date;
