@@ -4,7 +4,7 @@ namespace Chrono\Locales\Fi;
 
 use Chrono\Pattern;
 
-class FiConstants
+readonly class FiConstants
 {
     /**
      * Finnish weekday names and abbreviations mapped to Carbon weekday indexes.

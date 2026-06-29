@@ -8,7 +8,7 @@ use Chrono\ParsedComponents;
 use Chrono\ParsedResult;
 use Chrono\Reference;
 
-abstract class AbstractMergeDateRangeRefiner extends MergingRefiner
+abstract readonly class AbstractMergeDateRangeRefiner extends MergingRefiner
 {
     /**
      * Get the connector pattern allowed between date range endpoints.

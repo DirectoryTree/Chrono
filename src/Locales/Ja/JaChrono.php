@@ -20,7 +20,7 @@ use Chrono\Refiners\ForwardDateRefiner;
 use Chrono\Refiners\OverlapRemovalRefiner;
 use Chrono\Refiners\UnlikelyFormatFilter;
 
-class JaChrono extends ConfiguredChronoEngine
+readonly class JaChrono extends ConfiguredChronoEngine
 {
     /**
      * Create a configured Japanese Chrono engine.

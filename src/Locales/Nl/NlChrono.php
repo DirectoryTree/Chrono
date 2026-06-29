@@ -29,7 +29,7 @@ use Chrono\Refiners\MergeWeekdayComponentRefiner;
 use Chrono\Refiners\OverlapRemovalRefiner;
 use Chrono\Refiners\UnlikelyFormatFilter;
 
-class NlChrono extends ConfiguredChronoEngine
+readonly class NlChrono extends ConfiguredChronoEngine
 {
     /**
      * Create a configured Dutch Chrono engine.

@@ -7,7 +7,7 @@ use Chrono\ParsedResult;
 use Chrono\Reference;
 use Chrono\Refiner;
 
-abstract class MergingRefiner implements Refiner
+abstract readonly class MergingRefiner implements Refiner
 {
     /**
      * @param  array<int, ParsedResult>  $results

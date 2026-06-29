@@ -4,7 +4,7 @@ namespace Chrono\Locales\Pt;
 
 use Chrono\Pattern;
 
-class PtConstants
+readonly class PtConstants
 {
     /**
      * @var array<string, int>

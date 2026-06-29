@@ -2,7 +2,7 @@
 
 namespace Chrono\Locales\Zh;
 
-class ZhConstants
+readonly class ZhConstants
 {
     /**
      * @var array<string, int>

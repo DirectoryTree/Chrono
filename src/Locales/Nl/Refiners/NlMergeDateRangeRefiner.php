@@ -5,7 +5,7 @@ namespace Chrono\Locales\Nl\Refiners;
 use Chrono\ParsedComponents;
 use Chrono\Refiners\AbstractMergeDateRangeRefiner;
 
-class NlMergeDateRangeRefiner extends AbstractMergeDateRangeRefiner
+readonly class NlMergeDateRangeRefiner extends AbstractMergeDateRangeRefiner
 {
     /**
      * Get the Dutch connector pattern between date range endpoints.

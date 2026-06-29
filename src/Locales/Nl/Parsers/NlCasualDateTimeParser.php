@@ -8,7 +8,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class NlCasualDateTimeParser implements Parser
+readonly class NlCasualDateTimeParser implements Parser
 {
     use CreatesParsedComponents;
 

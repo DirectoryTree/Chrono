@@ -2,7 +2,7 @@
 
 namespace Chrono;
 
-class Configuration
+readonly class Configuration
 {
     /**
      * Create a parser/refiner configuration.

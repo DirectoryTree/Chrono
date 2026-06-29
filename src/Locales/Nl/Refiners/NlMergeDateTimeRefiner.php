@@ -4,7 +4,7 @@ namespace Chrono\Locales\Nl\Refiners;
 
 use Chrono\Refiners\AbstractMergeDateTimeRefiner;
 
-class NlMergeDateTimeRefiner extends AbstractMergeDateTimeRefiner
+readonly class NlMergeDateTimeRefiner extends AbstractMergeDateTimeRefiner
 {
     /**
      * Get the Dutch connector pattern between date and time results.

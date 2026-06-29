@@ -7,7 +7,7 @@ use Chrono\ParsedResult;
 use Chrono\Reference;
 use Chrono\Refiner;
 
-class OverlapRemovalRefiner implements Refiner
+readonly class OverlapRemovalRefiner implements Refiner
 {
     /**
      * @param  array<int, ParsedResult>  $results

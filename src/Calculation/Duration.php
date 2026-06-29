@@ -4,7 +4,7 @@ namespace Chrono\Calculation;
 
 use Carbon\CarbonImmutable;
 
-class Duration
+readonly class Duration
 {
     public const EMPTY = [
         'day' => 0,

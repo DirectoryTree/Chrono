@@ -9,7 +9,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class ItSlashMonthFormatParser implements Parser
+readonly class ItSlashMonthFormatParser implements Parser
 {
     use CreatesParsedComponents;
 

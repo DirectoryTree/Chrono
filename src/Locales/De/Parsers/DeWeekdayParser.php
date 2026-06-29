@@ -11,7 +11,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class DeWeekdayParser implements Parser
+readonly class DeWeekdayParser implements Parser
 {
     /**
      * Parse German weekday expressions.

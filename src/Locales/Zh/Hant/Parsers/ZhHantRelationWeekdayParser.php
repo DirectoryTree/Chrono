@@ -2,7 +2,7 @@
 
 namespace Chrono\Locales\Zh\Hant\Parsers;
 
-class ZhHantRelationWeekdayParser extends ZhHantWeekdayParser
+readonly class ZhHantRelationWeekdayParser extends ZhHantWeekdayParser
 {
     /**
      * Get the parser pattern.

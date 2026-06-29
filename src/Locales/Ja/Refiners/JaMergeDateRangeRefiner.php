@@ -4,7 +4,7 @@ namespace Chrono\Locales\Ja\Refiners;
 
 use Chrono\Refiners\AbstractMergeDateRangeRefiner;
 
-class JaMergeDateRangeRefiner extends AbstractMergeDateRangeRefiner
+readonly class JaMergeDateRangeRefiner extends AbstractMergeDateRangeRefiner
 {
     /**
      * Get the connector pattern allowed between Japanese date range endpoints.

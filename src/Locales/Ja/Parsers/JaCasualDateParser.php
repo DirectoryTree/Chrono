@@ -8,7 +8,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class JaCasualDateParser implements Parser
+readonly class JaCasualDateParser implements Parser
 {
     use CreatesParsedComponents;
 

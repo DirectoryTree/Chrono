@@ -4,7 +4,7 @@ namespace Chrono\Locales\Ja;
 
 use Chrono\Reference;
 
-class JaConstants
+readonly class JaConstants
 {
     /**
      * @var array<string, int>

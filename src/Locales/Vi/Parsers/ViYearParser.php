@@ -10,7 +10,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class ViYearParser implements Parser
+readonly class ViYearParser implements Parser
 {
     use CreatesParsedComponents;
 

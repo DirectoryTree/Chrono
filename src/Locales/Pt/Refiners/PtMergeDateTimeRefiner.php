@@ -7,7 +7,7 @@ use Chrono\ParsedResult;
 use Chrono\Reference;
 use Chrono\Refiners\MergingRefiner;
 
-class PtMergeDateTimeRefiner extends MergingRefiner
+readonly class PtMergeDateTimeRefiner extends MergingRefiner
 {
     /**
      * Determine if a date-only result should merge with a following time-only result.

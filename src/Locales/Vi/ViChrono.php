@@ -26,7 +26,7 @@ use Chrono\Refiners\ForwardDateRefiner;
 use Chrono\Refiners\OverlapRemovalRefiner;
 use Chrono\Refiners\UnlikelyFormatFilter;
 
-class ViChrono extends ConfiguredChronoEngine
+readonly class ViChrono extends ConfiguredChronoEngine
 {
     /**
      * Create a configured Vietnamese Chrono engine.

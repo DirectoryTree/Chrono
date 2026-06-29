@@ -4,7 +4,7 @@ namespace Chrono\Locales\En;
 
 use Chrono\Pattern;
 
-class EnConstants
+readonly class EnConstants
 {
     /**
      * @var array<string, int>

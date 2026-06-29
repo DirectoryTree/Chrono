@@ -7,7 +7,7 @@ use Chrono\ParsedResult;
 use Chrono\Reference;
 use Chrono\Refiners\Filter;
 
-class EnUnlikelyFormatFilter extends Filter
+readonly class EnUnlikelyFormatFilter extends Filter
 {
     /**
      * Determine whether the parsed result is valid.

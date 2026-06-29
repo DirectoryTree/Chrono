@@ -7,7 +7,7 @@ use Chrono\ParsedResult;
 use Chrono\Reference;
 use Chrono\Refiner;
 
-abstract class Filter implements Refiner
+abstract readonly class Filter implements Refiner
 {
     /**
      * @param  array<int, ParsedResult>  $results

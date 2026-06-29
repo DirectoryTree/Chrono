@@ -11,7 +11,7 @@ use Chrono\Parser;
 use Chrono\Parsers\SlashDateFormatParser;
 use Chrono\Reference;
 
-class EnSlashDateParser implements Parser
+readonly class EnSlashDateParser implements Parser
 {
     use CreatesParsedComponents;
 

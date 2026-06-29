@@ -20,7 +20,7 @@ use Chrono\Refiners\MergeWeekdayComponentRefiner;
 use Chrono\Refiners\OverlapRemovalRefiner;
 use Chrono\Refiners\UnlikelyFormatFilter;
 
-class PtChrono extends ConfiguredChronoEngine
+readonly class PtChrono extends ConfiguredChronoEngine
 {
     /**
      * Create a configured Portuguese Chrono engine.

@@ -4,7 +4,7 @@ namespace Chrono\Locales\Uk;
 
 use Chrono\Pattern;
 
-class UkConstants
+readonly class UkConstants
 {
     /**
      * Ukrainian weekday names mapped to Carbon weekday indexes.

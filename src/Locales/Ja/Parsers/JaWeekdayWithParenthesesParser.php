@@ -6,7 +6,7 @@ use Chrono\Options;
 use Chrono\ParsedResult;
 use Chrono\Reference;
 
-class JaWeekdayWithParenthesesParser extends JaWeekdayParser
+readonly class JaWeekdayWithParenthesesParser extends JaWeekdayParser
 {
     /**
      * Parse Japanese weekday references inside parentheses.

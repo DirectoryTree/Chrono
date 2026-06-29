@@ -8,7 +8,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class ItRelativeDateFormatParser implements Parser
+readonly class ItRelativeDateFormatParser implements Parser
 {
     use InteractsWithItalianRelativeDates;
 

@@ -17,7 +17,7 @@ use Chrono\Refiners\MergeWeekdayComponentRefiner;
 use Chrono\Refiners\OverlapRemovalRefiner;
 use Chrono\Refiners\UnlikelyFormatFilter;
 
-class SvChrono extends ConfiguredChronoEngine
+readonly class SvChrono extends ConfiguredChronoEngine
 {
     /**
      * Create a configured Swedish Chrono engine.

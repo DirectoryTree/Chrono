@@ -2,7 +2,7 @@
 
 namespace Chrono;
 
-class Pattern
+readonly class Pattern
 {
     /**
      * Build a regex pattern that matches repeated time-unit fragments.

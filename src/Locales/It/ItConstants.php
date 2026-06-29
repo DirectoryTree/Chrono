@@ -4,7 +4,7 @@ namespace Chrono\Locales\It;
 
 use Chrono\Pattern;
 
-class ItConstants
+readonly class ItConstants
 {
     /**
      * Italian weekday names and abbreviations mapped to Carbon weekday indexes.

@@ -9,7 +9,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class FrIsoDateTimeRangeParser implements Parser
+readonly class FrIsoDateTimeRangeParser implements Parser
 {
     use CreatesParsedComponents;
 

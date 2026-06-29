@@ -4,7 +4,7 @@ namespace Chrono;
 
 use Carbon\CarbonImmutable;
 
-class Dates
+readonly class Dates
 {
     /**
      * Assign date components from a matching Carbon date.

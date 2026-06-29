@@ -7,7 +7,7 @@ use Chrono\Meridiem;
 use Chrono\ParsedComponents;
 use Chrono\ParsedResult;
 
-class MergingCalculation
+readonly class MergingCalculation
 {
     /**
      * Merge date and time parsing results using upstream Chrono's merge semantics.

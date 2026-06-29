@@ -5,7 +5,7 @@ namespace Chrono\Locales\Zh\Hant\Parsers;
 use Chrono\Locales\Zh\Parsers\AbstractZhDateParser;
 use Chrono\Locales\Zh\ZhConstants;
 
-class ZhHantDateParser extends AbstractZhDateParser
+readonly class ZhHantDateParser extends AbstractZhDateParser
 {
     /**
      * Get the localized number map.

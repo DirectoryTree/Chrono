@@ -8,7 +8,7 @@ use Chrono\Reference;
 use Chrono\Refiner;
 use Chrono\Timezone;
 
-class ExtractTimezoneAbbrRefiner implements Refiner
+readonly class ExtractTimezoneAbbrRefiner implements Refiner
 {
     /**
      * @param  array<int, ParsedResult>  $results

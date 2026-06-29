@@ -4,7 +4,7 @@ namespace Chrono\Locales\Uk\Refiners;
 
 use Chrono\Refiners\AbstractMergeDateTimeRefiner;
 
-class UkMergeDateTimeRefiner extends AbstractMergeDateTimeRefiner
+readonly class UkMergeDateTimeRefiner extends AbstractMergeDateTimeRefiner
 {
     /**
      * Get the Ukrainian connector pattern between date and time results.

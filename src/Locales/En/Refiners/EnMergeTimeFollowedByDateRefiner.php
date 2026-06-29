@@ -8,7 +8,7 @@ use Chrono\ParsedResult;
 use Chrono\Reference;
 use Chrono\Refiners\MergingRefiner;
 
-class EnMergeTimeFollowedByDateRefiner extends MergingRefiner
+readonly class EnMergeTimeFollowedByDateRefiner extends MergingRefiner
 {
     use InteractsWithEnglishRefiners;
 

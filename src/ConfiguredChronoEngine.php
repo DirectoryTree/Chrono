@@ -2,7 +2,7 @@
 
 namespace Chrono;
 
-class ConfiguredChronoEngine implements ChronoEngine
+readonly class ConfiguredChronoEngine implements ChronoEngine
 {
     /**
      * Create a Chrono engine from the given configuration.

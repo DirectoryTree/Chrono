@@ -5,7 +5,7 @@ namespace Chrono\Locales\Vi\Refiners;
 use Chrono\ParsedResult;
 use Chrono\Refiners\AbstractMergeDateRangeRefiner;
 
-class ViMergeDateRangeRefiner extends AbstractMergeDateRangeRefiner
+readonly class ViMergeDateRangeRefiner extends AbstractMergeDateRangeRefiner
 {
     /**
      * Get the connector pattern allowed between Vietnamese date range endpoints.

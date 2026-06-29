@@ -9,7 +9,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-abstract class AbstractZhDeadlineFormatParser implements Parser
+abstract readonly class AbstractZhDeadlineFormatParser implements Parser
 {
     use CreatesParsedComponents;
 

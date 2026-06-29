@@ -4,7 +4,7 @@ namespace Chrono\Locales\Zh\Hant\Parsers;
 
 use Chrono\Locales\Zh\Parsers\AbstractZhWeekdayParser;
 
-class ZhHantWeekdayParser extends AbstractZhWeekdayParser
+readonly class ZhHantWeekdayParser extends AbstractZhWeekdayParser
 {
     /**
      * Get the parser pattern.

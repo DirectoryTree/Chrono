@@ -4,7 +4,7 @@ namespace Chrono\Locales\Fi\Refiners;
 
 use Chrono\Refiners\AbstractMergeDateTimeRefiner;
 
-class FiMergeDateTimeRefiner extends AbstractMergeDateTimeRefiner
+readonly class FiMergeDateTimeRefiner extends AbstractMergeDateTimeRefiner
 {
     /**
      * Get the Finnish connector pattern between date and time results.

@@ -11,7 +11,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class EnMonthNameWeekdayParser implements Parser
+readonly class EnMonthNameWeekdayParser implements Parser
 {
     use CreatesParsedComponents;
 

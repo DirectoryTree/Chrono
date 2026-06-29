@@ -11,7 +11,7 @@ use Chrono\ParsedResult;
 use Chrono\Reference;
 use Chrono\Refiner;
 
-class ForwardDateRefiner implements Refiner
+readonly class ForwardDateRefiner implements Refiner
 {
     /**
      * @param  array<int, ParsedResult>  $results

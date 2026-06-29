@@ -7,7 +7,7 @@ use Chrono\Options;
 use Chrono\ParsedResult;
 use Chrono\Reference;
 
-abstract class AbstractMergeDateTimeRefiner extends MergingRefiner
+abstract readonly class AbstractMergeDateTimeRefiner extends MergingRefiner
 {
     /**
      * Get the connector pattern allowed between date and time results.

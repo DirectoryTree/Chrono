@@ -4,7 +4,7 @@ namespace Chrono\Locales\It\Refiners;
 
 use Chrono\Refiners\AbstractMergeDateTimeRefiner;
 
-class ItMergeDateTimeRefiner extends AbstractMergeDateTimeRefiner
+readonly class ItMergeDateTimeRefiner extends AbstractMergeDateTimeRefiner
 {
     /**
      * Get the Italian connector pattern between date and time results.

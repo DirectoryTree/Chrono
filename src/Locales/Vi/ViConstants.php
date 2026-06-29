@@ -4,7 +4,7 @@ namespace Chrono\Locales\Vi;
 
 use Chrono\Pattern;
 
-class ViConstants
+readonly class ViConstants
 {
     /**
      * @var array<string, int>

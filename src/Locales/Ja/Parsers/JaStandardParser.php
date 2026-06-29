@@ -10,7 +10,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class JaStandardParser implements Parser
+readonly class JaStandardParser implements Parser
 {
     use CreatesParsedComponents;
 

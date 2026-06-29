@@ -11,7 +11,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class ViStandardParser implements Parser
+readonly class ViStandardParser implements Parser
 {
     use CreatesParsedComponents;
 

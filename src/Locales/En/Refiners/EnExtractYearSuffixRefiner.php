@@ -8,7 +8,7 @@ use Chrono\ParsedResult;
 use Chrono\Reference;
 use Chrono\Refiner;
 
-class EnExtractYearSuffixRefiner implements Refiner
+readonly class EnExtractYearSuffixRefiner implements Refiner
 {
     /**
      * Extract explicit year suffixes into date results with unknown years.

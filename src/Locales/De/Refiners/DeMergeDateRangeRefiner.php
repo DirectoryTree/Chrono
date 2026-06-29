@@ -4,7 +4,7 @@ namespace Chrono\Locales\De\Refiners;
 
 use Chrono\Refiners\AbstractMergeDateRangeRefiner;
 
-class DeMergeDateRangeRefiner extends AbstractMergeDateRangeRefiner
+readonly class DeMergeDateRangeRefiner extends AbstractMergeDateRangeRefiner
 {
     /**
      * Get the connector pattern allowed between parsed results.

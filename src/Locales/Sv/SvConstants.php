@@ -4,7 +4,7 @@ namespace Chrono\Locales\Sv;
 
 use Chrono\Pattern;
 
-class SvConstants
+readonly class SvConstants
 {
     /**
      * @var array<string, int>

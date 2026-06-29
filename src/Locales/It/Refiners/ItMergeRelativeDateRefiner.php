@@ -8,7 +8,7 @@ use Chrono\ParsedResult;
 use Chrono\Reference;
 use Chrono\Refiners\MergingRefiner;
 
-class ItMergeRelativeDateRefiner extends MergingRefiner
+readonly class ItMergeRelativeDateRefiner extends MergingRefiner
 {
     use InteractsWithItalianRelativeDates;
 

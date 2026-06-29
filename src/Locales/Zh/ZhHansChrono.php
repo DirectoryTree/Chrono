@@ -19,7 +19,7 @@ use Chrono\Refiners\MergeWeekdayComponentRefiner;
 use Chrono\Refiners\OverlapRemovalRefiner;
 use Chrono\Refiners\UnlikelyFormatFilter;
 
-class ZhHansChrono extends ConfiguredChronoEngine
+readonly class ZhHansChrono extends ConfiguredChronoEngine
 {
     /**
      * Create a configured simplified Chinese Chrono engine.

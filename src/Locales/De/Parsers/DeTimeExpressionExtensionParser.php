@@ -11,7 +11,7 @@ use Chrono\Parser;
 use Chrono\Reference;
 use Chrono\Refiners\ExtractTimezoneRefiner;
 
-class DeTimeExpressionExtensionParser implements Parser
+readonly class DeTimeExpressionExtensionParser implements Parser
 {
     use CreatesParsedComponents;
 

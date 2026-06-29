@@ -4,7 +4,7 @@ namespace Chrono\Locales\En\Refiners;
 
 use Chrono\Refiners\AbstractMergeDateRangeRefiner;
 
-class EnMergeDateRangeRefiner extends AbstractMergeDateRangeRefiner
+readonly class EnMergeDateRangeRefiner extends AbstractMergeDateRangeRefiner
 {
     use InteractsWithEnglishRefiners;
 

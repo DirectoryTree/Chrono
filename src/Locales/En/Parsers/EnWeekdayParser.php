@@ -9,7 +9,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class EnWeekdayParser implements Parser
+readonly class EnWeekdayParser implements Parser
 {
     /**
      * Parse English weekday references.

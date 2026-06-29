@@ -10,7 +10,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class JaSlashDateFormatParser implements Parser
+readonly class JaSlashDateFormatParser implements Parser
 {
     use CreatesParsedComponents;
 

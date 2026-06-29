@@ -23,7 +23,7 @@ use Chrono\Refiners\MergeWeekdayComponentRefiner;
 use Chrono\Refiners\OverlapRemovalRefiner;
 use Chrono\Refiners\UnlikelyFormatFilter;
 
-class FiChrono extends ConfiguredChronoEngine
+readonly class FiChrono extends ConfiguredChronoEngine
 {
     /**
      * Create a configured Finnish Chrono engine.

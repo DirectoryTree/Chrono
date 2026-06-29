@@ -9,7 +9,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class NativeDateFormatParser implements Parser
+readonly class NativeDateFormatParser implements Parser
 {
     use CreatesParsedComponents;
 

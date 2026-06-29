@@ -24,7 +24,7 @@ use Chrono\Refiners\MergeWeekdayComponentRefiner;
 use Chrono\Refiners\OverlapRemovalRefiner;
 use Chrono\Refiners\UnlikelyFormatFilter;
 
-class EsChrono extends ConfiguredChronoEngine
+readonly class EsChrono extends ConfiguredChronoEngine
 {
     /**
      * Create a configured Spanish Chrono engine.

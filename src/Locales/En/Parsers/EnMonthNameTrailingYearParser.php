@@ -12,7 +12,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class EnMonthNameTrailingYearParser implements Parser
+readonly class EnMonthNameTrailingYearParser implements Parser
 {
     use CreatesParsedComponents;
 

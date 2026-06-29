@@ -2,7 +2,7 @@
 
 namespace Chrono;
 
-class Options
+readonly class Options
 {
     /**
      * Create a parser options bag.

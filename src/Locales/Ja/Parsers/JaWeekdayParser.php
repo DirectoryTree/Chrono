@@ -9,7 +9,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class JaWeekdayParser implements Parser
+readonly class JaWeekdayParser implements Parser
 {
     /**
      * Parse Japanese weekday references.

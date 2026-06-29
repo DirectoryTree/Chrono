@@ -7,7 +7,7 @@ use Chrono\ParsedResult;
 use Chrono\Reference;
 use Chrono\Refiner;
 
-class ExtractTimezoneOffsetRefiner implements Refiner
+readonly class ExtractTimezoneOffsetRefiner implements Refiner
 {
     /**
      * @param  array<int, ParsedResult>  $results

@@ -4,7 +4,7 @@ namespace Chrono\Locales\Pt\Refiners;
 
 use Chrono\Refiners\AbstractMergeDateRangeRefiner;
 
-class PtMergeDateRangeRefiner extends AbstractMergeDateRangeRefiner
+readonly class PtMergeDateRangeRefiner extends AbstractMergeDateRangeRefiner
 {
     /**
      * Get the Portuguese connector pattern between date range endpoints.

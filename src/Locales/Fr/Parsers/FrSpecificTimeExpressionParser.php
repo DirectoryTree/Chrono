@@ -9,7 +9,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class FrSpecificTimeExpressionParser implements Parser
+readonly class FrSpecificTimeExpressionParser implements Parser
 {
     use CreatesParsedComponents;
 

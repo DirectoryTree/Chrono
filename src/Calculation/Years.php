@@ -4,7 +4,7 @@ namespace Chrono\Calculation;
 
 use Carbon\CarbonImmutable;
 
-class Years
+readonly class Years
 {
     /**
      * Find the most likely AD year from a raw number.

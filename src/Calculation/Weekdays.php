@@ -7,7 +7,7 @@ use Chrono\ParsedComponents;
 use Chrono\Reference;
 use Chrono\Weekday;
 
-class Weekdays
+readonly class Weekdays
 {
     /**
      * Create parsing components at the requested weekday.

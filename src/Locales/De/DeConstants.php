@@ -4,7 +4,7 @@ namespace Chrono\Locales\De;
 
 use Chrono\Pattern;
 
-class DeConstants
+readonly class DeConstants
 {
     /**
      * The German month dictionary.

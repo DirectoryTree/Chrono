@@ -8,7 +8,7 @@ use Chrono\ParsedResult;
 use Chrono\Reference;
 use Chrono\Refiners\MergingRefiner;
 
-class JaMergeDateTimeRefiner extends MergingRefiner
+readonly class JaMergeDateTimeRefiner extends MergingRefiner
 {
     /**
      * Determine whether the parsed results should be merged.

@@ -30,7 +30,7 @@ use Chrono\Refiners\MergeWeekdayComponentRefiner;
 use Chrono\Refiners\OverlapRemovalRefiner;
 use Chrono\Refiners\UnlikelyFormatFilter;
 
-class ItChrono extends ConfiguredChronoEngine
+readonly class ItChrono extends ConfiguredChronoEngine
 {
     /**
      * Create a configured Italian Chrono engine.

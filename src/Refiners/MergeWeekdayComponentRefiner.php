@@ -6,7 +6,7 @@ use Chrono\Options;
 use Chrono\ParsedResult;
 use Chrono\Reference;
 
-class MergeWeekdayComponentRefiner extends MergingRefiner
+readonly class MergeWeekdayComponentRefiner extends MergingRefiner
 {
     /**
      * Determine whether the parsed results should be merged.

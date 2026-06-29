@@ -9,7 +9,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class ViTimeExpressionParser implements Parser
+readonly class ViTimeExpressionParser implements Parser
 {
     /**
      * Parse Vietnamese numeric time expressions.

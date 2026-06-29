@@ -11,7 +11,7 @@ use Chrono\Reference;
 use Chrono\Refiners\MergingRefiner;
 use Chrono\Timezone;
 
-class EnMergeDateTimeRefiner extends MergingRefiner
+readonly class EnMergeDateTimeRefiner extends MergingRefiner
 {
     use InteractsWithEnglishRefiners;
 

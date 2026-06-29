@@ -10,7 +10,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class EsScheduleDateTimeParser implements Parser
+readonly class EsScheduleDateTimeParser implements Parser
 {
     use CreatesParsedComponents;
 

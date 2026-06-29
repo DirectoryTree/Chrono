@@ -5,7 +5,7 @@ namespace Chrono\Locales\Zh\Hant\Parsers;
 use Chrono\Locales\Zh\Parsers\AbstractZhDeadlineFormatParser;
 use Chrono\Locales\Zh\ZhConstants;
 
-class ZhHantDeadlineFormatParser extends AbstractZhDeadlineFormatParser
+readonly class ZhHantDeadlineFormatParser extends AbstractZhDeadlineFormatParser
 {
     /**
      * Get the localized number map.

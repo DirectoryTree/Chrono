@@ -7,7 +7,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class EnRelativeDateFormatParser implements Parser
+readonly class EnRelativeDateFormatParser implements Parser
 {
     use InteractsWithRelativeDates;
 

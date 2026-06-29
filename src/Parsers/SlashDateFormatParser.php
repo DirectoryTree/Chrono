@@ -10,7 +10,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class SlashDateFormatParser implements Parser
+readonly class SlashDateFormatParser implements Parser
 {
     use CreatesParsedComponents;
 

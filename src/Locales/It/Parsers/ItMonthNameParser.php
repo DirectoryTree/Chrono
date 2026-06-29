@@ -11,7 +11,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class ItMonthNameParser implements Parser
+readonly class ItMonthNameParser implements Parser
 {
     use CreatesParsedComponents;
 

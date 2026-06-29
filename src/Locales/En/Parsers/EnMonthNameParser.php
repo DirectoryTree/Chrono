@@ -11,7 +11,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class EnMonthNameParser implements Parser
+readonly class EnMonthNameParser implements Parser
 {
     use CreatesParsedComponents;
 

@@ -4,7 +4,7 @@ namespace Chrono\Locales\Es\Refiners;
 
 use Chrono\Refiners\AbstractMergeDateRangeRefiner;
 
-class EsMergeDateRangeRefiner extends AbstractMergeDateRangeRefiner
+readonly class EsMergeDateRangeRefiner extends AbstractMergeDateRangeRefiner
 {
     /**
      * Get the Spanish connector pattern between date range endpoints.

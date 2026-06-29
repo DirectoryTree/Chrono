@@ -9,7 +9,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class RuRelativeDateFormatParser implements Parser
+readonly class RuRelativeDateFormatParser implements Parser
 {
     use InteractsWithRussianRelativeDates;
 

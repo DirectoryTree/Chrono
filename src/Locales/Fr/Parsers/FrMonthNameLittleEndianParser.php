@@ -12,7 +12,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class FrMonthNameLittleEndianParser implements Parser
+readonly class FrMonthNameLittleEndianParser implements Parser
 {
     use CreatesParsedComponents;
 

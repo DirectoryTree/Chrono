@@ -6,7 +6,7 @@ use Chrono\Options;
 use Chrono\ParsedResult;
 use Chrono\Reference;
 
-class UnlikelyFormatFilter extends Filter
+readonly class UnlikelyFormatFilter extends Filter
 {
     /**
      * Create an unlikely-format result filter.

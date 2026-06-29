@@ -10,7 +10,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class ItCasualYearMonthDayParser implements Parser
+readonly class ItCasualYearMonthDayParser implements Parser
 {
     use CreatesParsedComponents;
 

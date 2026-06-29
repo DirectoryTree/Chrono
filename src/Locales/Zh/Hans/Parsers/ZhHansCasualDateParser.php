@@ -4,7 +4,7 @@ namespace Chrono\Locales\Zh\Hans\Parsers;
 
 use Chrono\Locales\Zh\Parsers\AbstractZhCasualDateParser;
 
-class ZhHansCasualDateParser extends AbstractZhCasualDateParser
+readonly class ZhHansCasualDateParser extends AbstractZhCasualDateParser
 {
     /**
      * Get the parser pattern.

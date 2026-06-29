@@ -7,7 +7,7 @@ use Chrono\ParsedResult;
 use Chrono\Reference;
 use Chrono\Refiners\MergingRefiner;
 
-class EnMergeSpecificDateIntoTimeRangeRefiner extends MergingRefiner
+readonly class EnMergeSpecificDateIntoTimeRangeRefiner extends MergingRefiner
 {
     use InteractsWithEnglishRefiners;
 

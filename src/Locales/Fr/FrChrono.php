@@ -26,7 +26,7 @@ use Chrono\Refiners\MergeWeekdayComponentRefiner;
 use Chrono\Refiners\OverlapRemovalRefiner;
 use Chrono\Refiners\UnlikelyFormatFilter;
 
-class FrChrono extends ConfiguredChronoEngine
+readonly class FrChrono extends ConfiguredChronoEngine
 {
     /**
      * Create a configured French Chrono engine.

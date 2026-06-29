@@ -8,7 +8,7 @@ use Chrono\ParsedResult;
 use Chrono\Reference;
 use Chrono\Refiners\MergingRefiner;
 
-class FrMergeDateTimeRefiner extends MergingRefiner
+readonly class FrMergeDateTimeRefiner extends MergingRefiner
 {
     /**
      * Determine whether the parsed results should be merged.

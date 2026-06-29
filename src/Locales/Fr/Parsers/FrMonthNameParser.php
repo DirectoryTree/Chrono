@@ -10,7 +10,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class FrMonthNameParser implements Parser
+readonly class FrMonthNameParser implements Parser
 {
     use CreatesParsedComponents;
 

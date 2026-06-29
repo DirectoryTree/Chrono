@@ -4,7 +4,7 @@ namespace Chrono\Locales\Vi\Refiners;
 
 use Chrono\Refiners\AbstractMergeDateTimeRefiner;
 
-class ViMergeDateTimeRefiner extends AbstractMergeDateTimeRefiner
+readonly class ViMergeDateTimeRefiner extends AbstractMergeDateTimeRefiner
 {
     /**
      * Get the connector pattern allowed between parsed results.

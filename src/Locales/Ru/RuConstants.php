@@ -4,7 +4,7 @@ namespace Chrono\Locales\Ru;
 
 use Chrono\Pattern;
 
-class RuConstants
+readonly class RuConstants
 {
     /**
      * Russian weekday names mapped to Carbon weekday indexes.

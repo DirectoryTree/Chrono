@@ -4,7 +4,7 @@ namespace Chrono\Locales\Fr;
 
 use Chrono\Pattern;
 
-class FrConstants
+readonly class FrConstants
 {
     /**
      * The French month dictionary.

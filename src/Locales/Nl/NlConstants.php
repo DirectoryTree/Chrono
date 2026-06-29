@@ -4,7 +4,7 @@ namespace Chrono\Locales\Nl;
 
 use Chrono\Pattern;
 
-class NlConstants
+readonly class NlConstants
 {
     /**
      * Dutch weekday names and abbreviations mapped to Carbon weekday indexes.

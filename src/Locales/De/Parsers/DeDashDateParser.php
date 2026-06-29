@@ -9,7 +9,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class DeDashDateParser implements Parser
+readonly class DeDashDateParser implements Parser
 {
     use CreatesParsedComponents;
 

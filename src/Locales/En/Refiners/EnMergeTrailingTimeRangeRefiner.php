@@ -8,7 +8,7 @@ use Chrono\ParsedResult;
 use Chrono\Reference;
 use Chrono\Refiner;
 
-class EnMergeTrailingTimeRangeRefiner implements Refiner
+readonly class EnMergeTrailingTimeRangeRefiner implements Refiner
 {
     use InteractsWithEnglishRefiners;
 

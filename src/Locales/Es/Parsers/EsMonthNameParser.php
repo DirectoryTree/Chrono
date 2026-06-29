@@ -10,7 +10,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class EsMonthNameParser implements Parser
+readonly class EsMonthNameParser implements Parser
 {
     use CreatesParsedComponents;
 

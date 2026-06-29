@@ -21,7 +21,7 @@ use Chrono\Locales\Zh\ZhChrono;
 use Chrono\Locales\Zh\ZhHansChrono;
 use Chrono\Locales\Zh\ZhHantChrono;
 
-class Chrono
+readonly class Chrono
 {
     /**
      * Create a Chrono facade around the given parsing engine.

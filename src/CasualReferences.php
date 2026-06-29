@@ -2,7 +2,7 @@
 
 namespace Chrono;
 
-class CasualReferences
+readonly class CasualReferences
 {
     /**
      * Create components for the current reference moment.

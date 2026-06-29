@@ -11,7 +11,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class DeSpecificTimeExpressionParser implements Parser
+readonly class DeSpecificTimeExpressionParser implements Parser
 {
     use CreatesParsedComponents;
 

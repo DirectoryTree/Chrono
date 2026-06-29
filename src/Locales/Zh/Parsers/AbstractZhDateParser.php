@@ -10,7 +10,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-abstract class AbstractZhDateParser implements Parser
+abstract readonly class AbstractZhDateParser implements Parser
 {
     use CreatesParsedComponents;
 

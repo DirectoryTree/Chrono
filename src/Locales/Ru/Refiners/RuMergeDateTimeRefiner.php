@@ -4,7 +4,7 @@ namespace Chrono\Locales\Ru\Refiners;
 
 use Chrono\Refiners\AbstractMergeDateTimeRefiner;
 
-class RuMergeDateTimeRefiner extends AbstractMergeDateTimeRefiner
+readonly class RuMergeDateTimeRefiner extends AbstractMergeDateTimeRefiner
 {
     /**
      * Get the Russian connector pattern between date and time results.

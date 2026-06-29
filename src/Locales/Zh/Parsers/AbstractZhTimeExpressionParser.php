@@ -11,7 +11,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-abstract class AbstractZhTimeExpressionParser implements Parser
+abstract readonly class AbstractZhTimeExpressionParser implements Parser
 {
     /**
      * @return array<string, int>

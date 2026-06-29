@@ -10,7 +10,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-abstract class AbstractZhWeekdayParser implements Parser
+abstract readonly class AbstractZhWeekdayParser implements Parser
 {
     abstract protected function pattern(): string;
 

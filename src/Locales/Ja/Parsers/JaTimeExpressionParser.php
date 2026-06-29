@@ -10,7 +10,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class JaTimeExpressionParser implements Parser
+readonly class JaTimeExpressionParser implements Parser
 {
     /**
      * Parse Japanese time expressions and ranges.

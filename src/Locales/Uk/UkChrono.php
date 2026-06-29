@@ -25,7 +25,7 @@ use Chrono\Refiners\MergeWeekdayComponentRefiner;
 use Chrono\Refiners\OverlapRemovalRefiner;
 use Chrono\Refiners\UnlikelyFormatFilter;
 
-class UkChrono extends ConfiguredChronoEngine
+readonly class UkChrono extends ConfiguredChronoEngine
 {
     /**
      * Create a configured Ukrainian Chrono engine.

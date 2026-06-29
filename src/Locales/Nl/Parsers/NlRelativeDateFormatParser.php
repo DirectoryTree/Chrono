@@ -8,7 +8,7 @@ use Chrono\ParsedResult;
 use Chrono\Parser;
 use Chrono\Reference;
 
-class NlRelativeDateFormatParser implements Parser
+readonly class NlRelativeDateFormatParser implements Parser
 {
     use InteractsWithDutchRelativeDates;
 

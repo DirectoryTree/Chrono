@@ -4,7 +4,7 @@ namespace Chrono;
 
 use Carbon\CarbonImmutable;
 
-class Timezone
+readonly class Timezone
 {
     /**
      * @var array<string, int|string>

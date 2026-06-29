@@ -4,7 +4,7 @@ namespace Chrono\Locales\Es;
 
 use Chrono\Pattern;
 
-class EsConstants
+readonly class EsConstants
 {
     /**
      * @var array<string, int>
