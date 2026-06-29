@@ -1,47 +1,29 @@
-name: Fix Style
+name: fix-style
 
 on:
   push:
-    branches:
-      - master
+    paths:
+      - '**.php'
   workflow_dispatch:
 
 permissions:
   contents: write
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
-  fix-style:
-    name: Fix Style
+  php-code-styling:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
 
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.head_ref }}
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      - name: Fix PHP code style issues
+        uses: aglipanci/laravel-pint-action@2.5
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          php-version: '8.4'
-          tools: composer:v2
-          coverage: none
-
-      - name: Validate composer files
-        run: composer validate --strict --no-check-publish
-
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-interaction --no-progress
-
-      - name: Run Pint
-        run: ./vendor/bin/pint
-
-      - name: Commit style fixes
-        uses: stefanzweifel/git-auto-commit-action@v6
-        with:
-          commit_message: Fix code style
+          commit_message: Fix styling
