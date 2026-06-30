@@ -99,6 +99,7 @@ use DirectoryTree\Chrono\Reference;
 use DirectoryTree\Chrono\Refiner;
 use DirectoryTree\Chrono\Refiners\ExtractTimezoneAbbrRefiner;
 use DirectoryTree\Chrono\Refiners\ExtractTimezoneOffsetRefiner;
+use DirectoryTree\Chrono\Refiners\ForwardDateRefiner;
 use DirectoryTree\Chrono\Refiners\MergeWeekdayComponentRefiner;
 use DirectoryTree\Chrono\Refiners\OverlapRemovalRefiner;
 use DirectoryTree\Chrono\Weekday;
@@ -134,12 +135,12 @@ it('exposes source-shaped public parsing entrypoints', function () {
 });
 
 it('exposes source-shaped strict locale configurations separately from PHP extensions', function () {
-    $spanishParsers = array_map(fn (object $parser): string => $parser::class, EsChrono::createStrictConfiguration()->parsers);
-    $spanishRefiners = array_map(fn (object $refiner): string => $refiner::class, EsChrono::createStrictConfiguration()->refiners);
-    $germanParsers = array_map(fn (object $parser): string => $parser::class, DeChrono::createStrictConfiguration()->parsers);
-    $germanRefiners = array_map(fn (object $refiner): string => $refiner::class, DeChrono::createStrictConfiguration()->refiners);
-    $frenchParsers = array_map(fn (object $parser): string => $parser::class, FrChrono::createStrictConfiguration()->parsers);
-    $frenchRefiners = array_map(fn (object $refiner): string => $refiner::class, FrChrono::createStrictConfiguration()->refiners);
+    $spanishParsers = array_map(fn (object $parser): string => $parser::class, EsChrono::createStrictConfiguration()->parsers());
+    $spanishRefiners = array_map(fn (object $refiner): string => $refiner::class, EsChrono::createStrictConfiguration()->refiners());
+    $germanParsers = array_map(fn (object $parser): string => $parser::class, DeChrono::createStrictConfiguration()->parsers());
+    $germanRefiners = array_map(fn (object $refiner): string => $refiner::class, DeChrono::createStrictConfiguration()->refiners());
+    $frenchParsers = array_map(fn (object $parser): string => $parser::class, FrChrono::createStrictConfiguration()->parsers());
+    $frenchRefiners = array_map(fn (object $refiner): string => $refiner::class, FrChrono::createStrictConfiguration()->refiners());
     $resultTags = function (array $results): array {
         return array_values(array_unique(array_merge(...array_map(
             fn (ParsedResult $result): array => [
@@ -209,7 +210,7 @@ it('exposes source-shaped strict locale configurations separately from PHP exten
 });
 
 it('exposes source-shaped English refiner ordering around common configuration', function () {
-    $refiners = array_map(fn (object $refiner): string => $refiner::class, EnChrono::createStrictConfiguration()->refiners);
+    $refiners = array_map(fn (object $refiner): string => $refiner::class, EnChrono::createStrictConfiguration()->refiners());
     $timezoneAbbrIndexes = array_keys($refiners, ExtractTimezoneAbbrRefiner::class, true);
     $lateTimezoneAbbrIndex = end($timezoneAbbrIndexes);
 
@@ -233,12 +234,12 @@ it('exposes source-shaped English refiner ordering around common configuration',
 });
 
 it('exposes source-shaped strict configurations for Finnish Portuguese and Swedish', function () {
-    $finnishParsers = array_map(fn (object $parser): string => $parser::class, FiChrono::createStrictConfiguration()->parsers);
-    $finnishRefiners = array_map(fn (object $refiner): string => $refiner::class, FiChrono::createStrictConfiguration()->refiners);
-    $portugueseParsers = array_map(fn (object $parser): string => $parser::class, PtChrono::createStrictConfiguration()->parsers);
-    $portugueseRefiners = array_map(fn (object $refiner): string => $refiner::class, PtChrono::createStrictConfiguration()->refiners);
-    $swedishParsers = array_map(fn (object $parser): string => $parser::class, SvChrono::createStrictConfiguration()->parsers);
-    $swedishRefiners = array_map(fn (object $refiner): string => $refiner::class, SvChrono::createStrictConfiguration()->refiners);
+    $finnishParsers = array_map(fn (object $parser): string => $parser::class, FiChrono::createStrictConfiguration()->parsers());
+    $finnishRefiners = array_map(fn (object $refiner): string => $refiner::class, FiChrono::createStrictConfiguration()->refiners());
+    $portugueseParsers = array_map(fn (object $parser): string => $parser::class, PtChrono::createStrictConfiguration()->parsers());
+    $portugueseRefiners = array_map(fn (object $refiner): string => $refiner::class, PtChrono::createStrictConfiguration()->refiners());
+    $swedishParsers = array_map(fn (object $parser): string => $parser::class, SvChrono::createStrictConfiguration()->parsers());
+    $swedishRefiners = array_map(fn (object $refiner): string => $refiner::class, SvChrono::createStrictConfiguration()->refiners());
 
     expect($finnishParsers)
         ->toContain(FiMonthNameLittleEndianParser::class)
@@ -292,18 +293,18 @@ it('exposes source-shaped strict configurations for Finnish Portuguese and Swedi
 });
 
 it('exposes source-shaped strict configurations for remaining locale engines', function () {
-    $italianParsers = array_map(fn (object $parser): string => $parser::class, ItChrono::createStrictConfiguration()->parsers);
-    $italianRefiners = array_map(fn (object $refiner): string => $refiner::class, ItChrono::createStrictConfiguration()->refiners);
-    $dutchParsers = array_map(fn (object $parser): string => $parser::class, NlChrono::createStrictConfiguration()->parsers);
-    $dutchRefiners = array_map(fn (object $refiner): string => $refiner::class, NlChrono::createStrictConfiguration()->refiners);
-    $russianParsers = array_map(fn (object $parser): string => $parser::class, RuChrono::createStrictConfiguration()->parsers);
-    $russianRefiners = array_map(fn (object $refiner): string => $refiner::class, RuChrono::createStrictConfiguration()->refiners);
-    $ukrainianParsers = array_map(fn (object $parser): string => $parser::class, UkChrono::createStrictConfiguration()->parsers);
-    $ukrainianRefiners = array_map(fn (object $refiner): string => $refiner::class, UkChrono::createStrictConfiguration()->refiners);
-    $japaneseParsers = array_map(fn (object $parser): string => $parser::class, JaChrono::createStrictConfiguration()->parsers);
-    $japaneseRefiners = array_map(fn (object $refiner): string => $refiner::class, JaChrono::createStrictConfiguration()->refiners);
-    $vietnameseParsers = array_map(fn (object $parser): string => $parser::class, ViChrono::createStrictConfiguration()->parsers);
-    $vietnameseRefiners = array_map(fn (object $refiner): string => $refiner::class, ViChrono::createStrictConfiguration()->refiners);
+    $italianParsers = array_map(fn (object $parser): string => $parser::class, ItChrono::createStrictConfiguration()->parsers());
+    $italianRefiners = array_map(fn (object $refiner): string => $refiner::class, ItChrono::createStrictConfiguration()->refiners());
+    $dutchParsers = array_map(fn (object $parser): string => $parser::class, NlChrono::createStrictConfiguration()->parsers());
+    $dutchRefiners = array_map(fn (object $refiner): string => $refiner::class, NlChrono::createStrictConfiguration()->refiners());
+    $russianParsers = array_map(fn (object $parser): string => $parser::class, RuChrono::createStrictConfiguration()->parsers());
+    $russianRefiners = array_map(fn (object $refiner): string => $refiner::class, RuChrono::createStrictConfiguration()->refiners());
+    $ukrainianParsers = array_map(fn (object $parser): string => $parser::class, UkChrono::createStrictConfiguration()->parsers());
+    $ukrainianRefiners = array_map(fn (object $refiner): string => $refiner::class, UkChrono::createStrictConfiguration()->refiners());
+    $japaneseParsers = array_map(fn (object $parser): string => $parser::class, JaChrono::createStrictConfiguration()->parsers());
+    $japaneseRefiners = array_map(fn (object $refiner): string => $refiner::class, JaChrono::createStrictConfiguration()->refiners());
+    $vietnameseParsers = array_map(fn (object $parser): string => $parser::class, ViChrono::createStrictConfiguration()->parsers());
+    $vietnameseRefiners = array_map(fn (object $refiner): string => $refiner::class, ViChrono::createStrictConfiguration()->refiners());
 
     expect($italianParsers)
         ->toContain(IsoFormatParser::class)
@@ -409,15 +410,15 @@ it('exposes source-shaped strict configurations for remaining locale engines', f
 });
 
 it('exposes source-shaped strict configurations for Chinese engines', function () {
-    $chineseParsers = array_map(fn (object $parser): string => $parser::class, ZhChrono::createStrictConfiguration()->parsers);
-    $chineseCasualParsers = array_map(fn (object $parser): string => $parser::class, ZhChrono::createCasualConfiguration()->parsers);
-    $chineseRefiners = array_map(fn (object $refiner): string => $refiner::class, ZhChrono::createStrictConfiguration()->refiners);
-    $hansParsers = array_map(fn (object $parser): string => $parser::class, ZhHansChrono::createStrictConfiguration()->parsers);
-    $hansCasualParsers = array_map(fn (object $parser): string => $parser::class, ZhHansChrono::createCasualConfiguration()->parsers);
-    $hansRefiners = array_map(fn (object $refiner): string => $refiner::class, ZhHansChrono::createStrictConfiguration()->refiners);
-    $hantParsers = array_map(fn (object $parser): string => $parser::class, ZhHantChrono::createStrictConfiguration()->parsers);
-    $hantCasualParsers = array_map(fn (object $parser): string => $parser::class, ZhHantChrono::createCasualConfiguration()->parsers);
-    $hantRefiners = array_map(fn (object $refiner): string => $refiner::class, ZhHantChrono::createStrictConfiguration()->refiners);
+    $chineseParsers = array_map(fn (object $parser): string => $parser::class, ZhChrono::createStrictConfiguration()->parsers());
+    $chineseCasualParsers = array_map(fn (object $parser): string => $parser::class, ZhChrono::createCasualConfiguration()->parsers());
+    $chineseRefiners = array_map(fn (object $refiner): string => $refiner::class, ZhChrono::createStrictConfiguration()->refiners());
+    $hansParsers = array_map(fn (object $parser): string => $parser::class, ZhHansChrono::createStrictConfiguration()->parsers());
+    $hansCasualParsers = array_map(fn (object $parser): string => $parser::class, ZhHansChrono::createCasualConfiguration()->parsers());
+    $hansRefiners = array_map(fn (object $refiner): string => $refiner::class, ZhHansChrono::createStrictConfiguration()->refiners());
+    $hantParsers = array_map(fn (object $parser): string => $parser::class, ZhHantChrono::createStrictConfiguration()->parsers());
+    $hantCasualParsers = array_map(fn (object $parser): string => $parser::class, ZhHantChrono::createCasualConfiguration()->parsers());
+    $hantRefiners = array_map(fn (object $refiner): string => $refiner::class, ZhHantChrono::createStrictConfiguration()->refiners());
 
     expect($chineseParsers)
         ->toContain(IsoFormatParser::class)
@@ -470,15 +471,15 @@ it('exposes source-shaped strict configurations for Chinese engines', function (
 });
 
 it('exposes source-shaped casual parser order for German French Finnish Italian Dutch Russian and Ukrainian', function () {
-    $germanParsers = array_map(fn (object $parser): string => $parser::class, DeChrono::createCasualConfiguration()->parsers);
-    $germanRefiners = array_map(fn (object $refiner): string => $refiner::class, DeChrono::createCasualConfiguration()->refiners);
-    $frenchParsers = array_map(fn (object $parser): string => $parser::class, FrChrono::createCasualConfiguration()->parsers);
-    $frenchRefiners = array_map(fn (object $refiner): string => $refiner::class, FrChrono::createCasualConfiguration()->refiners);
-    $finnishParsers = array_map(fn (object $parser): string => $parser::class, FiChrono::createCasualConfiguration()->parsers);
-    $italianParsers = array_map(fn (object $parser): string => $parser::class, ItChrono::createCasualConfiguration()->parsers);
-    $dutchParsers = array_map(fn (object $parser): string => $parser::class, NlChrono::createCasualConfiguration()->parsers);
-    $russianParsers = array_map(fn (object $parser): string => $parser::class, RuChrono::createCasualConfiguration()->parsers);
-    $ukrainianParsers = array_map(fn (object $parser): string => $parser::class, UkChrono::createCasualConfiguration()->parsers);
+    $germanParsers = array_map(fn (object $parser): string => $parser::class, DeChrono::createCasualConfiguration()->parsers());
+    $germanRefiners = array_map(fn (object $refiner): string => $refiner::class, DeChrono::createCasualConfiguration()->refiners());
+    $frenchParsers = array_map(fn (object $parser): string => $parser::class, FrChrono::createCasualConfiguration()->parsers());
+    $frenchRefiners = array_map(fn (object $refiner): string => $refiner::class, FrChrono::createCasualConfiguration()->refiners());
+    $finnishParsers = array_map(fn (object $parser): string => $parser::class, FiChrono::createCasualConfiguration()->parsers());
+    $italianParsers = array_map(fn (object $parser): string => $parser::class, ItChrono::createCasualConfiguration()->parsers());
+    $dutchParsers = array_map(fn (object $parser): string => $parser::class, NlChrono::createCasualConfiguration()->parsers());
+    $russianParsers = array_map(fn (object $parser): string => $parser::class, RuChrono::createCasualConfiguration()->parsers());
+    $ukrainianParsers = array_map(fn (object $parser): string => $parser::class, UkChrono::createCasualConfiguration()->parsers());
 
     expect(array_slice($germanParsers, 0, 3))->toBe([
         DeTimeUnitRelativeFormatParser::class,
@@ -685,6 +686,36 @@ it('keeps parser order for same-index results like upstream chrono', function ()
 
     expect(array_map(fn (ParsedResult $result): string => $result->text, $results))
         ->toBe(['foo', 'foobar']);
+});
+
+it('builds parser and refiner configurations with a fluent pipeline API', function () {
+    $slashDateParser = new EnSlashDateParser;
+    $relativeParser = new EnTimeUnitCasualRelativeFormatParser;
+    $overlapRemoval = new OverlapRemovalRefiner;
+    $forwardDate = new ForwardDateRefiner;
+
+    $configuration = Configuration::make()
+        ->addParser($slashDateParser)
+        ->prependParser($relativeParser)
+        ->addRefiner($overlapRemoval)
+        ->prependRefiner($forwardDate);
+
+    expect($configuration->parsers())->toBe([$relativeParser, $slashDateParser])
+        ->and($configuration->refiners())->toBe([$forwardDate, $overlapRemoval])
+        ->and($configuration->hasParser(EnSlashDateParser::class))->toBeTrue()
+        ->and($configuration->hasParser(EnTimeUnitCasualRelativeFormatParser::class))->toBeTrue()
+        ->and($configuration->hasRefiner(OverlapRemovalRefiner::class))->toBeTrue()
+        ->and($configuration->hasRefiner(ForwardDateRefiner::class))->toBeTrue();
+
+    $withoutSlashDateParser = $configuration->removeParser(EnSlashDateParser::class);
+    $withoutForwardDateRefiner = $configuration->removeRefiner(ForwardDateRefiner::class);
+
+    expect($withoutSlashDateParser->parsers())->toBe([$relativeParser])
+        ->and($withoutSlashDateParser->hasParser(EnSlashDateParser::class))->toBeFalse()
+        ->and($withoutForwardDateRefiner->refiners())->toBe([$overlapRemoval])
+        ->and($withoutForwardDateRefiner->hasRefiner(ForwardDateRefiner::class))->toBeFalse()
+        ->and($configuration->parsers())->toBe([$relativeParser, $slashDateParser])
+        ->and($configuration->refiners())->toBe([$forwardDate, $overlapRemoval]);
 });
 
 it('clones parser and refiner configuration like upstream chrono instances', function () {
