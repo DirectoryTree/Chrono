@@ -20,7 +20,7 @@ readonly class ConfiguredChronoEngine implements ChronoEngine
     {
         $results = array_merge(...array_map(
             fn (Parser $parser) => $parser->parse($text, $reference, $options),
-            $this->configuration->parsers,
+            $this->configuration->parsers(),
         ));
 
         $results = $this->attachReference($results, $reference);
@@ -35,7 +35,7 @@ readonly class ConfiguredChronoEngine implements ChronoEngine
 
         $results = array_map(fn (array $result): ParsedResult => $result[0], $results);
 
-        foreach ($this->configuration->refiners as $refiner) {
+        foreach ($this->configuration->refiners() as $refiner) {
             $results = $this->attachReference(
                 $refiner->refine($text, $results, $reference, $options),
                 $reference,
@@ -51,8 +51,8 @@ readonly class ConfiguredChronoEngine implements ChronoEngine
     public function clone(): self
     {
         return $this->newInstance(new Configuration(
-            parsers: [...$this->configuration->parsers],
-            refiners: [...$this->configuration->refiners],
+            parsers: [...$this->configuration->parsers()],
+            refiners: [...$this->configuration->refiners()],
         ));
     }
 
@@ -61,7 +61,11 @@ readonly class ConfiguredChronoEngine implements ChronoEngine
      */
     public function withParser(Parser $parser, bool $prepend = false): self
     {
-        return $this->newInstance($this->configuration->withParser($parser, $prepend));
+        return $this->newInstance(
+            $prepend
+                ? $this->configuration->prependParser($parser)
+                : $this->configuration->addParser($parser),
+        );
     }
 
     /**
@@ -71,7 +75,7 @@ readonly class ConfiguredChronoEngine implements ChronoEngine
      */
     public function withoutParser(string $parser): self
     {
-        return $this->newInstance($this->configuration->withoutParser($parser));
+        return $this->newInstance($this->configuration->removeParser($parser));
     }
 
     /**
@@ -79,7 +83,11 @@ readonly class ConfiguredChronoEngine implements ChronoEngine
      */
     public function withRefiner(Refiner $refiner, bool $prepend = false): self
     {
-        return $this->newInstance($this->configuration->withRefiner($refiner, $prepend));
+        return $this->newInstance(
+            $prepend
+                ? $this->configuration->prependRefiner($refiner)
+                : $this->configuration->addRefiner($refiner),
+        );
     }
 
     /**
@@ -89,7 +97,7 @@ readonly class ConfiguredChronoEngine implements ChronoEngine
      */
     public function withoutRefiner(string $refiner): self
     {
-        return $this->newInstance($this->configuration->withoutRefiner($refiner));
+        return $this->newInstance($this->configuration->removeRefiner($refiner));
     }
 
     /**
