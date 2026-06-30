@@ -1,8 +1,8 @@
 <?php
 
-namespace Chrono\Locales\Uk;
+namespace DirectoryTree\Chrono\Locales\Uk;
 
-use Chrono\Pattern;
+use DirectoryTree\Chrono\Pattern;
 
 readonly class UkConstants
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Chrono\Locales\Ja;
+namespace DirectoryTree\Chrono\Locales\Ja;
 
-use Chrono\Reference;
+use DirectoryTree\Chrono\Reference;
 
 readonly class JaConstants
 {

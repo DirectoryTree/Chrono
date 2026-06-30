@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses spanish time expressions', function () {
     $spanish = Chrono::es();

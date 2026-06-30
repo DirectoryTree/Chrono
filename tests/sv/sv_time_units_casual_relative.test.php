@@ -1,9 +1,9 @@
 <?php
 
-use Chrono\Chrono;
-use Chrono\Configuration;
-use Chrono\ConfiguredChronoEngine;
-use Chrono\Locales\Sv\Parsers\SvTimeUnitCasualRelativeFormatParser;
+use DirectoryTree\Chrono\Chrono;
+use DirectoryTree\Chrono\Configuration;
+use DirectoryTree\Chrono\ConfiguredChronoEngine;
+use DirectoryTree\Chrono\Locales\Sv\Parsers\SvTimeUnitCasualRelativeFormatParser;
 
 it('parses swedish casual relative time units', function () {
     $swedish = Chrono::sv();

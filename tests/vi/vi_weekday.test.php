@@ -1,8 +1,8 @@
 <?php
 
-use Chrono\Chrono;
-use Chrono\Meridiem;
-use Chrono\Weekday;
+use DirectoryTree\Chrono\Chrono;
+use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\Weekday;
 
 it('parses vietnamese weekday time and relative expressions', function () {
     $vietnamese = Chrono::vi();

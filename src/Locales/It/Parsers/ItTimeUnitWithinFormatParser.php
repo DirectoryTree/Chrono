@@ -1,12 +1,12 @@
 <?php
 
-namespace Chrono\Locales\It\Parsers;
+namespace DirectoryTree\Chrono\Locales\It\Parsers;
 
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Parsers\AbstractParserWithWordBoundary;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parsers\AbstractParserWithWordBoundary;
+use DirectoryTree\Chrono\Reference;
 
 class ItTimeUnitWithinFormatParser extends AbstractParserWithWordBoundary
 {

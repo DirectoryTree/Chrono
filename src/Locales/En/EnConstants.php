@@ -1,8 +1,8 @@
 <?php
 
-namespace Chrono\Locales\En;
+namespace DirectoryTree\Chrono\Locales\En;
 
-use Chrono\Pattern;
+use DirectoryTree\Chrono\Pattern;
 
 readonly class EnConstants
 {

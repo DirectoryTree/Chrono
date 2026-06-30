@@ -1,16 +1,16 @@
 <?php
 
 use Carbon\CarbonImmutable;
-use Chrono\Calculation\MergingCalculation;
-use Chrono\Chrono;
-use Chrono\Meridiem;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Reference;
-use Chrono\Refiners\ExtractTimezoneAbbrRefiner;
-use Chrono\Refiners\ForwardDateRefiner;
-use Chrono\Weekday;
+use DirectoryTree\Chrono\Calculation\MergingCalculation;
+use DirectoryTree\Chrono\Chrono;
+use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Reference;
+use DirectoryTree\Chrono\Refiners\ExtractTimezoneAbbrRefiner;
+use DirectoryTree\Chrono\Refiners\ForwardDateRefiner;
+use DirectoryTree\Chrono\Weekday;
 
 it('merges time followed by date in common date-time refiners', function () {
     $german = Chrono::german()->parseText('um 5 Uhr am 10. August 2012', '2012-08-10')[0];

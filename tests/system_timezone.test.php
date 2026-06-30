@@ -2,11 +2,11 @@
 
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
-use Chrono\Chrono;
-use Chrono\Month;
-use Chrono\Reference;
-use Chrono\Timezone;
-use Chrono\Weekday;
+use DirectoryTree\Chrono\Chrono;
+use DirectoryTree\Chrono\Month;
+use DirectoryTree\Chrono\Reference;
+use DirectoryTree\Chrono\Timezone;
+use DirectoryTree\Chrono\Weekday;
 
 it('gets timezone DST boundary dates like upstream helpers', function () {
     $secondSunday = Timezone::getNthWeekdayOfMonth(2022, Month::MARCH, Weekday::SUNDAY, 2, 2);

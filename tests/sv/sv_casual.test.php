@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses swedish casual date references', function () {
     $swedish = Chrono::sv();

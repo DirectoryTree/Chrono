@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('merges italian dates with times and date ranges', function () {
     $italian = Chrono::it();

@@ -1,9 +1,9 @@
 <?php
 
 use Carbon\CarbonImmutable;
-use Chrono\Chrono;
-use Chrono\ParsedComponents;
-use Chrono\Weekday;
+use DirectoryTree\Chrono\Chrono;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\Weekday;
 
 it('parses weekday prefixed month name dates', function () {
     $compact = Chrono::parse('Sun 15Sep', '2013-08-10')[0];

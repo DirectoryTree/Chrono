@@ -1,14 +1,14 @@
 <?php
 
-namespace Chrono\Locales\Pt\Parsers;
+namespace DirectoryTree\Chrono\Locales\Pt\Parsers;
 
-use Chrono\Locales\Pt\CreatesParsedComponents;
-use Chrono\Meridiem;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Parsers\AbstractParserWithWordBoundary;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Locales\Pt\CreatesParsedComponents;
+use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parsers\AbstractParserWithWordBoundary;
+use DirectoryTree\Chrono\Reference;
 
 class PtCasualTimeParser extends AbstractParserWithWordBoundary
 {

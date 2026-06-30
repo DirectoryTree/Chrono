@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('rejects vietnamese negative cases', function () {
     $vietnamese = Chrono::vi();

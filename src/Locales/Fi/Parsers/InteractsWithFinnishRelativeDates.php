@@ -1,9 +1,9 @@
 <?php
 
-namespace Chrono\Locales\Fi\Parsers;
+namespace DirectoryTree\Chrono\Locales\Fi\Parsers;
 
-use Chrono\Locales\Fi\FiConstants;
-use Chrono\Pattern;
+use DirectoryTree\Chrono\Locales\Fi\FiConstants;
+use DirectoryTree\Chrono\Pattern;
 
 trait InteractsWithFinnishRelativeDates
 {

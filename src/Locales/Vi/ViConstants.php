@@ -1,8 +1,8 @@
 <?php
 
-namespace Chrono\Locales\Vi;
+namespace DirectoryTree\Chrono\Locales\Vi;
 
-use Chrono\Pattern;
+use DirectoryTree\Chrono\Pattern;
 
 readonly class ViConstants
 {

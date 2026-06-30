@@ -1,33 +1,33 @@
 <?php
 
-namespace Chrono\Locales\Nl;
+namespace DirectoryTree\Chrono\Locales\Nl;
 
-use Chrono\Configuration;
-use Chrono\ConfiguredChronoEngine;
-use Chrono\Locales\Nl\Parsers\NlCasualDateParser;
-use Chrono\Locales\Nl\Parsers\NlCasualDateTimeParser;
-use Chrono\Locales\Nl\Parsers\NlCasualTimeParser;
-use Chrono\Locales\Nl\Parsers\NlCasualYearMonthDayParser;
-use Chrono\Locales\Nl\Parsers\NlMonthNameMiddleEndianParser;
-use Chrono\Locales\Nl\Parsers\NlMonthNameParser;
-use Chrono\Locales\Nl\Parsers\NlRelativeDateFormatParser;
-use Chrono\Locales\Nl\Parsers\NlSlashMonthFormatParser;
-use Chrono\Locales\Nl\Parsers\NlTimeExpressionParser;
-use Chrono\Locales\Nl\Parsers\NlTimeUnitAgoFormatParser;
-use Chrono\Locales\Nl\Parsers\NlTimeUnitCasualRelativeFormatParser;
-use Chrono\Locales\Nl\Parsers\NlTimeUnitLaterFormatParser;
-use Chrono\Locales\Nl\Parsers\NlTimeUnitWithinFormatParser;
-use Chrono\Locales\Nl\Parsers\NlWeekdayParser;
-use Chrono\Locales\Nl\Refiners\NlMergeDateRangeRefiner;
-use Chrono\Locales\Nl\Refiners\NlMergeDateTimeRefiner;
-use Chrono\Parsers\IsoFormatParser;
-use Chrono\Parsers\SlashDateFormatParser;
-use Chrono\Refiners\ExtractTimezoneAbbrRefiner;
-use Chrono\Refiners\ExtractTimezoneOffsetRefiner;
-use Chrono\Refiners\ForwardDateRefiner;
-use Chrono\Refiners\MergeWeekdayComponentRefiner;
-use Chrono\Refiners\OverlapRemovalRefiner;
-use Chrono\Refiners\UnlikelyFormatFilter;
+use DirectoryTree\Chrono\Configuration;
+use DirectoryTree\Chrono\ConfiguredChronoEngine;
+use DirectoryTree\Chrono\Locales\Nl\Parsers\NlCasualDateParser;
+use DirectoryTree\Chrono\Locales\Nl\Parsers\NlCasualDateTimeParser;
+use DirectoryTree\Chrono\Locales\Nl\Parsers\NlCasualTimeParser;
+use DirectoryTree\Chrono\Locales\Nl\Parsers\NlCasualYearMonthDayParser;
+use DirectoryTree\Chrono\Locales\Nl\Parsers\NlMonthNameMiddleEndianParser;
+use DirectoryTree\Chrono\Locales\Nl\Parsers\NlMonthNameParser;
+use DirectoryTree\Chrono\Locales\Nl\Parsers\NlRelativeDateFormatParser;
+use DirectoryTree\Chrono\Locales\Nl\Parsers\NlSlashMonthFormatParser;
+use DirectoryTree\Chrono\Locales\Nl\Parsers\NlTimeExpressionParser;
+use DirectoryTree\Chrono\Locales\Nl\Parsers\NlTimeUnitAgoFormatParser;
+use DirectoryTree\Chrono\Locales\Nl\Parsers\NlTimeUnitCasualRelativeFormatParser;
+use DirectoryTree\Chrono\Locales\Nl\Parsers\NlTimeUnitLaterFormatParser;
+use DirectoryTree\Chrono\Locales\Nl\Parsers\NlTimeUnitWithinFormatParser;
+use DirectoryTree\Chrono\Locales\Nl\Parsers\NlWeekdayParser;
+use DirectoryTree\Chrono\Locales\Nl\Refiners\NlMergeDateRangeRefiner;
+use DirectoryTree\Chrono\Locales\Nl\Refiners\NlMergeDateTimeRefiner;
+use DirectoryTree\Chrono\Parsers\IsoFormatParser;
+use DirectoryTree\Chrono\Parsers\SlashDateFormatParser;
+use DirectoryTree\Chrono\Refiners\ExtractTimezoneAbbrRefiner;
+use DirectoryTree\Chrono\Refiners\ExtractTimezoneOffsetRefiner;
+use DirectoryTree\Chrono\Refiners\ForwardDateRefiner;
+use DirectoryTree\Chrono\Refiners\MergeWeekdayComponentRefiner;
+use DirectoryTree\Chrono\Refiners\OverlapRemovalRefiner;
+use DirectoryTree\Chrono\Refiners\UnlikelyFormatFilter;
 
 readonly class NlChrono extends ConfiguredChronoEngine
 {

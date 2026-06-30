@@ -1,11 +1,11 @@
 <?php
 
-namespace Chrono\Locales\It\Parsers;
+namespace DirectoryTree\Chrono\Locales\It\Parsers;
 
 use Carbon\CarbonImmutable;
-use Chrono\Dates;
-use Chrono\Locales\It\ItConstants;
-use Chrono\ParsedComponents;
+use DirectoryTree\Chrono\Dates;
+use DirectoryTree\Chrono\Locales\It\ItConstants;
+use DirectoryTree\Chrono\ParsedComponents;
 
 trait InteractsWithItalianRelativeDates
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Chrono\Locales\En\Refiners;
+namespace DirectoryTree\Chrono\Locales\En\Refiners;
 
 use Carbon\CarbonImmutable;
-use Chrono\ParsedResult;
+use DirectoryTree\Chrono\ParsedResult;
 
 trait InteractsWithEnglishRefiners
 {

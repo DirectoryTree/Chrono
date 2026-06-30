@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses ukrainian within time unit expressions', function () {
     $within = Chrono::uk()->parseText('протягом 1 місяця', '2012-08-10 09:30')[0];

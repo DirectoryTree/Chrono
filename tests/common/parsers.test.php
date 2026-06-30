@@ -1,11 +1,11 @@
 <?php
 
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Parsers\AbstractParserWithWordBoundary;
-use Chrono\Pattern;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parsers\AbstractParserWithWordBoundary;
+use DirectoryTree\Chrono\Pattern;
+use DirectoryTree\Chrono\Reference;
 
 it('builds regex patterns like upstream helpers', function () {
     $any = Pattern::matchAny(['jan' => 1, 'january' => 1, 'mar.' => 3]);

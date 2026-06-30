@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses portuguese weekdays', function () {
     $portuguese = Chrono::pt();

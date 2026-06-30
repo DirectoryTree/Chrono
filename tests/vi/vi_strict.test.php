@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses vietnamese strict mode like upstream', function () {
     $strict = Chrono::strictVietnamese();

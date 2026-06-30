@@ -1,9 +1,9 @@
 <?php
 
-namespace Chrono\Locales\Zh\Hant\Parsers;
+namespace DirectoryTree\Chrono\Locales\Zh\Hant\Parsers;
 
-use Chrono\Locales\Zh\Parsers\AbstractZhDeadlineFormatParser;
-use Chrono\Locales\Zh\ZhConstants;
+use DirectoryTree\Chrono\Locales\Zh\Parsers\AbstractZhDeadlineFormatParser;
+use DirectoryTree\Chrono\Locales\Zh\ZhConstants;
 
 readonly class ZhHantDeadlineFormatParser extends AbstractZhDeadlineFormatParser
 {

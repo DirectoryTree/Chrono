@@ -1,29 +1,29 @@
 <?php
 
-namespace Chrono\Locales\Ru;
+namespace DirectoryTree\Chrono\Locales\Ru;
 
-use Chrono\Configuration;
-use Chrono\ConfiguredChronoEngine;
-use Chrono\Locales\Ru\Parsers\RuCasualDateParser;
-use Chrono\Locales\Ru\Parsers\RuCasualTimeParser;
-use Chrono\Locales\Ru\Parsers\RuMonthNameLittleEndianParser;
-use Chrono\Locales\Ru\Parsers\RuMonthNameParser;
-use Chrono\Locales\Ru\Parsers\RuRelativeDateFormatParser;
-use Chrono\Locales\Ru\Parsers\RuTimeExpressionParser;
-use Chrono\Locales\Ru\Parsers\RuTimeUnitAgoFormatParser;
-use Chrono\Locales\Ru\Parsers\RuTimeUnitCasualRelativeFormatParser;
-use Chrono\Locales\Ru\Parsers\RuTimeUnitWithinFormatParser;
-use Chrono\Locales\Ru\Parsers\RuWeekdayParser;
-use Chrono\Locales\Ru\Refiners\RuMergeDateRangeRefiner;
-use Chrono\Locales\Ru\Refiners\RuMergeDateTimeRefiner;
-use Chrono\Parsers\IsoFormatParser;
-use Chrono\Parsers\SlashDateFormatParser;
-use Chrono\Refiners\ExtractTimezoneAbbrRefiner;
-use Chrono\Refiners\ExtractTimezoneOffsetRefiner;
-use Chrono\Refiners\ForwardDateRefiner;
-use Chrono\Refiners\MergeWeekdayComponentRefiner;
-use Chrono\Refiners\OverlapRemovalRefiner;
-use Chrono\Refiners\UnlikelyFormatFilter;
+use DirectoryTree\Chrono\Configuration;
+use DirectoryTree\Chrono\ConfiguredChronoEngine;
+use DirectoryTree\Chrono\Locales\Ru\Parsers\RuCasualDateParser;
+use DirectoryTree\Chrono\Locales\Ru\Parsers\RuCasualTimeParser;
+use DirectoryTree\Chrono\Locales\Ru\Parsers\RuMonthNameLittleEndianParser;
+use DirectoryTree\Chrono\Locales\Ru\Parsers\RuMonthNameParser;
+use DirectoryTree\Chrono\Locales\Ru\Parsers\RuRelativeDateFormatParser;
+use DirectoryTree\Chrono\Locales\Ru\Parsers\RuTimeExpressionParser;
+use DirectoryTree\Chrono\Locales\Ru\Parsers\RuTimeUnitAgoFormatParser;
+use DirectoryTree\Chrono\Locales\Ru\Parsers\RuTimeUnitCasualRelativeFormatParser;
+use DirectoryTree\Chrono\Locales\Ru\Parsers\RuTimeUnitWithinFormatParser;
+use DirectoryTree\Chrono\Locales\Ru\Parsers\RuWeekdayParser;
+use DirectoryTree\Chrono\Locales\Ru\Refiners\RuMergeDateRangeRefiner;
+use DirectoryTree\Chrono\Locales\Ru\Refiners\RuMergeDateTimeRefiner;
+use DirectoryTree\Chrono\Parsers\IsoFormatParser;
+use DirectoryTree\Chrono\Parsers\SlashDateFormatParser;
+use DirectoryTree\Chrono\Refiners\ExtractTimezoneAbbrRefiner;
+use DirectoryTree\Chrono\Refiners\ExtractTimezoneOffsetRefiner;
+use DirectoryTree\Chrono\Refiners\ForwardDateRefiner;
+use DirectoryTree\Chrono\Refiners\MergeWeekdayComponentRefiner;
+use DirectoryTree\Chrono\Refiners\OverlapRemovalRefiner;
+use DirectoryTree\Chrono\Refiners\UnlikelyFormatFilter;
 
 readonly class RuChrono extends ConfiguredChronoEngine
 {

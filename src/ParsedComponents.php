@@ -1,9 +1,9 @@
 <?php
 
-namespace Chrono;
+namespace DirectoryTree\Chrono;
 
 use Carbon\CarbonImmutable;
-use Chrono\Calculation\Duration;
+use DirectoryTree\Chrono\Calculation\Duration;
 
 class ParsedComponents
 {

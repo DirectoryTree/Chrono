@@ -1,16 +1,16 @@
 <?php
 
-namespace Chrono\Locales\Sv\Parsers;
+namespace DirectoryTree\Chrono\Locales\Sv\Parsers;
 
 use Carbon\CarbonImmutable;
-use Chrono\Calculation\Years;
-use Chrono\Locales\Sv\CreatesParsedComponents;
-use Chrono\Locales\Sv\SvConstants;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Parser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Calculation\Years;
+use DirectoryTree\Chrono\Locales\Sv\CreatesParsedComponents;
+use DirectoryTree\Chrono\Locales\Sv\SvConstants;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parser;
+use DirectoryTree\Chrono\Reference;
 
 readonly class SvMonthNameLittleEndianParser implements Parser
 {

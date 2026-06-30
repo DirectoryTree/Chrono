@@ -1,11 +1,11 @@
 <?php
 
-namespace Chrono\Locales\Fi\Parsers;
+namespace DirectoryTree\Chrono\Locales\Fi\Parsers;
 
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\Parsers\AbstractParserWithWordBoundary;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\Parsers\AbstractParserWithWordBoundary;
+use DirectoryTree\Chrono\Reference;
 
 class FiTimeUnitWithinFormatParser extends AbstractParserWithWordBoundary
 {

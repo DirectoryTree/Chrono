@@ -1,15 +1,15 @@
 <?php
 
-namespace Chrono\Locales\Ru\Parsers;
+namespace DirectoryTree\Chrono\Locales\Ru\Parsers;
 
 use Carbon\CarbonImmutable;
-use Chrono\Calculation\Years;
-use Chrono\Locales\Ru\CreatesParsedComponents;
-use Chrono\Locales\Ru\RuConstants;
-use Chrono\Options;
-use Chrono\ParsedResult;
-use Chrono\Parser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Calculation\Years;
+use DirectoryTree\Chrono\Locales\Ru\CreatesParsedComponents;
+use DirectoryTree\Chrono\Locales\Ru\RuConstants;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parser;
+use DirectoryTree\Chrono\Reference;
 
 readonly class RuMonthNameParser implements Parser
 {

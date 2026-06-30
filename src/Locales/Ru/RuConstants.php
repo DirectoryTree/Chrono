@@ -1,8 +1,8 @@
 <?php
 
-namespace Chrono\Locales\Ru;
+namespace DirectoryTree\Chrono\Locales\Ru;
 
-use Chrono\Pattern;
+use DirectoryTree\Chrono\Pattern;
 
 readonly class RuConstants
 {

@@ -1,9 +1,9 @@
 <?php
 
 use Carbon\CarbonImmutable;
-use Chrono\Calculation\Weekdays;
-use Chrono\Reference;
-use Chrono\Weekday;
+use DirectoryTree\Chrono\Calculation\Weekdays;
+use DirectoryTree\Chrono\Reference;
+use DirectoryTree\Chrono\Weekday;
 
 it('calculates weekdays like upstream helpers', function () {
     $saturday = CarbonImmutable::parse('2022-08-20 12:00:00');

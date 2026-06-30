@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('extracts french timezones from weekday time expressions', function () {
     $french = Chrono::fr();

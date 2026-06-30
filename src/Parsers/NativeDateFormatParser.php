@@ -1,13 +1,13 @@
 <?php
 
-namespace Chrono\Parsers;
+namespace DirectoryTree\Chrono\Parsers;
 
 use Carbon\CarbonImmutable;
-use Chrono\Locales\En\CreatesParsedComponents;
-use Chrono\Options;
-use Chrono\ParsedResult;
-use Chrono\Parser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Locales\En\CreatesParsedComponents;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parser;
+use DirectoryTree\Chrono\Reference;
 
 readonly class NativeDateFormatParser implements Parser
 {

@@ -1,7 +1,7 @@
 <?php
 
-use Chrono\Chrono;
-use Chrono\Meridiem;
+use DirectoryTree\Chrono\Chrono;
+use DirectoryTree\Chrono\Meridiem;
 
 it('parses later relative expressions with upstream-shaped components', function () {
     $days = Chrono::parse('2 days later', '2012-08-10 12:00')[0];

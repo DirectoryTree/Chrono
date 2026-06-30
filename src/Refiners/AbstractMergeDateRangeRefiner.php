@@ -1,12 +1,12 @@
 <?php
 
-namespace Chrono\Refiners;
+namespace DirectoryTree\Chrono\Refiners;
 
-use Chrono\Dates;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Dates;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Reference;
 
 abstract readonly class AbstractMergeDateRangeRefiner extends MergingRefiner
 {

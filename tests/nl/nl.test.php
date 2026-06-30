@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('merges dutch dates with times and date ranges', function () {
     $dutch = Chrono::nl();

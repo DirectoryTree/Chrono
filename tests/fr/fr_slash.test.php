@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('merges french slash date ranges', function () {
     $french = Chrono::fr();

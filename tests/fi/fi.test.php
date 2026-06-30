@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('merges finnish dates with times and date ranges', function () {
     $finnish = Chrono::fi();

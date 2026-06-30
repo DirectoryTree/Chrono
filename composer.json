@@ -13,12 +13,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Chrono\\": "src/"
+            "DirectoryTree\\Chrono\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Chrono\\Tests\\": "tests/"
+            "DirectoryTree\\Chrono\\Tests\\": "tests/"
         }
     },
     "scripts": {

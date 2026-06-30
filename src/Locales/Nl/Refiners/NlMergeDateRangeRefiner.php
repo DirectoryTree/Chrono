@@ -1,9 +1,9 @@
 <?php
 
-namespace Chrono\Locales\Nl\Refiners;
+namespace DirectoryTree\Chrono\Locales\Nl\Refiners;
 
-use Chrono\ParsedComponents;
-use Chrono\Refiners\AbstractMergeDateRangeRefiner;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\Refiners\AbstractMergeDateRangeRefiner;
 
 readonly class NlMergeDateRangeRefiner extends AbstractMergeDateRangeRefiner
 {

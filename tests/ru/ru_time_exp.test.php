@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses russian time expressions', function () {
     $timeWithSeconds = Chrono::ru()->parseText('20:32:13', '2016-10-01 08:00')[0];

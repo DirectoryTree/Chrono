@@ -1,12 +1,12 @@
 <?php
 
-namespace Chrono\Locales\Sv\Parsers;
+namespace DirectoryTree\Chrono\Locales\Sv\Parsers;
 
-use Chrono\CasualReferences;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\Parsers\AbstractParserWithWordBoundary;
-use Chrono\Reference;
+use DirectoryTree\Chrono\CasualReferences;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\Parsers\AbstractParserWithWordBoundary;
+use DirectoryTree\Chrono\Reference;
 
 class SvCasualDateParser extends AbstractParserWithWordBoundary
 {

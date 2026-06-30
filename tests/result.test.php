@@ -1,14 +1,14 @@
 <?php
 
 use Carbon\CarbonImmutable;
-use Chrono\Chrono;
-use Chrono\Dates;
-use Chrono\Meridiem;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Reference;
-use Chrono\Refiner;
+use DirectoryTree\Chrono\Chrono;
+use DirectoryTree\Chrono\Dates;
+use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Reference;
+use DirectoryTree\Chrono\Refiner;
 
 it('assigns and implies date components like upstream helpers', function () {
     $date = CarbonImmutable::parse('2026-06-23 15:04:05.006');

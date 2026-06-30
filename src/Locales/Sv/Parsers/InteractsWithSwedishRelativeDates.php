@@ -1,9 +1,9 @@
 <?php
 
-namespace Chrono\Locales\Sv\Parsers;
+namespace DirectoryTree\Chrono\Locales\Sv\Parsers;
 
-use Chrono\Locales\Sv\SvConstants;
-use Chrono\Pattern;
+use DirectoryTree\Chrono\Locales\Sv\SvConstants;
+use DirectoryTree\Chrono\Pattern;
 
 trait InteractsWithSwedishRelativeDates
 {

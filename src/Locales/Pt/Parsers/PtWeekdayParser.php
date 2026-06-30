@@ -1,13 +1,13 @@
 <?php
 
-namespace Chrono\Locales\Pt\Parsers;
+namespace DirectoryTree\Chrono\Locales\Pt\Parsers;
 
-use Chrono\Calculation\Weekdays;
-use Chrono\Locales\Pt\PtConstants;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\Parsers\AbstractParserWithWordBoundary;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Calculation\Weekdays;
+use DirectoryTree\Chrono\Locales\Pt\PtConstants;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\Parsers\AbstractParserWithWordBoundary;
+use DirectoryTree\Chrono\Reference;
 
 class PtWeekdayParser extends AbstractParserWithWordBoundary
 {

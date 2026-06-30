@@ -1,8 +1,8 @@
 <?php
 
-namespace Chrono\Locales\De;
+namespace DirectoryTree\Chrono\Locales\De;
 
-use Chrono\Pattern;
+use DirectoryTree\Chrono\Pattern;
 
 readonly class DeConstants
 {

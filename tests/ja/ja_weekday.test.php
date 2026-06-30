@@ -1,7 +1,7 @@
 <?php
 
-use Chrono\Chrono;
-use Chrono\Weekday;
+use DirectoryTree\Chrono\Chrono;
+use DirectoryTree\Chrono\Weekday;
 
 it('parses japanese weekdays and parenthesized weekdays', function () {
     $japanese = Chrono::ja();

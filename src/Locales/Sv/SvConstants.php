@@ -1,8 +1,8 @@
 <?php
 
-namespace Chrono\Locales\Sv;
+namespace DirectoryTree\Chrono\Locales\Sv;
 
-use Chrono\Pattern;
+use DirectoryTree\Chrono\Pattern;
 
 readonly class SvConstants
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Chrono\Locales\Nl\Parsers;
+namespace DirectoryTree\Chrono\Locales\Nl\Parsers;
 
-use Chrono\Dates;
-use Chrono\Locales\Nl\CreatesParsedComponents;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Parsers\AbstractParserWithWordBoundary;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Dates;
+use DirectoryTree\Chrono\Locales\Nl\CreatesParsedComponents;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parsers\AbstractParserWithWordBoundary;
+use DirectoryTree\Chrono\Reference;
 
 class NlCasualDateParser extends AbstractParserWithWordBoundary
 {

@@ -1,11 +1,11 @@
 <?php
 
 use Carbon\CarbonImmutable;
-use Chrono\Calculation\MergingCalculation;
-use Chrono\Chrono;
-use Chrono\Locales\En\Parsers\EnTimeExpressionParser;
-use Chrono\Meridiem;
-use Chrono\ParsedComponents;
+use DirectoryTree\Chrono\Calculation\MergingCalculation;
+use DirectoryTree\Chrono\Chrono;
+use DirectoryTree\Chrono\Locales\En\Parsers\EnTimeExpressionParser;
+use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\ParsedComponents;
 
 it('merges date and time components like upstream helpers', function () {
     $date = new ParsedComponents(CarbonImmutable::parse('2022-08-27 12:00:00'), [

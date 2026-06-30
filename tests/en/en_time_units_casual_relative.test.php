@@ -1,7 +1,7 @@
 <?php
 
-use Chrono\Chrono;
-use Chrono\Locales\En\Parsers\EnTimeUnitCasualRelativeFormatParser;
+use DirectoryTree\Chrono\Chrono;
+use DirectoryTree\Chrono\Locales\En\Parsers\EnTimeUnitCasualRelativeFormatParser;
 
 it('parses signed relative durations', function () {
     $plusMinutes = Chrono::casual()->parseText('+15 minutes', '2012-07-10 12:14')[0];

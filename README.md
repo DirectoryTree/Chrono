@@ -7,7 +7,7 @@ This repository is intentionally being built as a PHP package rather than a tran
 Porting should follow upstream chrono source structure first, then Pest coverage. See [docs/upstream-alignment.md](docs/upstream-alignment.md) for the current source-alignment checklist and known divergences.
 
 ```php
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 $date = Chrono::parseDate('tomorrow at 4pm', '2026-06-23 09:00');
 

@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses finnish common iso and slash date formats', function () {
     $finnish = Chrono::fi();

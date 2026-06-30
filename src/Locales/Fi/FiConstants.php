@@ -1,8 +1,8 @@
 <?php
 
-namespace Chrono\Locales\Fi;
+namespace DirectoryTree\Chrono\Locales\Fi;
 
-use Chrono\Pattern;
+use DirectoryTree\Chrono\Pattern;
 
 readonly class FiConstants
 {

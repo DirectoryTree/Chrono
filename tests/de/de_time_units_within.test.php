@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses german within time units with upstream-shaped components', function () {
     $german = Chrono::de();

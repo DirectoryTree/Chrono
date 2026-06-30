@@ -1,7 +1,7 @@
 <?php
 
 use Carbon\CarbonImmutable;
-use Chrono\Calculation\Years;
+use DirectoryTree\Chrono\Calculation\Years;
 
 it('calculates years like upstream helpers', function () {
     expect(Years::findMostLikelyADYear(1997))->toBe(1997)

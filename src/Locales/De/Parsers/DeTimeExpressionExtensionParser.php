@@ -1,15 +1,15 @@
 <?php
 
-namespace Chrono\Locales\De\Parsers;
+namespace DirectoryTree\Chrono\Locales\De\Parsers;
 
 use Carbon\CarbonImmutable;
-use Chrono\Locales\De\CreatesParsedComponents;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Parser;
-use Chrono\Reference;
-use Chrono\Refiners\ExtractTimezoneRefiner;
+use DirectoryTree\Chrono\Locales\De\CreatesParsedComponents;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parser;
+use DirectoryTree\Chrono\Reference;
+use DirectoryTree\Chrono\Refiners\ExtractTimezoneRefiner;
 
 readonly class DeTimeExpressionExtensionParser implements Parser
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Chrono\Locales\En\Parsers;
+namespace DirectoryTree\Chrono\Locales\En\Parsers;
 
-use Chrono\Calculation\Weekdays;
-use Chrono\Locales\En\EnConstants;
-use Chrono\Options;
-use Chrono\ParsedResult;
-use Chrono\Parser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Calculation\Weekdays;
+use DirectoryTree\Chrono\Locales\En\EnConstants;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parser;
+use DirectoryTree\Chrono\Reference;
 
 readonly class EnWeekdayParser implements Parser
 {

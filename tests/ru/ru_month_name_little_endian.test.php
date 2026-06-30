@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses russian month name dates and ranges', function () {
     $numericDate = Chrono::ru()->parseText('10.08.2012', '2012-08-10 12:00')[0];

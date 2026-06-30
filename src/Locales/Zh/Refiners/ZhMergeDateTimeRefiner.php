@@ -1,12 +1,12 @@
 <?php
 
-namespace Chrono\Locales\Zh\Refiners;
+namespace DirectoryTree\Chrono\Locales\Zh\Refiners;
 
-use Chrono\Calculation\MergingCalculation;
-use Chrono\Options;
-use Chrono\ParsedResult;
-use Chrono\Reference;
-use Chrono\Refiners\MergingRefiner;
+use DirectoryTree\Chrono\Calculation\MergingCalculation;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Reference;
+use DirectoryTree\Chrono\Refiners\MergingRefiner;
 
 readonly class ZhMergeDateTimeRefiner extends MergingRefiner
 {

@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses dutch ago relative durations', function () {
     $dutch = Chrono::nl();

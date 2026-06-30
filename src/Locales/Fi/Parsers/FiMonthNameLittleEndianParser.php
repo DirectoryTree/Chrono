@@ -1,16 +1,16 @@
 <?php
 
-namespace Chrono\Locales\Fi\Parsers;
+namespace DirectoryTree\Chrono\Locales\Fi\Parsers;
 
 use Carbon\CarbonImmutable;
-use Chrono\Calculation\Years;
-use Chrono\Locales\Fi\CreatesParsedComponents;
-use Chrono\Locales\Fi\FiConstants;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Parser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Calculation\Years;
+use DirectoryTree\Chrono\Locales\Fi\CreatesParsedComponents;
+use DirectoryTree\Chrono\Locales\Fi\FiConstants;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parser;
+use DirectoryTree\Chrono\Reference;
 
 readonly class FiMonthNameLittleEndianParser implements Parser
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Chrono\Locales\Nl\Parsers;
+namespace DirectoryTree\Chrono\Locales\Nl\Parsers;
 
 use Carbon\CarbonImmutable;
-use Chrono\Dates;
-use Chrono\Locales\Nl\NlConstants;
-use Chrono\ParsedComponents;
-use Chrono\Pattern;
+use DirectoryTree\Chrono\Dates;
+use DirectoryTree\Chrono\Locales\Nl\NlConstants;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\Pattern;
 
 trait InteractsWithDutchRelativeDates
 {

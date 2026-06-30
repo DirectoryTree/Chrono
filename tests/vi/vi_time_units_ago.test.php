@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses vietnamese ago time unit expressions', function () {
     $vietnamese = Chrono::vi();

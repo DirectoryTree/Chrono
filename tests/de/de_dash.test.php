@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses german dash and dot numeric dates', function () {
     $german = Chrono::de();

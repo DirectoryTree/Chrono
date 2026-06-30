@@ -1,12 +1,12 @@
 <?php
 
-namespace Chrono\Locales\Uk\Parsers;
+namespace DirectoryTree\Chrono\Locales\Uk\Parsers;
 
-use Chrono\Meridiem;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Parsers\AbstractTimeExpressionParser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parsers\AbstractTimeExpressionParser;
+use DirectoryTree\Chrono\Reference;
 
 class UkTimeExpressionParser extends AbstractTimeExpressionParser
 {

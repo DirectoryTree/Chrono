@@ -1,9 +1,9 @@
 <?php
 
-namespace Chrono\Locales\It;
+namespace DirectoryTree\Chrono\Locales\It;
 
 use Carbon\CarbonImmutable;
-use Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedComponents;
 
 trait CreatesParsedComponents
 {

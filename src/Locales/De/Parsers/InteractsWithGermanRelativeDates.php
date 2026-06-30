@@ -1,9 +1,9 @@
 <?php
 
-namespace Chrono\Locales\De\Parsers;
+namespace DirectoryTree\Chrono\Locales\De\Parsers;
 
 use Carbon\CarbonImmutable;
-use Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedComponents;
 
 trait InteractsWithGermanRelativeDates
 {

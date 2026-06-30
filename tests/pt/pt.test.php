@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('merges portuguese dates with times and date ranges', function () {
     $portuguese = Chrono::pt();

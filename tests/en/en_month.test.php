@@ -1,7 +1,7 @@
 <?php
 
-use Chrono\Chrono;
-use Chrono\Meridiem;
+use DirectoryTree\Chrono\Chrono;
+use DirectoryTree\Chrono\Meridiem;
 
 it('parses month name dates and ranges', function () {
     $result = Chrono::parse('Sep 12-13', '2026-06-23')[0];

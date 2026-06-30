@@ -1,15 +1,15 @@
 <?php
 
 use Carbon\CarbonImmutable;
-use Chrono\CasualReferences;
-use Chrono\Chrono;
-use Chrono\Locales\En\Refiners\EnExtractYearSuffixRefiner;
-use Chrono\Meridiem;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Reference;
-use Chrono\Weekday;
+use DirectoryTree\Chrono\CasualReferences;
+use DirectoryTree\Chrono\Chrono;
+use DirectoryTree\Chrono\Locales\En\Refiners\EnExtractYearSuffixRefiner;
+use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Reference;
+use DirectoryTree\Chrono\Weekday;
 
 it('extracts english year suffixes from unknown-year dates', function () {
     $refiner = new EnExtractYearSuffixRefiner;

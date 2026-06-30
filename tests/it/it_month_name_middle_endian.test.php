@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses italian middle endian month name dates and ranges', function () {
     $italian = Chrono::it();

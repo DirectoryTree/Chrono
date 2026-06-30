@@ -1,12 +1,12 @@
 <?php
 
-namespace Chrono\Locales\Nl\Parsers;
+namespace DirectoryTree\Chrono\Locales\Nl\Parsers;
 
-use Chrono\Locales\Nl\NlConstants;
-use Chrono\Options;
-use Chrono\ParsedResult;
-use Chrono\Parser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Locales\Nl\NlConstants;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parser;
+use DirectoryTree\Chrono\Reference;
 
 readonly class NlRelativeDateFormatParser implements Parser
 {

@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses russian casual dates and times', function () {
     $tomorrow = Chrono::ru()->parseText('завтра', '2012-08-10 17:10')[0];

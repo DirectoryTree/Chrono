@@ -1,11 +1,11 @@
 <?php
 
-namespace Chrono\Calculation;
+namespace DirectoryTree\Chrono\Calculation;
 
-use Chrono\Dates;
-use Chrono\Meridiem;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
+use DirectoryTree\Chrono\Dates;
+use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
 
 readonly class MergingCalculation
 {

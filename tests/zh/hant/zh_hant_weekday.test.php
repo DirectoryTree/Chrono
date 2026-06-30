@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses traditional chinese weekdays', function () {
     $chinese = Chrono::zhHant();

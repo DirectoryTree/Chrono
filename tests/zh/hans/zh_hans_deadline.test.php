@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses simplified chinese deadline expressions', function () {
     $chinese = Chrono::zhHans();

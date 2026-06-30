@@ -1,8 +1,8 @@
 <?php
 
-namespace Chrono\Locales\Fr\Refiners;
+namespace DirectoryTree\Chrono\Locales\Fr\Refiners;
 
-use Chrono\Refiners\AbstractMergeDateRangeRefiner;
+use DirectoryTree\Chrono\Refiners\AbstractMergeDateRangeRefiner;
 
 readonly class FrMergeDateRangeRefiner extends AbstractMergeDateRangeRefiner
 {

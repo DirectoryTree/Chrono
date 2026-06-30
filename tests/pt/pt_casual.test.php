@@ -1,7 +1,7 @@
 <?php
 
-use Chrono\Chrono;
-use Chrono\Meridiem;
+use DirectoryTree\Chrono\Chrono;
+use DirectoryTree\Chrono\Meridiem;
 
 it('parses portuguese casual date and time references', function () {
     $portuguese = Chrono::pt();

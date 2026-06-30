@@ -1,15 +1,15 @@
 <?php
 
-namespace Chrono\Locales\En\Parsers;
+namespace DirectoryTree\Chrono\Locales\En\Parsers;
 
 use Carbon\CarbonImmutable;
-use Chrono\Locales\En\CreatesParsedComponents;
-use Chrono\Locales\En\EnConstants;
-use Chrono\Options;
-use Chrono\ParsedResult;
-use Chrono\Parser;
-use Chrono\Parsers\SlashDateFormatParser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Locales\En\CreatesParsedComponents;
+use DirectoryTree\Chrono\Locales\En\EnConstants;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parser;
+use DirectoryTree\Chrono\Parsers\SlashDateFormatParser;
+use DirectoryTree\Chrono\Reference;
 
 readonly class EnSlashDateParser implements Parser
 {

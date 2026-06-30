@@ -1,12 +1,12 @@
 <?php
 
-namespace Chrono\Refiners;
+namespace DirectoryTree\Chrono\Refiners;
 
-use Chrono\Options;
-use Chrono\ParsedResult;
-use Chrono\Reference;
-use Chrono\Refiner;
-use Chrono\Timezone;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Reference;
+use DirectoryTree\Chrono\Refiner;
+use DirectoryTree\Chrono\Timezone;
 
 readonly class ExtractTimezoneAbbrRefiner implements Refiner
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Chrono\Locales\Ru\Parsers;
+namespace DirectoryTree\Chrono\Locales\Ru\Parsers;
 
 use Carbon\CarbonImmutable;
-use Chrono\Locales\Ru\RuConstants;
-use Chrono\ParsedComponents;
-use Chrono\Pattern;
+use DirectoryTree\Chrono\Locales\Ru\RuConstants;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\Pattern;
 
 trait InteractsWithRussianRelativeDates
 {

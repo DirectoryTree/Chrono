@@ -1,8 +1,8 @@
 <?php
 
-namespace Chrono\Locales\Vi\Refiners;
+namespace DirectoryTree\Chrono\Locales\Vi\Refiners;
 
-use Chrono\Refiners\MergeWeekdayComponentRefiner;
+use DirectoryTree\Chrono\Refiners\MergeWeekdayComponentRefiner;
 
 readonly class ViMergeWeekdayComponentRefiner extends MergeWeekdayComponentRefiner
 {

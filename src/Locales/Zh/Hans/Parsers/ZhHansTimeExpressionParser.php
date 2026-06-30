@@ -1,9 +1,9 @@
 <?php
 
-namespace Chrono\Locales\Zh\Hans\Parsers;
+namespace DirectoryTree\Chrono\Locales\Zh\Hans\Parsers;
 
-use Chrono\Locales\Zh\Parsers\AbstractZhTimeExpressionParser;
-use Chrono\Locales\Zh\ZhConstants;
+use DirectoryTree\Chrono\Locales\Zh\Parsers\AbstractZhTimeExpressionParser;
+use DirectoryTree\Chrono\Locales\Zh\ZhConstants;
 
 readonly class ZhHansTimeExpressionParser extends AbstractZhTimeExpressionParser
 {

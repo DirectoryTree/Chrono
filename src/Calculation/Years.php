@@ -1,6 +1,6 @@
 <?php
 
-namespace Chrono\Calculation;
+namespace DirectoryTree\Chrono\Calculation;
 
 use Carbon\CarbonImmutable;
 

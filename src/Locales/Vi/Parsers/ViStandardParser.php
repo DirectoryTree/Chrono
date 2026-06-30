@@ -1,15 +1,15 @@
 <?php
 
-namespace Chrono\Locales\Vi\Parsers;
+namespace DirectoryTree\Chrono\Locales\Vi\Parsers;
 
 use Carbon\CarbonImmutable;
-use Chrono\Calculation\Years;
-use Chrono\Locales\Vi\CreatesParsedComponents;
-use Chrono\Locales\Vi\ViConstants;
-use Chrono\Options;
-use Chrono\ParsedResult;
-use Chrono\Parser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Calculation\Years;
+use DirectoryTree\Chrono\Locales\Vi\CreatesParsedComponents;
+use DirectoryTree\Chrono\Locales\Vi\ViConstants;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parser;
+use DirectoryTree\Chrono\Reference;
 
 readonly class ViStandardParser implements Parser
 {

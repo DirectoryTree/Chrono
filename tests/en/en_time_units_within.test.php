@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses within and in relative expressions', function () {
     expect(Chrono::parseDate('we have to make something in five days.', '2026-06-23 09:15:30')?->toDateTimeString())

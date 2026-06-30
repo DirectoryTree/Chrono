@@ -1,11 +1,11 @@
 <?php
 
-namespace Chrono\Locales\Uk\Parsers;
+namespace DirectoryTree\Chrono\Locales\Uk\Parsers;
 
 use Carbon\CarbonImmutable;
-use Chrono\Locales\Uk\UkConstants;
-use Chrono\ParsedComponents;
-use Chrono\Pattern;
+use DirectoryTree\Chrono\Locales\Uk\UkConstants;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\Pattern;
 
 trait InteractsWithUkrainianRelativeDates
 {

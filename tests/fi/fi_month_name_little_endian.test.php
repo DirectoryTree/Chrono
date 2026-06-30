@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses finnish little endian month name dates and ranges', function () {
     $finnish = Chrono::fi();

@@ -1,9 +1,9 @@
 <?php
 
 use Carbon\CarbonImmutable;
-use Chrono\Calculation\Duration;
-use Chrono\ParsedComponents;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Calculation\Duration;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\Reference;
 
 it('calculates durations like upstream helpers', function () {
     $reference = CarbonImmutable::parse('2022-08-27 12:52:11.000');

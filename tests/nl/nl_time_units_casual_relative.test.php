@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses dutch time unit relative expressions', function () {
     $dutch = Chrono::nl();

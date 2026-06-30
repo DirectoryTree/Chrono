@@ -1,16 +1,16 @@
 <?php
 
-namespace Chrono\Locales\Nl\Parsers;
+namespace DirectoryTree\Chrono\Locales\Nl\Parsers;
 
 use Carbon\CarbonImmutable;
-use Chrono\Calculation\Years;
-use Chrono\Locales\Nl\CreatesParsedComponents;
-use Chrono\Locales\Nl\NlConstants;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Parser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Calculation\Years;
+use DirectoryTree\Chrono\Locales\Nl\CreatesParsedComponents;
+use DirectoryTree\Chrono\Locales\Nl\NlConstants;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parser;
+use DirectoryTree\Chrono\Reference;
 
 readonly class NlMonthNameMiddleEndianParser implements Parser
 {

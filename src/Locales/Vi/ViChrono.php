@@ -1,30 +1,30 @@
 <?php
 
-namespace Chrono\Locales\Vi;
+namespace DirectoryTree\Chrono\Locales\Vi;
 
-use Chrono\Configuration;
-use Chrono\ConfiguredChronoEngine;
-use Chrono\Locales\Vi\Parsers\ViCasualDateParser;
-use Chrono\Locales\Vi\Parsers\ViCasualTimeParser;
-use Chrono\Locales\Vi\Parsers\ViMonthYearParser;
-use Chrono\Locales\Vi\Parsers\ViStandardParser;
-use Chrono\Locales\Vi\Parsers\ViTimeExpressionParser;
-use Chrono\Locales\Vi\Parsers\ViTimeUnitAgoFormatParser;
-use Chrono\Locales\Vi\Parsers\ViTimeUnitCasualRelativeFormatParser;
-use Chrono\Locales\Vi\Parsers\ViTimeUnitLaterFormatParser;
-use Chrono\Locales\Vi\Parsers\ViTimeUnitWithinFormatParser;
-use Chrono\Locales\Vi\Parsers\ViWeekdayParser;
-use Chrono\Locales\Vi\Parsers\ViYearParser;
-use Chrono\Locales\Vi\Refiners\ViMergeDateRangeRefiner;
-use Chrono\Locales\Vi\Refiners\ViMergeDateTimeRefiner;
-use Chrono\Locales\Vi\Refiners\ViMergeWeekdayComponentRefiner;
-use Chrono\Parsers\IsoFormatParser;
-use Chrono\Parsers\SlashDateFormatParser;
-use Chrono\Refiners\ExtractTimezoneAbbrRefiner;
-use Chrono\Refiners\ExtractTimezoneOffsetRefiner;
-use Chrono\Refiners\ForwardDateRefiner;
-use Chrono\Refiners\OverlapRemovalRefiner;
-use Chrono\Refiners\UnlikelyFormatFilter;
+use DirectoryTree\Chrono\Configuration;
+use DirectoryTree\Chrono\ConfiguredChronoEngine;
+use DirectoryTree\Chrono\Locales\Vi\Parsers\ViCasualDateParser;
+use DirectoryTree\Chrono\Locales\Vi\Parsers\ViCasualTimeParser;
+use DirectoryTree\Chrono\Locales\Vi\Parsers\ViMonthYearParser;
+use DirectoryTree\Chrono\Locales\Vi\Parsers\ViStandardParser;
+use DirectoryTree\Chrono\Locales\Vi\Parsers\ViTimeExpressionParser;
+use DirectoryTree\Chrono\Locales\Vi\Parsers\ViTimeUnitAgoFormatParser;
+use DirectoryTree\Chrono\Locales\Vi\Parsers\ViTimeUnitCasualRelativeFormatParser;
+use DirectoryTree\Chrono\Locales\Vi\Parsers\ViTimeUnitLaterFormatParser;
+use DirectoryTree\Chrono\Locales\Vi\Parsers\ViTimeUnitWithinFormatParser;
+use DirectoryTree\Chrono\Locales\Vi\Parsers\ViWeekdayParser;
+use DirectoryTree\Chrono\Locales\Vi\Parsers\ViYearParser;
+use DirectoryTree\Chrono\Locales\Vi\Refiners\ViMergeDateRangeRefiner;
+use DirectoryTree\Chrono\Locales\Vi\Refiners\ViMergeDateTimeRefiner;
+use DirectoryTree\Chrono\Locales\Vi\Refiners\ViMergeWeekdayComponentRefiner;
+use DirectoryTree\Chrono\Parsers\IsoFormatParser;
+use DirectoryTree\Chrono\Parsers\SlashDateFormatParser;
+use DirectoryTree\Chrono\Refiners\ExtractTimezoneAbbrRefiner;
+use DirectoryTree\Chrono\Refiners\ExtractTimezoneOffsetRefiner;
+use DirectoryTree\Chrono\Refiners\ForwardDateRefiner;
+use DirectoryTree\Chrono\Refiners\OverlapRemovalRefiner;
+use DirectoryTree\Chrono\Refiners\UnlikelyFormatFilter;
 
 readonly class ViChrono extends ConfiguredChronoEngine
 {

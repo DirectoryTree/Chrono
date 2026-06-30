@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses italian time unit relative expressions', function () {
     $italian = Chrono::it();

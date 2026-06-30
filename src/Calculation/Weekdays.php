@@ -1,11 +1,11 @@
 <?php
 
-namespace Chrono\Calculation;
+namespace DirectoryTree\Chrono\Calculation;
 
 use Carbon\CarbonImmutable;
-use Chrono\ParsedComponents;
-use Chrono\Reference;
-use Chrono\Weekday;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\Reference;
+use DirectoryTree\Chrono\Weekday;
 
 readonly class Weekdays
 {

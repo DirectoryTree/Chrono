@@ -1,15 +1,15 @@
 <?php
 
-namespace Chrono\Locales\De\Parsers;
+namespace DirectoryTree\Chrono\Locales\De\Parsers;
 
-use Chrono\Dates;
-use Chrono\Locales\De\CreatesParsedComponents;
-use Chrono\Meridiem;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Parsers\AbstractParserWithWordBoundary;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Dates;
+use DirectoryTree\Chrono\Locales\De\CreatesParsedComponents;
+use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parsers\AbstractParserWithWordBoundary;
+use DirectoryTree\Chrono\Reference;
 
 class DeCasualDateParser extends AbstractParserWithWordBoundary
 {

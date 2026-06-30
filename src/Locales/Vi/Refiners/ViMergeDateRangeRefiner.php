@@ -1,9 +1,9 @@
 <?php
 
-namespace Chrono\Locales\Vi\Refiners;
+namespace DirectoryTree\Chrono\Locales\Vi\Refiners;
 
-use Chrono\ParsedResult;
-use Chrono\Refiners\AbstractMergeDateRangeRefiner;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Refiners\AbstractMergeDateRangeRefiner;
 
 readonly class ViMergeDateRangeRefiner extends AbstractMergeDateRangeRefiner
 {

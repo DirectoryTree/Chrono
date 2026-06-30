@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses russian weekdays', function () {
     $weekday = Chrono::ru()->parseText('среда', '2012-08-10 09:30')[0];

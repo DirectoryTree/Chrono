@@ -1,14 +1,14 @@
 <?php
 
-namespace Chrono\Locales\De\Parsers;
+namespace DirectoryTree\Chrono\Locales\De\Parsers;
 
 use Carbon\CarbonImmutable;
-use Chrono\Locales\De\CreatesParsedComponents;
-use Chrono\Locales\De\DeConstants;
-use Chrono\Options;
-use Chrono\ParsedResult;
-use Chrono\Parser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Locales\De\CreatesParsedComponents;
+use DirectoryTree\Chrono\Locales\De\DeConstants;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parser;
+use DirectoryTree\Chrono\Reference;
 
 readonly class DeMonthNameParser implements Parser
 {

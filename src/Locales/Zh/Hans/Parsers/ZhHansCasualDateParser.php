@@ -1,8 +1,8 @@
 <?php
 
-namespace Chrono\Locales\Zh\Hans\Parsers;
+namespace DirectoryTree\Chrono\Locales\Zh\Hans\Parsers;
 
-use Chrono\Locales\Zh\Parsers\AbstractZhCasualDateParser;
+use DirectoryTree\Chrono\Locales\Zh\Parsers\AbstractZhCasualDateParser;
 
 readonly class ZhHansCasualDateParser extends AbstractZhCasualDateParser
 {

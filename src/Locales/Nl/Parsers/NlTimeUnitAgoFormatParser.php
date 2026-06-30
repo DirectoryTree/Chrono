@@ -1,12 +1,12 @@
 <?php
 
-namespace Chrono\Locales\Nl\Parsers;
+namespace DirectoryTree\Chrono\Locales\Nl\Parsers;
 
-use Chrono\Calculation\Duration;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\Parsers\AbstractParserWithWordBoundary;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Calculation\Duration;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\Parsers\AbstractParserWithWordBoundary;
+use DirectoryTree\Chrono\Reference;
 
 class NlTimeUnitAgoFormatParser extends AbstractParserWithWordBoundary
 {

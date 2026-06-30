@@ -1,6 +1,6 @@
 <?php
 
-namespace Chrono\Locales\Zh\Hans\Parsers;
+namespace DirectoryTree\Chrono\Locales\Zh\Hans\Parsers;
 
 readonly class ZhHansRelationWeekdayParser extends ZhHansWeekdayParser
 {

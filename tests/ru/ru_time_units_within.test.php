@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses russian within time unit expressions', function () {
     $within = Chrono::ru()->parseText('в течение 1 месяца', '2012-08-10 09:30')[0];

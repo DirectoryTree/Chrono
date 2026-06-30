@@ -1,8 +1,8 @@
 <?php
 
 use Carbon\CarbonImmutable;
-use Chrono\Chrono;
-use Chrono\ParsedResult;
+use DirectoryTree\Chrono\Chrono;
+use DirectoryTree\Chrono\ParsedResult;
 
 it('parses iso dates into carbon instances', function () {
     $result = Chrono::parse('Ship on 2026-06-23 14:30')[0];

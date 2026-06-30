@@ -1,23 +1,23 @@
 <?php
 
-namespace Chrono\Locales\Zh;
+namespace DirectoryTree\Chrono\Locales\Zh;
 
-use Chrono\Configuration;
-use Chrono\ConfiguredChronoEngine;
-use Chrono\Locales\Zh\Hans\Parsers\ZhHansCasualDateParser;
-use Chrono\Locales\Zh\Hans\Parsers\ZhHansDateParser;
-use Chrono\Locales\Zh\Hans\Parsers\ZhHansDeadlineFormatParser;
-use Chrono\Locales\Zh\Hans\Parsers\ZhHansRelationWeekdayParser;
-use Chrono\Locales\Zh\Hans\Parsers\ZhHansTimeExpressionParser;
-use Chrono\Locales\Zh\Hans\Parsers\ZhHansWeekdayParser;
-use Chrono\Locales\Zh\Refiners\ZhMergeDateRangeRefiner;
-use Chrono\Locales\Zh\Refiners\ZhMergeDateTimeRefiner;
-use Chrono\Parsers\IsoFormatParser;
-use Chrono\Refiners\ExtractTimezoneAbbrRefiner;
-use Chrono\Refiners\ForwardDateRefiner;
-use Chrono\Refiners\MergeWeekdayComponentRefiner;
-use Chrono\Refiners\OverlapRemovalRefiner;
-use Chrono\Refiners\UnlikelyFormatFilter;
+use DirectoryTree\Chrono\Configuration;
+use DirectoryTree\Chrono\ConfiguredChronoEngine;
+use DirectoryTree\Chrono\Locales\Zh\Hans\Parsers\ZhHansCasualDateParser;
+use DirectoryTree\Chrono\Locales\Zh\Hans\Parsers\ZhHansDateParser;
+use DirectoryTree\Chrono\Locales\Zh\Hans\Parsers\ZhHansDeadlineFormatParser;
+use DirectoryTree\Chrono\Locales\Zh\Hans\Parsers\ZhHansRelationWeekdayParser;
+use DirectoryTree\Chrono\Locales\Zh\Hans\Parsers\ZhHansTimeExpressionParser;
+use DirectoryTree\Chrono\Locales\Zh\Hans\Parsers\ZhHansWeekdayParser;
+use DirectoryTree\Chrono\Locales\Zh\Refiners\ZhMergeDateRangeRefiner;
+use DirectoryTree\Chrono\Locales\Zh\Refiners\ZhMergeDateTimeRefiner;
+use DirectoryTree\Chrono\Parsers\IsoFormatParser;
+use DirectoryTree\Chrono\Refiners\ExtractTimezoneAbbrRefiner;
+use DirectoryTree\Chrono\Refiners\ForwardDateRefiner;
+use DirectoryTree\Chrono\Refiners\MergeWeekdayComponentRefiner;
+use DirectoryTree\Chrono\Refiners\OverlapRemovalRefiner;
+use DirectoryTree\Chrono\Refiners\UnlikelyFormatFilter;
 
 readonly class ZhHansChrono extends ConfiguredChronoEngine
 {

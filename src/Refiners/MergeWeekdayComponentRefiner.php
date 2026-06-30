@@ -1,10 +1,10 @@
 <?php
 
-namespace Chrono\Refiners;
+namespace DirectoryTree\Chrono\Refiners;
 
-use Chrono\Options;
-use Chrono\ParsedResult;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Reference;
 
 readonly class MergeWeekdayComponentRefiner extends MergingRefiner
 {

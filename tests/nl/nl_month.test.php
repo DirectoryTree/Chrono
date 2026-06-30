@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses dutch month only and month year expressions', function () {
     $dutch = Chrono::nl();

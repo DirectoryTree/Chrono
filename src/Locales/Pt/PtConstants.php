@@ -1,8 +1,8 @@
 <?php
 
-namespace Chrono\Locales\Pt;
+namespace DirectoryTree\Chrono\Locales\Pt;
 
-use Chrono\Pattern;
+use DirectoryTree\Chrono\Pattern;
 
 readonly class PtConstants
 {

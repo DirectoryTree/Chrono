@@ -1,11 +1,11 @@
 <?php
 
-namespace Chrono\Locales\En\Parsers;
+namespace DirectoryTree\Chrono\Locales\En\Parsers;
 
-use Chrono\Meridiem;
-use Chrono\ParsedComponents;
-use Chrono\Parsers\AbstractTimeExpressionParser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\Parsers\AbstractTimeExpressionParser;
+use DirectoryTree\Chrono\Reference;
 
 class EnTimeExpressionParser extends AbstractTimeExpressionParser
 {

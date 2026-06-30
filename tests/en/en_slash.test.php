@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses slash dates with forward date option', function () {
     $date = Chrono::parseDate('Book 6/20', '2026-06-23 09:00', ['forwardDate' => true]);

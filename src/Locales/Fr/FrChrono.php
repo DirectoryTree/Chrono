@@ -1,30 +1,30 @@
 <?php
 
-namespace Chrono\Locales\Fr;
+namespace DirectoryTree\Chrono\Locales\Fr;
 
-use Chrono\Configuration;
-use Chrono\ConfiguredChronoEngine;
-use Chrono\Locales\Fr\Parsers\FrCasualDateParser;
-use Chrono\Locales\Fr\Parsers\FrCasualTimeParser;
-use Chrono\Locales\Fr\Parsers\FrIsoDateTimeRangeParser;
-use Chrono\Locales\Fr\Parsers\FrMonthNameLittleEndianParser;
-use Chrono\Locales\Fr\Parsers\FrMonthNameParser;
-use Chrono\Locales\Fr\Parsers\FrSlashDateParser;
-use Chrono\Locales\Fr\Parsers\FrSpecificTimeExpressionParser;
-use Chrono\Locales\Fr\Parsers\FrTimeExpressionParser as FrCommonTimeExpressionParser;
-use Chrono\Locales\Fr\Parsers\FrTimeUnitAgoFormatParser;
-use Chrono\Locales\Fr\Parsers\FrTimeUnitRelativeFormatParser;
-use Chrono\Locales\Fr\Parsers\FrTimeUnitWithinFormatParser;
-use Chrono\Locales\Fr\Parsers\FrWeekdayParser;
-use Chrono\Locales\Fr\Refiners\FrMergeDateRangeRefiner;
-use Chrono\Locales\Fr\Refiners\FrMergeDateTimeRefiner;
-use Chrono\Parsers\IsoFormatParser;
-use Chrono\Refiners\ExtractTimezoneAbbrRefiner;
-use Chrono\Refiners\ExtractTimezoneOffsetRefiner;
-use Chrono\Refiners\ForwardDateRefiner;
-use Chrono\Refiners\MergeWeekdayComponentRefiner;
-use Chrono\Refiners\OverlapRemovalRefiner;
-use Chrono\Refiners\UnlikelyFormatFilter;
+use DirectoryTree\Chrono\Configuration;
+use DirectoryTree\Chrono\ConfiguredChronoEngine;
+use DirectoryTree\Chrono\Locales\Fr\Parsers\FrCasualDateParser;
+use DirectoryTree\Chrono\Locales\Fr\Parsers\FrCasualTimeParser;
+use DirectoryTree\Chrono\Locales\Fr\Parsers\FrIsoDateTimeRangeParser;
+use DirectoryTree\Chrono\Locales\Fr\Parsers\FrMonthNameLittleEndianParser;
+use DirectoryTree\Chrono\Locales\Fr\Parsers\FrMonthNameParser;
+use DirectoryTree\Chrono\Locales\Fr\Parsers\FrSlashDateParser;
+use DirectoryTree\Chrono\Locales\Fr\Parsers\FrSpecificTimeExpressionParser;
+use DirectoryTree\Chrono\Locales\Fr\Parsers\FrTimeExpressionParser as FrCommonTimeExpressionParser;
+use DirectoryTree\Chrono\Locales\Fr\Parsers\FrTimeUnitAgoFormatParser;
+use DirectoryTree\Chrono\Locales\Fr\Parsers\FrTimeUnitRelativeFormatParser;
+use DirectoryTree\Chrono\Locales\Fr\Parsers\FrTimeUnitWithinFormatParser;
+use DirectoryTree\Chrono\Locales\Fr\Parsers\FrWeekdayParser;
+use DirectoryTree\Chrono\Locales\Fr\Refiners\FrMergeDateRangeRefiner;
+use DirectoryTree\Chrono\Locales\Fr\Refiners\FrMergeDateTimeRefiner;
+use DirectoryTree\Chrono\Parsers\IsoFormatParser;
+use DirectoryTree\Chrono\Refiners\ExtractTimezoneAbbrRefiner;
+use DirectoryTree\Chrono\Refiners\ExtractTimezoneOffsetRefiner;
+use DirectoryTree\Chrono\Refiners\ForwardDateRefiner;
+use DirectoryTree\Chrono\Refiners\MergeWeekdayComponentRefiner;
+use DirectoryTree\Chrono\Refiners\OverlapRemovalRefiner;
+use DirectoryTree\Chrono\Refiners\UnlikelyFormatFilter;
 
 readonly class FrChrono extends ConfiguredChronoEngine
 {

@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses vietnamese standard month year and year expressions', function () {
     $vietnamese = Chrono::vi();

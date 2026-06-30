@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses portuguese month name dates and ranges', function () {
     $portuguese = Chrono::pt();

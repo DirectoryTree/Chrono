@@ -1,14 +1,14 @@
 <?php
 
-namespace Chrono\Locales\Ja\Parsers;
+namespace DirectoryTree\Chrono\Locales\Ja\Parsers;
 
 use Carbon\CarbonImmutable;
-use Chrono\Locales\Ja\CreatesParsedComponents;
-use Chrono\Locales\Ja\JaConstants;
-use Chrono\Options;
-use Chrono\ParsedResult;
-use Chrono\Parser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Locales\Ja\CreatesParsedComponents;
+use DirectoryTree\Chrono\Locales\Ja\JaConstants;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parser;
+use DirectoryTree\Chrono\Reference;
 
 readonly class JaStandardParser implements Parser
 {

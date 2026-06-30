@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses finnish casual dates and times', function () {
     $finnish = Chrono::fi();

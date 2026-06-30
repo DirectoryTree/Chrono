@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses german casual date ranges and daypart variants', function () {
     $german = Chrono::de();

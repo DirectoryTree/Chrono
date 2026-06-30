@@ -1,15 +1,15 @@
 <?php
 
-namespace Chrono\Refiners;
+namespace DirectoryTree\Chrono\Refiners;
 
 use Carbon\CarbonImmutable;
-use Chrono\Calculation\Duration;
-use Chrono\Calculation\Weekdays;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Reference;
-use Chrono\Refiner;
+use DirectoryTree\Chrono\Calculation\Duration;
+use DirectoryTree\Chrono\Calculation\Weekdays;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Reference;
+use DirectoryTree\Chrono\Refiner;
 
 readonly class ForwardDateRefiner implements Refiner
 {

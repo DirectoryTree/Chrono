@@ -1,16 +1,16 @@
 <?php
 
 use Carbon\CarbonImmutable;
-use Chrono\Chrono;
-use Chrono\Locales\En\Parsers\EnTimeUnitCasualRelativeFormatParser;
-use Chrono\Month;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Reference;
-use Chrono\Refiners\ExtractTimezoneAbbrRefiner;
-use Chrono\Timezone;
-use Chrono\Weekday;
+use DirectoryTree\Chrono\Chrono;
+use DirectoryTree\Chrono\Locales\En\Parsers\EnTimeUnitCasualRelativeFormatParser;
+use DirectoryTree\Chrono\Month;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Reference;
+use DirectoryTree\Chrono\Refiners\ExtractTimezoneAbbrRefiner;
+use DirectoryTree\Chrono\Timezone;
+use DirectoryTree\Chrono\Weekday;
 
 it('parses iso datetimes with timezone suffixes', function () {
     $offset = Chrono::parse('1994-11-05T08:15:30-05:30')[0];

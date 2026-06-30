@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses english date and time expressions from the upstream mixed fixture', function () {
     $dateTime = Chrono::parse('Something happen on 2014-04-18 13:00 - 16:00 as')[0];

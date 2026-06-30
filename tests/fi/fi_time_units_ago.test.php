@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses finnish ago time unit expressions', function () {
     $finnish = Chrono::fi();

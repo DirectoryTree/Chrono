@@ -1,8 +1,8 @@
 <?php
 
-namespace Chrono\Locales\Zh\Hant\Parsers;
+namespace DirectoryTree\Chrono\Locales\Zh\Hant\Parsers;
 
-use Chrono\Locales\Zh\Parsers\AbstractZhWeekdayParser;
+use DirectoryTree\Chrono\Locales\Zh\Parsers\AbstractZhWeekdayParser;
 
 readonly class ZhHantWeekdayParser extends AbstractZhWeekdayParser
 {

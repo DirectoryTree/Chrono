@@ -1,16 +1,16 @@
 <?php
 
-namespace Chrono\Locales\De\Parsers;
+namespace DirectoryTree\Chrono\Locales\De\Parsers;
 
 use Carbon\CarbonImmutable;
-use Chrono\Calculation\Years;
-use Chrono\Locales\De\CreatesParsedComponents;
-use Chrono\Locales\De\DeConstants;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Parser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Calculation\Years;
+use DirectoryTree\Chrono\Locales\De\CreatesParsedComponents;
+use DirectoryTree\Chrono\Locales\De\DeConstants;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parser;
+use DirectoryTree\Chrono\Reference;
 
 readonly class DeMonthNameLittleEndianParser implements Parser
 {

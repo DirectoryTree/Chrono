@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('rejects unlikely vietnamese date and time false positives', function () {
     $vietnamese = Chrono::vi();

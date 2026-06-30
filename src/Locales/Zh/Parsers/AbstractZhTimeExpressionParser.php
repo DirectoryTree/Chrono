@@ -1,15 +1,15 @@
 <?php
 
-namespace Chrono\Locales\Zh\Parsers;
+namespace DirectoryTree\Chrono\Locales\Zh\Parsers;
 
-use Chrono\Dates;
-use Chrono\Locales\Zh\ZhConstants;
-use Chrono\Meridiem;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Parser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Dates;
+use DirectoryTree\Chrono\Locales\Zh\ZhConstants;
+use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parser;
+use DirectoryTree\Chrono\Reference;
 
 abstract readonly class AbstractZhTimeExpressionParser implements Parser
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Chrono\Locales\Vi\Parsers;
+namespace DirectoryTree\Chrono\Locales\Vi\Parsers;
 
-use Chrono\Calculation\Duration;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\Parsers\AbstractParserWithWordBoundary;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Calculation\Duration;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\Parsers\AbstractParserWithWordBoundary;
+use DirectoryTree\Chrono\Reference;
 
 class ViTimeUnitAgoFormatParser extends AbstractParserWithWordBoundary
 {

@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('does not parse reporting-period prose as a relative duration', function () {
     $result = Chrono::parse('Statement of comprehensive income for the year ended Dec. 2021', '2012-08-10')[0];

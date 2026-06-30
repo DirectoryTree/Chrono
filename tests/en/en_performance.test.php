@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('does not backtrack excessively across whitespace-only duration fragments', function () {
     $text = 'BGR3                                                                                         '.

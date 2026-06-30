@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('matches upstream russian ago time unit expressions', function (string $text, string $expectedText, string $expectedDate) {
     $result = Chrono::ru()->parseText($text, '2012-07-10 00:00')[0];

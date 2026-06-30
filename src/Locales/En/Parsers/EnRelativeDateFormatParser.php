@@ -1,11 +1,11 @@
 <?php
 
-namespace Chrono\Locales\En\Parsers;
+namespace DirectoryTree\Chrono\Locales\En\Parsers;
 
-use Chrono\Options;
-use Chrono\ParsedResult;
-use Chrono\Parser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parser;
+use DirectoryTree\Chrono\Reference;
 
 readonly class EnRelativeDateFormatParser implements Parser
 {

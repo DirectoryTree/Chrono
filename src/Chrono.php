@@ -1,25 +1,25 @@
 <?php
 
-namespace Chrono;
+namespace DirectoryTree\Chrono;
 
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
-use Chrono\Locales\De\DeChrono;
-use Chrono\Locales\En\EnChrono;
-use Chrono\Locales\Es\EsChrono;
-use Chrono\Locales\Fi\FiChrono;
-use Chrono\Locales\Fr\FrChrono;
-use Chrono\Locales\It\ItChrono;
-use Chrono\Locales\Ja\JaChrono;
-use Chrono\Locales\Nl\NlChrono;
-use Chrono\Locales\Pt\PtChrono;
-use Chrono\Locales\Ru\RuChrono;
-use Chrono\Locales\Sv\SvChrono;
-use Chrono\Locales\Uk\UkChrono;
-use Chrono\Locales\Vi\ViChrono;
-use Chrono\Locales\Zh\ZhChrono;
-use Chrono\Locales\Zh\ZhHansChrono;
-use Chrono\Locales\Zh\ZhHantChrono;
+use DirectoryTree\Chrono\Locales\De\DeChrono;
+use DirectoryTree\Chrono\Locales\En\EnChrono;
+use DirectoryTree\Chrono\Locales\Es\EsChrono;
+use DirectoryTree\Chrono\Locales\Fi\FiChrono;
+use DirectoryTree\Chrono\Locales\Fr\FrChrono;
+use DirectoryTree\Chrono\Locales\It\ItChrono;
+use DirectoryTree\Chrono\Locales\Ja\JaChrono;
+use DirectoryTree\Chrono\Locales\Nl\NlChrono;
+use DirectoryTree\Chrono\Locales\Pt\PtChrono;
+use DirectoryTree\Chrono\Locales\Ru\RuChrono;
+use DirectoryTree\Chrono\Locales\Sv\SvChrono;
+use DirectoryTree\Chrono\Locales\Uk\UkChrono;
+use DirectoryTree\Chrono\Locales\Vi\ViChrono;
+use DirectoryTree\Chrono\Locales\Zh\ZhChrono;
+use DirectoryTree\Chrono\Locales\Zh\ZhHansChrono;
+use DirectoryTree\Chrono\Locales\Zh\ZhHantChrono;
 
 readonly class Chrono
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Chrono\Locales\Ja\Parsers;
+namespace DirectoryTree\Chrono\Locales\Ja\Parsers;
 
-use Chrono\Options;
-use Chrono\ParsedResult;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Reference;
 
 readonly class JaWeekdayWithParenthesesParser extends JaWeekdayParser
 {

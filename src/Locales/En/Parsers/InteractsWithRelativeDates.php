@@ -1,10 +1,10 @@
 <?php
 
-namespace Chrono\Locales\En\Parsers;
+namespace DirectoryTree\Chrono\Locales\En\Parsers;
 
 use Carbon\CarbonImmutable;
-use Chrono\Dates;
-use Chrono\ParsedComponents;
+use DirectoryTree\Chrono\Dates;
+use DirectoryTree\Chrono\ParsedComponents;
 
 trait InteractsWithRelativeDates
 {

@@ -1,21 +1,21 @@
 <?php
 
-namespace Chrono\Locales\Sv;
+namespace DirectoryTree\Chrono\Locales\Sv;
 
-use Chrono\Configuration;
-use Chrono\ConfiguredChronoEngine;
-use Chrono\Locales\Sv\Parsers\SvCasualDateParser;
-use Chrono\Locales\Sv\Parsers\SvMonthNameLittleEndianParser;
-use Chrono\Locales\Sv\Parsers\SvTimeUnitCasualRelativeFormatParser;
-use Chrono\Locales\Sv\Parsers\SvWeekdayParser;
-use Chrono\Parsers\IsoFormatParser;
-use Chrono\Parsers\SlashDateFormatParser;
-use Chrono\Refiners\ExtractTimezoneAbbrRefiner;
-use Chrono\Refiners\ExtractTimezoneOffsetRefiner;
-use Chrono\Refiners\ForwardDateRefiner;
-use Chrono\Refiners\MergeWeekdayComponentRefiner;
-use Chrono\Refiners\OverlapRemovalRefiner;
-use Chrono\Refiners\UnlikelyFormatFilter;
+use DirectoryTree\Chrono\Configuration;
+use DirectoryTree\Chrono\ConfiguredChronoEngine;
+use DirectoryTree\Chrono\Locales\Sv\Parsers\SvCasualDateParser;
+use DirectoryTree\Chrono\Locales\Sv\Parsers\SvMonthNameLittleEndianParser;
+use DirectoryTree\Chrono\Locales\Sv\Parsers\SvTimeUnitCasualRelativeFormatParser;
+use DirectoryTree\Chrono\Locales\Sv\Parsers\SvWeekdayParser;
+use DirectoryTree\Chrono\Parsers\IsoFormatParser;
+use DirectoryTree\Chrono\Parsers\SlashDateFormatParser;
+use DirectoryTree\Chrono\Refiners\ExtractTimezoneAbbrRefiner;
+use DirectoryTree\Chrono\Refiners\ExtractTimezoneOffsetRefiner;
+use DirectoryTree\Chrono\Refiners\ForwardDateRefiner;
+use DirectoryTree\Chrono\Refiners\MergeWeekdayComponentRefiner;
+use DirectoryTree\Chrono\Refiners\OverlapRemovalRefiner;
+use DirectoryTree\Chrono\Refiners\UnlikelyFormatFilter;
 
 readonly class SvChrono extends ConfiguredChronoEngine
 {

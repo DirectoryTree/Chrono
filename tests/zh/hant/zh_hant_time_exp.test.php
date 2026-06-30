@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses traditional chinese time expressions', function () {
     $chinese = Chrono::zhHant();

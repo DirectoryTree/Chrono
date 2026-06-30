@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses spanish schedule-style slash date times', function () {
     $spanish = Chrono::es();

@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses default chinese engine international and simplified traditional input', function () {
     $chinese = Chrono::zh();

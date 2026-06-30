@@ -1,12 +1,12 @@
 <?php
 
-namespace Chrono\Parsers;
+namespace DirectoryTree\Chrono\Parsers;
 
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Parser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parser;
+use DirectoryTree\Chrono\Reference;
 
 abstract class AbstractParserWithWordBoundary implements Parser
 {

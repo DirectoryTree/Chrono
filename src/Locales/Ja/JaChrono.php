@@ -1,24 +1,24 @@
 <?php
 
-namespace Chrono\Locales\Ja;
+namespace DirectoryTree\Chrono\Locales\Ja;
 
-use Chrono\Configuration;
-use Chrono\ConfiguredChronoEngine;
-use Chrono\Locales\Ja\Parsers\JaCasualDateParser;
-use Chrono\Locales\Ja\Parsers\JaSlashDateFormatParser;
-use Chrono\Locales\Ja\Parsers\JaStandardParser;
-use Chrono\Locales\Ja\Parsers\JaTimeExpressionParser;
-use Chrono\Locales\Ja\Parsers\JaWeekdayParser;
-use Chrono\Locales\Ja\Parsers\JaWeekdayWithParenthesesParser;
-use Chrono\Locales\Ja\Refiners\JaMergeDateRangeRefiner;
-use Chrono\Locales\Ja\Refiners\JaMergeDateTimeRefiner;
-use Chrono\Locales\Ja\Refiners\JaMergeWeekdayComponentRefiner;
-use Chrono\Parsers\IsoFormatParser;
-use Chrono\Refiners\ExtractTimezoneAbbrRefiner;
-use Chrono\Refiners\ExtractTimezoneOffsetRefiner;
-use Chrono\Refiners\ForwardDateRefiner;
-use Chrono\Refiners\OverlapRemovalRefiner;
-use Chrono\Refiners\UnlikelyFormatFilter;
+use DirectoryTree\Chrono\Configuration;
+use DirectoryTree\Chrono\ConfiguredChronoEngine;
+use DirectoryTree\Chrono\Locales\Ja\Parsers\JaCasualDateParser;
+use DirectoryTree\Chrono\Locales\Ja\Parsers\JaSlashDateFormatParser;
+use DirectoryTree\Chrono\Locales\Ja\Parsers\JaStandardParser;
+use DirectoryTree\Chrono\Locales\Ja\Parsers\JaTimeExpressionParser;
+use DirectoryTree\Chrono\Locales\Ja\Parsers\JaWeekdayParser;
+use DirectoryTree\Chrono\Locales\Ja\Parsers\JaWeekdayWithParenthesesParser;
+use DirectoryTree\Chrono\Locales\Ja\Refiners\JaMergeDateRangeRefiner;
+use DirectoryTree\Chrono\Locales\Ja\Refiners\JaMergeDateTimeRefiner;
+use DirectoryTree\Chrono\Locales\Ja\Refiners\JaMergeWeekdayComponentRefiner;
+use DirectoryTree\Chrono\Parsers\IsoFormatParser;
+use DirectoryTree\Chrono\Refiners\ExtractTimezoneAbbrRefiner;
+use DirectoryTree\Chrono\Refiners\ExtractTimezoneOffsetRefiner;
+use DirectoryTree\Chrono\Refiners\ForwardDateRefiner;
+use DirectoryTree\Chrono\Refiners\OverlapRemovalRefiner;
+use DirectoryTree\Chrono\Refiners\UnlikelyFormatFilter;
 
 readonly class JaChrono extends ConfiguredChronoEngine
 {

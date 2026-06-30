@@ -1,12 +1,12 @@
 <?php
 
-namespace Chrono\Locales\It\Refiners;
+namespace DirectoryTree\Chrono\Locales\It\Refiners;
 
-use Chrono\Locales\It\Parsers\InteractsWithItalianRelativeDates;
-use Chrono\Options;
-use Chrono\ParsedResult;
-use Chrono\Reference;
-use Chrono\Refiners\MergingRefiner;
+use DirectoryTree\Chrono\Locales\It\Parsers\InteractsWithItalianRelativeDates;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Reference;
+use DirectoryTree\Chrono\Refiners\MergingRefiner;
 
 readonly class ItMergeRelativeDateRefiner extends MergingRefiner
 {

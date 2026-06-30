@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses swedish little-endian month names with upstream-shaped components', function () {
     $swedish = Chrono::sv();

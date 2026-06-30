@@ -1,11 +1,11 @@
 <?php
 
-namespace Chrono\Locales\Vi\Parsers;
+namespace DirectoryTree\Chrono\Locales\Vi\Parsers;
 
 use Carbon\CarbonImmutable;
-use Chrono\Locales\Vi\ViConstants;
-use Chrono\ParsedComponents;
-use Chrono\Pattern;
+use DirectoryTree\Chrono\Locales\Vi\ViConstants;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\Pattern;
 
 trait InteractsWithVietnameseRelativeDates
 {

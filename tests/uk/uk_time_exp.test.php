@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses ukrainian time expressions', function () {
     $time = Chrono::uk()->parseText('о 6:30 вечора', '2012-08-10 09:30')[0];

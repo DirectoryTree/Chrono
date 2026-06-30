@@ -1,14 +1,14 @@
 <?php
 
-namespace Chrono\Locales\Zh\Parsers;
+namespace DirectoryTree\Chrono\Locales\Zh\Parsers;
 
 use Carbon\CarbonImmutable;
-use Chrono\Locales\Zh\CreatesParsedComponents;
-use Chrono\Locales\Zh\ZhConstants;
-use Chrono\Options;
-use Chrono\ParsedResult;
-use Chrono\Parser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Locales\Zh\CreatesParsedComponents;
+use DirectoryTree\Chrono\Locales\Zh\ZhConstants;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parser;
+use DirectoryTree\Chrono\Reference;
 
 abstract readonly class AbstractZhDateParser implements Parser
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Chrono;
+namespace DirectoryTree\Chrono;
 
 enum Weekday: int
 {

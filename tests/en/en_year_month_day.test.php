@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses year month day expressions', function () {
     $slash = Chrono::parse('2012/8/10', '2012-08-10')[0];

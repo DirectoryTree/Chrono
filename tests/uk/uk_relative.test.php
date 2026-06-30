@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('matches upstream ukrainian relative date expressions', function (string $text, string $reference, string $expectedDate) {
     $result = Chrono::uk()->parseText($text, $reference)[0];

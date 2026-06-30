@@ -1,14 +1,14 @@
 <?php
 
-namespace Chrono\Locales\Ja\Parsers;
+namespace DirectoryTree\Chrono\Locales\Ja\Parsers;
 
-use Chrono\Locales\Ja\JaConstants;
-use Chrono\Meridiem;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Parser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Locales\Ja\JaConstants;
+use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parser;
+use DirectoryTree\Chrono\Reference;
 
 readonly class JaTimeExpressionParser implements Parser
 {

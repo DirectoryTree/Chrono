@@ -1,7 +1,7 @@
 <?php
 
-use Chrono\Chrono;
-use Chrono\Meridiem;
+use DirectoryTree\Chrono\Chrono;
+use DirectoryTree\Chrono\Meridiem;
 
 it('parses ago and before relative durations like upstream', function () {
     $fiveDays = Chrono::parse('5 days ago, we did something', '2012-08-10')[0];

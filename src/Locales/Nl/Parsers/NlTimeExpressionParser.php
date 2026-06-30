@@ -1,12 +1,12 @@
 <?php
 
-namespace Chrono\Locales\Nl\Parsers;
+namespace DirectoryTree\Chrono\Locales\Nl\Parsers;
 
-use Chrono\Meridiem;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Parsers\AbstractTimeExpressionParser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parsers\AbstractTimeExpressionParser;
+use DirectoryTree\Chrono\Reference;
 
 class NlTimeExpressionParser extends AbstractTimeExpressionParser
 {

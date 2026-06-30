@@ -1,13 +1,13 @@
 <?php
 
-namespace Chrono\Locales\Uk\Parsers;
+namespace DirectoryTree\Chrono\Locales\Uk\Parsers;
 
 use Carbon\CarbonImmutable;
-use Chrono\Locales\Uk\UkConstants;
-use Chrono\Options;
-use Chrono\ParsedResult;
-use Chrono\Parser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Locales\Uk\UkConstants;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parser;
+use DirectoryTree\Chrono\Reference;
 
 readonly class UkRelativeDateFormatParser implements Parser
 {

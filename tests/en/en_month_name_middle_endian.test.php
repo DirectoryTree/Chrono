@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses middle endian cross month ranges', function () {
     $sameMonthDash = Chrono::parse('August 10 - 22, 2012', '2012-08-10')[0];

@@ -1,12 +1,12 @@
 <?php
 
-namespace Chrono\Locales\En\Refiners;
+namespace DirectoryTree\Chrono\Locales\En\Refiners;
 
-use Chrono\Locales\En\EnConstants;
-use Chrono\Options;
-use Chrono\ParsedResult;
-use Chrono\Reference;
-use Chrono\Refiner;
+use DirectoryTree\Chrono\Locales\En\EnConstants;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Reference;
+use DirectoryTree\Chrono\Refiner;
 
 readonly class EnExtractYearSuffixRefiner implements Refiner
 {

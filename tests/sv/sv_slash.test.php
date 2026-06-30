@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses swedish month name and slash dates', function () {
     $swedish = Chrono::sv();

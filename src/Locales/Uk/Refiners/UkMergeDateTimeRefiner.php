@@ -1,8 +1,8 @@
 <?php
 
-namespace Chrono\Locales\Uk\Refiners;
+namespace DirectoryTree\Chrono\Locales\Uk\Refiners;
 
-use Chrono\Refiners\AbstractMergeDateTimeRefiner;
+use DirectoryTree\Chrono\Refiners\AbstractMergeDateTimeRefiner;
 
 readonly class UkMergeDateTimeRefiner extends AbstractMergeDateTimeRefiner
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Chrono\Locales\Fr;
+namespace DirectoryTree\Chrono\Locales\Fr;
 
-use Chrono\Pattern;
+use DirectoryTree\Chrono\Pattern;
 
 readonly class FrConstants
 {

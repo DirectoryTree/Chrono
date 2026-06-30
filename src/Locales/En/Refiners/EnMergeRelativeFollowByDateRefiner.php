@@ -1,11 +1,11 @@
 <?php
 
-namespace Chrono\Locales\En\Refiners;
+namespace DirectoryTree\Chrono\Locales\En\Refiners;
 
-use Chrono\Options;
-use Chrono\ParsedResult;
-use Chrono\Reference;
-use Chrono\Refiners\MergingRefiner;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Reference;
+use DirectoryTree\Chrono\Refiners\MergingRefiner;
 
 readonly class EnMergeRelativeFollowByDateRefiner extends MergingRefiner
 {

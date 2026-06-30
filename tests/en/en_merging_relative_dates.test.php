@@ -1,7 +1,7 @@
 <?php
 
-use Chrono\Chrono;
-use Chrono\Weekday;
+use DirectoryTree\Chrono\Chrono;
+use DirectoryTree\Chrono\Weekday;
 
 it('merges relative durations before and after parsed dates', function () {
     $afterYesterday = Chrono::parse('2 weeks after yesterday', '2022-02-02 00:00')[0];

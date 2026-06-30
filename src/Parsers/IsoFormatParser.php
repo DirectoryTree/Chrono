@@ -1,12 +1,12 @@
 <?php
 
-namespace Chrono\Parsers;
+namespace DirectoryTree\Chrono\Parsers;
 
 use Carbon\CarbonImmutable;
-use Chrono\Locales\En\CreatesParsedComponents;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Locales\En\CreatesParsedComponents;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\Reference;
 
 class IsoFormatParser extends AbstractParserWithWordBoundary
 {

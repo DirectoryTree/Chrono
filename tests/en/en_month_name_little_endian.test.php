@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses little endian month name dates with two digit years', function () {
     $explicit = Chrono::parse('10 August 2012', '2012-08-10')[0];

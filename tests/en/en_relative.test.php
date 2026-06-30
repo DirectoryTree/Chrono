@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses relative dates', function () {
     $result = Chrono::parse('5 days ago', '2026-06-23 09:15:30')[0];

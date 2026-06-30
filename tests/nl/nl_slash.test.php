@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses dutch slash and casual year month day formats', function () {
     $dutch = Chrono::nl();

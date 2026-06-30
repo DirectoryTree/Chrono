@@ -1,13 +1,13 @@
 <?php
 
-namespace Chrono\Locales\Ru\Parsers;
+namespace DirectoryTree\Chrono\Locales\Ru\Parsers;
 
-use Chrono\Dates;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Parsers\AbstractParserWithWordBoundary;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Dates;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parsers\AbstractParserWithWordBoundary;
+use DirectoryTree\Chrono\Reference;
 
 class RuCasualDateParser extends AbstractParserWithWordBoundary
 {

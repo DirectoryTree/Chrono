@@ -1,13 +1,13 @@
 <?php
 
-namespace Chrono\Locales\Vi\Parsers;
+namespace DirectoryTree\Chrono\Locales\Vi\Parsers;
 
-use Chrono\Meridiem;
-use Chrono\Options;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Parser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\Options;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parser;
+use DirectoryTree\Chrono\Reference;
 
 readonly class ViTimeExpressionParser implements Parser
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Chrono\Locales\Pt\Parsers;
+namespace DirectoryTree\Chrono\Locales\Pt\Parsers;
 
-use Chrono\ParsedResult;
-use Chrono\Parsers\AbstractTimeExpressionParser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parsers\AbstractTimeExpressionParser;
+use DirectoryTree\Chrono\Reference;
 
 class PtTimeExpressionParser extends AbstractTimeExpressionParser
 {

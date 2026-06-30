@@ -1,6 +1,6 @@
 <?php
 
-namespace Chrono\Locales\Zh;
+namespace DirectoryTree\Chrono\Locales\Zh;
 
 readonly class ZhConstants
 {

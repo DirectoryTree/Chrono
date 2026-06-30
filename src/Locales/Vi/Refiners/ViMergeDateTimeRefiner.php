@@ -1,8 +1,8 @@
 <?php
 
-namespace Chrono\Locales\Vi\Refiners;
+namespace DirectoryTree\Chrono\Locales\Vi\Refiners;
 
-use Chrono\Refiners\AbstractMergeDateTimeRefiner;
+use DirectoryTree\Chrono\Refiners\AbstractMergeDateTimeRefiner;
 
 readonly class ViMergeDateTimeRefiner extends AbstractMergeDateTimeRefiner
 {

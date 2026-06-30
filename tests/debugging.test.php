@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\BufferedDebugHandler;
+use DirectoryTree\Chrono\BufferedDebugHandler;
 
 it('buffers debug callbacks until explicitly executed', function () {
     $debugHandler = new BufferedDebugHandler;

@@ -1,6 +1,6 @@
 <?php
 
-use Chrono\Chrono;
+use DirectoryTree\Chrono\Chrono;
 
 it('parses russian month expressions', function () {
     $dateTime = Chrono::ru()->parseText('10 августа 2012 в 6:30 вечера', '2012-08-10 09:30')[0];

@@ -1,9 +1,9 @@
 <?php
 
-namespace Chrono\Locales\De\Parsers;
+namespace DirectoryTree\Chrono\Locales\De\Parsers;
 
-use Chrono\ParsedComponents;
-use Chrono\Parsers\AbstractTimeExpressionParser;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\Parsers\AbstractTimeExpressionParser;
 
 class DeTimeExpressionParser extends AbstractTimeExpressionParser
 {

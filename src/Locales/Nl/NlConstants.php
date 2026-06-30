@@ -1,8 +1,8 @@
 <?php
 
-namespace Chrono\Locales\Nl;
+namespace DirectoryTree\Chrono\Locales\Nl;
 
-use Chrono\Pattern;
+use DirectoryTree\Chrono\Pattern;
 
 readonly class NlConstants
 {

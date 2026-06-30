@@ -1,12 +1,12 @@
 <?php
 
-namespace Chrono\Locales\Ru\Parsers;
+namespace DirectoryTree\Chrono\Locales\Ru\Parsers;
 
-use Chrono\Meridiem;
-use Chrono\ParsedComponents;
-use Chrono\ParsedResult;
-use Chrono\Parsers\AbstractTimeExpressionParser;
-use Chrono\Reference;
+use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\ParsedComponents;
+use DirectoryTree\Chrono\ParsedResult;
+use DirectoryTree\Chrono\Parsers\AbstractTimeExpressionParser;
+use DirectoryTree\Chrono\Reference;
 
 class RuTimeExpressionParser extends AbstractTimeExpressionParser
 {

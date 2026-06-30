@@ -1,28 +1,28 @@
 <?php
 
-namespace Chrono\Locales\Es;
+namespace DirectoryTree\Chrono\Locales\Es;
 
-use Chrono\Configuration;
-use Chrono\ConfiguredChronoEngine;
-use Chrono\Locales\Es\Parsers\EsCasualDateParser;
-use Chrono\Locales\Es\Parsers\EsCasualTimeParser;
-use Chrono\Locales\Es\Parsers\EsMonthNameLittleEndianParser;
-use Chrono\Locales\Es\Parsers\EsMonthNameParser;
-use Chrono\Locales\Es\Parsers\EsScheduleDateTimeParser;
-use Chrono\Locales\Es\Parsers\EsSlashDateParser;
-use Chrono\Locales\Es\Parsers\EsTimeExpressionParser as EsCommonTimeExpressionParser;
-use Chrono\Locales\Es\Parsers\EsTimeUnitAgoFormatParser;
-use Chrono\Locales\Es\Parsers\EsTimeUnitWithinFormatParser;
-use Chrono\Locales\Es\Parsers\EsWeekdayParser;
-use Chrono\Locales\Es\Refiners\EsMergeDateRangeRefiner;
-use Chrono\Locales\Es\Refiners\EsMergeDateTimeRefiner;
-use Chrono\Parsers\IsoFormatParser;
-use Chrono\Refiners\ExtractTimezoneAbbrRefiner;
-use Chrono\Refiners\ExtractTimezoneOffsetRefiner;
-use Chrono\Refiners\ForwardDateRefiner;
-use Chrono\Refiners\MergeWeekdayComponentRefiner;
-use Chrono\Refiners\OverlapRemovalRefiner;
-use Chrono\Refiners\UnlikelyFormatFilter;
+use DirectoryTree\Chrono\Configuration;
+use DirectoryTree\Chrono\ConfiguredChronoEngine;
+use DirectoryTree\Chrono\Locales\Es\Parsers\EsCasualDateParser;
+use DirectoryTree\Chrono\Locales\Es\Parsers\EsCasualTimeParser;
+use DirectoryTree\Chrono\Locales\Es\Parsers\EsMonthNameLittleEndianParser;
+use DirectoryTree\Chrono\Locales\Es\Parsers\EsMonthNameParser;
+use DirectoryTree\Chrono\Locales\Es\Parsers\EsScheduleDateTimeParser;
+use DirectoryTree\Chrono\Locales\Es\Parsers\EsSlashDateParser;
+use DirectoryTree\Chrono\Locales\Es\Parsers\EsTimeExpressionParser as EsCommonTimeExpressionParser;
+use DirectoryTree\Chrono\Locales\Es\Parsers\EsTimeUnitAgoFormatParser;
+use DirectoryTree\Chrono\Locales\Es\Parsers\EsTimeUnitWithinFormatParser;
+use DirectoryTree\Chrono\Locales\Es\Parsers\EsWeekdayParser;
+use DirectoryTree\Chrono\Locales\Es\Refiners\EsMergeDateRangeRefiner;
+use DirectoryTree\Chrono\Locales\Es\Refiners\EsMergeDateTimeRefiner;
+use DirectoryTree\Chrono\Parsers\IsoFormatParser;
+use DirectoryTree\Chrono\Refiners\ExtractTimezoneAbbrRefiner;
+use DirectoryTree\Chrono\Refiners\ExtractTimezoneOffsetRefiner;
+use DirectoryTree\Chrono\Refiners\ForwardDateRefiner;
+use DirectoryTree\Chrono\Refiners\MergeWeekdayComponentRefiner;
+use DirectoryTree\Chrono\Refiners\OverlapRemovalRefiner;
+use DirectoryTree\Chrono\Refiners\UnlikelyFormatFilter;
 
 readonly class EsChrono extends ConfiguredChronoEngine
 {
