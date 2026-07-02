@@ -4,6 +4,7 @@ namespace DirectoryTree\Chrono;
 
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
+use DateTimeImmutable;
 
 readonly class Reference
 {
@@ -100,7 +101,7 @@ readonly class Reference
             return null;
         }
 
-        $date = \DateTimeImmutable::createFromFormat(
+        $date = DateTimeImmutable::createFromFormat(
             'M j Y H:i:s \G\M\TO',
             preg_replace('/^[A-Z][a-z]{2}\s+/', '', $reference) ?? $reference,
         );

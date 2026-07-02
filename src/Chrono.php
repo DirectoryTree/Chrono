@@ -2,6 +2,7 @@
 
 namespace DirectoryTree\Chrono;
 
+use BadMethodCallException;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use DirectoryTree\Chrono\Locales\De\DeChrono;
@@ -586,7 +587,7 @@ readonly class Chrono
     public function __call(string $method, array $parameters): mixed
     {
         if (! in_array($method, ['parse', 'date', 'dates'], true)) {
-            throw new \BadMethodCallException(sprintf(
+            throw new BadMethodCallException(sprintf(
                 'Method [%s] does not exist on [%s].',
                 $method,
                 static::class,
@@ -604,7 +605,7 @@ readonly class Chrono
     public static function __callStatic(string $method, array $parameters): mixed
     {
         if (! in_array($method, ['parse', 'date', 'dates'], true)) {
-            throw new \BadMethodCallException(sprintf(
+            throw new BadMethodCallException(sprintf(
                 'Method [%s] does not exist on [%s].',
                 $method,
                 static::class,
