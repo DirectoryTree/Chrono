@@ -23,17 +23,11 @@ class ParsedResult
      */
     public function __construct(
         public readonly int $index,
-
         public string $text,
-
         public readonly ParsedComponents $start,
-
         public readonly ?ParsedComponents $end = null,
-
         array $tags = [],
-
         ?Reference $reference = null,
-
         ?CarbonImmutable $refDate = null,
     ) {
         $this->reference = $reference;

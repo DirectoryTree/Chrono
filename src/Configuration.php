@@ -23,7 +23,6 @@ readonly class Configuration
      */
     public function __construct(
         protected readonly array $parsers = [],
-
         protected readonly array $refiners = [],
     ) {}
 

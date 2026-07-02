@@ -21,13 +21,9 @@ class ParsedComponents
      */
     public function __construct(
         protected CarbonImmutable $date,
-
         protected array $knownValues = [],
-
         protected array $impliedValues = [],
-
         protected array $tags = [],
-
         ?Reference $reference = null,
     ) {
         $this->reference = $reference;

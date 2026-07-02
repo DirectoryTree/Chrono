@@ -30,7 +30,6 @@ readonly class Chrono
      */
     public function __construct(
         protected readonly ChronoEngine $engine = new EnChrono,
-
         protected readonly array $defaultOptions = [],
     ) {}
 
