@@ -7,6 +7,8 @@ use Carbon\CarbonImmutable;
 readonly class Timezone
 {
     /**
+     * The timezone abbreviation mappings.
+     *
      * @var array<string, int|string>
      */
     protected const ABBREVIATIONS = [
@@ -231,6 +233,8 @@ readonly class Timezone
     }
 
     /**
+     * Resolve a custom ambiguous timezone offset.
+     *
      * @param  array<string, mixed>  $timezone
      */
     protected static function customAmbiguousOffset(array $timezone, CarbonImmutable $date): ?int

@@ -5,21 +5,29 @@ namespace DirectoryTree\Chrono\Locales\Zh;
 readonly class ZhConstants
 {
     /**
+     * The simplified Chinese number mappings.
+     *
      * @var array<string, int>
      */
     public const HANS_NUMBERS = ['零' => 0, '〇' => 0, '一' => 1, '二' => 2, '两' => 2, '三' => 3, '四' => 4, '五' => 5, '六' => 6, '七' => 7, '八' => 8, '九' => 9, '十' => 10];
 
     /**
+     * The traditional Chinese number mappings.
+     *
      * @var array<string, int>
      */
     public const HANT_NUMBERS = ['零' => 0, '一' => 1, '二' => 2, '兩' => 2, '三' => 3, '四' => 4, '五' => 5, '六' => 6, '七' => 7, '八' => 8, '九' => 9, '十' => 10, '廿' => 20, '卅' => 30];
 
     /**
+     * The weekday name mappings.
+     *
      * @var array<string, int>
      */
     public const WEEKDAYS = ['天' => 0, '日' => 0, '一' => 1, '二' => 2, '三' => 3, '四' => 4, '五' => 5, '六' => 6];
 
     /**
+     * Parse the localized number text.
+     *
      * @param  array<string, int>  $numbers
      */
     public static function number(string $text, array $numbers): int
@@ -47,6 +55,8 @@ readonly class ZhConstants
     }
 
     /**
+     * Parse the localized year text.
+     *
      * @param  array<string, int>  $numbers
      */
     public static function year(string $text, array $numbers): int

@@ -9,6 +9,8 @@ use DirectoryTree\Chrono\ParsedComponents;
 trait InteractsWithRelativeDates
 {
     /**
+     * Create parsed components for a relative date.
+     *
      * @param  array<string, int>  $known
      */
     protected function relativeComponents(CarbonImmutable $date, array $known): ParsedComponents
@@ -24,6 +26,8 @@ trait InteractsWithRelativeDates
     }
 
     /**
+     * Create known date components for the given unit.
+     *
      * @return array<string, int>
      */
     protected function certainComponents(CarbonImmutable $date, string $unit): array
@@ -67,6 +71,8 @@ trait InteractsWithRelativeDates
     }
 
     /**
+     * Apply the duration to the given date.
+     *
      * @param  array<string, int>  $duration
      */
     protected function applyDuration(CarbonImmutable $date, array $duration, int $direction): CarbonImmutable
@@ -129,6 +135,8 @@ trait InteractsWithRelativeDates
     }
 
     /**
+     * Parse the duration text into date units.
+     *
      * @return array<string, int>
      */
     protected function duration(string $duration): array
@@ -160,6 +168,8 @@ trait InteractsWithRelativeDates
     }
 
     /**
+     * Add a decimal duration to the unit list.
+     *
      * @param  array<string, int>  $units
      */
     protected function addDecimalDuration(array &$units, string $unit, float $amount): void
@@ -176,6 +186,8 @@ trait InteractsWithRelativeDates
     }
 
     /**
+     * Determine the most specific duration unit.
+     *
      * @param  array<string, int>  $duration
      */
     protected function mostSpecificUnit(array $duration): string

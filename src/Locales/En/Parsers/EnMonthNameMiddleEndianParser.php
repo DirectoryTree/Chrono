@@ -37,6 +37,8 @@ readonly class EnMonthNameMiddleEndianParser implements Parser
     }
 
     /**
+     * Parse middle-endian month name dates.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseMiddleEndianDates(string $text, Reference $reference, Options $options): array
@@ -85,6 +87,8 @@ readonly class EnMonthNameMiddleEndianParser implements Parser
     }
 
     /**
+     * Parse separated middle-endian dates.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseSeparatedMiddleEndianDates(string $text, Reference $reference): array

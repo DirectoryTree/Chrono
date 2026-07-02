@@ -7,6 +7,8 @@ use DirectoryTree\Chrono\Reference;
 readonly class JaConstants
 {
     /**
+     * The localized number mappings.
+     *
      * @var array<string, int>
      */
     public const NUMBERS = [
@@ -25,6 +27,8 @@ readonly class JaConstants
     ];
 
     /**
+     * The weekday name mappings.
+     *
      * @var array<string, int>
      */
     public const WEEKDAYS = [

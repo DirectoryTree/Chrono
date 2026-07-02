@@ -77,6 +77,8 @@ readonly class FrMonthNameParser implements Parser
     }
 
     /**
+     * Parse repeated-month ranges.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseRepeatedMonthRanges(string $text, Reference $reference, string $monthPattern): array
@@ -118,6 +120,8 @@ readonly class FrMonthNameParser implements Parser
     }
 
     /**
+     * Parse same-month ranges.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseSameMonthRanges(string $text, Reference $reference, string $monthPattern): array
@@ -149,6 +153,8 @@ readonly class FrMonthNameParser implements Parser
     }
 
     /**
+     * Parse cross-month ranges.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseCrossMonthRanges(string $text, Reference $reference, string $monthPattern): array

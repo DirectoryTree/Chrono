@@ -7,6 +7,8 @@ use DirectoryTree\Chrono\Pattern;
 readonly class SvConstants
 {
     /**
+     * The weekday name mappings.
+     *
      * @var array<string, int>
      */
     protected const WEEKDAYS = [
@@ -34,6 +36,8 @@ readonly class SvConstants
     ];
 
     /**
+     * The month name mappings.
+     *
      * @var array<string, int>
      */
     protected const MONTHS = [
@@ -75,6 +79,8 @@ readonly class SvConstants
     ];
 
     /**
+     * The localized number mappings.
+     *
      * @var array<string, int>
      */
     protected const NUMBERS = [
@@ -111,6 +117,8 @@ readonly class SvConstants
     ];
 
     /**
+     * The time unit mappings.
+     *
      * @var array<string, string>
      */
     protected const TIME_UNITS = [
@@ -135,6 +143,8 @@ readonly class SvConstants
     ];
 
     /**
+     * The unabbreviated time unit mappings.
+     *
      * @var array<string, string>
      */
     protected const TIME_UNITS_NO_ABBR = [
@@ -237,6 +247,8 @@ readonly class SvConstants
     }
 
     /**
+     * Build a regular expression pattern from the given words.
+     *
      * @param  array<int, string>  $words
      */
     protected static function pattern(array $words): string

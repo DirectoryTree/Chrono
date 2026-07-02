@@ -16,6 +16,8 @@ readonly class EnMonthNameLittleEndianParser implements Parser
     use CreatesParsedComponents;
 
     /**
+     * Parse the text into date results.
+     *
      * @return array<int, ParsedResult>
      */
     public function parse(string $text, Reference $reference, Options $options): array
@@ -28,6 +30,8 @@ readonly class EnMonthNameLittleEndianParser implements Parser
     }
 
     /**
+     * Parse little-endian month name dates.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseLittleEndianMonthNameDates(string $text, Reference $reference): array
@@ -51,6 +55,8 @@ readonly class EnMonthNameLittleEndianParser implements Parser
     }
 
     /**
+     * Parse separated little-endian dates.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseSeparatedLittleEndianDates(string $text, Reference $reference): array
@@ -65,6 +71,8 @@ readonly class EnMonthNameLittleEndianParser implements Parser
     }
 
     /**
+     * Parse compact little-endian dates.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseCompactLittleEndianDates(string $text, Reference $reference): array

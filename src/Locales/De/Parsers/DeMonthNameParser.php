@@ -76,6 +76,8 @@ readonly class DeMonthNameParser implements Parser
     }
 
     /**
+     * Parse same-month ranges.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseSameMonthRanges(string $text, Reference $reference, string $monthPattern): array
@@ -107,6 +109,8 @@ readonly class DeMonthNameParser implements Parser
     }
 
     /**
+     * Parse cross-month ranges.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseCrossMonthRanges(string $text, Reference $reference, string $monthPattern): array

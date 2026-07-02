@@ -8,6 +8,8 @@ use DirectoryTree\Chrono\ParsedComponents;
 trait InteractsWithSpanishRelativeDates
 {
     /**
+     * The localized integer word mappings.
+     *
      * @var array<string, int>
      */
     protected array $integers = [
@@ -19,6 +21,8 @@ trait InteractsWithSpanishRelativeDates
     ];
 
     /**
+     * The localized time unit mappings.
+     *
      * @var array<string, string>
      */
     protected array $timeUnits = [
@@ -33,6 +37,8 @@ trait InteractsWithSpanishRelativeDates
     ];
 
     /**
+     * Create parsed components for a relative date.
+     *
      * @param  array<string, int>  $known
      */
     protected function relativeComponents(CarbonImmutable $date, array $known): ParsedComponents
@@ -47,6 +53,8 @@ trait InteractsWithSpanishRelativeDates
     }
 
     /**
+     * Create known date components for the given unit.
+     *
      * @return array<string, int>
      */
     protected function certainComponents(CarbonImmutable $date, string $unit): array
@@ -63,6 +71,8 @@ trait InteractsWithSpanishRelativeDates
     }
 
     /**
+     * Apply the duration to the given date.
+     *
      * @param  array<string, int|float>  $duration
      */
     protected function applyDuration(CarbonImmutable $date, array $duration, int $direction): CarbonImmutable
@@ -161,6 +171,8 @@ trait InteractsWithSpanishRelativeDates
     }
 
     /**
+     * Determine the most specific duration unit.
+     *
      * @param  array<string, int|float>  $duration
      */
     protected function mostSpecificUnit(array $duration): string
@@ -196,6 +208,8 @@ trait InteractsWithSpanishRelativeDates
     }
 
     /**
+     * Build a regular expression alternation from the given words.
+     *
      * @param  array<int, string>  $words
      */
     protected function alternation(array $words): string

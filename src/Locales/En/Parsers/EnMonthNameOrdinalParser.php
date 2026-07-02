@@ -16,6 +16,8 @@ readonly class EnMonthNameOrdinalParser implements Parser
     use CreatesParsedComponents;
 
     /**
+     * Parse the text into date results.
+     *
      * @return array<int, ParsedResult>
      */
     public function parse(string $text, Reference $reference, Options $options): array
@@ -32,6 +34,8 @@ readonly class EnMonthNameOrdinalParser implements Parser
     }
 
     /**
+     * Parse middle-endian ordinal word dates.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseMiddleEndianOrdinalWordDates(string $text, Reference $reference, string $monthPattern, string $ordinalPattern): array
@@ -44,6 +48,8 @@ readonly class EnMonthNameOrdinalParser implements Parser
     }
 
     /**
+     * Parse little-endian ordinal word dates.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseLittleEndianOrdinalWordDates(string $text, Reference $reference, string $monthPattern, string $ordinalPattern): array
@@ -56,6 +62,8 @@ readonly class EnMonthNameOrdinalParser implements Parser
     }
 
     /**
+     * Parse middle-endian ordinal word ranges.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseMiddleEndianOrdinalWordRanges(string $text, Reference $reference, string $monthPattern, string $ordinalPattern): array
@@ -66,6 +74,8 @@ readonly class EnMonthNameOrdinalParser implements Parser
     }
 
     /**
+     * Parse little-endian ordinal word ranges.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseLittleEndianOrdinalWordRanges(string $text, Reference $reference, string $monthPattern, string $ordinalPattern): array
@@ -98,6 +108,8 @@ readonly class EnMonthNameOrdinalParser implements Parser
     }
 
     /**
+     * Create parsed results for ordinal word ranges.
+     *
      * @param  array<int, array<string, array{0: string, 1: int}>>  $matches
      * @return array<int, ParsedResult>
      */
@@ -175,6 +187,8 @@ readonly class EnMonthNameOrdinalParser implements Parser
     }
 
     /**
+     * Get the ordinal words.
+     *
      * @return array<string, int>
      */
     protected function ordinalWords(): array

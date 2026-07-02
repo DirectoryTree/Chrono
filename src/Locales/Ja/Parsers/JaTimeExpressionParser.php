@@ -164,6 +164,8 @@ readonly class JaTimeExpressionParser implements Parser
     }
 
     /**
+     * Remove timezone offset captures from the match.
+     *
      * @return array<string, array{0: string, 1: int}>
      */
     protected function offsetlessMatch(array $match): array

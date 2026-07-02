@@ -13,6 +13,8 @@ readonly class EnMergeTrailingTimeRangeRefiner implements Refiner
     use InteractsWithEnglishRefiners;
 
     /**
+     * Refine the parsed date results.
+     *
      * @param  array<int, ParsedResult>  $results
      * @return array<int, ParsedResult>
      */

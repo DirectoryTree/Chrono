@@ -14,6 +14,8 @@ use DirectoryTree\Chrono\Reference;
 abstract readonly class AbstractZhTimeExpressionParser implements Parser
 {
     /**
+     * Get the locale number mappings.
+     *
      * @return array<string, int>
      */
     abstract protected function numbers(): array;

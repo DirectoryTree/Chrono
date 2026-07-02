@@ -41,6 +41,8 @@ readonly class EnSlashDateParser implements Parser
     }
 
     /**
+     * Parse month name dates.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseMonthNameDates(string $text, Reference $reference): array
@@ -75,6 +77,8 @@ readonly class EnSlashDateParser implements Parser
     }
 
     /**
+     * Parse weekday-prefixed dates.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseWeekdayPrefixedDates(string $text, Reference $reference): array
