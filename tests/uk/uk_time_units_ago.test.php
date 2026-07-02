@@ -3,7 +3,7 @@
 use DirectoryTree\Chrono\Chrono;
 
 it('matches upstream ukrainian ago time unit expressions', function (string $text, string $expectedText, string $expectedDate) {
-    $result = Chrono::uk()->parseText($text, '2012-07-10 00:00')[0];
+    $result = Chrono::uk()->parse($text, '2012-07-10 00:00')[0];
 
     expect($result->index)->toBe(0)
         ->and($result->text)->toBe($expectedText)
@@ -19,7 +19,7 @@ it('matches upstream ukrainian ago time unit expressions', function (string $tex
 ]);
 
 it('does not parse incomplete ukrainian ago time unit expressions', function (string $text) {
-    expect(Chrono::uk()->parseText($text, '2012-07-10 00:00'))->toBe([]);
+    expect(Chrono::uk()->parse($text, '2012-07-10 00:00'))->toBe([]);
 })->with([
     '15 годин 29 хв.',
     'декілька годин',

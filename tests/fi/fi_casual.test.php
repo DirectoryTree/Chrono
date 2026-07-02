@@ -4,27 +4,27 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses finnish casual dates and times', function () {
     $finnish = Chrono::fi();
-    $now = $finnish->parseText('Määräaika on nyt', '2012-08-10 08:09:10.011')[0];
-    $today = $finnish->parseText('tänään', '2012-08-10')[0];
-    $tomorrow = $finnish->parseText('huomenna', '2012-08-10')[0];
-    $yesterday = $finnish->parseText('eilen', '2012-08-10')[0];
-    $dayAfterTomorrow = $finnish->parseText('ylihuomenna', '2012-08-10')[0];
-    $dayBeforeYesterday = $finnish->parseText('toissapäivänä', '2012-08-10')[0];
-    $todayMorning = $finnish->parseText('tänään aamulla', '2012-08-10')[0];
-    $todayLateMorning = $finnish->parseText('tänään aamupäivällä', '2012-08-10')[0];
-    $todayNoon = $finnish->parseText('tänään päivällä', '2012-08-10')[0];
-    $todayAfternoon = $finnish->parseText('tänään iltapäivällä', '2012-08-10')[0];
-    $todayEvening = $finnish->parseText('tänään illalla', '2012-08-10')[0];
-    $todayNight = $finnish->parseText('tänään yöllä', '2012-08-10')[0];
-    $todayMidnight = $finnish->parseText('tänään keskiyöllä', '2012-08-10')[0];
-    $morning = $finnish->parseText('aamulla', '2012-08-10 14:00')[0];
-    $casualTime = $finnish->parseText('aamupäivällä', '2012-08-10 14:00')[0];
-    $noon = $finnish->parseText('päivällä', '2012-08-10 14:00')[0];
-    $afternoon = $finnish->parseText('iltapäivällä', '2012-08-10 14:00')[0];
-    $evening = $finnish->parseText('illalla', '2012-08-10 14:00')[0];
-    $night = $finnish->parseText('yöllä', '2012-08-10 14:00')[0];
-    $midnight = $finnish->parseText('keskiyöllä', '2012-08-10 14:00')[0];
-    $lastNight = $finnish->parseText('viime yönä', '2012-08-10 14:00')[0];
+    $now = $finnish->parse('Määräaika on nyt', '2012-08-10 08:09:10.011')[0];
+    $today = $finnish->parse('tänään', '2012-08-10')[0];
+    $tomorrow = $finnish->parse('huomenna', '2012-08-10')[0];
+    $yesterday = $finnish->parse('eilen', '2012-08-10')[0];
+    $dayAfterTomorrow = $finnish->parse('ylihuomenna', '2012-08-10')[0];
+    $dayBeforeYesterday = $finnish->parse('toissapäivänä', '2012-08-10')[0];
+    $todayMorning = $finnish->parse('tänään aamulla', '2012-08-10')[0];
+    $todayLateMorning = $finnish->parse('tänään aamupäivällä', '2012-08-10')[0];
+    $todayNoon = $finnish->parse('tänään päivällä', '2012-08-10')[0];
+    $todayAfternoon = $finnish->parse('tänään iltapäivällä', '2012-08-10')[0];
+    $todayEvening = $finnish->parse('tänään illalla', '2012-08-10')[0];
+    $todayNight = $finnish->parse('tänään yöllä', '2012-08-10')[0];
+    $todayMidnight = $finnish->parse('tänään keskiyöllä', '2012-08-10')[0];
+    $morning = $finnish->parse('aamulla', '2012-08-10 14:00')[0];
+    $casualTime = $finnish->parse('aamupäivällä', '2012-08-10 14:00')[0];
+    $noon = $finnish->parse('päivällä', '2012-08-10 14:00')[0];
+    $afternoon = $finnish->parse('iltapäivällä', '2012-08-10 14:00')[0];
+    $evening = $finnish->parse('illalla', '2012-08-10 14:00')[0];
+    $night = $finnish->parse('yöllä', '2012-08-10 14:00')[0];
+    $midnight = $finnish->parse('keskiyöllä', '2012-08-10 14:00')[0];
+    $lastNight = $finnish->parse('viime yönä', '2012-08-10 14:00')[0];
 
     expect($now->text)->toBe('nyt')
         ->and($now->start->date()->format('Y-m-d H:i:s.v'))->toBe('2012-08-10 08:09:10.011')
@@ -84,22 +84,22 @@ it('parses finnish casual dates and times', function () {
         ->and($lastNight->start->get('month'))->toBe(8)
         ->and($lastNight->start->get('day'))->toBe(9)
         ->and($lastNight->start->get('hour'))->toBe(0)
-        ->and($finnish->parseDateText('Määräaika on tänään', '2012-08-10 14:12')?->toDateTimeString())
+        ->and($finnish->date('Määräaika on tänään', '2012-08-10 14:12')?->toDateTimeString())
         ->toBe('2012-08-10 14:12:00')
-        ->and($finnish->parseDateText('Määräaika on huomenna', '2012-08-10 17:10')?->toDateTimeString())
+        ->and($finnish->date('Määräaika on huomenna', '2012-08-10 17:10')?->toDateTimeString())
         ->toBe('2012-08-11 17:10:00')
-        ->and($finnish->parseDateText('Määräaika on ylihuomenna', '2012-08-10 17:10')?->toDateTimeString())
+        ->and($finnish->date('Määräaika on ylihuomenna', '2012-08-10 17:10')?->toDateTimeString())
         ->toBe('2012-08-12 17:10:00')
-        ->and($finnish->parseDateText('Määräaika oli eilen', '2012-08-10 17:10')?->toDateTimeString())
+        ->and($finnish->date('Määräaika oli eilen', '2012-08-10 17:10')?->toDateTimeString())
         ->toBe('2012-08-09 17:10:00')
-        ->and($finnish->parseDateText('Määräaika oli toissapäivänä', '2012-08-10 17:10')?->toDateTimeString())
+        ->and($finnish->date('Määräaika oli toissapäivänä', '2012-08-10 17:10')?->toDateTimeString())
         ->toBe('2012-08-08 17:10:00')
-        ->and($finnish->parseDateText('Määräaika oli viime yönä', '2012-08-10 17:10')?->toDateTimeString())
+        ->and($finnish->date('Määräaika oli viime yönä', '2012-08-10 17:10')?->toDateTimeString())
         ->toBe('2012-08-09 00:00:00')
-        ->and($finnish->parseDateText('Määräaika on huomenna illalla', '2012-08-10 17:10')?->toDateTimeString())
+        ->and($finnish->date('Määräaika on huomenna illalla', '2012-08-10 17:10')?->toDateTimeString())
         ->toBe('2012-08-11 18:00:00')
-        ->and($finnish->parseDateText('Määräaika on tänä aamuna', '2012-08-10 17:10')?->toDateTimeString())
+        ->and($finnish->date('Määräaika on tänä aamuna', '2012-08-10 17:10')?->toDateTimeString())
         ->toBe('2012-08-10 06:00:00')
-        ->and($finnish->parseDateText('Määräaika on keskiyöllä', '2012-08-10 17:10')?->toDateTimeString())
+        ->and($finnish->date('Määräaika on keskiyöllä', '2012-08-10 17:10')?->toDateTimeString())
         ->toBe('2012-08-11 00:00:00');
 });

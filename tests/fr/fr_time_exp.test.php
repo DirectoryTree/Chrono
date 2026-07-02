@@ -5,12 +5,12 @@ use DirectoryTree\Chrono\Meridiem;
 
 it('parses french time expressions', function () {
     $french = Chrono::fr();
-    $hourMinute = $french->parseText('8h10', '2012-08-10 00:00')[0];
-    $hourMinuteSuffix = $french->parseText('8h10m', '2012-08-10 00:00')[0];
-    $withZeroSeconds = $french->parseText('8h10m00', '2012-08-10 00:00')[0];
-    $withSeconds = $french->parseText('8h10m00s', '2012-08-10 00:00')[0];
-    $withMilliseconds = $french->parseText('8:10:30.123', '2012-08-10 00:00')[0];
-    $prefixed = $french->parseText('RDV à 6.13 AM', '2012-08-10 00:00')[0];
+    $hourMinute = $french->parse('8h10', '2012-08-10 00:00')[0];
+    $hourMinuteSuffix = $french->parse('8h10m', '2012-08-10 00:00')[0];
+    $withZeroSeconds = $french->parse('8h10m00', '2012-08-10 00:00')[0];
+    $withSeconds = $french->parse('8h10m00s', '2012-08-10 00:00')[0];
+    $withMilliseconds = $french->parse('8:10:30.123', '2012-08-10 00:00')[0];
+    $prefixed = $french->parse('RDV à 6.13 AM', '2012-08-10 00:00')[0];
 
     expect($hourMinute->text)->toBe('8h10')
         ->and($hourMinute->index)->toBe(0)
@@ -28,21 +28,21 @@ it('parses french time expressions', function () {
         ->and($withZeroSeconds->text)->toBe('8h10m00')
         ->and($withZeroSeconds->start->date()->toDateTimeString())->toBe('2012-08-10 08:10:00')
         ->and($withZeroSeconds->start->isCertain('second'))->toBeTrue()
-        ->and($french->parseDateText('8:10 PM', '2012-08-10 00:00')?->toDateTimeString())
+        ->and($french->date('8:10 PM', '2012-08-10 00:00')?->toDateTimeString())
         ->toBe('2012-08-10 20:10:00')
-        ->and($french->parseDateText('8h10 PM', '2012-08-10 00:00')?->toDateTimeString())
+        ->and($french->date('8h10 PM', '2012-08-10 00:00')?->toDateTimeString())
         ->toBe('2012-08-10 20:10:00')
-        ->and($french->parseDateText('1230pm', '2012-08-10 00:00')?->toDateTimeString())
+        ->and($french->date('1230pm', '2012-08-10 00:00')?->toDateTimeString())
         ->toBe('2012-08-10 12:30:00')
-        ->and($french->parseDateText('5:16p', '2012-08-10 00:00')?->toDateTimeString())
+        ->and($french->date('5:16p', '2012-08-10 00:00')?->toDateTimeString())
         ->toBe('2012-08-10 17:16:00')
-        ->and($french->parseDateText('5h16p', '2012-08-10 00:00')?->toDateTimeString())
+        ->and($french->date('5h16p', '2012-08-10 00:00')?->toDateTimeString())
         ->toBe('2012-08-10 17:16:00')
-        ->and($french->parseDateText('5h16mp', '2012-08-10 00:00')?->toDateTimeString())
+        ->and($french->date('5h16mp', '2012-08-10 00:00')?->toDateTimeString())
         ->toBe('2012-08-10 17:16:00')
-        ->and($french->parseDateText('5:16 p.m.', '2012-08-10 00:00')?->toDateTimeString())
+        ->and($french->date('5:16 p.m.', '2012-08-10 00:00')?->toDateTimeString())
         ->toBe('2012-08-10 17:16:00')
-        ->and($french->parseDateText('5h16 p.m.', '2012-08-10 00:00')?->toDateTimeString())
+        ->and($french->date('5h16 p.m.', '2012-08-10 00:00')?->toDateTimeString())
         ->toBe('2012-08-10 17:16:00')
         ->and($prefixed->index)
         ->toBe(4)
@@ -58,22 +58,22 @@ it('parses french time expressions', function () {
         ->and($withMilliseconds->text)->toBe('8:10:30.123')
         ->and($withMilliseconds->start->date()->format('Y-m-d H:i:s.v'))->toBe('2012-08-10 08:10:30.123')
         ->and($withMilliseconds->start->isCertain('millisecond'))->toBeTrue()
-        ->and($french->parseText('8:62', '2012-08-10'))->toBe([])
-        ->and($french->parseText('25:12', '2012-08-10'))->toBe([])
-        ->and($french->parseText('12h12:99s', '2012-08-10'))->toBe([])
-        ->and($french->parseText('13.12 PM', '2012-08-10'))->toBe([]);
+        ->and($french->parse('8:62', '2012-08-10'))->toBe([])
+        ->and($french->parse('25:12', '2012-08-10'))->toBe([])
+        ->and($french->parse('12h12:99s', '2012-08-10'))->toBe([])
+        ->and($french->parse('13.12 PM', '2012-08-10'))->toBe([]);
 });
 
 it('parses french time ranges', function () {
     $french = Chrono::fr();
-    $hourRange = $french->parseText('13h-15h', '2012-08-10 00:00')[0];
-    $impliedHourRange = $french->parseText('13-15h', '2012-08-10 00:00')[0];
-    $pmRange = $french->parseText('1-3pm', '2012-08-10 00:00')[0];
-    $overnight = $french->parseText('11pm-2', '2012-08-10 00:00')[0];
-    $minuteRange = $french->parseText('8:10 - 12.32', '2012-08-10 00:00')[0];
-    $mixedRange = $french->parseText('8:10 - 12h32', '2012-08-10 00:00')[0];
-    $tildeRange = $french->parseText('8:10 ~ 12h32', '2012-08-10 00:00')[0];
-    $prefixedRange = $french->parseText(' de 6:30pm à 11:00pm ', '2012-08-10 00:00')[0];
+    $hourRange = $french->parse('13h-15h', '2012-08-10 00:00')[0];
+    $impliedHourRange = $french->parse('13-15h', '2012-08-10 00:00')[0];
+    $pmRange = $french->parse('1-3pm', '2012-08-10 00:00')[0];
+    $overnight = $french->parse('11pm-2', '2012-08-10 00:00')[0];
+    $minuteRange = $french->parse('8:10 - 12.32', '2012-08-10 00:00')[0];
+    $mixedRange = $french->parse('8:10 - 12h32', '2012-08-10 00:00')[0];
+    $tildeRange = $french->parse('8:10 ~ 12h32', '2012-08-10 00:00')[0];
+    $prefixedRange = $french->parse(' de 6:30pm à 11:00pm ', '2012-08-10 00:00')[0];
 
     expect($hourRange->text)->toBe('13h-15h')
         ->and($hourRange->index)->toBe(0)
@@ -109,19 +109,19 @@ it('parses french time ranges', function () {
         ->and($prefixedRange->index)->toBe(1)
         ->and($prefixedRange->start->date()->toDateTimeString())->toBe('2012-08-10 18:30:00')
         ->and($prefixedRange->end?->date()->toDateTimeString())->toBe('2012-08-10 23:00:00')
-        ->and($french->parseText(' 2012 à 10:12:59', '2012-08-10 00:00')[0]->index)->toBe(6)
-        ->and($french->parseText(' 2012 à 10:12:59', '2012-08-10 00:00')[0]->text)->toBe('à 10:12:59')
-        ->and($french->parseDateText(' 2012 à 10:12:59', '2012-08-10 00:00')?->toDateTimeString())->toBe('2012-08-10 10:12:59');
+        ->and($french->parse(' 2012 à 10:12:59', '2012-08-10 00:00')[0]->index)->toBe(6)
+        ->and($french->parse(' 2012 à 10:12:59', '2012-08-10 00:00')[0]->text)->toBe('à 10:12:59')
+        ->and($french->date(' 2012 à 10:12:59', '2012-08-10 00:00')?->toDateTimeString())->toBe('2012-08-10 10:12:59');
 });
 
 it('merges french dates followed by time expressions', function () {
     $french = Chrono::fr();
-    $iso = $french->parseText('Quelque chose se passe le 2014-04-18 à 3h00', '2012-08-10')[0];
-    $isoRange = $french->parseText('Quelque chose se passe le 2014-04-18 7:00 - 8h00 ...', '2012-08-10')[0];
-    $isoDeRange = $french->parseText('Quelque chose se passe le 2014-04-18 de 7:00 à 20:00 ...', '2012-08-10')[0];
-    $month = $french->parseText('Quelque chose se passe le 10 Août 2012 à 10:12:59', '2012-08-10')[0];
-    $compactMonth = $french->parseText('Quelque chose se passe le 15juin 2016 20h', '2016-07-10')[0];
-    $attachedWeekday = $french->parseText('Jeudi6/5/2013 de 7h à 10h')[0];
+    $iso = $french->parse('Quelque chose se passe le 2014-04-18 à 3h00', '2012-08-10')[0];
+    $isoRange = $french->parse('Quelque chose se passe le 2014-04-18 7:00 - 8h00 ...', '2012-08-10')[0];
+    $isoDeRange = $french->parse('Quelque chose se passe le 2014-04-18 de 7:00 à 20:00 ...', '2012-08-10')[0];
+    $month = $french->parse('Quelque chose se passe le 10 Août 2012 à 10:12:59', '2012-08-10')[0];
+    $compactMonth = $french->parse('Quelque chose se passe le 15juin 2016 20h', '2016-07-10')[0];
+    $attachedWeekday = $french->parse('Jeudi6/5/2013 de 7h à 10h')[0];
 
     expect($iso->text)->toBe('2014-04-18 à 3h00')
         ->and($iso->index)->toBe(26)
@@ -158,51 +158,51 @@ it('merges french dates followed by time expressions', function () {
 it('parses french random date and time expressions', function () {
     $french = Chrono::fr();
 
-    expect($french->parseText('lundi 29/4/2013 630-930am')[0]->text)
+    expect($french->parse('lundi 29/4/2013 630-930am')[0]->text)
         ->toBe('lundi 29/4/2013 630-930am')
-        ->and($french->parseText('mercredi 1/5/2013 1115am')[0]->text)
+        ->and($french->parse('mercredi 1/5/2013 1115am')[0]->text)
         ->toBe('mercredi 1/5/2013 1115am')
-        ->and($french->parseText('vendredi 3/5/2013 1230pm')[0]->text)
+        ->and($french->parse('vendredi 3/5/2013 1230pm')[0]->text)
         ->toBe('vendredi 3/5/2013 1230pm')
-        ->and($french->parseText('dimanche 6/5/2013  750am-910am')[0]->text)
+        ->and($french->parse('dimanche 6/5/2013  750am-910am')[0]->text)
         ->toBe('dimanche 6/5/2013  750am-910am')
-        ->and($french->parseText('lundi 13/5/2013 630-930am')[0]->text)
+        ->and($french->parse('lundi 13/5/2013 630-930am')[0]->text)
         ->toBe('lundi 13/5/2013 630-930am')
-        ->and($french->parseText('Vendredi 21/6/2013 2:30')[0]->text)
+        ->and($french->parse('Vendredi 21/6/2013 2:30')[0]->text)
         ->toBe('Vendredi 21/6/2013 2:30')
-        ->and($french->parseText('mardi 7/2/2013 1-230 pm')[0]->text)
+        ->and($french->parse('mardi 7/2/2013 1-230 pm')[0]->text)
         ->toBe('mardi 7/2/2013 1-230 pm')
-        ->and($french->parseText('mardi 7/2/2013 1-23h0')[0]->text)
+        ->and($french->parse('mardi 7/2/2013 1-23h0')[0]->text)
         ->toBe('mardi 7/2/2013 1-23h0')
-        ->and($french->parseText('mardi 7/2/2013 1h-23h0m')[0]->text)
+        ->and($french->parse('mardi 7/2/2013 1h-23h0m')[0]->text)
         ->toBe('mardi 7/2/2013 1h-23h0m')
-        ->and($french->parseText('Lundi, 24/6/2013, 7:00pm - 8:30pm')[0]->text)
+        ->and($french->parse('Lundi, 24/6/2013, 7:00pm - 8:30pm')[0]->text)
         ->toBe('Lundi, 24/6/2013, 7:00pm - 8:30pm')
-        ->and($french->parseText('Jeudi6/5/2013 de 7h à 10h')[0]->text)
+        ->and($french->parse('Jeudi6/5/2013 de 7h à 10h')[0]->text)
         ->toBe('Jeudi6/5/2013 de 7h à 10h')
-        ->and($french->parseText('18h')[0]->text)
+        ->and($french->parse('18h')[0]->text)
         ->toBe('18h')
-        ->and($french->parseText('18-22h')[0]->text)
+        ->and($french->parse('18-22h')[0]->text)
         ->toBe('18-22h')
-        ->and($french->parseText('11h-13')[0]->text)
+        ->and($french->parse('11h-13')[0]->text)
         ->toBe('11h-13')
-        ->and($french->parseText('à 12h')[0]->text)
+        ->and($french->parse('à 12h')[0]->text)
         ->toBe('à 12h')
-        ->and($french->parseText('Mercredi, 3 juil 2013 14h')[0]->text)
+        ->and($french->parse('Mercredi, 3 juil 2013 14h')[0]->text)
         ->toBe('Mercredi, 3 juil 2013 14h')
-        ->and($french->parseText('that I need to know or am I covered?'))
+        ->and($french->parse('that I need to know or am I covered?'))
         ->toBe([]);
 });
 
 it('extracts french timezones from time expressions', function () {
     $french = Chrono::fr();
-    $plain = $french->parseText('Vendredi à 2 pm', '2016-04-28')[0];
-    $est = $french->parseText('vendredi 2 pm EST', '2016-04-28')[0];
-    $cet = $french->parseText('vendredi 15h CET', '2016-02-28')[0];
-    $cest = $french->parseText('vendredi 15h cest', '2016-02-28')[0];
-    $lowerEst = $french->parseText('Vendredi à 2 pm est', '2016-04-28')[0];
-    $sentence = $french->parseText("Vendredi à 2 pm j'ai rdv...", '2016-04-28')[0];
-    $sentenceWords = $french->parseText('Vendredi à 2 pm je vais faire quelque chose', '2016-04-28')[0];
+    $plain = $french->parse('Vendredi à 2 pm', '2016-04-28')[0];
+    $est = $french->parse('vendredi 2 pm EST', '2016-04-28')[0];
+    $cet = $french->parse('vendredi 15h CET', '2016-02-28')[0];
+    $cest = $french->parse('vendredi 15h cest', '2016-02-28')[0];
+    $lowerEst = $french->parse('Vendredi à 2 pm est', '2016-04-28')[0];
+    $sentence = $french->parse("Vendredi à 2 pm j'ai rdv...", '2016-04-28')[0];
+    $sentenceWords = $french->parse('Vendredi à 2 pm je vais faire quelque chose', '2016-04-28')[0];
 
     expect($plain->text)->toBe('Vendredi à 2 pm')
         ->and($plain->start->isCertain('timezoneOffset'))->toBeFalse()

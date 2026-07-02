@@ -5,54 +5,54 @@ use DirectoryTree\Chrono\Meridiem;
 
 it('parses german casual dates and times', function () {
     $german = Chrono::de();
-    $now = $german->parseText('Die Deadline ist jetzt', '2012-08-10 08:09:10.011')[0];
+    $now = $german->parse('Die Deadline ist jetzt', '2012-08-10 08:09:10.011')[0];
 
     expect($now->text)->toBe('jetzt')
         ->and($now->start->date()->format('Y-m-d H:i:s.v'))->toBe('2012-08-10 08:09:10.011')
         ->and($now->start->tags())->toContain('parser/DECasualDateParser')
-        ->and($german->parseDateText('Die Deadline ist heute', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($german->date('Die Deadline ist heute', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and($german->parseDateText('Die Deadline ist morgen', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($german->date('Die Deadline ist morgen', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-11 12:00:00')
-        ->and($german->parseDateText('Die Deadline war gestern', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($german->date('Die Deadline war gestern', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-09 12:00:00')
-        ->and($german->parseDateText('Die Deadline war letzte Nacht', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($german->date('Die Deadline war letzte Nacht', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-09 00:00:00')
-        ->and($german->parseDateText('Die Deadline war gestern Nacht', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($german->date('Die Deadline war gestern Nacht', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-09 22:00:00')
-        ->and($german->parseDateText('Die Deadline war heute Morgen', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($german->date('Die Deadline war heute Morgen', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-10 06:00:00')
-        ->and($german->parseDateText('Die Deadline war heute Nachmittag', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($german->date('Die Deadline war heute Nachmittag', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-10 15:00:00')
-        ->and($german->parseDateText('Die Deadline war heute Abend', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($german->date('Die Deadline war heute Abend', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-10 18:00:00')
-        ->and($german->parseDateText('Die Deadline ist mittags', '2012-08-10 08:09:10.011')?->toDateTimeString())
+        ->and($german->date('Die Deadline ist mittags', '2012-08-10 08:09:10.011')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and($german->parseDateText('um Mitternacht', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($german->date('um Mitternacht', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-11 00:00:00')
-        ->and($german->parseDateText('um Mitternacht', '2012-08-10 01:00')?->toDateTimeString())
+        ->and($german->date('um Mitternacht', '2012-08-10 01:00')?->toDateTimeString())
         ->toBe('2012-08-10 00:00:00')
-        ->and($german->parseDateText('Die Deadline ist heute 17 Uhr', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($german->date('Die Deadline ist heute 17 Uhr', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-10 17:00:00')
-        ->and($german->parseDateText('Die Deadline ist heute um 17 Uhr', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($german->date('Die Deadline ist heute um 17 Uhr', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-10 17:00:00');
 });
 
 it('parses german casual dates with upstream-shaped components', function () {
     $german = Chrono::de();
-    $now = $german->parseText('Die Deadline ist jetzt', '2012-08-10 08:09:10.011')[0];
-    $today = $german->parseText('Die Deadline ist heute', '2012-08-10 12:00')[0];
-    $tomorrow = $german->parseText('Die Deadline ist morgen', '2012-08-10 01:00')[0];
-    $yesterday = $german->parseText('Die Deadline war gestern', '2012-08-10 12:00')[0];
-    $lastNight = $german->parseText('Die Deadline war letzte Nacht ', '2012-08-10 12:00')[0];
-    $yesterdayNight = $german->parseText('Die Deadline war gestern Nacht ', '2012-08-10 12:00')[0];
-    $todayMorning = $german->parseText('Die Deadline war heute Morgen ', '2012-08-10 12:00')[0];
-    $todayAfternoon = $german->parseText('Die Deadline war heute Nachmittag ', '2012-08-10 12:00')[0];
-    $todayEvening = $german->parseText('Die Deadline war heute Abend ', '2012-08-10 12:00')[0];
-    $midday = $german->parseText('Die Deadline ist mittags', '2012-08-10 08:09:10.011')[0];
-    $midnight = $german->parseText('um Mitternacht', '2012-08-10 12:00')[0];
-    $todayAtFive = $german->parseText('Die Deadline ist heute 17 Uhr', '2012-08-10 12:00')[0];
-    $todayAtFiveWithPrefix = $german->parseText('Die Deadline ist heute um 17 Uhr', '2012-08-10 12:00')[0];
+    $now = $german->parse('Die Deadline ist jetzt', '2012-08-10 08:09:10.011')[0];
+    $today = $german->parse('Die Deadline ist heute', '2012-08-10 12:00')[0];
+    $tomorrow = $german->parse('Die Deadline ist morgen', '2012-08-10 01:00')[0];
+    $yesterday = $german->parse('Die Deadline war gestern', '2012-08-10 12:00')[0];
+    $lastNight = $german->parse('Die Deadline war letzte Nacht ', '2012-08-10 12:00')[0];
+    $yesterdayNight = $german->parse('Die Deadline war gestern Nacht ', '2012-08-10 12:00')[0];
+    $todayMorning = $german->parse('Die Deadline war heute Morgen ', '2012-08-10 12:00')[0];
+    $todayAfternoon = $german->parse('Die Deadline war heute Nachmittag ', '2012-08-10 12:00')[0];
+    $todayEvening = $german->parse('Die Deadline war heute Abend ', '2012-08-10 12:00')[0];
+    $midday = $german->parse('Die Deadline ist mittags', '2012-08-10 08:09:10.011')[0];
+    $midnight = $german->parse('um Mitternacht', '2012-08-10 12:00')[0];
+    $todayAtFive = $german->parse('Die Deadline ist heute 17 Uhr', '2012-08-10 12:00')[0];
+    $todayAtFiveWithPrefix = $german->parse('Die Deadline ist heute um 17 Uhr', '2012-08-10 12:00')[0];
 
     expect($now->index)->toBe(17)
         ->and($now->text)->toBe('jetzt')
@@ -112,32 +112,32 @@ it('parses german casual dates with upstream-shaped components', function () {
         ->and($todayAtFiveWithPrefix->index)->toBe(17)
         ->and($todayAtFiveWithPrefix->text)->toBe('heute um 17 Uhr')
         ->and($todayAtFiveWithPrefix->start->get('hour'))->toBe(17)
-        ->and($german->parseText('nicheute'))->toBe([])
-        ->and($german->parseText('heutenicht'))->toBe([])
-        ->and($german->parseText('angestern'))->toBe([])
-        ->and($german->parseText('jetztig'))->toBe([])
-        ->and($german->parseText('ljetztlich'))->toBe([]);
+        ->and($german->parse('nicheute'))->toBe([])
+        ->and($german->parse('heutenicht'))->toBe([])
+        ->and($german->parse('angestern'))->toBe([])
+        ->and($german->parse('jetztig'))->toBe([])
+        ->and($german->parse('ljetztlich'))->toBe([]);
 });
 
 it('parses german casual time references', function () {
     $german = Chrono::de();
 
-    expect($german->parseText('Treffen wir uns vormittag', '2012-08-10 12:00')[0]->text)
+    expect($german->parse('Treffen wir uns vormittag', '2012-08-10 12:00')[0]->text)
         ->toBe('vormittag')
-        ->and($german->parseText('Treffen wir uns vormittag', '2012-08-10 12:00')[0]->start->tags())
+        ->and($german->parse('Treffen wir uns vormittag', '2012-08-10 12:00')[0]->start->tags())
         ->toContain('parser/DECasualTimeParser')
-        ->and($german->parseDateText('Treffen wir uns vormittag', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($german->date('Treffen wir uns vormittag', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-10 09:00:00')
-        ->and($german->parseDateText('Treffen wir uns nachmittag', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($german->date('Treffen wir uns nachmittag', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-10 15:00:00')
-        ->and($german->parseDateText('Treffen wir uns abend', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($german->date('Treffen wir uns abend', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-10 18:00:00')
-        ->and($german->parseDateText('Treffen wir uns nacht', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($german->date('Treffen wir uns nacht', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-10 22:00:00')
-        ->and($german->parseDateText('Treffen wir uns diesen morgen', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($german->date('Treffen wir uns diesen morgen', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-10 06:00:00')
-        ->and($german->parseDateText('Treffen wir uns mitternacht', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($german->date('Treffen wir uns mitternacht', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-11 00:00:00')
-        ->and($german->parseDateText('Die Deadline ist morgen', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($german->date('Die Deadline ist morgen', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-11 12:00:00');
 });

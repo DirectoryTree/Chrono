@@ -4,16 +4,16 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses spanish month name dates', function () {
     $spanish = Chrono::es();
-    $explicit = $spanish->parseText('10 Agosto 2012', '2012-08-10')[0];
-    $bc = $spanish->parseText('10 Agosto 234 AC', '2012-08-10')[0];
-    $ad = $spanish->parseText('10 Agosto 88 d. C.', '2012-08-10')[0];
-    $compact = $spanish->parseText('Dom 15Sep', '2013-08-10')[0];
-    $uppercaseCompact = $spanish->parseText('DOM 15SEP', '2013-08-10')[0];
-    $prefixed = $spanish->parseText('La fecha límite es 10 Agosto', '2012-08-10')[0];
-    $inferred = $spanish->parseText('La fecha límite es el martes, 10 de enero', '2012-08-10')[0];
-    $accentedInferred = $spanish->parseText('La fecha límite es el miércoles, 10 de enero ', '2012-08-10')[0];
-    $deDate = $spanish->parseText('10 de Agosto de 2012', '2010-02-01')[0];
-    $withTime = $spanish->parseText('12 de julio a las 19:00', '2012-08-10')[0];
+    $explicit = $spanish->parse('10 Agosto 2012', '2012-08-10')[0];
+    $bc = $spanish->parse('10 Agosto 234 AC', '2012-08-10')[0];
+    $ad = $spanish->parse('10 Agosto 88 d. C.', '2012-08-10')[0];
+    $compact = $spanish->parse('Dom 15Sep', '2013-08-10')[0];
+    $uppercaseCompact = $spanish->parse('DOM 15SEP', '2013-08-10')[0];
+    $prefixed = $spanish->parse('La fecha límite es 10 Agosto', '2012-08-10')[0];
+    $inferred = $spanish->parse('La fecha límite es el martes, 10 de enero', '2012-08-10')[0];
+    $accentedInferred = $spanish->parse('La fecha límite es el miércoles, 10 de enero ', '2012-08-10')[0];
+    $deDate = $spanish->parse('10 de Agosto de 2012', '2010-02-01')[0];
+    $withTime = $spanish->parse('12 de julio a las 19:00', '2012-08-10')[0];
 
     expect($explicit->index)->toBe(0)
         ->and($explicit->text)->toBe('10 Agosto 2012')
@@ -53,11 +53,11 @@ it('parses spanish month name dates', function () {
 
 it('parses spanish month name ranges', function () {
     $spanish = Chrono::es();
-    $sameDash = $spanish->parseText('10 - 22 Agosto 2012', '2012-08-10')[0];
-    $sameWord = $spanish->parseText('10 a 22 Agosto 2012', '2012-08-10')[0];
-    $sameDesde = $spanish->parseText('10º desde 22ª Agosto 2012', '2012-08-10')[0];
-    $cross = $spanish->parseText('10 Agosto - 12 Septiembre', '2012-08-10')[0];
-    $crossYear = $spanish->parseText('10 Agosto - 12 Septiembre 2013', '2012-08-10')[0];
+    $sameDash = $spanish->parse('10 - 22 Agosto 2012', '2012-08-10')[0];
+    $sameWord = $spanish->parse('10 a 22 Agosto 2012', '2012-08-10')[0];
+    $sameDesde = $spanish->parse('10º desde 22ª Agosto 2012', '2012-08-10')[0];
+    $cross = $spanish->parse('10 Agosto - 12 Septiembre', '2012-08-10')[0];
+    $crossYear = $spanish->parse('10 Agosto - 12 Septiembre 2013', '2012-08-10')[0];
 
     expect($sameDash->text)->toBe('10 - 22 Agosto 2012')
         ->and($sameDash->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
@@ -77,7 +77,7 @@ it('parses spanish month name ranges', function () {
 });
 
 it('rejects impossible spanish month name dates in strict mode', function () {
-    expect(Chrono::strictSpanish()->parseText('32 Agosto 2014', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictSpanish()->parseText('29 Febrero 2014', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictSpanish()->parseText('32 Agosto', '2012-08-10'))->toBe([]);
+    expect(Chrono::strictSpanish()->parse('32 Agosto 2014', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictSpanish()->parse('29 Febrero 2014', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictSpanish()->parse('32 Agosto', '2012-08-10'))->toBe([]);
 });

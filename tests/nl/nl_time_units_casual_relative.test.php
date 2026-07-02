@@ -5,50 +5,50 @@ use DirectoryTree\Chrono\Chrono;
 it('parses dutch time unit relative expressions', function () {
     $dutch = Chrono::nl();
     $strictDutch = Chrono::strictDutch();
-    $withinDays = $dutch->parseText('we have to make something binnen 5 dagen.', '2012-08-10')[0];
-    $withinMinutes = $dutch->parseText('binnen 2 minuten', '2016-10-01 14:52')[0];
-    $withinHours = $dutch->parseText('binnen 2 uur', '2016-10-01 14:52')[0];
-    $withinMonths = $dutch->parseText('binnen de 12 maand', '2016-10-01 14:52')[0];
-    $withinThreeDays = $dutch->parseText('binnen de 3 dagen', '2016-10-01 14:52')[0];
-    $withinMinutesWithPrefix = $dutch->parseText('Binnen de 5 minuten moet een auto zich verzetten', '2012-08-10 12:14')[0];
-    $withinSeconds = $dutch->parseText('Binnen 5 seconden moet een auto zich verzetten', '2012-08-10 12:14')[0];
-    $withinMonth = $dutch->parseText('Binnen een maand', '2012-08-10 12:14')[0];
-    $withinYear = $dutch->parseText('Binnen een jaar', '2012-08-10 12:14')[0];
-    $halfHourAgo = $dutch->parseText('   half uur geleden', '2012-08-10 12:14')[0];
-    $threeSecondsAgo = $dutch->parseText('drie seconden geleden deed ik iets', '2012-08-10 12:14')[0];
-    $nestedAgo = $dutch->parseText('15 uur 29 minuten geleden', '2012-08-10 22:30')[0];
-    $nestedAgoWithDay = $dutch->parseText('1 dag 21 uur geleden ', '2012-08-10 22:30')[0];
-    $nestedAgoWithSeconds = $dutch->parseText('3 min 49 sec geleden ', '2012-08-10 22:30')[0];
-    $decimalHour = $dutch->parseText('over 1,5 uur', '2012-08-10 12:40')[0];
-    $fromNow = $dutch->parseText('5 dagen vanaf nu we hebben iets gedaan', '2012-08-10')[0];
-    $minutesFromNow = $dutch->parseText('15 minuten vanaf nu', '2012-08-10 12:14')[0];
-    $minutesOut = $dutch->parseText('15 minuten uit', '2012-08-10 12:14')[0];
-    $secondsFromNow = $dutch->parseText('Over 12 seconden heb ik iets gedaan', '2012-08-10 12:14')[0];
-    $spelledSecondsFromNow = $dutch->parseText('over drie seconden heb ik iets gedaan', '2012-08-10 12:14')[0];
-    $minuteOut = $dutch->parseText('een minuutje uit', '2012-08-10 12:14')[0];
-    $minusCompact = $dutch->parseText('-2u5min', '2016-10-01 12:00')[0];
+    $withinDays = $dutch->parse('we have to make something binnen 5 dagen.', '2012-08-10')[0];
+    $withinMinutes = $dutch->parse('binnen 2 minuten', '2016-10-01 14:52')[0];
+    $withinHours = $dutch->parse('binnen 2 uur', '2016-10-01 14:52')[0];
+    $withinMonths = $dutch->parse('binnen de 12 maand', '2016-10-01 14:52')[0];
+    $withinThreeDays = $dutch->parse('binnen de 3 dagen', '2016-10-01 14:52')[0];
+    $withinMinutesWithPrefix = $dutch->parse('Binnen de 5 minuten moet een auto zich verzetten', '2012-08-10 12:14')[0];
+    $withinSeconds = $dutch->parse('Binnen 5 seconden moet een auto zich verzetten', '2012-08-10 12:14')[0];
+    $withinMonth = $dutch->parse('Binnen een maand', '2012-08-10 12:14')[0];
+    $withinYear = $dutch->parse('Binnen een jaar', '2012-08-10 12:14')[0];
+    $halfHourAgo = $dutch->parse('   half uur geleden', '2012-08-10 12:14')[0];
+    $threeSecondsAgo = $dutch->parse('drie seconden geleden deed ik iets', '2012-08-10 12:14')[0];
+    $nestedAgo = $dutch->parse('15 uur 29 minuten geleden', '2012-08-10 22:30')[0];
+    $nestedAgoWithDay = $dutch->parse('1 dag 21 uur geleden ', '2012-08-10 22:30')[0];
+    $nestedAgoWithSeconds = $dutch->parse('3 min 49 sec geleden ', '2012-08-10 22:30')[0];
+    $decimalHour = $dutch->parse('over 1,5 uur', '2012-08-10 12:40')[0];
+    $fromNow = $dutch->parse('5 dagen vanaf nu we hebben iets gedaan', '2012-08-10')[0];
+    $minutesFromNow = $dutch->parse('15 minuten vanaf nu', '2012-08-10 12:14')[0];
+    $minutesOut = $dutch->parse('15 minuten uit', '2012-08-10 12:14')[0];
+    $secondsFromNow = $dutch->parse('Over 12 seconden heb ik iets gedaan', '2012-08-10 12:14')[0];
+    $spelledSecondsFromNow = $dutch->parse('over drie seconden heb ik iets gedaan', '2012-08-10 12:14')[0];
+    $minuteOut = $dutch->parse('een minuutje uit', '2012-08-10 12:14')[0];
+    $minusCompact = $dutch->parse('-2u5min', '2016-10-01 12:00')[0];
 
-    expect($dutch->parseText('Afspraak in 2 dagen', '2012-08-10 09:30')[0]->text)
+    expect($dutch->parse('Afspraak in 2 dagen', '2012-08-10 09:30')[0]->text)
         ->toBe('in 2 dagen')
-        ->and($dutch->parseDateText('Afspraak in 2 dagen', '2012-08-10 09:30')?->toDateTimeString())
+        ->and($dutch->date('Afspraak in 2 dagen', '2012-08-10 09:30')?->toDateTimeString())
         ->toBe('2012-08-12 09:30:00')
-        ->and($dutch->parseText('wait voor 5 minuten', '2012-08-10 12:14')[0]->text)
+        ->and($dutch->parse('wait voor 5 minuten', '2012-08-10 12:14')[0]->text)
         ->toBe('voor 5 minuten')
-        ->and($dutch->parseDateText('wait voor 5 minuten', '2012-08-10 12:14')?->toDateTimeString())
+        ->and($dutch->date('wait voor 5 minuten', '2012-08-10 12:14')?->toDateTimeString())
         ->toBe('2012-08-10 12:19:00')
-        ->and($dutch->parseDateText('Afspraak binnen de 3 uur', '2012-08-10 09:30')?->toDateTimeString())
+        ->and($dutch->date('Afspraak binnen de 3 uur', '2012-08-10 09:30')?->toDateTimeString())
         ->toBe('2012-08-10 12:30:00')
-        ->and($dutch->parseDateText('Afspraak twee dagen geleden', '2012-08-10 09:30')?->toDateTimeString())
+        ->and($dutch->date('Afspraak twee dagen geleden', '2012-08-10 09:30')?->toDateTimeString())
         ->toBe('2012-08-08 09:30:00')
-        ->and($dutch->parseDateText('Afspraak 4 uur later', '2012-08-10 09:30')?->toDateTimeString())
+        ->and($dutch->date('Afspraak 4 uur later', '2012-08-10 09:30')?->toDateTimeString())
         ->toBe('2012-08-10 13:30:00')
-        ->and($dutch->parseDateText('Afspraak over 2 weken', '2012-08-10 09:30')?->toDateTimeString())
+        ->and($dutch->date('Afspraak over 2 weken', '2012-08-10 09:30')?->toDateTimeString())
         ->toBe('2012-08-24 09:30:00')
-        ->and($dutch->parseDateText('Afspraak afgelopen 1 week', '2012-08-10 09:30')?->toDateTimeString())
+        ->and($dutch->date('Afspraak afgelopen 1 week', '2012-08-10 09:30')?->toDateTimeString())
         ->toBe('2012-08-03 09:30:00')
-        ->and($strictDutch->parseDateText('15 minuten vanaf nu', '2012-08-10 12:14')?->toDateTimeString())
+        ->and($strictDutch->date('15 minuten vanaf nu', '2012-08-10 12:14')?->toDateTimeString())
         ->toBe('2012-08-10 12:29:00')
-        ->and($strictDutch->parseDateText('25 minuten later', '2012-08-10 12:40')?->toDateTimeString())
+        ->and($strictDutch->date('25 minuten later', '2012-08-10 12:40')?->toDateTimeString())
         ->toBe('2012-08-10 13:05:00')
         ->and(Chrono::parse('15 uur 29 min', '2012-08-10 12:14'))
         ->toBe([])
@@ -129,27 +129,27 @@ it('parses dutch time unit relative expressions', function () {
 it('parses dutch upstream time unit relative edge cases', function () {
     $dutch = Chrono::nl();
 
-    $laterDays = $dutch->parseText('10 dagen vanaf nu we hebben iets gedaan', '2012-08-10 12:14')[0];
-    $laterMinutes = $dutch->parseText('15 minuten eerder', '2012-08-10 12:14')[0];
-    $laterHours = $dutch->parseText('   12 uur vanaf nu', '2012-08-10 12:14')[0];
-    $prefixedHours = $dutch->parseText('Over 12 uur heb ik iets gedaan', '2012-08-10 12:14')[0];
-    $spelledWithin = $dutch->parseText('we have to make something binnen vijf dagen.', '2012-08-10 12:14')[0];
-    $withinTenDays = $dutch->parseText('we have to make something binnen de 10 dagen', '2012-08-10 12:14')[0];
-    $withinOneHour = $dutch->parseText('binnen 1 uur', '2012-08-10 12:14')[0];
-    $withinTwoWeeks = $dutch->parseText('Binnen de 2 weken', '2012-08-10 12:14')[0];
-    $withinMinuteShort = $dutch->parseText('Binnen 5 min a car need to move', '2012-08-10 12:14')[0];
-    $agoDays = $dutch->parseText('10 dagen geleden, hebben we wat gedaan', '2012-08-10 12:14')[0];
-    $agoShortHour = $dutch->parseText('1u geleden', '2012-08-10 12:14')[0];
-    $agoSeconds = $dutch->parseText('12 seconden geleden deed ik iets', '2012-08-10 12:14')[0];
-    $agoMonths = $dutch->parseText('5 maanden geleden', '2012-08-10 12:14')[0];
-    $agoYears = $dutch->parseText('5 jaar geleden', '2012-08-10 12:14')[0];
-    $agoPair = $dutch->parseText('paar dagen geleden', '2012-08-10 12:14')[0];
-    $upcomingWeeks = $dutch->parseText('komende 2 weken', '2012-08-10 12:14')[0];
-    $upcomingCompound = $dutch->parseText('komende 2 weken 3 dagen', '2012-08-10 12:14')[0];
-    $pastSpelledWeeks = $dutch->parseText('afgelopen twee weken', '2012-08-10 12:14')[0];
-    $signedCompound = $dutch->parseText('+2 maanden 5 dagen', '2012-08-10 12:14')[0];
-    $signedCompact = $dutch->parseText('+15min', '2012-08-10 12:14')[0];
-    $signedNegative = $dutch->parseText('-3jr', '2012-08-10 12:14')[0];
+    $laterDays = $dutch->parse('10 dagen vanaf nu we hebben iets gedaan', '2012-08-10 12:14')[0];
+    $laterMinutes = $dutch->parse('15 minuten eerder', '2012-08-10 12:14')[0];
+    $laterHours = $dutch->parse('   12 uur vanaf nu', '2012-08-10 12:14')[0];
+    $prefixedHours = $dutch->parse('Over 12 uur heb ik iets gedaan', '2012-08-10 12:14')[0];
+    $spelledWithin = $dutch->parse('we have to make something binnen vijf dagen.', '2012-08-10 12:14')[0];
+    $withinTenDays = $dutch->parse('we have to make something binnen de 10 dagen', '2012-08-10 12:14')[0];
+    $withinOneHour = $dutch->parse('binnen 1 uur', '2012-08-10 12:14')[0];
+    $withinTwoWeeks = $dutch->parse('Binnen de 2 weken', '2012-08-10 12:14')[0];
+    $withinMinuteShort = $dutch->parse('Binnen 5 min a car need to move', '2012-08-10 12:14')[0];
+    $agoDays = $dutch->parse('10 dagen geleden, hebben we wat gedaan', '2012-08-10 12:14')[0];
+    $agoShortHour = $dutch->parse('1u geleden', '2012-08-10 12:14')[0];
+    $agoSeconds = $dutch->parse('12 seconden geleden deed ik iets', '2012-08-10 12:14')[0];
+    $agoMonths = $dutch->parse('5 maanden geleden', '2012-08-10 12:14')[0];
+    $agoYears = $dutch->parse('5 jaar geleden', '2012-08-10 12:14')[0];
+    $agoPair = $dutch->parse('paar dagen geleden', '2012-08-10 12:14')[0];
+    $upcomingWeeks = $dutch->parse('komende 2 weken', '2012-08-10 12:14')[0];
+    $upcomingCompound = $dutch->parse('komende 2 weken 3 dagen', '2012-08-10 12:14')[0];
+    $pastSpelledWeeks = $dutch->parse('afgelopen twee weken', '2012-08-10 12:14')[0];
+    $signedCompound = $dutch->parse('+2 maanden 5 dagen', '2012-08-10 12:14')[0];
+    $signedCompact = $dutch->parse('+15min', '2012-08-10 12:14')[0];
+    $signedNegative = $dutch->parse('-3jr', '2012-08-10 12:14')[0];
 
     expect($laterDays->text)->toBe('10 dagen vanaf nu')
         ->and($laterDays->start->date()->toDateTimeString())->toBe('2012-08-20 12:14:00')

@@ -4,18 +4,18 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses german month-name dates and ranges', function () {
     $german = Chrono::de();
-    $ancient = $german->parseText('10. August 113 v. Chr.', '2012-08-10')[0];
-    $commonEra = $german->parseText('10. August 85 n. Chr.', '2012-08-10')[0];
-    $prefixed = $german->parseText('Die Deadline ist am Dienstag, den 10. Januar', '2012-08-10')[0];
-    $abbreviatedWeekday = $german->parseText('Die Deadline ist Di, 10. Januar', '2012-08-10')[0];
-    $sameMonthRange = $german->parseText('10. - 22. August 2012', '2012-08-10')[0];
-    $crossMonthRange = $german->parseText('10. Oktober - 12. Dezember', '2012-08-10')[0];
+    $ancient = $german->parse('10. August 113 v. Chr.', '2012-08-10')[0];
+    $commonEra = $german->parse('10. August 85 n. Chr.', '2012-08-10')[0];
+    $prefixed = $german->parse('Die Deadline ist am Dienstag, den 10. Januar', '2012-08-10')[0];
+    $abbreviatedWeekday = $german->parse('Die Deadline ist Di, 10. Januar', '2012-08-10')[0];
+    $sameMonthRange = $german->parse('10. - 22. August 2012', '2012-08-10')[0];
+    $crossMonthRange = $german->parse('10. Oktober - 12. Dezember', '2012-08-10')[0];
 
-    expect($german->parseText('10. August 2012', '2012-08-10')[0]->text)
+    expect($german->parse('10. August 2012', '2012-08-10')[0]->text)
         ->toBe('10. August 2012')
-        ->and($german->parseText('10. August 2012', '2012-08-10')[0]->index)
+        ->and($german->parse('10. August 2012', '2012-08-10')[0]->index)
         ->toBe(0)
-        ->and($german->parseDateText('10. August 2012', '2012-08-10')?->toDateTimeString())
+        ->and($german->date('10. August 2012', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
         ->and($ancient->text)->toBe('10. August 113 v. Chr.')
         ->and($ancient->index)->toBe(0)
@@ -24,17 +24,17 @@ it('parses german month-name dates and ranges', function () {
         ->and($ancient->start->get('day'))->toBe(10)
         ->and($commonEra->text)->toBe('10. August 85 n. Chr.')
         ->and($commonEra->start->get('year'))->toBe(85)
-        ->and($german->parseText('So 15.Sep', '2013-08-10')[0]->text)
+        ->and($german->parse('So 15.Sep', '2013-08-10')[0]->text)
         ->toBe('So 15.Sep')
-        ->and($german->parseDateText('So 15.Sep', '2013-08-10')?->toDateTimeString())
+        ->and($german->date('So 15.Sep', '2013-08-10')?->toDateTimeString())
         ->toBe('2013-09-15 12:00:00')
-        ->and($german->parseText('SO 15.SEPT', '2013-08-10')[0]->text)
+        ->and($german->parse('SO 15.SEPT', '2013-08-10')[0]->text)
         ->toBe('SO 15.SEPT')
-        ->and($german->parseDateText('SO 15.SEPT', '2013-08-10')?->toDateTimeString())
+        ->and($german->date('SO 15.SEPT', '2013-08-10')?->toDateTimeString())
         ->toBe('2013-09-15 12:00:00')
-        ->and($german->parseText('Die Deadline ist am 10. August', '2012-08-10')[0]->text)
+        ->and($german->parse('Die Deadline ist am 10. August', '2012-08-10')[0]->text)
         ->toBe('am 10. August')
-        ->and($german->parseText('Die Deadline ist am 10. August', '2012-08-10')[0]->index)
+        ->and($german->parse('Die Deadline ist am 10. August', '2012-08-10')[0]->index)
         ->toBe(17)
         ->and($prefixed->text)
         ->toBe('am Dienstag, den 10. Januar')
@@ -48,51 +48,51 @@ it('parses german month-name dates and ranges', function () {
         ->and($abbreviatedWeekday->index)->toBe(17)
         ->and($abbreviatedWeekday->start->get('weekday'))->toBe(2)
         ->and($abbreviatedWeekday->start->date()->toDateTimeString())->toBe('2013-01-10 12:00:00')
-        ->and($german->parseDateText('31. März 2016', '2012-08-10')?->toDateTimeString())
+        ->and($german->date('31. März 2016', '2012-08-10')?->toDateTimeString())
         ->toBe('2016-03-31 12:00:00')
-        ->and($german->parseDateText('31.Maerz 2016', '2012-08-10')?->toDateTimeString())
+        ->and($german->date('31.Maerz 2016', '2012-08-10')?->toDateTimeString())
         ->toBe('2016-03-31 12:00:00')
-        ->and($german->parseDateText('10. jänner 2012', '2012-08-10')?->toDateTimeString())
+        ->and($german->date('10. jänner 2012', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-01-10 12:00:00')
         ->and($sameMonthRange->text)->toBe('10. - 22. August 2012')
         ->and($sameMonthRange->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
         ->and($sameMonthRange->end?->date()->toDateTimeString())->toBe('2012-08-22 12:00:00')
-        ->and($german->parseText('10. bis 22. Oktober 2012', '2012-08-10')[0]->end?->date()->toDateTimeString())
+        ->and($german->parse('10. bis 22. Oktober 2012', '2012-08-10')[0]->end?->date()->toDateTimeString())
         ->toBe('2012-10-22 12:00:00')
-        ->and($german->parseText('10. bis zum 22. Oktober 2012', '2012-08-10')[0]->end?->date()->toDateTimeString())
+        ->and($german->parse('10. bis zum 22. Oktober 2012', '2012-08-10')[0]->end?->date()->toDateTimeString())
         ->toBe('2012-10-22 12:00:00')
         ->and($crossMonthRange->text)->toBe('10. Oktober - 12. Dezember')
         ->and($crossMonthRange->start->date()->toDateTimeString())->toBe('2012-10-10 12:00:00')
         ->and($crossMonthRange->end?->date()->toDateTimeString())->toBe('2012-12-12 12:00:00')
-        ->and($german->parseText('10. August - 12. Oktober 2013', '2012-08-10')[0]->end?->date()->toDateTimeString())
+        ->and($german->parse('10. August - 12. Oktober 2013', '2012-08-10')[0]->end?->date()->toDateTimeString())
         ->toBe('2013-10-12 12:00:00')
-        ->and($german->parseDateText('12. Juli um 19:00', '2012-08-10')?->toDateTimeString())
+        ->and($german->date('12. Juli um 19:00', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-07-12 19:00:00')
-        ->and($german->parseDateText('12. Juli um 19 Uhr', '2012-08-10')?->toDateTimeString())
+        ->and($german->date('12. Juli um 19 Uhr', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-07-12 19:00:00')
-        ->and($german->parseDateText('12. Juli um 19:53 Uhr', '2012-08-10')?->toDateTimeString())
+        ->and($german->date('12. Juli um 19:53 Uhr', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-07-12 19:53:00')
-        ->and($german->parseDateText('5. Juni 12:00', '2012-08-10')?->toDateTimeString())
+        ->and($german->date('5. Juni 12:00', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-06-05 12:00:00')
-        ->and($german->parseText('32. Oktober 2015', '2012-08-10'))
+        ->and($german->parse('32. Oktober 2015', '2012-08-10'))
         ->toBe([]);
 });
 
 it('parses german little-endian month names with upstream-shaped components', function () {
     $german = Chrono::de();
-    $explicit = $german->parseText('10. August 2012', '2012-08-10')[0];
-    $ancient = $german->parseText('10. August 113 v. Chr.', '2012-08-10')[0];
-    $commonEra = $german->parseText('10. August 85 n. Chr.', '2012-08-10')[0];
-    $weekdayShort = $german->parseText('So 15.Sep', '2013-08-10')[0];
-    $weekdayUpper = $german->parseText('SO 15.SEPT', '2013-08-10')[0];
-    $contextual = $german->parseText('Die Deadline ist am 10. August', '2012-08-10')[0];
-    $weekdayLong = $german->parseText('Die Deadline ist am Dienstag, den 10. Januar', '2012-08-10')[0];
-    $weekdayAbbr = $german->parseText('Die Deadline ist Di, 10. Januar', '2012-08-10')[0];
-    $sameMonthRange = $german->parseText('10. - 22. August 2012', '2012-08-10')[0];
-    $bisRange = $german->parseText('10. bis 22. Oktober 2012', '2012-08-10')[0];
-    $crossMonthRange = $german->parseText('10. Oktober - 12. Dezember', '2012-08-10')[0];
-    $explicitEndYearRange = $german->parseText('10. August - 12. Oktober 2013', '2012-08-10')[0];
-    $austrianMonth = $german->parseText('10. jänner 2012', '2012-08-10')[0];
+    $explicit = $german->parse('10. August 2012', '2012-08-10')[0];
+    $ancient = $german->parse('10. August 113 v. Chr.', '2012-08-10')[0];
+    $commonEra = $german->parse('10. August 85 n. Chr.', '2012-08-10')[0];
+    $weekdayShort = $german->parse('So 15.Sep', '2013-08-10')[0];
+    $weekdayUpper = $german->parse('SO 15.SEPT', '2013-08-10')[0];
+    $contextual = $german->parse('Die Deadline ist am 10. August', '2012-08-10')[0];
+    $weekdayLong = $german->parse('Die Deadline ist am Dienstag, den 10. Januar', '2012-08-10')[0];
+    $weekdayAbbr = $german->parse('Die Deadline ist Di, 10. Januar', '2012-08-10')[0];
+    $sameMonthRange = $german->parse('10. - 22. August 2012', '2012-08-10')[0];
+    $bisRange = $german->parse('10. bis 22. Oktober 2012', '2012-08-10')[0];
+    $crossMonthRange = $german->parse('10. Oktober - 12. Dezember', '2012-08-10')[0];
+    $explicitEndYearRange = $german->parse('10. August - 12. Oktober 2013', '2012-08-10')[0];
+    $austrianMonth = $german->parse('10. jänner 2012', '2012-08-10')[0];
 
     expect($explicit->index)->toBe(0)
         ->and($explicit->text)->toBe('10. August 2012')
@@ -152,16 +152,16 @@ it('parses german little-endian month names with upstream-shaped components', fu
 
 it('parses german month-name dates with alternative era labels', function () {
     $german = Chrono::de();
-    $beforeCommonEra = $german->parseText('10. August 234 v.u.Z.', '2012-08-10')[0];
-    $commonEra = $german->parseText('10. August 88 nuZ', '2012-08-10')[0];
-    $commonEraShort = $german->parseText('10. August 88 uZ', '2012-08-10')[0];
-    $commonEraDotted = $german->parseText('10. August 88 d.g.Z.', '2012-08-10')[0];
-    $beforeChrist = $german->parseText('10. August 234 v.Chr.', '2012-08-10')[0];
-    $afterChrist = $german->parseText('10. August 88 nC', '2012-08-10')[0];
-    $beforeCurrentEra = $german->parseText('10. August 234 v.d.Z.', '2012-08-10')[0];
-    $afterCurrentEra = $german->parseText('10. August 88 ndZ', '2012-08-10')[0];
-    $beforeCurrentEraDotted = $german->parseText('10. August 234 v.d.g.Z.', '2012-08-10')[0];
-    $afterCurrentEraDotted = $german->parseText('10. August 88 ndgZ', '2012-08-10')[0];
+    $beforeCommonEra = $german->parse('10. August 234 v.u.Z.', '2012-08-10')[0];
+    $commonEra = $german->parse('10. August 88 nuZ', '2012-08-10')[0];
+    $commonEraShort = $german->parse('10. August 88 uZ', '2012-08-10')[0];
+    $commonEraDotted = $german->parse('10. August 88 d.g.Z.', '2012-08-10')[0];
+    $beforeChrist = $german->parse('10. August 234 v.Chr.', '2012-08-10')[0];
+    $afterChrist = $german->parse('10. August 88 nC', '2012-08-10')[0];
+    $beforeCurrentEra = $german->parse('10. August 234 v.d.Z.', '2012-08-10')[0];
+    $afterCurrentEra = $german->parse('10. August 88 ndZ', '2012-08-10')[0];
+    $beforeCurrentEraDotted = $german->parse('10. August 234 v.d.g.Z.', '2012-08-10')[0];
+    $afterCurrentEraDotted = $german->parse('10. August 88 ndgZ', '2012-08-10')[0];
 
     expect($beforeCommonEra->index)->toBe(0)
         ->and($beforeCommonEra->text)->toBe('10. August 234 v.u.Z.')

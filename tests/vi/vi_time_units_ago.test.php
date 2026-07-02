@@ -4,15 +4,15 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses vietnamese ago time unit expressions', function () {
     $vietnamese = Chrono::vi();
-    $result = $vietnamese->parseText('2 ngày trước', '2012-08-10 09:30')[0];
-    $prefixed = $vietnamese->parseText('Sự kiện 3 ngày trước.', '2012-08-10 12:00')[0];
-    $weeks = $vietnamese->parseText('2 tuần trước', '2012-08-10 12:00')[0];
-    $months = $vietnamese->parseText('3 tháng trước', '2012-08-10 12:00')[0];
-    $years = $vietnamese->parseText('5 năm trước', '2012-08-10 12:00')[0];
-    $pastMonth = $vietnamese->parseText('1 tháng qua', '2012-08-10 12:00')[0];
-    $wordWeeks = $vietnamese->parseText('hai tuần trước', '2012-08-10 12:00')[0];
-    $wordDays = $vietnamese->parseText('ba ngày trước', '2012-08-10 12:00')[0];
-    $wordMonth = $vietnamese->parseText('một tháng qua', '2012-08-10 12:00')[0];
+    $result = $vietnamese->parse('2 ngày trước', '2012-08-10 09:30')[0];
+    $prefixed = $vietnamese->parse('Sự kiện 3 ngày trước.', '2012-08-10 12:00')[0];
+    $weeks = $vietnamese->parse('2 tuần trước', '2012-08-10 12:00')[0];
+    $months = $vietnamese->parse('3 tháng trước', '2012-08-10 12:00')[0];
+    $years = $vietnamese->parse('5 năm trước', '2012-08-10 12:00')[0];
+    $pastMonth = $vietnamese->parse('1 tháng qua', '2012-08-10 12:00')[0];
+    $wordWeeks = $vietnamese->parse('hai tuần trước', '2012-08-10 12:00')[0];
+    $wordDays = $vietnamese->parse('ba ngày trước', '2012-08-10 12:00')[0];
+    $wordMonth = $vietnamese->parse('một tháng qua', '2012-08-10 12:00')[0];
 
     expect($result->start->date()->toDateTimeString())->toBe('2012-08-08 09:30:00')
         ->and($prefixed->index)->toBe(8)

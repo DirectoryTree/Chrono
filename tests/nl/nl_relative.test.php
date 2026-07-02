@@ -4,31 +4,31 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses dutch relative date period expressions', function () {
     $dutch = Chrono::nl();
-    $nextMonth = $dutch->parseText('volgende maand', '2016-10-01 12:00')[0];
-    $upcomingMonth = $dutch->parseText('aankomende maand', '2016-10-01 12:00')[0];
-    $nextYear = $dutch->parseText('volgend jaar', '2020-11-22 12:11:32.006')[0];
+    $nextMonth = $dutch->parse('volgende maand', '2016-10-01 12:00')[0];
+    $upcomingMonth = $dutch->parse('aankomende maand', '2016-10-01 12:00')[0];
+    $nextYear = $dutch->parse('volgend jaar', '2020-11-22 12:11:32.006')[0];
 
-    expect($dutch->parseDateText('deze week', '2012-08-10 09:30')?->toDateTimeString())
+    expect($dutch->date('deze week', '2012-08-10 09:30')?->toDateTimeString())
         ->toBe('2012-08-05 09:30:00')
-        ->and($dutch->parseDateText('deze maand', '2012-08-10 09:30')?->toDateTimeString())
+        ->and($dutch->date('deze maand', '2012-08-10 09:30')?->toDateTimeString())
         ->toBe('2012-08-01 09:30:00')
-        ->and($dutch->parseDateText('dit jaar', '2012-08-10 09:30')?->toDateTimeString())
+        ->and($dutch->date('dit jaar', '2012-08-10 09:30')?->toDateTimeString())
         ->toBe('2012-01-01 09:30:00')
-        ->and($dutch->parseDateText('afgelopen week', '2016-10-01 12:00')?->toDateTimeString())
+        ->and($dutch->date('afgelopen week', '2016-10-01 12:00')?->toDateTimeString())
         ->toBe('2016-09-24 12:00:00')
-        ->and($dutch->parseDateText('afgelopen maand', '2016-10-01 12:00')?->toDateTimeString())
+        ->and($dutch->date('afgelopen maand', '2016-10-01 12:00')?->toDateTimeString())
         ->toBe('2016-09-01 12:00:00')
-        ->and($dutch->parseDateText('afgelopen dag', '2016-10-01 12:00')?->toDateTimeString())
+        ->and($dutch->date('afgelopen dag', '2016-10-01 12:00')?->toDateTimeString())
         ->toBe('2016-09-30 12:00:00')
-        ->and($dutch->parseDateText('vorige week', '2016-10-01 12:00')?->toDateTimeString())
+        ->and($dutch->date('vorige week', '2016-10-01 12:00')?->toDateTimeString())
         ->toBe('2016-09-24 12:00:00')
-        ->and($dutch->parseDateText('komend uur', '2016-10-01 12:00')?->toDateTimeString())
+        ->and($dutch->date('komend uur', '2016-10-01 12:00')?->toDateTimeString())
         ->toBe('2016-10-01 13:00:00')
-        ->and($dutch->parseDateText('volgende week', '2012-08-10 09:30')?->toDateTimeString())
+        ->and($dutch->date('volgende week', '2012-08-10 09:30')?->toDateTimeString())
         ->toBe('2012-08-17 09:30:00')
-        ->and($dutch->parseDateText('volgende dag', '2016-10-01 12:00')?->toDateTimeString())
+        ->and($dutch->date('volgende dag', '2016-10-01 12:00')?->toDateTimeString())
         ->toBe('2016-10-02 12:00:00')
-        ->and($dutch->parseDateText('vorige maand', '2012-08-10 09:30')?->toDateTimeString())
+        ->and($dutch->date('vorige maand', '2012-08-10 09:30')?->toDateTimeString())
         ->toBe('2012-07-10 09:30:00')
         ->and($nextMonth->start->date()->toDateTimeString())
         ->toBe('2016-11-01 12:00:00')

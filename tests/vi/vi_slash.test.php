@@ -4,10 +4,10 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses vietnamese slash dates', function () {
     $vietnamese = Chrono::vi();
-    $slash = $vietnamese->parseText('Ngày 30/04/1975.', '2012-08-10')[0];
-    $embeddedSlash = $vietnamese->parseText('Hội nghị 01/01/1954', '2012-08-10')[0];
-    $unpadded = $vietnamese->parseText('3/5/1968', '2012-08-10')[0];
-    $iso = $vietnamese->parseText('Ngày 2024-03-15 là quan trọng.', '2012-08-10')[0];
+    $slash = $vietnamese->parse('Ngày 30/04/1975.', '2012-08-10')[0];
+    $embeddedSlash = $vietnamese->parse('Hội nghị 01/01/1954', '2012-08-10')[0];
+    $unpadded = $vietnamese->parse('3/5/1968', '2012-08-10')[0];
+    $iso = $vietnamese->parse('Ngày 2024-03-15 là quan trọng.', '2012-08-10')[0];
 
     expect($slash->text)->toBe('30/04/1975')
         ->and($slash->start->date()->toDateTimeString())->toBe('1975-04-30 12:00:00')

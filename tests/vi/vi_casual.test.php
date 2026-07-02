@@ -5,24 +5,24 @@ use DirectoryTree\Chrono\Meridiem;
 
 it('parses vietnamese casual date and time references', function () {
     $vietnamese = Chrono::vi();
-    $now = $vietnamese->parseText('bây giờ', '2012-08-10 09:30:45.123')[0];
-    $nowAlternative = $vietnamese->parseText('lúc này', '2012-08-10 08:09:10.011')[0];
-    $today = $vietnamese->parseText('hôm nay', '2012-08-10 09:30')[0];
-    $prefixedToday = $vietnamese->parseText('Cuộc họp hôm nay.', '2012-08-10 12:00')[0];
-    $prefixedYesterday = $vietnamese->parseText('Hội nghị hôm qua.', '2012-08-10 12:00')[0];
-    $tomorrow = $vietnamese->parseText('Lịch ngày mai.', '2012-08-10 12:00')[0];
-    $dayBeforeYesterday = $vietnamese->parseText('hôm kia', '2012-08-10 12:00')[0];
-    $morning = $vietnamese->parseText('buổi sáng', '2012-08-10 09:30')[0];
-    $dateMorning = $vietnamese->parseText('hôm nay buổi sáng', '2012-08-10 06:00')[0];
-    $noon = $vietnamese->parseText('buổi trưa', '2012-08-10 12:00')[0];
-    $afternoon = $vietnamese->parseText('buổi chiều', '2012-08-10 12:00')[0];
-    $evening = $vietnamese->parseText('buổi tối', '2012-08-10 12:00')[0];
-    $night = $vietnamese->parseText('buổi đêm', '2012-08-10 12:00')[0];
-    $bareNight = $vietnamese->parseText('đêm', '2012-08-10 12:00')[0];
-    $midnight = $vietnamese->parseText('nửa đêm', '2012-08-10 12:00')[0];
-    $dawn = $vietnamese->parseText('bình minh', '2012-08-10 12:00')[0];
-    $earlyMorning = $vietnamese->parseText('sáng sớm', '2012-08-10 12:00')[0];
-    $todayAfternoon = $vietnamese->parseText('hôm nay buổi chiều', '2012-08-10 12:00')[0];
+    $now = $vietnamese->parse('bây giờ', '2012-08-10 09:30:45.123')[0];
+    $nowAlternative = $vietnamese->parse('lúc này', '2012-08-10 08:09:10.011')[0];
+    $today = $vietnamese->parse('hôm nay', '2012-08-10 09:30')[0];
+    $prefixedToday = $vietnamese->parse('Cuộc họp hôm nay.', '2012-08-10 12:00')[0];
+    $prefixedYesterday = $vietnamese->parse('Hội nghị hôm qua.', '2012-08-10 12:00')[0];
+    $tomorrow = $vietnamese->parse('Lịch ngày mai.', '2012-08-10 12:00')[0];
+    $dayBeforeYesterday = $vietnamese->parse('hôm kia', '2012-08-10 12:00')[0];
+    $morning = $vietnamese->parse('buổi sáng', '2012-08-10 09:30')[0];
+    $dateMorning = $vietnamese->parse('hôm nay buổi sáng', '2012-08-10 06:00')[0];
+    $noon = $vietnamese->parse('buổi trưa', '2012-08-10 12:00')[0];
+    $afternoon = $vietnamese->parse('buổi chiều', '2012-08-10 12:00')[0];
+    $evening = $vietnamese->parse('buổi tối', '2012-08-10 12:00')[0];
+    $night = $vietnamese->parse('buổi đêm', '2012-08-10 12:00')[0];
+    $bareNight = $vietnamese->parse('đêm', '2012-08-10 12:00')[0];
+    $midnight = $vietnamese->parse('nửa đêm', '2012-08-10 12:00')[0];
+    $dawn = $vietnamese->parse('bình minh', '2012-08-10 12:00')[0];
+    $earlyMorning = $vietnamese->parse('sáng sớm', '2012-08-10 12:00')[0];
+    $todayAfternoon = $vietnamese->parse('hôm nay buổi chiều', '2012-08-10 12:00')[0];
 
     expect($now->start->date()->format('Y-m-d H:i:s.v'))->toBe('2012-08-10 09:30:45.123')
         ->and($now->start->tags())->toContain('parser/VICasualDateParser')
@@ -39,13 +39,13 @@ it('parses vietnamese casual date and time references', function () {
         ->and($prefixedYesterday->index)->toBe(9)
         ->and($prefixedYesterday->text)->toBe('hôm qua')
         ->and($prefixedYesterday->start->date()->toDateTimeString())->toBe('2012-08-09 12:00:00')
-        ->and($vietnamese->parseDateText('hôm qua', '2012-08-10 09:30')?->toDateTimeString())->toBe('2012-08-09 09:30:00')
-        ->and($vietnamese->parseDateText('hôm qua', '2012-08-01 12:00')?->toDateTimeString())->toBe('2012-07-31 12:00:00')
+        ->and($vietnamese->date('hôm qua', '2012-08-10 09:30')?->toDateTimeString())->toBe('2012-08-09 09:30:00')
+        ->and($vietnamese->date('hôm qua', '2012-08-01 12:00')?->toDateTimeString())->toBe('2012-07-31 12:00:00')
         ->and($tomorrow->index)->toBe(5)
         ->and($tomorrow->text)->toBe('ngày mai')
         ->and($tomorrow->start->date()->toDateTimeString())->toBe('2012-08-11 12:00:00')
-        ->and($vietnamese->parseDateText('ngày mai', '2012-08-31 12:00')?->toDateTimeString())->toBe('2012-09-01 12:00:00')
-        ->and($vietnamese->parseDateText('ngày kia', '2012-08-10 09:30')?->toDateTimeString())->toBe('2012-08-12 09:30:00')
+        ->and($vietnamese->date('ngày mai', '2012-08-31 12:00')?->toDateTimeString())->toBe('2012-09-01 12:00:00')
+        ->and($vietnamese->date('ngày kia', '2012-08-10 09:30')?->toDateTimeString())->toBe('2012-08-12 09:30:00')
         ->and($dayBeforeYesterday->text)->toBe('hôm kia')
         ->and($dayBeforeYesterday->start->date()->toDateTimeString())->toBe('2012-08-08 12:00:00')
         ->and($morning->start->date()->toDateTimeString())->toBe('2012-08-10 09:00:00')

@@ -4,14 +4,14 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses traditional chinese weekdays', function () {
     $chinese = Chrono::zhHant();
-    $thursday = $chinese->parseText('星期四', '2016-09-02')[0];
-    $monday = $chinese->parseText('我週一要打遊戲', '2012-08-10')[0];
-    $forwardThursday = $chinese->parseText('禮拜四 (forward dates only)', '2016-09-02', ['forwardDate' => true])[0];
-    $sunday = $chinese->parseText('禮拜日', '2016-09-02')[0];
-    $lastWednesday = $chinese->parseText('雞上個禮拜三全部都係雞', '2016-09-02')[0];
-    $nextSunday = $chinese->parseText('雞下星期天全部都係雞', '2016-09-02')[0];
-    $thisMonday = $chinese->parseText('我這個星期一要打遊戲', '2012-08-10')[0];
-    $weekdayRange = $chinese->parseText('星期六-星期一', '2016-09-02', ['forwardDate' => true])[0];
+    $thursday = $chinese->parse('星期四', '2016-09-02')[0];
+    $monday = $chinese->parse('我週一要打遊戲', '2012-08-10')[0];
+    $forwardThursday = $chinese->parse('禮拜四 (forward dates only)', '2016-09-02', ['forwardDate' => true])[0];
+    $sunday = $chinese->parse('禮拜日', '2016-09-02')[0];
+    $lastWednesday = $chinese->parse('雞上個禮拜三全部都係雞', '2016-09-02')[0];
+    $nextSunday = $chinese->parse('雞下星期天全部都係雞', '2016-09-02')[0];
+    $thisMonday = $chinese->parse('我這個星期一要打遊戲', '2012-08-10')[0];
+    $weekdayRange = $chinese->parse('星期六-星期一', '2016-09-02', ['forwardDate' => true])[0];
 
     expect($thursday->text)->toBe('星期四')
         ->and($thursday->start->date()->toDateTimeString())->toBe('2016-09-01 12:00:00')

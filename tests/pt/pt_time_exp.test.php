@@ -5,16 +5,16 @@ use DirectoryTree\Chrono\Meridiem;
 
 it('parses portuguese time expressions', function () {
     $portuguese = Chrono::pt();
-    $single = $portuguese->parseText('Ficaremos às 6.13 AM', '2012-08-10')[0];
-    $dotRange = $portuguese->parseText('8:10 - 12.32', '2012-08-10')[0];
-    $prefixedRange = $portuguese->parseText(' de 6:30pm a 11:00pm ', '2012-08-10')[0];
-    $dateTime = $portuguese->parseText('Algo passou em 10 de Agosto de 2012 10:12:59 pm', '2012-08-10')[0];
-    $impliedMeridiemRange = $portuguese->parseText('de 1pm a 3', '2012-08-10')[0];
-    $shortMeridiem = $portuguese->parseText('6pm', '2012-08-10')[0];
-    $spacedMeridiem = $portuguese->parseText('6 pm', '2012-08-10')[0];
-    $shortRange = $portuguese->parseText('7-10pm', '2012-08-10')[0];
-    $shortDotTime = $portuguese->parseText('11.1pm', '2012-08-10')[0];
-    $atNoon = $portuguese->parseText('às 12', '2012-08-10')[0];
+    $single = $portuguese->parse('Ficaremos às 6.13 AM', '2012-08-10')[0];
+    $dotRange = $portuguese->parse('8:10 - 12.32', '2012-08-10')[0];
+    $prefixedRange = $portuguese->parse(' de 6:30pm a 11:00pm ', '2012-08-10')[0];
+    $dateTime = $portuguese->parse('Algo passou em 10 de Agosto de 2012 10:12:59 pm', '2012-08-10')[0];
+    $impliedMeridiemRange = $portuguese->parse('de 1pm a 3', '2012-08-10')[0];
+    $shortMeridiem = $portuguese->parse('6pm', '2012-08-10')[0];
+    $spacedMeridiem = $portuguese->parse('6 pm', '2012-08-10')[0];
+    $shortRange = $portuguese->parse('7-10pm', '2012-08-10')[0];
+    $shortDotTime = $portuguese->parse('11.1pm', '2012-08-10')[0];
+    $atNoon = $portuguese->parse('às 12', '2012-08-10')[0];
 
     expect($single->index)->toBe(10)
         ->and($single->text)->toBe('às 6.13 AM')
@@ -88,19 +88,19 @@ it('parses portuguese time expressions', function () {
 it('parses portuguese random date and time expressions', function () {
     $portuguese = Chrono::pt();
 
-    expect($portuguese->parseText('segunda 4/29/2013 630-930am', '2012-08-10')[0]->text)->toBe('segunda 4/29/2013 630-930am')
-        ->and($portuguese->parseText('terça 5/1/2013 1115am', '2012-08-10')[0]->text)->toBe('terça 5/1/2013 1115am')
-        ->and($portuguese->parseText('quarta 5/3/2013 1230pm', '2012-08-10')[0]->text)->toBe('quarta 5/3/2013 1230pm')
-        ->and($portuguese->parseText('domingo 5/6/2013  750am-910am', '2012-08-10')[0]->text)->toBe('domingo 5/6/2013  750am-910am')
-        ->and($portuguese->parseText('segunda-feira 5/13/2013 630-930am', '2012-08-10')[0]->text)->toBe('segunda-feira 5/13/2013 630-930am')
-        ->and($portuguese->parseText('quarta-feira 5/15/2013 1030am', '2012-08-10')[0]->text)->toBe('quarta-feira 5/15/2013 1030am')
-        ->and($portuguese->parseText('quinta 6/21/2013 2:30', '2012-08-10')[0]->text)->toBe('quinta 6/21/2013 2:30')
-        ->and($portuguese->parseText('terça-feira 7/2/2013 1-230 pm', '2012-08-10')[0]->text)->toBe('terça-feira 7/2/2013 1-230 pm')
-        ->and($portuguese->parseText('Segunda-feira, 6/24/2013, 7:00pm - 8:30pm', '2012-08-10')[0]->text)->toBe('Segunda-feira, 6/24/2013, 7:00pm - 8:30pm')
-        ->and($portuguese->parseText('Quarta, 3 Julho de 2013 às 2pm', '2012-08-10')[0]->text)->toBe('Quarta, 3 Julho de 2013 às 2pm')
-        ->and($portuguese->parseText('6pm', '2012-08-10')[0]->text)->toBe('6pm')
-        ->and($portuguese->parseText('6 pm', '2012-08-10')[0]->text)->toBe('6 pm')
-        ->and($portuguese->parseText('7-10pm', '2012-08-10')[0]->text)->toBe('7-10pm')
-        ->and($portuguese->parseText('11.1pm', '2012-08-10')[0]->text)->toBe('11.1pm')
-        ->and($portuguese->parseText('às 12', '2012-08-10')[0]->text)->toBe('às 12');
+    expect($portuguese->parse('segunda 4/29/2013 630-930am', '2012-08-10')[0]->text)->toBe('segunda 4/29/2013 630-930am')
+        ->and($portuguese->parse('terça 5/1/2013 1115am', '2012-08-10')[0]->text)->toBe('terça 5/1/2013 1115am')
+        ->and($portuguese->parse('quarta 5/3/2013 1230pm', '2012-08-10')[0]->text)->toBe('quarta 5/3/2013 1230pm')
+        ->and($portuguese->parse('domingo 5/6/2013  750am-910am', '2012-08-10')[0]->text)->toBe('domingo 5/6/2013  750am-910am')
+        ->and($portuguese->parse('segunda-feira 5/13/2013 630-930am', '2012-08-10')[0]->text)->toBe('segunda-feira 5/13/2013 630-930am')
+        ->and($portuguese->parse('quarta-feira 5/15/2013 1030am', '2012-08-10')[0]->text)->toBe('quarta-feira 5/15/2013 1030am')
+        ->and($portuguese->parse('quinta 6/21/2013 2:30', '2012-08-10')[0]->text)->toBe('quinta 6/21/2013 2:30')
+        ->and($portuguese->parse('terça-feira 7/2/2013 1-230 pm', '2012-08-10')[0]->text)->toBe('terça-feira 7/2/2013 1-230 pm')
+        ->and($portuguese->parse('Segunda-feira, 6/24/2013, 7:00pm - 8:30pm', '2012-08-10')[0]->text)->toBe('Segunda-feira, 6/24/2013, 7:00pm - 8:30pm')
+        ->and($portuguese->parse('Quarta, 3 Julho de 2013 às 2pm', '2012-08-10')[0]->text)->toBe('Quarta, 3 Julho de 2013 às 2pm')
+        ->and($portuguese->parse('6pm', '2012-08-10')[0]->text)->toBe('6pm')
+        ->and($portuguese->parse('6 pm', '2012-08-10')[0]->text)->toBe('6 pm')
+        ->and($portuguese->parse('7-10pm', '2012-08-10')[0]->text)->toBe('7-10pm')
+        ->and($portuguese->parse('11.1pm', '2012-08-10')[0]->text)->toBe('11.1pm')
+        ->and($portuguese->parse('às 12', '2012-08-10')[0]->text)->toBe('às 12');
 });

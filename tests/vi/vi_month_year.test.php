@@ -4,11 +4,11 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses vietnamese month year expressions', function () {
     $vietnamese = Chrono::vi();
-    $month = $vietnamese->parseText('tháng chạp năm 1975', '2012-08-10')[0];
-    $numberedMonth = $vietnamese->parseText('tháng 4 năm 1975', '2012-08-10')[0];
-    $oldMonth = $vietnamese->parseText('tháng 1 năm 1863', '2012-08-10')[0];
-    $slashMonth = $vietnamese->parseText('tháng 3/1975', '2012-08-10')[0];
-    $impliedYear = $vietnamese->parseText('tháng 3', '2012-08-10')[0];
+    $month = $vietnamese->parse('tháng chạp năm 1975', '2012-08-10')[0];
+    $numberedMonth = $vietnamese->parse('tháng 4 năm 1975', '2012-08-10')[0];
+    $oldMonth = $vietnamese->parse('tháng 1 năm 1863', '2012-08-10')[0];
+    $slashMonth = $vietnamese->parse('tháng 3/1975', '2012-08-10')[0];
+    $impliedYear = $vietnamese->parse('tháng 3', '2012-08-10')[0];
 
     expect($month->start->date()->toDateTimeString())->toBe('1975-12-01 12:00:00')
         ->and($month->start->tags())->toContain('parser/VIMonthYearParser')
@@ -22,6 +22,6 @@ it('parses vietnamese month year expressions', function () {
         ->and($impliedYear->start->get('month'))->toBe(3)
         ->and($impliedYear->start->get('year'))->toBe(2012)
         ->and($impliedYear->start->isCertain('year'))->toBeFalse()
-        ->and($vietnamese->parseText('tháng 13', '2012-08-10'))->toBe([])
-        ->and($vietnamese->parseText('tháng 0', '2012-08-10'))->toBe([]);
+        ->and($vietnamese->parse('tháng 13', '2012-08-10'))->toBe([])
+        ->and($vietnamese->parse('tháng 0', '2012-08-10'))->toBe([]);
 });

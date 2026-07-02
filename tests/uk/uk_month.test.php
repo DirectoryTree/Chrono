@@ -3,18 +3,18 @@
 use DirectoryTree\Chrono\Chrono;
 
 it('parses ukrainian month expressions', function () {
-    $dateTime = Chrono::uk()->parseText('10 серпня 2012 о 6:30 вечора', '2012-08-10 09:30')[0];
-    $range = Chrono::uk()->parseText('10 серпня - 12 серпня', '2012-08-10 09:30')[0];
-    $monthYear = Chrono::uk()->parseText('Вересень 2012', '2020-11-22')[0];
-    $shortMonthYear = Chrono::uk()->parseText('верес 2012', '2020-11-22')[0];
-    $dottedMonthYear = Chrono::uk()->parseText('верес. 2012', '2020-11-22')[0];
-    $hyphenatedMonthYear = Chrono::uk()->parseText('верес-2012', '2020-11-22')[0];
-    $monthOnly = Chrono::uk()->parseText('травень', '2020-11-22')[0];
-    $monthOnlyWithPreposition = Chrono::uk()->parseText('у січні', '2020-11-22')[0];
-    $shortMonthOnlyWithPreposition = Chrono::uk()->parseText('в січ', '2020-11-22')[0];
-    $contextMonth = Chrono::uk()->parseText('Це було у вересні 2012 перед новим роком', '2020-11-22')[0];
-    $abbreviatedYear = Chrono::uk()->parseText('сер 96', '2012-08-10')[0];
-    $abbreviatedYearWithPrefix = Chrono::uk()->parseText('96 сер 96', '2012-08-10')[0];
+    $dateTime = Chrono::uk()->parse('10 серпня 2012 о 6:30 вечора', '2012-08-10 09:30')[0];
+    $range = Chrono::uk()->parse('10 серпня - 12 серпня', '2012-08-10 09:30')[0];
+    $monthYear = Chrono::uk()->parse('Вересень 2012', '2020-11-22')[0];
+    $shortMonthYear = Chrono::uk()->parse('верес 2012', '2020-11-22')[0];
+    $dottedMonthYear = Chrono::uk()->parse('верес. 2012', '2020-11-22')[0];
+    $hyphenatedMonthYear = Chrono::uk()->parse('верес-2012', '2020-11-22')[0];
+    $monthOnly = Chrono::uk()->parse('травень', '2020-11-22')[0];
+    $monthOnlyWithPreposition = Chrono::uk()->parse('у січні', '2020-11-22')[0];
+    $shortMonthOnlyWithPreposition = Chrono::uk()->parse('в січ', '2020-11-22')[0];
+    $contextMonth = Chrono::uk()->parse('Це було у вересні 2012 перед новим роком', '2020-11-22')[0];
+    $abbreviatedYear = Chrono::uk()->parse('сер 96', '2012-08-10')[0];
+    $abbreviatedYearWithPrefix = Chrono::uk()->parse('96 сер 96', '2012-08-10')[0];
 
     expect($dateTime->text)->toBe('10 серпня 2012 о 6:30 вечора')
         ->and($dateTime->start->date()->toDateTimeString())->toBe('2012-08-10 18:30:00')

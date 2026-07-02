@@ -4,9 +4,9 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses dutch ago relative durations', function () {
     $dutch = Chrono::nl();
-    $halfHourAgo = $dutch->parseText('   half uur geleden', '2012-08-10 12:14')[0];
-    $threeSecondsAgo = $dutch->parseText('drie seconden geleden', '2012-08-10 12:14')[0];
-    $nestedAgo = $dutch->parseText('15 uur 29 minuten geleden', '2012-08-10 22:30')[0];
+    $halfHourAgo = $dutch->parse('   half uur geleden', '2012-08-10 12:14')[0];
+    $threeSecondsAgo = $dutch->parse('drie seconden geleden', '2012-08-10 12:14')[0];
+    $nestedAgo = $dutch->parse('15 uur 29 minuten geleden', '2012-08-10 22:30')[0];
 
     expect($halfHourAgo->index)->toBe(3)
         ->and($halfHourAgo->text)->toBe('half uur geleden')
@@ -18,7 +18,7 @@ it('parses dutch ago relative durations', function () {
 });
 
 it('matches upstream dutch ago relative duration examples', function (string $text, string $reference, string $expectedText, string $expectedDate, int $expectedIndex = 0) {
-    $result = Chrono::nl()->parseText($text, $reference)[0];
+    $result = Chrono::nl()->parse($text, $reference)[0];
 
     expect($result->index)->toBe($expectedIndex)
         ->and($result->text)->toBe($expectedText)
@@ -46,7 +46,7 @@ it('matches upstream dutch ago relative duration examples', function (string $te
 ]);
 
 it('matches upstream dutch ago negative cases', function (string $text) {
-    expect(Chrono::nl()->parseText($text))->toBe([]);
+    expect(Chrono::nl()->parse($text))->toBe([]);
 })->with([
     'een paar uur',
     '5 dagen',

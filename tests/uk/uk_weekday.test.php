@@ -3,8 +3,8 @@
 use DirectoryTree\Chrono\Chrono;
 
 it('parses ukrainian weekdays', function () {
-    $weekday = Chrono::uk()->parseText('середа', '2012-08-10 09:30')[0];
-    $nextWeekday = Chrono::uk()->parseText('наступний понеділок', '2012-08-10 09:30')[0];
+    $weekday = Chrono::uk()->parse('середа', '2012-08-10 09:30')[0];
+    $nextWeekday = Chrono::uk()->parse('наступний понеділок', '2012-08-10 09:30')[0];
 
     expect($weekday->start->date()->toDateTimeString())->toBe('2012-08-08 12:00:00')
         ->and($weekday->start->tags())->toContain('parser/UKWeekdayParser')
@@ -13,7 +13,7 @@ it('parses ukrainian weekdays', function () {
 });
 
 it('matches upstream ukrainian weekday examples', function (string $text, string $reference, string $expectedText, string $expectedDate, array $options = []) {
-    $result = Chrono::uk()->parseText($text, $reference, $options)[0];
+    $result = Chrono::uk()->parse($text, $reference, $options)[0];
 
     expect($result->text)->toBe($expectedText)
         ->and($result->start->date()->toDateTimeString())->toBe($expectedDate)

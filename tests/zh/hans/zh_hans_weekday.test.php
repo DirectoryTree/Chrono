@@ -4,14 +4,14 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses simplified chinese weekdays', function () {
     $chinese = Chrono::zhHans();
-    $thursday = $chinese->parseText('星期四', '2016-09-02')[0];
-    $monday = $chinese->parseText('我周一要打游戏', '2012-08-10')[0];
-    $forwardThursday = $chinese->parseText('礼拜四 (forward dates only)', '2016-09-02', ['forwardDate' => true])[0];
-    $sunday = $chinese->parseText('礼拜日', '2016-09-02')[0];
-    $lastWednesday = $chinese->parseText('我上个礼拜三在打游戏', '2016-09-02')[0];
-    $nextSunday = $chinese->parseText('我下星期天打游戏', '2016-09-02')[0];
-    $thisMonday = $chinese->parseText('我这个星期一要打游戏', '2012-08-10')[0];
-    $weekdayRange = $chinese->parseText('星期六至星期一', '2016-09-02', ['forwardDate' => true])[0];
+    $thursday = $chinese->parse('星期四', '2016-09-02')[0];
+    $monday = $chinese->parse('我周一要打游戏', '2012-08-10')[0];
+    $forwardThursday = $chinese->parse('礼拜四 (forward dates only)', '2016-09-02', ['forwardDate' => true])[0];
+    $sunday = $chinese->parse('礼拜日', '2016-09-02')[0];
+    $lastWednesday = $chinese->parse('我上个礼拜三在打游戏', '2016-09-02')[0];
+    $nextSunday = $chinese->parse('我下星期天打游戏', '2016-09-02')[0];
+    $thisMonday = $chinese->parse('我这个星期一要打游戏', '2012-08-10')[0];
+    $weekdayRange = $chinese->parse('星期六至星期一', '2016-09-02', ['forwardDate' => true])[0];
 
     expect($thursday->text)->toBe('星期四')
         ->and($thursday->start->date()->toDateTimeString())->toBe('2016-09-01 12:00:00')
@@ -43,7 +43,7 @@ it('parses simplified chinese weekday ranges with upstream separators', function
     $chinese = Chrono::zhHans();
 
     foreach (['星期六至星期一', '星期六到星期一', '星期六~星期一', '星期六～星期一', '星期六－星期一', '星期六ー星期一'] as $text) {
-        $range = $chinese->parseText($text, '2016-09-02', ['forwardDate' => true])[0];
+        $range = $chinese->parse($text, '2016-09-02', ['forwardDate' => true])[0];
 
         expect($range->text)->toBe($text)
             ->and($range->start->date()->toDateTimeString())->toBe('2016-09-03 12:00:00')

@@ -27,12 +27,20 @@ Parse the first date from a string:
 ```php
 use DirectoryTree\Chrono\Chrono;
 
-$date = Chrono::parseDate('tomorrow at 4pm', '2026-06-23 09:00');
+$date = Chrono::date('tomorrow at 4pm', '2026-06-23 09:00');
 
 $date->toDateTimeString(); // 2026-06-24 16:00:00
 ```
 
 Parse all dates from a string:
+
+```php
+$dates = Chrono::dates('Review from Monday to Friday', '2026-06-23');
+
+$dates[0]->toDateString(); // 2026-06-22
+```
+
+Parse detailed results from a string:
 
 ```php
 $results = Chrono::parse('Review from Monday to Friday', '2026-06-23');
@@ -50,16 +58,16 @@ Create a parser when you want to reuse a locale or configuration:
 ```php
 $chrono = Chrono::english();
 
-$chrono->parseDateText('next Friday', '2026-06-23');
-$chrono->parseText('today, tomorrow, and Friday', '2026-06-23');
+$chrono->date('next Friday', '2026-06-23');
+$chrono->parse('today, tomorrow, and Friday', '2026-06-23');
 ```
 
 Chrono also includes casual and strict English variants:
 
 ```php
-Chrono::casual()->parseDateText('tomorrow');
+Chrono::casual()->date('tomorrow');
 
-Chrono::strict()->parseText('tomorrow'); // []
+Chrono::strict()->parse('tomorrow'); // []
 ```
 
 ## Locales
@@ -67,14 +75,14 @@ Chrono::strict()->parseText('tomorrow'); // []
 Chrono includes parser factories for supported locales:
 
 ```php
-Chrono::spanish()->parseDateText('mañana');
-Chrono::french()->parseDateText('demain');
-Chrono::german()->parseDateText('morgen');
-Chrono::italian()->parseDateText('domani');
-Chrono::russian()->parseDateText('завтра');
-Chrono::ukrainian()->parseDateText('завтра');
-Chrono::japanese()->parseDateText('明日');
-Chrono::chinese()->parseDateText('明天');
+Chrono::spanish()->date('mañana');
+Chrono::french()->date('demain');
+Chrono::german()->date('morgen');
+Chrono::italian()->date('domani');
+Chrono::russian()->date('завтра');
+Chrono::ukrainian()->date('завтра');
+Chrono::japanese()->date('明日');
+Chrono::chinese()->date('明天');
 ```
 
 Locale aliases are also available:
@@ -98,7 +106,7 @@ Chrono::zh();
 Use `Chrono::british()`, `Chrono::gb()`, or `Chrono::enGb()` for British English slash dates:
 
 ```php
-Chrono::gb()->parseDateText('6/10/2018', '2018-01-01');
+Chrono::gb()->date('6/10/2018', '2018-01-01');
 ```
 
 ## Reference Dates
@@ -106,13 +114,13 @@ Chrono::gb()->parseDateText('6/10/2018', '2018-01-01');
 Relative expressions are resolved against the reference date you provide:
 
 ```php
-Chrono::parseDate('next week', '2026-06-23');
+Chrono::date('next week', '2026-06-23');
 ```
 
 You may pass a `CarbonInterface`, a date string, or a reference array with a timezone:
 
 ```php
-Chrono::parseDate('tomorrow at 9am', [
+Chrono::date('tomorrow at 9am', [
     'instant' => '2026-06-23 12:00:00',
     'timezone' => 'America/Toronto',
 ]);
@@ -120,7 +128,7 @@ Chrono::parseDate('tomorrow at 9am', [
 
 ## Results
 
-`parse()` and `parseText()` return parsed result objects with the original text, start components, and optional end components:
+`parse()` returns parsed result objects with the original text, start components, and optional end components:
 
 ```php
 $result = Chrono::parse('10am - 11am tomorrow', '2026-06-23')[0];

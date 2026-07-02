@@ -38,7 +38,7 @@ it('parses weekday prefixed month name dates', function () {
         ->and($sunDotted->start->date()->toDateTimeString())->toBe('2016-03-06 12:00:00')
         ->and($punctuated->text)->toBe('Wed, Jan 20th, 2016')
         ->and($punctuated->start->date()->toDateTimeString())->toBe('2016-01-20 12:00:00')
-        ->and(Chrono::parseDate('Sunday, March, 6th 2016', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::date('Sunday, March, 6th 2016', '2012-08-10')?->toDateTimeString())
         ->toBe('2016-03-06 12:00:00');
 });
 
@@ -79,7 +79,7 @@ it('parses weekdays', function () {
     $monday = Chrono::parse('Monday', '2012-08-09')[0];
     $thursday = Chrono::parse('Thursday', '2012-08-09')[0];
     $sunday = Chrono::parse('Sunday', '2012-08-09')[0];
-    $date = Chrono::parseDate('next Friday at 4pm', '2026-06-23 09:00');
+    $date = Chrono::date('next Friday at 4pm', '2026-06-23 09:00');
 
     expect($monday->index)->toBe(0)
         ->and($monday->text)->toBe('Monday')
@@ -128,7 +128,7 @@ it('parses past and postfix week weekday modifiers', function () {
 });
 
 it('parses weekdays with casual times', function () {
-    $result = Chrono::casual()->parseText('Lets meet on Tuesday morning', '2015-04-18')[0];
+    $result = Chrono::casual()->parse('Lets meet on Tuesday morning', '2015-04-18')[0];
 
     expect($result->index)->toBe(10)
         ->and($result->text)->toBe('on Tuesday morning')
@@ -137,8 +137,8 @@ it('parses weekdays with casual times', function () {
 });
 
 it('merges weekday overlaps with explicit dates', function () {
-    $monthName = Chrono::casual()->parseText('Sunday, December 7, 2014', '2012-08-09')[0];
-    $slashDate = Chrono::casual()->parseText('Sunday 12/7/2014', '2012-08-09')[0];
+    $monthName = Chrono::casual()->parse('Sunday, December 7, 2014', '2012-08-09')[0];
+    $slashDate = Chrono::casual()->parse('Sunday 12/7/2014', '2012-08-09')[0];
 
     expect($monthName->text)->toBe('Sunday, December 7, 2014')
         ->and($monthName->start->date()->toDateTimeString())->toBe('2014-12-07 12:00:00')
@@ -181,41 +181,41 @@ it('uses chrono weekday modifier semantics', function () {
         ->and($sunday->start->get('weekday'))->toBe(Weekday::SUNDAY->value)
         ->and($abbreviated->text)->toBe('Mon.')
         ->and($abbreviated->start->get('weekday'))->toBe(Weekday::MONDAY->value)
-        ->and(Chrono::parseDate('This Saturday', '2022-08-02')?->toDateTimeString())
+        ->and(Chrono::date('This Saturday', '2022-08-02')?->toDateTimeString())
         ->toBe('2022-08-06 12:00:00')
-        ->and(Chrono::parseDate('This Sunday', '2022-08-02')?->toDateTimeString())
+        ->and(Chrono::date('This Sunday', '2022-08-02')?->toDateTimeString())
         ->toBe('2022-08-07 12:00:00')
-        ->and(Chrono::parseDate('This Wednesday', '2022-08-02')?->toDateTimeString())
+        ->and(Chrono::date('This Wednesday', '2022-08-02')?->toDateTimeString())
         ->toBe('2022-08-03 12:00:00')
-        ->and(Chrono::parseDate('This Saturday', '2022-08-07')?->toDateTimeString())
+        ->and(Chrono::date('This Saturday', '2022-08-07')?->toDateTimeString())
         ->toBe('2022-08-13 12:00:00')
-        ->and(Chrono::parseDate('This Sunday', '2022-08-07')?->toDateTimeString())
+        ->and(Chrono::date('This Sunday', '2022-08-07')?->toDateTimeString())
         ->toBe('2022-08-07 12:00:00')
-        ->and(Chrono::parseDate('This Wednesday', '2022-08-07')?->toDateTimeString())
+        ->and(Chrono::date('This Wednesday', '2022-08-07')?->toDateTimeString())
         ->toBe('2022-08-10 12:00:00')
-        ->and(Chrono::parseDate('Last Saturday', '2022-08-02')?->toDateTimeString())
+        ->and(Chrono::date('Last Saturday', '2022-08-02')?->toDateTimeString())
         ->toBe('2022-07-30 12:00:00')
-        ->and(Chrono::parseDate('Last Sunday', '2022-08-02')?->toDateTimeString())
+        ->and(Chrono::date('Last Sunday', '2022-08-02')?->toDateTimeString())
         ->toBe('2022-07-31 12:00:00')
-        ->and(Chrono::parseDate('Last Wednesday', '2022-08-02')?->toDateTimeString())
+        ->and(Chrono::date('Last Wednesday', '2022-08-02')?->toDateTimeString())
         ->toBe('2022-07-27 12:00:00')
-        ->and(Chrono::parseDate('Next Saturday', '2022-08-02')?->toDateTimeString())
+        ->and(Chrono::date('Next Saturday', '2022-08-02')?->toDateTimeString())
         ->toBe('2022-08-13 12:00:00')
-        ->and(Chrono::parseDate('Next Sunday', '2022-08-02')?->toDateTimeString())
+        ->and(Chrono::date('Next Sunday', '2022-08-02')?->toDateTimeString())
         ->toBe('2022-08-14 12:00:00')
-        ->and(Chrono::parseDate('Next Wednesday', '2022-08-02')?->toDateTimeString())
+        ->and(Chrono::date('Next Wednesday', '2022-08-02')?->toDateTimeString())
         ->toBe('2022-08-10 12:00:00')
-        ->and(Chrono::parseDate('Next Saturday', '2022-08-06')?->toDateTimeString())
+        ->and(Chrono::date('Next Saturday', '2022-08-06')?->toDateTimeString())
         ->toBe('2022-08-13 12:00:00')
-        ->and(Chrono::parseDate('Next Sunday', '2022-08-06')?->toDateTimeString())
+        ->and(Chrono::date('Next Sunday', '2022-08-06')?->toDateTimeString())
         ->toBe('2022-08-14 12:00:00')
-        ->and(Chrono::parseDate('Next Wednesday', '2022-08-06')?->toDateTimeString())
+        ->and(Chrono::date('Next Wednesday', '2022-08-06')?->toDateTimeString())
         ->toBe('2022-08-10 12:00:00')
-        ->and(Chrono::parseDate('Next Saturday', '2022-08-07')?->toDateTimeString())
+        ->and(Chrono::date('Next Saturday', '2022-08-07')?->toDateTimeString())
         ->toBe('2022-08-13 12:00:00')
-        ->and(Chrono::parseDate('Next Sunday', '2022-08-07')?->toDateTimeString())
+        ->and(Chrono::date('Next Sunday', '2022-08-07')?->toDateTimeString())
         ->toBe('2022-08-14 12:00:00')
-        ->and(Chrono::parseDate('Next Wednesday', '2022-08-07')?->toDateTimeString())
+        ->and(Chrono::date('Next Wednesday', '2022-08-07')?->toDateTimeString())
         ->toBe('2022-08-10 12:00:00')
         ->and($nextWeek->text)->toBe('Tuesday of next week')
         ->and($nextWeek->start->date()->toDateTimeString())->toBe('2022-08-09 12:00:00')
@@ -239,19 +239,19 @@ it('uses chrono weekday modifier semantics', function () {
 });
 
 it('parses weekend and weekday mentions', function () {
-    expect(Chrono::parseDate('last weekend', '2024-10-18 12:00')?->toDateTimeString())
+    expect(Chrono::date('last weekend', '2024-10-18 12:00')?->toDateTimeString())
         ->toBe('2024-10-13 12:00:00')
-        ->and(Chrono::parseDate('this weekend', '2024-10-18 12:00')?->toDateTimeString())
+        ->and(Chrono::date('this weekend', '2024-10-18 12:00')?->toDateTimeString())
         ->toBe('2024-10-19 12:00:00')
-        ->and(Chrono::parseDate('next weekend', '2024-10-18 12:00')?->toDateTimeString())
+        ->and(Chrono::date('next weekend', '2024-10-18 12:00')?->toDateTimeString())
         ->toBe('2024-10-26 12:00:00')
-        ->and(Chrono::parseDate('last weekday', '2024-10-18 12:00')?->toDateTimeString())
+        ->and(Chrono::date('last weekday', '2024-10-18 12:00')?->toDateTimeString())
         ->toBe('2024-10-17 12:00:00')
-        ->and(Chrono::parseDate('next weekday', '2024-10-18 12:00')?->toDateTimeString())
+        ->and(Chrono::date('next weekday', '2024-10-18 12:00')?->toDateTimeString())
         ->toBe('2024-10-21 12:00:00')
-        ->and(Chrono::parseDate('last weekday', '2024-10-19 12:00')?->toDateTimeString())
+        ->and(Chrono::date('last weekday', '2024-10-19 12:00')?->toDateTimeString())
         ->toBe('2024-10-18 12:00:00')
-        ->and(Chrono::parseDate('next weekday', '2024-10-19 12:00')?->toDateTimeString())
+        ->and(Chrono::date('next weekday', '2024-10-19 12:00')?->toDateTimeString())
         ->toBe('2024-10-21 12:00:00');
 });
 

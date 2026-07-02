@@ -3,8 +3,8 @@
 use DirectoryTree\Chrono\Chrono;
 
 it('merges russian dates with times and ranges', function () {
-    $dateTime = Chrono::ru()->parseText('10 августа 2012 в 6:30 вечера', '2012-08-10 09:30')[0];
-    $range = Chrono::ru()->parseText('10 августа - 12 августа', '2012-08-10 09:30')[0];
+    $dateTime = Chrono::ru()->parse('10 августа 2012 в 6:30 вечера', '2012-08-10 09:30')[0];
+    $range = Chrono::ru()->parse('10 августа - 12 августа', '2012-08-10 09:30')[0];
 
     expect($dateTime->text)->toBe('10 августа 2012 в 6:30 вечера')
         ->and($dateTime->start->date()->toDateTimeString())->toBe('2012-08-10 18:30:00')

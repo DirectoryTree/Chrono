@@ -4,23 +4,23 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses swedish casual date references', function () {
     $swedish = Chrono::sv();
-    $now = $swedish->parseText('nu', '2012-08-10 09:30:45.123')[0];
-    $tomorrowMorning = $swedish->parseText('imorgon på morgonen', '2012-08-10 09:30')[0];
-    $morning = $swedish->parseText('idag på morgonen', '2012-08-10')[0];
-    $forenoon = $swedish->parseText('idag på förmiddagen', '2012-08-10')[0];
-    $midday = $swedish->parseText('idag på middagen', '2012-08-10')[0];
-    $afternoon = $swedish->parseText('idag på eftermiddagen', '2012-08-10')[0];
-    $evening = $swedish->parseText('idag på kvällen', '2012-08-10')[0];
-    $night = $swedish->parseText('idag på natten', '2012-08-10')[0];
-    $midnight = $swedish->parseText('idag vid midnatt', '2012-08-10 09:30')[0];
+    $now = $swedish->parse('nu', '2012-08-10 09:30:45.123')[0];
+    $tomorrowMorning = $swedish->parse('imorgon på morgonen', '2012-08-10 09:30')[0];
+    $morning = $swedish->parse('idag på morgonen', '2012-08-10')[0];
+    $forenoon = $swedish->parse('idag på förmiddagen', '2012-08-10')[0];
+    $midday = $swedish->parse('idag på middagen', '2012-08-10')[0];
+    $afternoon = $swedish->parse('idag på eftermiddagen', '2012-08-10')[0];
+    $evening = $swedish->parse('idag på kvällen', '2012-08-10')[0];
+    $night = $swedish->parse('idag på natten', '2012-08-10')[0];
+    $midnight = $swedish->parse('idag vid midnatt', '2012-08-10 09:30')[0];
 
     expect($now->start->date()->format('Y-m-d H:i:s.v'))->toBe('2012-08-10 09:30:45.123')
         ->and($now->start->tags())->toContain('parser/SVCasualDateParser')
-        ->and($swedish->parseDateText('idag', '2012-08-10 09:30')?->toDateTimeString())->toBe('2012-08-10 09:30:00')
-        ->and($swedish->parseDateText('imorgon', '2012-08-10 09:30')?->toDateTimeString())->toBe('2012-08-11 09:30:00')
-        ->and($swedish->parseDateText('igår', '2012-08-10 09:30')?->toDateTimeString())->toBe('2012-08-09 09:30:00')
-        ->and($swedish->parseDateText('förrgår', '2012-08-10 09:30')?->toDateTimeString())->toBe('2012-08-08 09:30:00')
-        ->and($swedish->parseDateText('i förrgår', '2012-08-10 09:30')?->toDateTimeString())->toBe('2012-08-08 09:30:00')
+        ->and($swedish->date('idag', '2012-08-10 09:30')?->toDateTimeString())->toBe('2012-08-10 09:30:00')
+        ->and($swedish->date('imorgon', '2012-08-10 09:30')?->toDateTimeString())->toBe('2012-08-11 09:30:00')
+        ->and($swedish->date('igår', '2012-08-10 09:30')?->toDateTimeString())->toBe('2012-08-09 09:30:00')
+        ->and($swedish->date('förrgår', '2012-08-10 09:30')?->toDateTimeString())->toBe('2012-08-08 09:30:00')
+        ->and($swedish->date('i förrgår', '2012-08-10 09:30')?->toDateTimeString())->toBe('2012-08-08 09:30:00')
         ->and($tomorrowMorning->text)->toBe('imorgon på morgonen')
         ->and($tomorrowMorning->start->date()->toDateTimeString())->toBe('2012-08-11 06:00:00')
         ->and($morning->start->get('hour'))->toBe(6)
@@ -35,17 +35,17 @@ it('parses swedish casual date references', function () {
 
 it('parses swedish casual dates with upstream-shaped components', function () {
     $swedish = Chrono::sv();
-    $today = $swedish->parseText('idag', '2012-08-10')[0];
-    $tomorrow = $swedish->parseText('imorgon', '2012-08-10')[0];
-    $yesterday = $swedish->parseText('igår', '2012-08-10')[0];
-    $beforeYesterday = $swedish->parseText('förrgår', '2012-08-10')[0];
-    $morning = $swedish->parseText('idag på morgonen', '2012-08-10')[0];
-    $forenoon = $swedish->parseText('idag på förmiddagen', '2012-08-10')[0];
-    $midday = $swedish->parseText('idag på middagen', '2012-08-10')[0];
-    $afternoon = $swedish->parseText('idag på eftermiddagen', '2012-08-10')[0];
-    $evening = $swedish->parseText('idag på kvällen', '2012-08-10')[0];
-    $night = $swedish->parseText('idag på natten', '2012-08-10')[0];
-    $midnight = $swedish->parseText('idag vid midnatt', '2012-08-10')[0];
+    $today = $swedish->parse('idag', '2012-08-10')[0];
+    $tomorrow = $swedish->parse('imorgon', '2012-08-10')[0];
+    $yesterday = $swedish->parse('igår', '2012-08-10')[0];
+    $beforeYesterday = $swedish->parse('förrgår', '2012-08-10')[0];
+    $morning = $swedish->parse('idag på morgonen', '2012-08-10')[0];
+    $forenoon = $swedish->parse('idag på förmiddagen', '2012-08-10')[0];
+    $midday = $swedish->parse('idag på middagen', '2012-08-10')[0];
+    $afternoon = $swedish->parse('idag på eftermiddagen', '2012-08-10')[0];
+    $evening = $swedish->parse('idag på kvällen', '2012-08-10')[0];
+    $night = $swedish->parse('idag på natten', '2012-08-10')[0];
+    $midnight = $swedish->parse('idag vid midnatt', '2012-08-10')[0];
 
     expect($today->index)->toBe(0)
         ->and($today->text)->toBe('idag')

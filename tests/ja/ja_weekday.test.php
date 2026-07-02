@@ -5,17 +5,17 @@ use DirectoryTree\Chrono\Weekday;
 
 it('parses japanese weekdays and parenthesized weekdays', function () {
     $japanese = Chrono::ja();
-    $weekday = $japanese->parseText('水曜日', '2012-08-10')[0];
-    $closestThursday = $japanese->parseText('木曜日', '2016-09-02')[0];
-    $previousWednesday = $japanese->parseText('前の水曜日', '2016-09-02')[0];
-    $asciiParenthesized = $japanese->parseText('(木)', '2016-09-02')[0];
-    $parenthesized = $japanese->parseText('（土）', '2012-08-10')[0];
-    $fullWidthParenthesized = $japanese->parseText('（木）', '2016-09-02')[0];
-    $forwardRange = $japanese->parseText('土曜日～月曜日', '2016-09-02', ['forwardDate' => true])[0];
+    $weekday = $japanese->parse('水曜日', '2012-08-10')[0];
+    $closestThursday = $japanese->parse('木曜日', '2016-09-02')[0];
+    $previousWednesday = $japanese->parse('前の水曜日', '2016-09-02')[0];
+    $asciiParenthesized = $japanese->parse('(木)', '2016-09-02')[0];
+    $parenthesized = $japanese->parse('（土）', '2012-08-10')[0];
+    $fullWidthParenthesized = $japanese->parse('（木）', '2016-09-02')[0];
+    $forwardRange = $japanese->parse('土曜日～月曜日', '2016-09-02', ['forwardDate' => true])[0];
 
     expect($weekday->start->date()->toDateTimeString())->toBe('2012-08-08 00:00:00')
         ->and($weekday->start->tags())->toContain('parser/JPWeekdayParser')
-        ->and($japanese->parseDateText('次の月曜日', '2012-08-10')?->toDateTimeString())->toBe('2012-08-13 00:00:00')
+        ->and($japanese->date('次の月曜日', '2012-08-10')?->toDateTimeString())->toBe('2012-08-13 00:00:00')
         ->and($closestThursday->index)->toBe(0)
         ->and($closestThursday->text)->toBe('木曜日')
         ->and($closestThursday->start->get('year'))->toBe(2016)
@@ -82,18 +82,18 @@ it('parses japanese weekdays and parenthesized weekdays', function () {
 
 it('merges japanese dates with weekdays, times, and date ranges', function () {
     $japanese = Chrono::ja();
-    $weekday = $japanese->parseText('2014年7月12日（土）', '2012-08-10')[0];
-    $monthDayWeekday = $japanese->parseText('8月27日水曜日', '2012-08-10')[0];
-    $monthDayParenthesizedWeekday = $japanese->parseText('8月27日（水）', '2012-08-10')[0];
-    $slashParenthesizedWeekday = $japanese->parseText('2012/8/27（水）', '2012-08-10')[0];
-    $fullWidthSlashParenthesizedWeekday = $japanese->parseText('１／３０（木）', '2025-02-10')[0];
-    $slashNoWeekday = $japanese->parseText('1/30の木曜日', '2025-02-10')[0];
-    $asciiSlashParenthesizedWeekday = $japanese->parseText('1/30(木)', '2025-02-10')[0];
-    $dateTime = $japanese->parseText('2014年7月12日の午後3時', '2012-08-10')[0];
-    $dateRange = $japanese->parseText('2月11日から2月13日', '2012-08-10')[0];
-    $fullWidthDateWeekdayTime = $japanese->parseText('１月３０日（木）１４：００', '2025-02-10')[0];
-    $fullWidthDateWeekdayTimeRange = $japanese->parseText('１月３１日（金）１２：００－１６：００', '2025-02-10')[0];
-    $fullWidthDateTimeRange = $japanese->parseText('１月３０日（木）１２：００－１月３１日（金）１６：００', '2025-02-10')[0];
+    $weekday = $japanese->parse('2014年7月12日（土）', '2012-08-10')[0];
+    $monthDayWeekday = $japanese->parse('8月27日水曜日', '2012-08-10')[0];
+    $monthDayParenthesizedWeekday = $japanese->parse('8月27日（水）', '2012-08-10')[0];
+    $slashParenthesizedWeekday = $japanese->parse('2012/8/27（水）', '2012-08-10')[0];
+    $fullWidthSlashParenthesizedWeekday = $japanese->parse('１／３０（木）', '2025-02-10')[0];
+    $slashNoWeekday = $japanese->parse('1/30の木曜日', '2025-02-10')[0];
+    $asciiSlashParenthesizedWeekday = $japanese->parse('1/30(木)', '2025-02-10')[0];
+    $dateTime = $japanese->parse('2014年7月12日の午後3時', '2012-08-10')[0];
+    $dateRange = $japanese->parse('2月11日から2月13日', '2012-08-10')[0];
+    $fullWidthDateWeekdayTime = $japanese->parse('１月３０日（木）１４：００', '2025-02-10')[0];
+    $fullWidthDateWeekdayTimeRange = $japanese->parse('１月３１日（金）１２：００－１６：００', '2025-02-10')[0];
+    $fullWidthDateTimeRange = $japanese->parse('１月３０日（木）１２：００－１月３１日（金）１６：００', '2025-02-10')[0];
 
     expect($weekday->text)->toBe('2014年7月12日（土）')
         ->and($weekday->start->isCertain('weekday'))->toBeTrue()

@@ -5,34 +5,34 @@ use DirectoryTree\Chrono\Meridiem;
 
 it('parses dutch casual dates and times', function () {
     $dutch = Chrono::nl();
-    $now = $dutch->parseText('De deadline is nu', '2012-08-10 08:09:10.011')[0];
-    $today = $dutch->parseText('De deadline is vandaag', '2012-08-10 14:12')[0];
-    $tomorrow = $dutch->parseText('De deadline is morgen', '2012-08-10 17:10')[0];
-    $yesterday = $dutch->parseText('De deadline was gisteren', '2012-08-10 12:00')[0];
-    $thisMorning = $dutch->parseText('De Deadline was deze ochtend', '2012-08-10 12:00')[0];
-    $thisAfternoon = $dutch->parseText('De Deadline was deze namiddag ', '2012-08-10 12:00')[0];
-    $thisEvening = $dutch->parseText('De Deadline was deze avond ', '2012-08-10 12:00')[0];
-    $tonight = $dutch->parseText('De deadline is vanavond', '2012-08-10 12:00')[0];
-    $midnight = $dutch->parseText('The Deadline is om middernacht ', '2012-08-10 01:00')[0];
-    $todayAtFive = $dutch->parseText('De deadline is vandaag om 17:00', '2012-08-10 12:00')[0];
-    $yesterdayMorning = $dutch->parseText('gisterenochtend', '2012-08-10 14:00')[0];
-    $yesterdayNoon = $dutch->parseText('gisterenmiddag', '2012-08-10 14:00')[0];
-    $yesterdayEvening = $dutch->parseText('gisterenavond', '2012-08-10 14:00')[0];
-    $thisMorningCompact = $dutch->parseText('vanochtend', '2012-08-10 14:00')[0];
-    $thisNoonCompact = $dutch->parseText('vanmiddag', '2012-08-10 14:00')[0];
-    $tonightCompact = $dutch->parseText('vanavond', '2012-08-10 14:00')[0];
-    $tomorrowMorning = $dutch->parseText('morgenochtend', '2012-08-10 14:00')[0];
-    $tomorrowNoon = $dutch->parseText('morgenmiddag', '2012-08-10 14:00')[0];
-    $tomorrowEvening = $dutch->parseText('morgenavond', '2012-08-10 14:00')[0];
-    $casualRange = $dutch->parseText('Het evenement is vandaag - volgende vrijdag', '2012-08-04 12:00')[0];
-    $casualRangeNextWeek = $dutch->parseText('Het evenement is vandaag - volgende vrijdag', '2012-08-10 12:00')[0];
-    $casualTimeRange = $dutch->parseText('jaarlijks verlof vanaf vandaag tot morgennamiddag', '2012-08-04 12:00')[0];
-    $casualStartTimeRange = $dutch->parseText('jaarlijks verlof vanaf deze ochtend tot morgen', '2012-08-04 12:00')[0];
-    $tonightWithTime = $dutch->parseText('vanavond 22:00', '2012-01-01 12:00')[0];
-    $tonightWithPrefixedTime = $dutch->parseText('vanavond om 21:00', '2012-01-01 12:00')[0];
-    $tomorrowBeforeTime = $dutch->parseText('morgen voor 16:00', '2012-01-01 12:00')[0];
-    $tomorrowAfterTime = $dutch->parseText('morgen na 16:00', '2012-01-01 12:00')[0];
-    $casualTimeWithExplicitTime = $dutch->parseText('deze namiddag om 15:00', '2016-10-01 08:00')[0];
+    $now = $dutch->parse('De deadline is nu', '2012-08-10 08:09:10.011')[0];
+    $today = $dutch->parse('De deadline is vandaag', '2012-08-10 14:12')[0];
+    $tomorrow = $dutch->parse('De deadline is morgen', '2012-08-10 17:10')[0];
+    $yesterday = $dutch->parse('De deadline was gisteren', '2012-08-10 12:00')[0];
+    $thisMorning = $dutch->parse('De Deadline was deze ochtend', '2012-08-10 12:00')[0];
+    $thisAfternoon = $dutch->parse('De Deadline was deze namiddag ', '2012-08-10 12:00')[0];
+    $thisEvening = $dutch->parse('De Deadline was deze avond ', '2012-08-10 12:00')[0];
+    $tonight = $dutch->parse('De deadline is vanavond', '2012-08-10 12:00')[0];
+    $midnight = $dutch->parse('The Deadline is om middernacht ', '2012-08-10 01:00')[0];
+    $todayAtFive = $dutch->parse('De deadline is vandaag om 17:00', '2012-08-10 12:00')[0];
+    $yesterdayMorning = $dutch->parse('gisterenochtend', '2012-08-10 14:00')[0];
+    $yesterdayNoon = $dutch->parse('gisterenmiddag', '2012-08-10 14:00')[0];
+    $yesterdayEvening = $dutch->parse('gisterenavond', '2012-08-10 14:00')[0];
+    $thisMorningCompact = $dutch->parse('vanochtend', '2012-08-10 14:00')[0];
+    $thisNoonCompact = $dutch->parse('vanmiddag', '2012-08-10 14:00')[0];
+    $tonightCompact = $dutch->parse('vanavond', '2012-08-10 14:00')[0];
+    $tomorrowMorning = $dutch->parse('morgenochtend', '2012-08-10 14:00')[0];
+    $tomorrowNoon = $dutch->parse('morgenmiddag', '2012-08-10 14:00')[0];
+    $tomorrowEvening = $dutch->parse('morgenavond', '2012-08-10 14:00')[0];
+    $casualRange = $dutch->parse('Het evenement is vandaag - volgende vrijdag', '2012-08-04 12:00')[0];
+    $casualRangeNextWeek = $dutch->parse('Het evenement is vandaag - volgende vrijdag', '2012-08-10 12:00')[0];
+    $casualTimeRange = $dutch->parse('jaarlijks verlof vanaf vandaag tot morgennamiddag', '2012-08-04 12:00')[0];
+    $casualStartTimeRange = $dutch->parse('jaarlijks verlof vanaf deze ochtend tot morgen', '2012-08-04 12:00')[0];
+    $tonightWithTime = $dutch->parse('vanavond 22:00', '2012-01-01 12:00')[0];
+    $tonightWithPrefixedTime = $dutch->parse('vanavond om 21:00', '2012-01-01 12:00')[0];
+    $tomorrowBeforeTime = $dutch->parse('morgen voor 16:00', '2012-01-01 12:00')[0];
+    $tomorrowAfterTime = $dutch->parse('morgen na 16:00', '2012-01-01 12:00')[0];
+    $casualTimeWithExplicitTime = $dutch->parse('deze namiddag om 15:00', '2016-10-01 08:00')[0];
 
     expect($now->text)->toBe('nu')
         ->and($now->index)->toBe(15)
@@ -128,31 +128,31 @@ it('parses dutch casual dates and times', function () {
         ->and($tomorrowAfterTime->start->date()->toDateTimeString())->toBe('2012-01-02 16:00:00')
         ->and($casualTimeWithExplicitTime->text)->toBe('deze namiddag om 15:00')
         ->and($casualTimeWithExplicitTime->start->date()->toDateTimeString())->toBe('2016-10-01 15:00:00')
-        ->and($dutch->parseText('notoday', '2012-08-10'))->toBe([])
-        ->and($dutch->parseText('tdtmr', '2012-08-10'))->toBe([])
-        ->and($dutch->parseText('xyesterday', '2012-08-10'))->toBe([])
-        ->and($dutch->parseText('nowhere', '2012-08-10'))->toBe([])
-        ->and($dutch->parseText('noway', '2012-08-10'))->toBe([])
-        ->and($dutch->parseText('knowledge', '2012-08-10'))->toBe([])
-        ->and($dutch->parseDateText('Deadline is vandaag', '2012-08-10 14:12')?->toDateTimeString())
+        ->and($dutch->parse('notoday', '2012-08-10'))->toBe([])
+        ->and($dutch->parse('tdtmr', '2012-08-10'))->toBe([])
+        ->and($dutch->parse('xyesterday', '2012-08-10'))->toBe([])
+        ->and($dutch->parse('nowhere', '2012-08-10'))->toBe([])
+        ->and($dutch->parse('noway', '2012-08-10'))->toBe([])
+        ->and($dutch->parse('knowledge', '2012-08-10'))->toBe([])
+        ->and($dutch->date('Deadline is vandaag', '2012-08-10 14:12')?->toDateTimeString())
         ->toBe('2012-08-10 14:12:00')
-        ->and($dutch->parseDateText('Deadline is morgen', '2012-08-10 17:10')?->toDateTimeString())
+        ->and($dutch->date('Deadline is morgen', '2012-08-10 17:10')?->toDateTimeString())
         ->toBe('2012-08-11 17:10:00')
-        ->and($dutch->parseDateText('Deadline was gisteren', '2012-08-10 17:10')?->toDateTimeString())
+        ->and($dutch->date('Deadline was gisteren', '2012-08-10 17:10')?->toDateTimeString())
         ->toBe('2012-08-09 17:10:00')
-        ->and($dutch->parseDateText('Afspraak deze ochtend', '2012-08-10 17:10')?->toDateTimeString())
+        ->and($dutch->date('Afspraak deze ochtend', '2012-08-10 17:10')?->toDateTimeString())
         ->toBe('2012-08-10 06:00:00')
-        ->and($dutch->parseText('Afspraak deze ochtend', '2012-08-10 17:10')[0]->start->tags())->toContain('parser/NLCasualTimeParser')
-        ->and($dutch->parseDateText('Afspraak avond', '2012-08-10 17:10')?->toDateTimeString())
+        ->and($dutch->parse('Afspraak deze ochtend', '2012-08-10 17:10')[0]->start->tags())->toContain('parser/NLCasualTimeParser')
+        ->and($dutch->date('Afspraak avond', '2012-08-10 17:10')?->toDateTimeString())
         ->toBe('2012-08-10 20:00:00')
-        ->and($dutch->parseDateText('Afspraak middernacht', '2012-08-10 17:10')?->toDateTimeString())
+        ->and($dutch->date('Afspraak middernacht', '2012-08-10 17:10')?->toDateTimeString())
         ->toBe('2012-08-11 00:00:00')
-        ->and($dutch->parseDateText('Afspraak morgenochtend', '2012-08-10 17:10')?->toDateTimeString())
+        ->and($dutch->date('Afspraak morgenochtend', '2012-08-10 17:10')?->toDateTimeString())
         ->toBe('2012-08-11 06:00:00')
-        ->and($dutch->parseText('Afspraak morgenochtend', '2012-08-10 17:10')[0]->start->tags())->toContain('parser/NLCasualDateTimeParser')
-        ->and($dutch->parseText('Afspraak morgenochtend', '2012-08-10 17:10')[0]->start->isCertain('day'))->toBeTrue()
-        ->and($dutch->parseDateText('Afspraak vanavond', '2012-08-10 17:10')?->toDateTimeString())
+        ->and($dutch->parse('Afspraak morgenochtend', '2012-08-10 17:10')[0]->start->tags())->toContain('parser/NLCasualDateTimeParser')
+        ->and($dutch->parse('Afspraak morgenochtend', '2012-08-10 17:10')[0]->start->isCertain('day'))->toBeTrue()
+        ->and($dutch->date('Afspraak vanavond', '2012-08-10 17:10')?->toDateTimeString())
         ->toBe('2012-08-10 20:00:00')
-        ->and($dutch->parseDateText('Afspraak gisterenmiddag', '2012-08-10 17:10')?->toDateTimeString())
+        ->and($dutch->date('Afspraak gisterenmiddag', '2012-08-10 17:10')?->toDateTimeString())
         ->toBe('2012-08-09 12:00:00');
 });

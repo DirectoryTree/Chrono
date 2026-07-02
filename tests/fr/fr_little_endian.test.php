@@ -4,15 +4,15 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses french month name dates', function () {
     $french = Chrono::fr();
-    $explicit = $french->parseText('10 Août 2012', '2012-08-10')[0];
-    $inferred = $french->parseText('8 Février', '2012-08-10')[0];
-    $ordinal = $french->parseText('1er Août 2012', '2012-08-01')[0];
-    $bc = $french->parseText('10 Août 234 AC', '2012-08-10')[0];
-    $ad = $french->parseText('10 Août 88 p. Chr. n.', '2012-08-10')[0];
-    $compact = $french->parseText('Dim 15 Sept', '2013-08-10')[0];
-    $attached = $french->parseText('DIM 15SEPT', '2013-08-10')[0];
-    $prefixed = $french->parseText('La date limite est le Mardi 10 janvier', '2012-08-10')[0];
-    $abbreviatedWeekday = $french->parseText('La date limite est Mar 10 Jan', '2012-08-10')[0];
+    $explicit = $french->parse('10 Août 2012', '2012-08-10')[0];
+    $inferred = $french->parse('8 Février', '2012-08-10')[0];
+    $ordinal = $french->parse('1er Août 2012', '2012-08-01')[0];
+    $bc = $french->parse('10 Août 234 AC', '2012-08-10')[0];
+    $ad = $french->parse('10 Août 88 p. Chr. n.', '2012-08-10')[0];
+    $compact = $french->parse('Dim 15 Sept', '2013-08-10')[0];
+    $attached = $french->parse('DIM 15SEPT', '2013-08-10')[0];
+    $prefixed = $french->parse('La date limite est le Mardi 10 janvier', '2012-08-10')[0];
+    $abbreviatedWeekday = $french->parse('La date limite est Mar 10 Jan', '2012-08-10')[0];
 
     expect($explicit->text)->toBe('10 Août 2012')
         ->and($explicit->index)->toBe(0)
@@ -39,25 +39,25 @@ it('parses french month name dates', function () {
         ->and($abbreviatedWeekday->index)->toBe(19)
         ->and($abbreviatedWeekday->start->date()->toDateTimeString())->toBe('2013-01-10 12:00:00')
         ->and($abbreviatedWeekday->start->get('weekday'))->toBe(2)
-        ->and($french->parseDateText('31 mars 2016', '2012-08-10')?->toDateTimeString())->toBe('2016-03-31 12:00:00')
-        ->and($french->parseDateText('10 Aout 2012', '2012-08-10')?->toDateTimeString())->toBe('2012-08-10 12:00:00')
-        ->and($french->parseDateText('10 Fevrier 2012', '2012-08-10')?->toDateTimeString())->toBe('2012-02-10 12:00:00')
-        ->and($french->parseDateText('10 Decembre 2012', '2012-08-10')?->toDateTimeString())->toBe('2012-12-10 12:00:00')
-        ->and($french->parseText('32 Août 2014', '2012-08-10'))->toBe([])
-        ->and($french->parseText('29 Février 2014', '2012-08-10'))->toBe([])
-        ->and($french->parseText('32 Aout', '2012-08-10'))->toBe([])
-        ->and($french->parseText('29 Fevrier', '2013-08-10'))->toBe([]);
+        ->and($french->date('31 mars 2016', '2012-08-10')?->toDateTimeString())->toBe('2016-03-31 12:00:00')
+        ->and($french->date('10 Aout 2012', '2012-08-10')?->toDateTimeString())->toBe('2012-08-10 12:00:00')
+        ->and($french->date('10 Fevrier 2012', '2012-08-10')?->toDateTimeString())->toBe('2012-02-10 12:00:00')
+        ->and($french->date('10 Decembre 2012', '2012-08-10')?->toDateTimeString())->toBe('2012-12-10 12:00:00')
+        ->and($french->parse('32 Août 2014', '2012-08-10'))->toBe([])
+        ->and($french->parse('29 Février 2014', '2012-08-10'))->toBe([])
+        ->and($french->parse('32 Aout', '2012-08-10'))->toBe([])
+        ->and($french->parse('29 Fevrier', '2013-08-10'))->toBe([]);
 });
 
 it('parses french month name ranges and date times', function () {
     $french = Chrono::fr();
-    $sameMonth = $french->parseText('10 - 22 août 2012', '2012-08-10')[0];
-    $sameMonthAu = $french->parseText('10 au 22 août 2012', '2012-08-10')[0];
-    $sameMonthUntil = $french->parseText("10 jusqu'au 22 août 2012", '2012-08-10')[0];
-    $crossMonth = $french->parseText('10 août - 12 septembre', '2012-08-10')[0];
-    $crossMonthYear = $french->parseText('10 août - 12 septembre 2013', '2012-08-10')[0];
-    $repeatedMonth = $french->parseText('Du 24 août 2023 au 26 août 2023', '2012-08-10')[0];
-    $crossYear = $french->parseText('24 décembre au 2 janvier', '2023-12-01')[0];
+    $sameMonth = $french->parse('10 - 22 août 2012', '2012-08-10')[0];
+    $sameMonthAu = $french->parse('10 au 22 août 2012', '2012-08-10')[0];
+    $sameMonthUntil = $french->parse("10 jusqu'au 22 août 2012", '2012-08-10')[0];
+    $crossMonth = $french->parse('10 août - 12 septembre', '2012-08-10')[0];
+    $crossMonthYear = $french->parse('10 août - 12 septembre 2013', '2012-08-10')[0];
+    $repeatedMonth = $french->parse('Du 24 août 2023 au 26 août 2023', '2012-08-10')[0];
+    $crossYear = $french->parse('24 décembre au 2 janvier', '2023-12-01')[0];
 
     expect($sameMonth->text)->toBe('10 - 22 août 2012')
         ->and($sameMonth->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
@@ -80,7 +80,7 @@ it('parses french month name ranges and date times', function () {
         ->and($crossYear->text)->toBe('24 décembre au 2 janvier')
         ->and($crossYear->start->date()->toDateTimeString())->toBe('2023-12-24 12:00:00')
         ->and($crossYear->end?->date()->toDateTimeString())->toBe('2024-01-02 12:00:00')
-        ->and($french->parseDateText('12 juillet à 19:00', '2012-08-10')?->toDateTimeString())->toBe('2012-07-12 19:00:00')
-        ->and($french->parseDateText('5 mai 12:00', '2012-08-10')?->toDateTimeString())->toBe('2012-05-05 12:00:00')
-        ->and($french->parseDateText('7 Mai 11:00', '2012-08-10')?->toDateTimeString())->toBe('2012-05-07 11:00:00');
+        ->and($french->date('12 juillet à 19:00', '2012-08-10')?->toDateTimeString())->toBe('2012-07-12 19:00:00')
+        ->and($french->date('5 mai 12:00', '2012-08-10')?->toDateTimeString())->toBe('2012-05-05 12:00:00')
+        ->and($french->date('7 Mai 11:00', '2012-08-10')?->toDateTimeString())->toBe('2012-05-07 11:00:00');
 });

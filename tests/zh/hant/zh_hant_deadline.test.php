@@ -4,19 +4,19 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses traditional chinese deadline expressions', function () {
     $chinese = Chrono::zhHant();
-    $daysWithin = $chinese->parseText('五日內我地有d野做', '2012-08-10')[0];
-    $numericDaysWithin = $chinese->parseText('5日之內我地有d野做', '2012-08-10')[0];
-    $tenDaysWithin = $chinese->parseText('十日內我地有d野做', '2012-08-10')[0];
-    $fiveMinutesLater = $chinese->parseText('五分鐘後', '2012-08-10 12:14')[0];
-    $oneHourWithin = $chinese->parseText('一個鐘之內', '2012-08-10 12:14')[0];
-    $numericMinutesLater = $chinese->parseText('5分鐘之後我就收皮', '2012-08-10 12:14')[0];
-    $secondsLater = $chinese->parseText('係5秒之後你就會收皮', '2012-08-10 12:14')[0];
-    $halfHourWithin = $chinese->parseText('半小時之內', '2012-08-10 12:14')[0];
-    $weeksWithin = $chinese->parseText('兩個禮拜內答覆我', '2012-08-10 12:14')[0];
-    $monthWithin = $chinese->parseText('1個月之內答覆我', '2012-08-10 12:14')[0];
-    $fewMonthsWithin = $chinese->parseText('幾個月之內答覆我', '2012-08-10 12:14')[0];
-    $yearWithin = $chinese->parseText('一年內答覆我', '2012-08-10 12:14')[0];
-    $numericYearWithin = $chinese->parseText('1年之內答覆我', '2012-08-10 12:14')[0];
+    $daysWithin = $chinese->parse('五日內我地有d野做', '2012-08-10')[0];
+    $numericDaysWithin = $chinese->parse('5日之內我地有d野做', '2012-08-10')[0];
+    $tenDaysWithin = $chinese->parse('十日內我地有d野做', '2012-08-10')[0];
+    $fiveMinutesLater = $chinese->parse('五分鐘後', '2012-08-10 12:14')[0];
+    $oneHourWithin = $chinese->parse('一個鐘之內', '2012-08-10 12:14')[0];
+    $numericMinutesLater = $chinese->parse('5分鐘之後我就收皮', '2012-08-10 12:14')[0];
+    $secondsLater = $chinese->parse('係5秒之後你就會收皮', '2012-08-10 12:14')[0];
+    $halfHourWithin = $chinese->parse('半小時之內', '2012-08-10 12:14')[0];
+    $weeksWithin = $chinese->parse('兩個禮拜內答覆我', '2012-08-10 12:14')[0];
+    $monthWithin = $chinese->parse('1個月之內答覆我', '2012-08-10 12:14')[0];
+    $fewMonthsWithin = $chinese->parse('幾個月之內答覆我', '2012-08-10 12:14')[0];
+    $yearWithin = $chinese->parse('一年內答覆我', '2012-08-10 12:14')[0];
+    $numericYearWithin = $chinese->parse('1年之內答覆我', '2012-08-10 12:14')[0];
 
     expect($daysWithin->text)->toBe('五日內')
         ->and($daysWithin->start->date()->toDateTimeString())->toBe('2012-08-15 12:00:00')

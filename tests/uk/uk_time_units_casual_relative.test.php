@@ -3,35 +3,35 @@
 use DirectoryTree\Chrono\Chrono;
 
 it('parses ukrainian weekdays times and relative durations', function () {
-    $weekday = Chrono::uk()->parseText('середа', '2012-08-10 09:30')[0];
-    $nextWeekday = Chrono::uk()->parseText('наступний понеділок', '2012-08-10 09:30')[0];
-    $time = Chrono::uk()->parseText('о 6:30 вечора', '2012-08-10 09:30')[0];
-    $fullTime = Chrono::uk()->parseText('20:32:13', '2016-10-01 08:00')[0];
-    $timeRange = Chrono::uk()->parseText('10:00:00 - 21:45:01', '2016-10-01 08:00')[0];
-    $morning = Chrono::uk()->parseText('об 11 ранку', '2016-10-01 08:00')[0];
-    $evening = Chrono::uk()->parseText('в 11 вечора', '2016-10-01 08:00')[0];
-    $morningRange = Chrono::uk()->parseText('з 10 до 11 ранку', '2016-10-01 08:00')[0];
-    $eveningRange = Chrono::uk()->parseText('із 10 до 11 вечора', '2016-10-01 08:00')[0];
-    $casualHour = Chrono::ukrainian()->parseText('в 1', '2016-10-01 08:00')[0];
-    $casualNoon = Chrono::ukrainian()->parseText('о 12', '2016-10-01 08:00')[0];
-    $casualDotted = Chrono::ukrainian()->parseText('в 12.30', '2016-10-01 08:00')[0];
-    $thisWeek = Chrono::uk()->parseText('на цьому тижні', '2017-11-19 12:00')[0];
-    $thisMonth = Chrono::uk()->parseText('у цьому місяці', '2017-11-19 12:00')[0];
-    $firstOfThisMonth = Chrono::uk()->parseText('цього місяця', '2017-11-01 12:00')[0];
-    $thisYear = Chrono::uk()->parseText('у цьому році', '2017-11-19 12:00')[0];
-    $pastWeek = Chrono::uk()->parseText('на минулому тижні', '2016-10-01 12:00')[0];
-    $pastMonth = Chrono::uk()->parseText('минулого місяця', '2016-10-01 12:00')[0];
-    $pastYear = Chrono::uk()->parseText('у минулому році', '2016-10-01 12:00')[0];
-    $nextWeek = Chrono::uk()->parseText('на наступному тижні', '2016-10-01 12:00')[0];
-    $nextMonth = Chrono::uk()->parseText('наступного місяця', '2016-10-01 12:00')[0];
-    $nextQuarter = Chrono::uk()->parseText('в наступному кварталі', '2016-10-01 12:00')[0];
-    $nextYear = Chrono::uk()->parseText('наступного року', '2016-10-01 12:00')[0];
-    $ago = Chrono::uk()->parseText('2 дні тому', '2012-08-10 09:30')[0];
-    $halfHour = Chrono::uk()->parseText('через півгодини', '2016-10-01 12:00')[0];
-    $later = Chrono::uk()->parseText('через 3 тижні', '2012-08-10 09:30')[0];
-    $within = Chrono::uk()->parseText('протягом 1 місяця', '2012-08-10 09:30')[0];
-    $withinMinute = Chrono::uk()->parseText('буде зроблено протягом хвилини', '2012-08-10 00:00')[0];
-    $withinHours = Chrono::uk()->parseText('буде виконано на протязі 2 годин.', '2012-08-10 00:00')[0];
+    $weekday = Chrono::uk()->parse('середа', '2012-08-10 09:30')[0];
+    $nextWeekday = Chrono::uk()->parse('наступний понеділок', '2012-08-10 09:30')[0];
+    $time = Chrono::uk()->parse('о 6:30 вечора', '2012-08-10 09:30')[0];
+    $fullTime = Chrono::uk()->parse('20:32:13', '2016-10-01 08:00')[0];
+    $timeRange = Chrono::uk()->parse('10:00:00 - 21:45:01', '2016-10-01 08:00')[0];
+    $morning = Chrono::uk()->parse('об 11 ранку', '2016-10-01 08:00')[0];
+    $evening = Chrono::uk()->parse('в 11 вечора', '2016-10-01 08:00')[0];
+    $morningRange = Chrono::uk()->parse('з 10 до 11 ранку', '2016-10-01 08:00')[0];
+    $eveningRange = Chrono::uk()->parse('із 10 до 11 вечора', '2016-10-01 08:00')[0];
+    $casualHour = Chrono::ukrainian()->parse('в 1', '2016-10-01 08:00')[0];
+    $casualNoon = Chrono::ukrainian()->parse('о 12', '2016-10-01 08:00')[0];
+    $casualDotted = Chrono::ukrainian()->parse('в 12.30', '2016-10-01 08:00')[0];
+    $thisWeek = Chrono::uk()->parse('на цьому тижні', '2017-11-19 12:00')[0];
+    $thisMonth = Chrono::uk()->parse('у цьому місяці', '2017-11-19 12:00')[0];
+    $firstOfThisMonth = Chrono::uk()->parse('цього місяця', '2017-11-01 12:00')[0];
+    $thisYear = Chrono::uk()->parse('у цьому році', '2017-11-19 12:00')[0];
+    $pastWeek = Chrono::uk()->parse('на минулому тижні', '2016-10-01 12:00')[0];
+    $pastMonth = Chrono::uk()->parse('минулого місяця', '2016-10-01 12:00')[0];
+    $pastYear = Chrono::uk()->parse('у минулому році', '2016-10-01 12:00')[0];
+    $nextWeek = Chrono::uk()->parse('на наступному тижні', '2016-10-01 12:00')[0];
+    $nextMonth = Chrono::uk()->parse('наступного місяця', '2016-10-01 12:00')[0];
+    $nextQuarter = Chrono::uk()->parse('в наступному кварталі', '2016-10-01 12:00')[0];
+    $nextYear = Chrono::uk()->parse('наступного року', '2016-10-01 12:00')[0];
+    $ago = Chrono::uk()->parse('2 дні тому', '2012-08-10 09:30')[0];
+    $halfHour = Chrono::uk()->parse('через півгодини', '2016-10-01 12:00')[0];
+    $later = Chrono::uk()->parse('через 3 тижні', '2012-08-10 09:30')[0];
+    $within = Chrono::uk()->parse('протягом 1 місяця', '2012-08-10 09:30')[0];
+    $withinMinute = Chrono::uk()->parse('буде зроблено протягом хвилини', '2012-08-10 00:00')[0];
+    $withinHours = Chrono::uk()->parse('буде виконано на протязі 2 годин.', '2012-08-10 00:00')[0];
 
     expect($weekday->start->date()->toDateTimeString())->toBe('2012-08-08 12:00:00')
         ->and($weekday->start->tags())->toContain('parser/UKWeekdayParser')
@@ -89,26 +89,26 @@ it('parses ukrainian weekdays times and relative durations', function () {
         ->and($withinHours->text)->toBe('на протязі 2 годин')
         ->and($withinHours->start->date()->toDateTimeString())->toBe('2012-08-10 02:00:00')
         ->and($withinHours->start->isCertain('hour'))->toBeTrue()
-        ->and(Chrono::uk()->parseText('Температура 101,194 градусів!', '2012-08-10'))->toBe([])
-        ->and(Chrono::uk()->parseText('Температура 101 градусів!', '2012-08-10'))->toBe([])
-        ->and(Chrono::uk()->parseText('Температура 10.1', '2012-08-10'))->toBe([])
-        ->and(Chrono::uk()->parseText('Це в 10.1 - 10.12', '2012-08-10'))->toBe([])
-        ->and(Chrono::uk()->parseText('Це в 10 - 10.1', '2012-08-10'))->toBe([])
-        ->and(Chrono::uk()->parseText('2020', '2012-08-10'))->toBe([])
-        ->and(Chrono::uk()->parseText('2020  ', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictUkrainian()->parseText('Це в 101,194 телефон!', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictUkrainian()->parseText('Це в 101 стіл!', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictUkrainian()->parseText('Це в 10.1', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictUkrainian()->parseText('Це в 10', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictUkrainian()->parseText('2020', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictUkrainian()->parseText('Це в 10.1 - 10.12', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictUkrainian()->parseText('Це в 10 - 10.1', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictUkrainian()->parseText('Це в 10 - 20', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictUkrainian()->parseText('7-730', '2012-08-10'))->toBe([]);
+        ->and(Chrono::uk()->parse('Температура 101,194 градусів!', '2012-08-10'))->toBe([])
+        ->and(Chrono::uk()->parse('Температура 101 градусів!', '2012-08-10'))->toBe([])
+        ->and(Chrono::uk()->parse('Температура 10.1', '2012-08-10'))->toBe([])
+        ->and(Chrono::uk()->parse('Це в 10.1 - 10.12', '2012-08-10'))->toBe([])
+        ->and(Chrono::uk()->parse('Це в 10 - 10.1', '2012-08-10'))->toBe([])
+        ->and(Chrono::uk()->parse('2020', '2012-08-10'))->toBe([])
+        ->and(Chrono::uk()->parse('2020  ', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictUkrainian()->parse('Це в 101,194 телефон!', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictUkrainian()->parse('Це в 101 стіл!', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictUkrainian()->parse('Це в 10.1', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictUkrainian()->parse('Це в 10', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictUkrainian()->parse('2020', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictUkrainian()->parse('Це в 10.1 - 10.12', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictUkrainian()->parse('Це в 10 - 10.1', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictUkrainian()->parse('Це в 10 - 20', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictUkrainian()->parse('7-730', '2012-08-10'))->toBe([]);
 });
 
 it('matches upstream ukrainian positive casual relative time units', function (string $text, string $expected) {
-    $result = Chrono::uk()->parseText($text, '2016-10-01 12:00')[0];
+    $result = Chrono::uk()->parse($text, '2016-10-01 12:00')[0];
 
     expect($result->index)->toBe(0)
         ->and($result->text)->toBe($text)
@@ -128,7 +128,7 @@ it('matches upstream ukrainian positive casual relative time units', function (s
 ]);
 
 it('matches upstream ukrainian negative casual relative time units', function (string $text, string $expected) {
-    $result = Chrono::uk()->parseText($text, '2016-10-01 12:00')[0];
+    $result = Chrono::uk()->parse($text, '2016-10-01 12:00')[0];
 
     expect($result->index)->toBe(0)
         ->and($result->text)->toBe($text)
@@ -139,7 +139,7 @@ it('matches upstream ukrainian negative casual relative time units', function (s
 ]);
 
 it('matches upstream ukrainian signed casual relative time units', function (string $text, string $reference, string $expected) {
-    $result = Chrono::uk()->parseText($text, $reference)[0];
+    $result = Chrono::uk()->parse($text, $reference)[0];
 
     expect($result->index)->toBe(0)
         ->and($result->text)->toBe($text)

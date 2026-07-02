@@ -5,8 +5,8 @@ use DirectoryTree\Chrono\Weekday;
 
 it('parses portuguese slash dates', function () {
     $portuguese = Chrono::pt();
-    $monday = $portuguese->parseText('segunda 8/2/2016', '2012-08-10')[0];
-    $tuesday = $portuguese->parseText('Terça-feira 9/2/2016', '2012-08-10')[0];
+    $monday = $portuguese->parse('segunda 8/2/2016', '2012-08-10')[0];
+    $tuesday = $portuguese->parse('Terça-feira 9/2/2016', '2012-08-10')[0];
 
     expect($monday->index)->toBe(0)
         ->and($monday->text)->toBe('segunda 8/2/2016')

@@ -13,8 +13,8 @@ use DirectoryTree\Chrono\Refiners\ForwardDateRefiner;
 use DirectoryTree\Chrono\Weekday;
 
 it('merges time followed by date in common date-time refiners', function () {
-    $german = Chrono::german()->parseText('um 5 Uhr am 10. August 2012', '2012-08-10')[0];
-    $dutch = Chrono::dutch()->parseText('om 5 uur 10 augustus 2012', '2012-08-10')[0];
+    $german = Chrono::german()->parse('um 5 Uhr am 10. August 2012', '2012-08-10')[0];
+    $dutch = Chrono::dutch()->parse('om 5 uur 10 augustus 2012', '2012-08-10')[0];
 
     expect($german->text)
         ->toBe('um 5 Uhr am 10. August 2012')

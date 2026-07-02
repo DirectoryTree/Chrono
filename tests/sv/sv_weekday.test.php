@@ -4,11 +4,11 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses swedish weekday references', function () {
     $swedish = Chrono::sv();
-    $monday = $swedish->parseText('måndag', '2012-08-09')[0];
-    $weekday = $swedish->parseText('på onsdag', '2012-08-10')[0];
-    $prefixedMonday = $swedish->parseText('på måndag', '2012-08-09')[0];
-    $nextMonday = $swedish->parseText('nästa måndag', '2012-08-09')[0];
-    $lastMonday = $swedish->parseText('förra måndag', '2012-08-09')[0];
+    $monday = $swedish->parse('måndag', '2012-08-09')[0];
+    $weekday = $swedish->parse('på onsdag', '2012-08-10')[0];
+    $prefixedMonday = $swedish->parse('på måndag', '2012-08-09')[0];
+    $nextMonday = $swedish->parse('nästa måndag', '2012-08-09')[0];
+    $lastMonday = $swedish->parse('förra måndag', '2012-08-09')[0];
 
     expect($monday->index)->toBe(0)
         ->and($monday->text)->toBe('måndag')
@@ -43,10 +43,10 @@ it('parses swedish weekday references', function () {
         ->and($lastMonday->start->get('day'))->toBe(6)
         ->and($lastMonday->start->get('weekday'))->toBe(1)
         ->and($lastMonday->start->isCertain('day'))->toBeFalse()
-        ->and($swedish->parseText('söndag', '2012-08-09')[0]->start->get('weekday'))->toBe(0)
-        ->and($swedish->parseText('tisdag', '2012-08-09')[0]->start->get('weekday'))->toBe(2)
-        ->and($swedish->parseText('fredag', '2012-08-09')[0]->start->get('weekday'))->toBe(5)
-        ->and($swedish->parseText('lördag', '2012-08-09')[0]->start->get('weekday'))->toBe(6)
-        ->and($swedish->parseDateText('nästa måndag', '2012-08-10')?->toDateTimeString())->toBe('2012-08-13 12:00:00')
-        ->and($swedish->parseDateText('förra måndag', '2012-08-10')?->toDateTimeString())->toBe('2012-08-06 12:00:00');
+        ->and($swedish->parse('söndag', '2012-08-09')[0]->start->get('weekday'))->toBe(0)
+        ->and($swedish->parse('tisdag', '2012-08-09')[0]->start->get('weekday'))->toBe(2)
+        ->and($swedish->parse('fredag', '2012-08-09')[0]->start->get('weekday'))->toBe(5)
+        ->and($swedish->parse('lördag', '2012-08-09')[0]->start->get('weekday'))->toBe(6)
+        ->and($swedish->date('nästa måndag', '2012-08-10')?->toDateTimeString())->toBe('2012-08-13 12:00:00')
+        ->and($swedish->date('förra måndag', '2012-08-10')?->toDateTimeString())->toBe('2012-08-06 12:00:00');
 });

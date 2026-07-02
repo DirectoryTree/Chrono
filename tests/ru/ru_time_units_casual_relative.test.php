@@ -3,36 +3,36 @@
 use DirectoryTree\Chrono\Chrono;
 
 it('parses russian weekdays times and relative durations', function () {
-    $weekday = Chrono::ru()->parseText('среда', '2012-08-10 09:30')[0];
-    $nextWeekday = Chrono::ru()->parseText('следующий понедельник', '2012-08-10 09:30')[0];
-    $timeWithSeconds = Chrono::ru()->parseText('20:32:13', '2016-10-01 08:00')[0];
-    $time = Chrono::ru()->parseText('в 6:30 вечера', '2012-08-10 09:30')[0];
-    $timeRange = Chrono::ru()->parseText('10:00:00 - 21:45:01', '2016-10-01 08:00')[0];
-    $morningTime = Chrono::ru()->parseText('в 11 утра', '2016-10-01 08:00')[0];
-    $eveningTime = Chrono::ru()->parseText('в 11 вечера', '2016-10-01 08:00')[0];
-    $morningRange = Chrono::ru()->parseText('с 10 до 11 утра', '2016-10-01 08:00')[0];
-    $eveningRange = Chrono::ru()->parseText('с 10 до 11 вечера', '2016-10-01 08:00')[0];
-    $casualHour = Chrono::russian()->parseText('в 1', '2016-10-01 08:00')[0];
-    $casualNoon = Chrono::russian()->parseText('в 12', '2016-10-01 08:00')[0];
-    $casualDotted = Chrono::russian()->parseText('в 12.30', '2016-10-01 08:00')[0];
-    $ago = Chrono::ru()->parseText('2 дня назад', '2012-08-10 09:30')[0];
-    $halfHourAgo = Chrono::ru()->parseText('полчаса назад что-то было', '2012-07-10 00:00')[0];
-    $pairMinutes = Chrono::ru()->parseText('через пару минут', '2016-10-01 12:00')[0];
-    $later = Chrono::ru()->parseText('через 3 недели', '2012-08-10 09:30')[0];
-    $within = Chrono::ru()->parseText('в течение 1 месяца', '2012-08-10 09:30')[0];
-    $withinMinute = Chrono::ru()->parseText('будет сделано в течение минуты', '2012-08-10 00:00')[0];
-    $withinHours = Chrono::ru()->parseText('будет сделано в течение 2 часов.', '2012-08-10 00:00')[0];
-    $thisWeek = Chrono::ru()->parseText('на этой неделе', '2017-11-19 12:00')[0];
-    $thisMonth = Chrono::ru()->parseText('в этом месяце', '2017-11-19 12:00')[0];
-    $firstOfThisMonth = Chrono::ru()->parseText('в этом месяце', '2017-11-01 12:00')[0];
-    $thisYear = Chrono::ru()->parseText('в этом году', '2017-11-19 12:00')[0];
-    $lastWeek = Chrono::ru()->parseText('на прошлой неделе', '2016-10-01 12:00')[0];
-    $lastMonth = Chrono::ru()->parseText('в прошлом месяце', '2016-10-01 12:00')[0];
-    $nextWeek = Chrono::ru()->parseText('на следующей неделе', '2016-10-01 12:00')[0];
-    $nextMonth = Chrono::ru()->parseText('в следующем месяце', '2016-10-01 12:00')[0];
-    $nextQuarter = Chrono::ru()->parseText('в следующем квартале', '2016-10-01 12:00')[0];
-    $lastYear = Chrono::ru()->parseText('в прошлом году', '2016-10-01 12:00')[0];
-    $nextYear = Chrono::ru()->parseText('в следующем году', '2016-10-01 12:00')[0];
+    $weekday = Chrono::ru()->parse('среда', '2012-08-10 09:30')[0];
+    $nextWeekday = Chrono::ru()->parse('следующий понедельник', '2012-08-10 09:30')[0];
+    $timeWithSeconds = Chrono::ru()->parse('20:32:13', '2016-10-01 08:00')[0];
+    $time = Chrono::ru()->parse('в 6:30 вечера', '2012-08-10 09:30')[0];
+    $timeRange = Chrono::ru()->parse('10:00:00 - 21:45:01', '2016-10-01 08:00')[0];
+    $morningTime = Chrono::ru()->parse('в 11 утра', '2016-10-01 08:00')[0];
+    $eveningTime = Chrono::ru()->parse('в 11 вечера', '2016-10-01 08:00')[0];
+    $morningRange = Chrono::ru()->parse('с 10 до 11 утра', '2016-10-01 08:00')[0];
+    $eveningRange = Chrono::ru()->parse('с 10 до 11 вечера', '2016-10-01 08:00')[0];
+    $casualHour = Chrono::russian()->parse('в 1', '2016-10-01 08:00')[0];
+    $casualNoon = Chrono::russian()->parse('в 12', '2016-10-01 08:00')[0];
+    $casualDotted = Chrono::russian()->parse('в 12.30', '2016-10-01 08:00')[0];
+    $ago = Chrono::ru()->parse('2 дня назад', '2012-08-10 09:30')[0];
+    $halfHourAgo = Chrono::ru()->parse('полчаса назад что-то было', '2012-07-10 00:00')[0];
+    $pairMinutes = Chrono::ru()->parse('через пару минут', '2016-10-01 12:00')[0];
+    $later = Chrono::ru()->parse('через 3 недели', '2012-08-10 09:30')[0];
+    $within = Chrono::ru()->parse('в течение 1 месяца', '2012-08-10 09:30')[0];
+    $withinMinute = Chrono::ru()->parse('будет сделано в течение минуты', '2012-08-10 00:00')[0];
+    $withinHours = Chrono::ru()->parse('будет сделано в течение 2 часов.', '2012-08-10 00:00')[0];
+    $thisWeek = Chrono::ru()->parse('на этой неделе', '2017-11-19 12:00')[0];
+    $thisMonth = Chrono::ru()->parse('в этом месяце', '2017-11-19 12:00')[0];
+    $firstOfThisMonth = Chrono::ru()->parse('в этом месяце', '2017-11-01 12:00')[0];
+    $thisYear = Chrono::ru()->parse('в этом году', '2017-11-19 12:00')[0];
+    $lastWeek = Chrono::ru()->parse('на прошлой неделе', '2016-10-01 12:00')[0];
+    $lastMonth = Chrono::ru()->parse('в прошлом месяце', '2016-10-01 12:00')[0];
+    $nextWeek = Chrono::ru()->parse('на следующей неделе', '2016-10-01 12:00')[0];
+    $nextMonth = Chrono::ru()->parse('в следующем месяце', '2016-10-01 12:00')[0];
+    $nextQuarter = Chrono::ru()->parse('в следующем квартале', '2016-10-01 12:00')[0];
+    $lastYear = Chrono::ru()->parse('в прошлом году', '2016-10-01 12:00')[0];
+    $nextYear = Chrono::ru()->parse('в следующем году', '2016-10-01 12:00')[0];
 
     expect($weekday->start->date()->toDateTimeString())->toBe('2012-08-08 12:00:00')
         ->and($weekday->start->tags())->toContain('parser/RUWeekdayParser')
@@ -100,26 +100,26 @@ it('parses russian weekdays times and relative durations', function () {
         ->and($nextQuarter->start->date()->toDateTimeString())->toBe('2017-01-01 12:00:00')
         ->and($lastYear->start->date()->toDateTimeString())->toBe('2015-10-01 12:00:00')
         ->and($nextYear->start->date()->toDateTimeString())->toBe('2017-10-01 12:00:00')
-        ->and(Chrono::ru()->parseText('Температура 101,194 градусов!', '2012-08-10'))->toBe([])
-        ->and(Chrono::ru()->parseText('Температура 101 градусов!', '2012-08-10'))->toBe([])
-        ->and(Chrono::ru()->parseText('Температура 10.1', '2012-08-10'))->toBe([])
-        ->and(Chrono::ru()->parseText('Это в 10.1 - 10.12', '2012-08-10'))->toBe([])
-        ->and(Chrono::ru()->parseText('Это в 10 - 10.1', '2012-08-10'))->toBe([])
-        ->and(Chrono::ru()->parseText('2020', '2012-08-10'))->toBe([])
-        ->and(Chrono::ru()->parseText('2020  ', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictRussian()->parseText('Это в 101,194 телефон!', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictRussian()->parseText('Это в 101 стул!', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictRussian()->parseText('Это в 10.1', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictRussian()->parseText('Это в 10', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictRussian()->parseText('2020', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictRussian()->parseText('Это в 10.1 - 10.12', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictRussian()->parseText('Это в 10 - 10.1', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictRussian()->parseText('Это в 10 - 20', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictRussian()->parseText('7-730', '2012-08-10'))->toBe([]);
+        ->and(Chrono::ru()->parse('Температура 101,194 градусов!', '2012-08-10'))->toBe([])
+        ->and(Chrono::ru()->parse('Температура 101 градусов!', '2012-08-10'))->toBe([])
+        ->and(Chrono::ru()->parse('Температура 10.1', '2012-08-10'))->toBe([])
+        ->and(Chrono::ru()->parse('Это в 10.1 - 10.12', '2012-08-10'))->toBe([])
+        ->and(Chrono::ru()->parse('Это в 10 - 10.1', '2012-08-10'))->toBe([])
+        ->and(Chrono::ru()->parse('2020', '2012-08-10'))->toBe([])
+        ->and(Chrono::ru()->parse('2020  ', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictRussian()->parse('Это в 101,194 телефон!', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictRussian()->parse('Это в 101 стул!', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictRussian()->parse('Это в 10.1', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictRussian()->parse('Это в 10', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictRussian()->parse('2020', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictRussian()->parse('Это в 10.1 - 10.12', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictRussian()->parse('Это в 10 - 10.1', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictRussian()->parse('Это в 10 - 20', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictRussian()->parse('7-730', '2012-08-10'))->toBe([]);
 });
 
 it('matches upstream russian positive casual relative time units', function (string $text, string $expected) {
-    $result = Chrono::ru()->parseText($text, '2016-10-01 12:00')[0];
+    $result = Chrono::ru()->parse($text, '2016-10-01 12:00')[0];
 
     expect($result->index)->toBe(0)
         ->and($result->text)->toBe($text)
@@ -139,7 +139,7 @@ it('matches upstream russian positive casual relative time units', function (str
 ]);
 
 it('matches upstream russian positive casual relative time units with reference timezones', function (string $instant, string $expected) {
-    $result = Chrono::ru()->parseText('через год', [
+    $result = Chrono::ru()->parse('через год', [
         'instant' => $instant,
         'timezone' => 'GMT',
     ])[0];
@@ -153,7 +153,7 @@ it('matches upstream russian positive casual relative time units with reference 
 ]);
 
 it('matches upstream russian negative casual relative time units', function (string $text, string $expected) {
-    $result = Chrono::ru()->parseText($text, '2016-10-01 12:00')[0];
+    $result = Chrono::ru()->parse($text, '2016-10-01 12:00')[0];
 
     expect($result->index)->toBe(0)
         ->and($result->text)->toBe($text)
@@ -164,7 +164,7 @@ it('matches upstream russian negative casual relative time units', function (str
 ]);
 
 it('matches upstream russian signed casual relative time units', function (string $text, string $reference, string $expected) {
-    $result = Chrono::ru()->parseText($text, $reference)[0];
+    $result = Chrono::ru()->parse($text, $reference)[0];
 
     expect($result->index)->toBe(0)
         ->and($result->text)->toBe($text)

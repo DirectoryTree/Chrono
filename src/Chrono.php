@@ -21,6 +21,14 @@ use DirectoryTree\Chrono\Locales\Zh\ZhChrono;
 use DirectoryTree\Chrono\Locales\Zh\ZhHansChrono;
 use DirectoryTree\Chrono\Locales\Zh\ZhHantChrono;
 
+/**
+ * @method static array<int, ParsedResult> parse(string $text, CarbonInterface|string|array|null $reference = null, array $options = [])
+ * @method static CarbonImmutable|null date(string $text, CarbonInterface|string|array|null $reference = null, array $options = [])
+ * @method static array<int, CarbonImmutable> dates(string $text, CarbonInterface|string|array|null $reference = null, array $options = [])
+ * @method array<int, ParsedResult> parse(string $text, CarbonInterface|string|array|null $reference = null, array $options = [])
+ * @method CarbonImmutable|null date(string $text, CarbonInterface|string|array|null $reference = null, array $options = [])
+ * @method array<int, CarbonImmutable> dates(string $text, CarbonInterface|string|array|null $reference = null, array $options = [])
+ */
 readonly class Chrono
 {
     /**
@@ -520,44 +528,13 @@ readonly class Chrono
     }
 
     /**
-     * Parse the text with the default casual English parser.
-     *
-     * @param  CarbonInterface|string|array<string, mixed>|null  $reference
-     * @param  array<string, mixed>  $options
-     * @return array<int, ParsedResult>
-     */
-    public static function parse(
-        string $text,
-        CarbonInterface|string|array|null $reference = null,
-        array $options = []
-    ): array {
-        return (new self)->parseText($text, $reference, $options);
-    }
-
-    /**
-     * Parse the text and return the first result as a Carbon instance.
-     *
-     * @param  CarbonInterface|string|array<string, mixed>|null  $reference
-     * @param  array<string, mixed>  $options
-     */
-    public static function parseDate(
-        string $text,
-        CarbonInterface|string|array|null $reference = null,
-        array $options = []
-    ): ?CarbonImmutable {
-        $result = self::parse($text, $reference, $options)[0] ?? null;
-
-        return $result?->start->date();
-    }
-
-    /**
      * Parse the text with this configured parser.
      *
      * @param  CarbonInterface|string|array<string, mixed>|null  $reference
      * @param  array<string, mixed>  $options
      * @return array<int, ParsedResult>
      */
-    public function parseText(
+    protected function parse(
         string $text,
         CarbonInterface|string|array|null $reference = null,
         array $options = []
@@ -568,18 +545,72 @@ readonly class Chrono
     }
 
     /**
-     * Parse the text with this configured parser and return the first result as a Carbon instance.
+     * Parse the text and return the first date as a Carbon instance.
      *
      * @param  CarbonInterface|string|array<string, mixed>|null  $reference
      * @param  array<string, mixed>  $options
      */
-    public function parseDateText(
+    protected function date(
         string $text,
         CarbonInterface|string|array|null $reference = null,
         array $options = []
     ): ?CarbonImmutable {
-        $result = $this->parseText($text, $reference, $options)[0] ?? null;
+        $result = $this->parse($text, $reference, $options)[0] ?? null;
 
         return $result?->start->date();
+    }
+
+    /**
+     * Parse the text and return all dates as Carbon instances.
+     *
+     * @param  CarbonInterface|string|array<string, mixed>|null  $reference
+     * @param  array<string, mixed>  $options
+     * @return array<int, CarbonImmutable>
+     */
+    protected function dates(
+        string $text,
+        CarbonInterface|string|array|null $reference = null,
+        array $options = []
+    ): array {
+        return array_values(array_filter(array_map(
+            fn (ParsedResult $result): ?CarbonImmutable => $result->start->date(),
+            $this->parse($text, $reference, $options),
+        )));
+    }
+
+    /**
+     * Dynamically call parsing methods against this configured parser.
+     *
+     * @param  array<int, mixed>  $parameters
+     */
+    public function __call(string $method, array $parameters): mixed
+    {
+        if (! in_array($method, ['parse', 'date', 'dates'], true)) {
+            throw new \BadMethodCallException(sprintf(
+                'Method [%s] does not exist on [%s].',
+                $method,
+                static::class,
+            ));
+        }
+
+        return $this->{$method}(...$parameters);
+    }
+
+    /**
+     * Dynamically call parsing methods against the default English parser.
+     *
+     * @param  array<int, mixed>  $parameters
+     */
+    public static function __callStatic(string $method, array $parameters): mixed
+    {
+        if (! in_array($method, ['parse', 'date', 'dates'], true)) {
+            throw new \BadMethodCallException(sprintf(
+                'Method [%s] does not exist on [%s].',
+                $method,
+                static::class,
+            ));
+        }
+
+        return (new self)->{$method}(...$parameters);
     }
 }

@@ -3,14 +3,14 @@
 use DirectoryTree\Chrono\Chrono;
 
 it('parses russian casual dates and times', function () {
-    $tomorrow = Chrono::ru()->parseText('завтра', '2012-08-10 17:10')[0];
-    $beforeYesterday = Chrono::ru()->parseText('позавчера', '2012-08-10 17:10')[0];
-    $now = Chrono::ru()->parseText('сейчас', '2012-08-10 08:09:10.011')[0];
-    $evening = Chrono::ru()->parseText('вечером', '2012-08-10 09:30')[0];
-    $lastNight = Chrono::ru()->parseText('прошлой ночью', '2012-08-10 08:09:10.011')[0];
-    $earlyLastNight = Chrono::ru()->parseText('прошлой ночью', '2012-08-10 02:09:10.011')[0];
-    $tomorrowMorning = Chrono::ru()->parseText('Дедлайн завтра утром', '2012-08-10 17:10')[0];
-    $casualRange = Chrono::ru()->parseText('Событие сегодня-завтра', '2012-08-10 12:00')[0];
+    $tomorrow = Chrono::ru()->parse('завтра', '2012-08-10 17:10')[0];
+    $beforeYesterday = Chrono::ru()->parse('позавчера', '2012-08-10 17:10')[0];
+    $now = Chrono::ru()->parse('сейчас', '2012-08-10 08:09:10.011')[0];
+    $evening = Chrono::ru()->parse('вечером', '2012-08-10 09:30')[0];
+    $lastNight = Chrono::ru()->parse('прошлой ночью', '2012-08-10 08:09:10.011')[0];
+    $earlyLastNight = Chrono::ru()->parse('прошлой ночью', '2012-08-10 02:09:10.011')[0];
+    $tomorrowMorning = Chrono::ru()->parse('Дедлайн завтра утром', '2012-08-10 17:10')[0];
+    $casualRange = Chrono::ru()->parse('Событие сегодня-завтра', '2012-08-10 12:00')[0];
 
     expect($tomorrow->start->date()->toDateTimeString())->toBe('2012-08-11 17:10:00')
         ->and($tomorrow->start->tags())->toContain('parser/RUCasualDateParser')
@@ -34,7 +34,7 @@ it('parses russian casual dates and times', function () {
 });
 
 it('matches upstream russian casual date and time examples', function (string $text, string $reference, string $expectedText, string $expectedDate) {
-    $result = Chrono::ru()->parseText($text, $reference)[0];
+    $result = Chrono::ru()->parse($text, $reference)[0];
 
     expect($result->text)->toBe($expectedText)
         ->and($result->start->date()->toDateTimeString())->toBe($expectedDate);
@@ -62,7 +62,7 @@ it('matches upstream russian casual date and time examples', function (string $t
 ]);
 
 it('matches upstream russian casual date ranges', function (string $text, string $reference, string $expectedText, string $expectedStart, string $expectedEnd) {
-    $result = Chrono::ru()->parseText($text, $reference)[0];
+    $result = Chrono::ru()->parse($text, $reference)[0];
 
     expect($result->text)->toBe($expectedText)
         ->and($result->start->date()->toDateTimeString())->toBe($expectedStart)
@@ -73,7 +73,7 @@ it('matches upstream russian casual date ranges', function (string $text, string
 ]);
 
 it('does not parse invalid russian casual text', function (string $text) {
-    expect(Chrono::ru()->parseText($text, '2012-08-10'))->toBe([]);
+    expect(Chrono::ru()->parse($text, '2012-08-10'))->toBe([]);
 })->with([
     'несегодня',
     'зявтра',

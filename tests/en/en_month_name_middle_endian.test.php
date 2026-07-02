@@ -83,7 +83,7 @@ it('parses middle endian dates and ranges with compact comma years', function ()
         ->and($commonEra->start->get('year'))->toBe(8)
         ->and($commonEra->start->date()->format('Y-m-d H:i:s'))->toBe('0008-08-10 12:00:00')
         ->and(Chrono::parse('Jan 1 3000, 9:30', '2012-08-10')[0]->text)->toBe('Jan 1 3000, 9:30')
-        ->and(Chrono::parseDate('Jan 1 3000, 9:30', '2012-08-10')?->format('Y-m-d H:i:s'))->toBe('3000-01-01 09:30:00');
+        ->and(Chrono::date('Jan 1 3000, 9:30', '2012-08-10')?->format('Y-m-d H:i:s'))->toBe('3000-01-01 09:30:00');
 });
 
 it('parses middle endian weekday-prefixed month name dates', function () {
@@ -107,17 +107,17 @@ it('parses middle endian weekday-prefixed month name dates', function () {
         ->and($padded->text)->toBe('Wed, Jan 20th, 2016')
         ->and($padded->start->date()->toDateTimeString())->toBe('2016-01-20 12:00:00')
         ->and(Chrono::parse('Dec. 21', '2012-08-10')[0]->text)->toBe('Dec. 21')
-        ->and(Chrono::parseDate('Dec. 21', '2012-08-10')?->toDateTimeString())->toBe('2012-12-21 12:00:00');
+        ->and(Chrono::date('Dec. 21', '2012-08-10')?->toDateTimeString())->toBe('2012-12-21 12:00:00');
 });
 
 it('parses middle endian month name dates with separators', function () {
-    expect(Chrono::parseDate('August-10, 2012')?->toDateTimeString())
+    expect(Chrono::date('August-10, 2012')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and(Chrono::parseDate('August/10, 2012')?->toDateTimeString())
+        ->and(Chrono::date('August/10, 2012')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and(Chrono::parseDate('August/10/2012')?->toDateTimeString())
+        ->and(Chrono::date('August/10/2012')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and(Chrono::parseDate('August-10-2012')?->toDateTimeString())
+        ->and(Chrono::date('August-10-2012')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00');
 });
 
@@ -136,24 +136,24 @@ it('parses middle endian ordinal word month name expressions', function () {
 });
 
 it('moves middle endian dates forward when requested', function () {
-    $normal = Chrono::casual()->parseText('January 1st', '2016-02-15')[0];
-    $forward = Chrono::casual()->parseText('January 1st', '2016-02-15', ['forwardDate' => true])[0];
+    $normal = Chrono::casual()->parse('January 1st', '2016-02-15')[0];
+    $forward = Chrono::casual()->parse('January 1st', '2016-02-15', ['forwardDate' => true])[0];
 
     expect($normal->start->date()->toDateTimeString())->toBe('2016-01-01 12:00:00')
         ->and($forward->start->date()->toDateTimeString())->toBe('2017-01-01 12:00:00');
 });
 
 it('rejects impossible middle endian month name dates in strict mode', function () {
-    expect(Chrono::strict()->parseText('August 32, 2014', '2012-08-10'))->toBe([])
-        ->and(Chrono::strict()->parseText('February 29, 2014', '2012-08-10'))->toBe([])
-        ->and(Chrono::strict()->parseText('August 32', '2012-08-10'))->toBe([])
-        ->and(Chrono::strict()->parseText('February 29', '2014-08-10'))->toBe([])
-        ->and(Chrono::strict()->parseText('February 151998', '2014-08-10'))->toBe([]);
+    expect(Chrono::strict()->parse('August 32, 2014', '2012-08-10'))->toBe([])
+        ->and(Chrono::strict()->parse('February 29, 2014', '2012-08-10'))->toBe([])
+        ->and(Chrono::strict()->parse('August 32', '2012-08-10'))->toBe([])
+        ->and(Chrono::strict()->parse('February 29', '2014-08-10'))->toBe([])
+        ->and(Chrono::strict()->parse('February 151998', '2014-08-10'))->toBe([]);
 });
 
 it('skips year-like middle endian month dates for british english', function () {
-    $middleEndian = Chrono::casual()->parseText('Dec. 21', '2024-01-10')[0];
-    $littleEndian = Chrono::gb()->parseText('Dec. 21', '2024-01-10')[0];
+    $middleEndian = Chrono::casual()->parse('Dec. 21', '2024-01-10')[0];
+    $littleEndian = Chrono::gb()->parse('Dec. 21', '2024-01-10')[0];
 
     expect($middleEndian->text)->toBe('Dec. 21')
         ->and($middleEndian->start->date()->toDateTimeString())->toBe('2023-12-21 12:00:00')

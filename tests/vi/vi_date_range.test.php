@@ -4,12 +4,12 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses vietnamese date ranges', function () {
     $vietnamese = Chrono::vi();
-    $range = $vietnamese->parseText('30/04/1975 - 01/05/1975', '2012-08-10')[0];
-    $connectorRange = $vietnamese->parseText('từ ngày 5 tháng 8 đến ngày 10 tháng 8 năm 2012', '2012-08-10 12:00')[0];
-    $emDashRange = $vietnamese->parseText('ngày 1 tháng 4 – ngày 30 tháng 4 năm 2000', '2012-08-10 12:00')[0];
-    $hyphenRange = $vietnamese->parseText('ngày 3 tháng 9 - ngày 5 tháng 9 năm 1945', '2012-08-10 12:00')[0];
-    $monthRange = $vietnamese->parseText('tháng 3 tới tháng 5 năm 1975', '2012-08-10 12:00')[0];
-    $yearEndRange = $vietnamese->parseText('ngày 1 tháng 1 đến ngày 31 tháng 12 năm 2020', '2012-08-10 12:00')[0];
+    $range = $vietnamese->parse('30/04/1975 - 01/05/1975', '2012-08-10')[0];
+    $connectorRange = $vietnamese->parse('từ ngày 5 tháng 8 đến ngày 10 tháng 8 năm 2012', '2012-08-10 12:00')[0];
+    $emDashRange = $vietnamese->parse('ngày 1 tháng 4 – ngày 30 tháng 4 năm 2000', '2012-08-10 12:00')[0];
+    $hyphenRange = $vietnamese->parse('ngày 3 tháng 9 - ngày 5 tháng 9 năm 1945', '2012-08-10 12:00')[0];
+    $monthRange = $vietnamese->parse('tháng 3 tới tháng 5 năm 1975', '2012-08-10 12:00')[0];
+    $yearEndRange = $vietnamese->parse('ngày 1 tháng 1 đến ngày 31 tháng 12 năm 2020', '2012-08-10 12:00')[0];
 
     expect($range->start->date()->toDateTimeString())->toBe('1975-04-30 12:00:00')
         ->and($range->end?->date()->toDateTimeString())->toBe('1975-05-01 12:00:00')

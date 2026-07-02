@@ -4,16 +4,16 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses spanish schedule-style slash date times', function () {
     $spanish = Chrono::es();
-    $range = $spanish->parseText('lunes 4/29/2013 630-930am', '2012-08-10')[0];
-    $single = $spanish->parseText('martes 5/1/2013 1115am', '2012-08-10')[0];
-    $pm = $spanish->parseText('miércoles 5/3/2013 1230pm', '2012-08-10')[0];
-    $sunday = $spanish->parseText('domingo 5/6/2013  750am-910am', '2012-08-10')[0];
-    $laterMonday = $spanish->parseText('lunes 5/13/2013 630-930am', '2012-08-10')[0];
-    $laterWednesday = $spanish->parseText('miércoles 5/15/2013 1030am', '2012-08-10')[0];
-    $colon = $spanish->parseText('jueves 6/21/2013 2:30', '2012-08-10')[0];
-    $spaced = $spanish->parseText('martes 7/2/2013 1-230 pm', '2012-08-10')[0];
-    $commaRange = $spanish->parseText('Lunes, 6/24/2013, 7:00pm - 8:30pm', '2012-08-10')[0];
-    $monthName = $spanish->parseText('Miércoles, 3 Julio de 2013 a las 2pm', '2012-08-10')[0];
+    $range = $spanish->parse('lunes 4/29/2013 630-930am', '2012-08-10')[0];
+    $single = $spanish->parse('martes 5/1/2013 1115am', '2012-08-10')[0];
+    $pm = $spanish->parse('miércoles 5/3/2013 1230pm', '2012-08-10')[0];
+    $sunday = $spanish->parse('domingo 5/6/2013  750am-910am', '2012-08-10')[0];
+    $laterMonday = $spanish->parse('lunes 5/13/2013 630-930am', '2012-08-10')[0];
+    $laterWednesday = $spanish->parse('miércoles 5/15/2013 1030am', '2012-08-10')[0];
+    $colon = $spanish->parse('jueves 6/21/2013 2:30', '2012-08-10')[0];
+    $spaced = $spanish->parse('martes 7/2/2013 1-230 pm', '2012-08-10')[0];
+    $commaRange = $spanish->parse('Lunes, 6/24/2013, 7:00pm - 8:30pm', '2012-08-10')[0];
+    $monthName = $spanish->parse('Miércoles, 3 Julio de 2013 a las 2pm', '2012-08-10')[0];
 
     expect($range->text)->toBe('lunes 4/29/2013 630-930am')
         ->and($range->start->date()->toDateTimeString())->toBe('2013-04-29 06:30:00')
@@ -47,8 +47,8 @@ it('parses spanish schedule-style slash date times', function () {
 
 it('parses spanish slash dates', function () {
     $spanish = Chrono::es();
-    $monday = $spanish->parseText('lunes 8/2/2016', '2012-08-10')[0];
-    $tuesday = $spanish->parseText('Martes 9/2/2016', '2012-08-10')[0];
+    $monday = $spanish->parse('lunes 8/2/2016', '2012-08-10')[0];
+    $tuesday = $spanish->parse('Martes 9/2/2016', '2012-08-10')[0];
 
     expect($monday->index)->toBe(0)
         ->and($monday->text)->toBe('lunes 8/2/2016')
@@ -64,6 +64,6 @@ it('parses spanish slash dates', function () {
         ->and($tuesday->start->get('month'))->toBe(2)
         ->and($tuesday->start->get('day'))->toBe(9)
         ->and($tuesday->start->date()->toDateTimeString())->toBe('2016-02-09 12:00:00')
-        ->and($spanish->parseDateText('8/2', '2012-08-10', ['forwardDate' => true])?->toDateTimeString())
+        ->and($spanish->date('8/2', '2012-08-10', ['forwardDate' => true])?->toDateTimeString())
         ->toBe('2013-02-08 12:00:00');
 });

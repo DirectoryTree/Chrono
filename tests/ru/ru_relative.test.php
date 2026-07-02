@@ -3,7 +3,7 @@
 use DirectoryTree\Chrono\Chrono;
 
 it('matches upstream russian relative date expressions', function (string $text, string $reference, string $expectedDate) {
-    $result = Chrono::ru()->parseText($text, $reference)[0];
+    $result = Chrono::ru()->parse($text, $reference)[0];
 
     expect($result->index)->toBe(0)
         ->and($result->text)->toBe($text)

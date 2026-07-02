@@ -84,8 +84,8 @@ it('supports custom refiners that mutate ambiguous parsed results like upstream 
     };
 
     $custom = Chrono::casual()->withRefiner($afternoonGuess);
-    $ambiguous = $custom->parseText('This is at 2.30', '2016-10-01 08:00')[0];
-    $explicit = $custom->parseText('This is at 2.30 AM', '2016-10-01 08:00')[0];
+    $ambiguous = $custom->parse('This is at 2.30', '2016-10-01 08:00')[0];
+    $explicit = $custom->parse('This is at 2.30 AM', '2016-10-01 08:00')[0];
 
     expect($ambiguous->text)->toBe('at 2.30')
         ->and($ambiguous->start->get('hour'))->toBe(14)
@@ -369,7 +369,7 @@ it('detects unknown-year dates by month certainty like upstream parsing componen
     expect($monthOnly->isDateWithUnknownYear())->toBeTrue()
         ->and($monthDay->isDateWithUnknownYear())->toBeTrue()
         ->and($explicitYear->isDateWithUnknownYear())->toBeFalse()
-        ->and(Chrono::parseDate('in May', '2026-06-23', ['forwardDate' => true])?->toDateTimeString())
+        ->and(Chrono::date('in May', '2026-06-23', ['forwardDate' => true])?->toDateTimeString())
         ->toBe('2027-05-01 12:00:00');
 });
 

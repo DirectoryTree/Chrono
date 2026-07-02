@@ -40,7 +40,7 @@ it('extracts english year suffixes from unknown-year dates', function () {
 });
 
 it('parses casual dates with time', function () {
-    $date = Chrono::parseDate('tomorrow at 4pm', '2026-06-23 09:00');
+    $date = Chrono::date('tomorrow at 4pm', '2026-06-23 09:00');
 
     expect($date?->toDateTimeString())->toBe('2026-06-24 16:00:00');
 });
@@ -58,11 +58,11 @@ it('preserves the reference timestamp for now', function () {
 });
 
 it('parses casual date aliases', function () {
-    expect(Chrono::parseDate('tmr', '2026-06-23 09:00')?->toDateTimeString())
+    expect(Chrono::date('tmr', '2026-06-23 09:00')?->toDateTimeString())
         ->toBe('2026-06-24 09:00:00')
-        ->and(Chrono::parseDate('tmrw', '2026-06-23 09:00')?->toDateTimeString())
+        ->and(Chrono::date('tmrw', '2026-06-23 09:00')?->toDateTimeString())
         ->toBe('2026-06-24 09:00:00')
-        ->and(Chrono::parseDate('overmorrow', '2026-06-23 09:00')?->toDateTimeString())
+        ->and(Chrono::date('overmorrow', '2026-06-23 09:00')?->toDateTimeString())
         ->toBe('2026-06-25 09:00:00');
 });
 
@@ -100,9 +100,9 @@ it('parses upstream casual date and time combinations', function () {
 });
 
 it('parses last night relative to the reference time', function () {
-    expect(Chrono::parseDate('last night', '2012-08-10 12:00')?->toDateTimeString())
+    expect(Chrono::date('last night', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-09 00:00:00')
-        ->and(Chrono::parseDate('last night', '2012-08-10 01:00')?->toDateTimeString())
+        ->and(Chrono::date('last night', '2012-08-10 01:00')?->toDateTimeString())
         ->toBe('2012-08-10 00:00:00');
 });
 
@@ -143,15 +143,15 @@ it('parses casual times', function () {
     expect($morning->start->date()->toDateTimeString())
         ->toBe('2026-06-23 06:00:00')
         ->and($morning->start->tags())->toContain('parser/ENCasualTimeParser')
-        ->and(Chrono::parseDate('this afternoon', '2026-06-23 12:00')?->toDateTimeString())
+        ->and(Chrono::date('this afternoon', '2026-06-23 12:00')?->toDateTimeString())
         ->toBe('2026-06-23 15:00:00')
         ->and(Chrono::parse('this afternoon at 3', '2016-10-01 08:00')[0]->text)
         ->toBe('this afternoon at 3')
-        ->and(Chrono::parseDate('this afternoon at 3', '2016-10-01 08:00')?->toDateTimeString())
+        ->and(Chrono::date('this afternoon at 3', '2016-10-01 08:00')?->toDateTimeString())
         ->toBe('2016-10-01 15:00:00')
-        ->and(Chrono::parseDate('this evening', '2026-06-23 12:00')?->toDateTimeString())
+        ->and(Chrono::date('this evening', '2026-06-23 12:00')?->toDateTimeString())
         ->toBe('2026-06-23 20:00:00')
-        ->and(Chrono::parseDate('noon', '2026-06-23 12:00')?->toDateTimeString())
+        ->and(Chrono::date('noon', '2026-06-23 12:00')?->toDateTimeString())
         ->toBe('2026-06-23 12:00:00')
         ->and(Chrono::parse('at 12', '2012-08-10')[0]->text)->toBe('at 12')
         ->and(Chrono::parse('at 12', '2012-08-10')[0]->start->get('hour'))->toBe(12)
@@ -171,9 +171,9 @@ it('defaults explicit casual time milliseconds to zero', function () {
 });
 
 it('parses midnight relative to the reference time', function () {
-    expect(Chrono::parseDate('midnight', '2026-06-23 12:00')?->toDateTimeString())
+    expect(Chrono::date('midnight', '2026-06-23 12:00')?->toDateTimeString())
         ->toBe('2026-06-24 00:00:00')
-        ->and(Chrono::parseDate('midnight', '2026-06-23 01:00')?->toDateTimeString())
+        ->and(Chrono::date('midnight', '2026-06-23 01:00')?->toDateTimeString())
         ->toBe('2026-06-23 00:00:00');
 });
 
@@ -258,17 +258,17 @@ it('parses upstream later and from-now relative duration variants with exact tex
 });
 
 it('parses casual relative duration prefixes', function () {
-    expect(Chrono::parseDate('next 2 weeks 3 days', '2016-10-01 12:00')?->toDateTimeString())
+    expect(Chrono::date('next 2 weeks 3 days', '2016-10-01 12:00')?->toDateTimeString())
         ->toBe('2016-10-18 12:00:00')
-        ->and(Chrono::parseDate('after a year', '2016-10-01 12:00')?->toDateTimeString())
+        ->and(Chrono::date('after a year', '2016-10-01 12:00')?->toDateTimeString())
         ->toBe('2017-10-01 12:00:00')
-        ->and(Chrono::parseDate('next two quarters', '2016-10-01 12:00')?->toDateTimeString())
+        ->and(Chrono::date('next two quarters', '2016-10-01 12:00')?->toDateTimeString())
         ->toBe('2017-04-01 12:00:00')
-        ->and(Chrono::parseDate('after an hour', '2016-10-01 15:00')?->toDateTimeString())
+        ->and(Chrono::date('after an hour', '2016-10-01 15:00')?->toDateTimeString())
         ->toBe('2016-10-01 16:00:00')
-        ->and(Chrono::parseDate('last 2 weeks', '2016-10-01 12:00')?->toDateTimeString())
+        ->and(Chrono::date('last 2 weeks', '2016-10-01 12:00')?->toDateTimeString())
         ->toBe('2016-09-17 12:00:00')
-        ->and(Chrono::parseDate('past 2 days', '2016-10-01 12:00')?->toDateTimeString())
+        ->and(Chrono::date('past 2 days', '2016-10-01 12:00')?->toDateTimeString())
         ->toBe('2016-09-29 12:00:00');
 });
 
@@ -293,9 +293,9 @@ it('parses upstream casual relative unit prefixes with exact text', function () 
 });
 
 it('parses upstream signed casual relative duration variants', function () {
-    $minutes = Chrono::casual()->parseText('+15 minutes', '2012-07-10 12:14')[0];
-    $shortMinutes = Chrono::casual()->parseText('+15min', '2012-07-10 12:14')[0];
-    $singleMinute = Chrono::casual()->parseText('+1m', '2012-07-10 12:14')[0];
+    $minutes = Chrono::casual()->parse('+15 minutes', '2012-07-10 12:14')[0];
+    $shortMinutes = Chrono::casual()->parse('+15min', '2012-07-10 12:14')[0];
+    $singleMinute = Chrono::casual()->parse('+1m', '2012-07-10 12:14')[0];
     $spelledNegative = Chrono::parse('-2 hours 5 minutes', '2016-10-01 12:00')[0];
 
     expect($minutes->text)->toBe('+15 minutes')
@@ -310,28 +310,28 @@ it('parses upstream signed casual relative duration variants', function () {
 });
 
 it('merges casual date references with before and after durations', function () {
-    expect(Chrono::parseDate('2 day before today', '2012-08-10 00:00')?->toDateTimeString())
+    expect(Chrono::date('2 day before today', '2012-08-10 00:00')?->toDateTimeString())
         ->toBe('2012-08-08 00:00:00')
-        ->and(Chrono::parseDate('the day before yesterday', '2012-08-10 00:00')?->toDateTimeString())
+        ->and(Chrono::date('the day before yesterday', '2012-08-10 00:00')?->toDateTimeString())
         ->toBe('2012-08-08 00:00:00')
-        ->and(Chrono::parseDate('2 day before yesterday', '2012-08-10 00:00')?->toDateTimeString())
+        ->and(Chrono::date('2 day before yesterday', '2012-08-10 00:00')?->toDateTimeString())
         ->toBe('2012-08-07 00:00:00')
-        ->and(Chrono::parseDate('a week before yesterday', '2012-08-10 00:00')?->toDateTimeString())
+        ->and(Chrono::date('a week before yesterday', '2012-08-10 00:00')?->toDateTimeString())
         ->toBe('2012-08-02 00:00:00')
-        ->and(Chrono::parseDate('2 day after today', '2012-08-10 00:00')?->toDateTimeString())
+        ->and(Chrono::date('2 day after today', '2012-08-10 00:00')?->toDateTimeString())
         ->toBe('2012-08-12 00:00:00')
-        ->and(Chrono::parseDate('the day after tomorrow', '2012-08-10 00:00')?->toDateTimeString())
+        ->and(Chrono::date('the day after tomorrow', '2012-08-10 00:00')?->toDateTimeString())
         ->toBe('2012-08-12 00:00:00')
-        ->and(Chrono::parseDate('2 day after tomorrow', '2012-08-10 00:00')?->toDateTimeString())
+        ->and(Chrono::date('2 day after tomorrow', '2012-08-10 00:00')?->toDateTimeString())
         ->toBe('2012-08-13 00:00:00')
-        ->and(Chrono::parseDate('a week after tomorrow', '2012-08-10 00:00')?->toDateTimeString())
+        ->and(Chrono::date('a week after tomorrow', '2012-08-10 00:00')?->toDateTimeString())
         ->toBe('2012-08-18 00:00:00');
 });
 
 it('parses upstream casual numeric time expressions', function () {
-    $one = Chrono::casual()->parseText('at 1')[0];
-    $twelve = Chrono::casual()->parseText('at 12')[0];
-    $twelveThirty = Chrono::casual()->parseText('at 12.30')[0];
+    $one = Chrono::casual()->parse('at 1')[0];
+    $twelve = Chrono::casual()->parse('at 12')[0];
+    $twelveThirty = Chrono::casual()->parse('at 12.30')[0];
 
     expect($one->text)->toBe('at 1')
         ->and($one->start->get('hour'))->toBe(1)
@@ -345,9 +345,9 @@ it('parses upstream casual numeric time expressions', function () {
 it('rejects casual time guesses in strict mode', function () {
     $strict = Chrono::strict();
 
-    expect($strict->parseText("I'm at 10", '2012-08-10 12:00'))->toBe([])
-        ->and($strict->parseText("I'm at 10 - 20", '2012-08-10 12:00'))->toBe([])
-        ->and($strict->parseText('7-730', '2012-08-10 12:00'))->toBe([]);
+    expect($strict->parse("I'm at 10", '2012-08-10 12:00'))->toBe([])
+        ->and($strict->parse("I'm at 10 - 20", '2012-08-10 12:00'))->toBe([])
+        ->and($strict->parse('7-730', '2012-08-10 12:00'))->toBe([]);
 });
 
 it('merges time expressions followed by casual dates', function () {

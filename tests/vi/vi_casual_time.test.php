@@ -5,17 +5,17 @@ use DirectoryTree\Chrono\Meridiem;
 
 it('parses vietnamese casual time references', function () {
     $vietnamese = Chrono::vi();
-    $morningTime = $vietnamese->parseText('7 giờ sáng', '2012-08-10 12:00')[0];
-    $todayMorning = $vietnamese->parseText('hôm nay buổi sáng', '2012-08-10 06:00')[0];
-    $noon = $vietnamese->parseText('buổi trưa', '2012-08-10 12:00')[0];
-    $afternoon = $vietnamese->parseText('buổi chiều', '2012-08-10 12:00')[0];
-    $evening = $vietnamese->parseText('buổi tối', '2012-08-10 12:00')[0];
-    $night = $vietnamese->parseText('buổi đêm', '2012-08-10 12:00')[0];
-    $bareNight = $vietnamese->parseText('đêm', '2012-08-10 12:00')[0];
-    $midnight = $vietnamese->parseText('nửa đêm', '2012-08-10 12:00')[0];
-    $dawn = $vietnamese->parseText('bình minh', '2012-08-10 12:00')[0];
-    $earlyMorning = $vietnamese->parseText('sáng sớm', '2012-08-10 12:00')[0];
-    $todayAfternoon = $vietnamese->parseText('hôm nay buổi chiều', '2012-08-10 12:00')[0];
+    $morningTime = $vietnamese->parse('7 giờ sáng', '2012-08-10 12:00')[0];
+    $todayMorning = $vietnamese->parse('hôm nay buổi sáng', '2012-08-10 06:00')[0];
+    $noon = $vietnamese->parse('buổi trưa', '2012-08-10 12:00')[0];
+    $afternoon = $vietnamese->parse('buổi chiều', '2012-08-10 12:00')[0];
+    $evening = $vietnamese->parse('buổi tối', '2012-08-10 12:00')[0];
+    $night = $vietnamese->parse('buổi đêm', '2012-08-10 12:00')[0];
+    $bareNight = $vietnamese->parse('đêm', '2012-08-10 12:00')[0];
+    $midnight = $vietnamese->parse('nửa đêm', '2012-08-10 12:00')[0];
+    $dawn = $vietnamese->parse('bình minh', '2012-08-10 12:00')[0];
+    $earlyMorning = $vietnamese->parse('sáng sớm', '2012-08-10 12:00')[0];
+    $todayAfternoon = $vietnamese->parse('hôm nay buổi chiều', '2012-08-10 12:00')[0];
 
     expect($morningTime->start->get('hour'))->toBe(7)
         ->and($morningTime->start->get('meridiem'))->toBe(Meridiem::AM)

@@ -5,19 +5,19 @@ use DirectoryTree\Chrono\Meridiem;
 
 it('parses french casual dates and times', function () {
     $french = Chrono::fr();
-    $now = $french->parseText('La deadline est maintenant', '2012-08-10 08:09:10.011')[0];
-    $today = $french->parseText("La deadline est aujourd'hui", '2012-08-10 12:00')[0];
-    $tomorrow = $french->parseText('La deadline est demain', '2012-08-10 12:00')[0];
-    $yesterday = $french->parseText('La deadline était hier', '2012-08-10 12:00')[0];
-    $previousDay = $french->parseText('La deadline était la veille', '2012-08-10 12:00')[0];
-    $morning = $french->parseText('La deadline est ce matin', '2012-08-10 12:00')[0];
-    $afternoon = $french->parseText('La deadline est cet après-midi', '2012-08-10 12:00')[0];
-    $shortAfternoon = $french->parseText('La deadline est cet aprem', '2012-08-10 12:00')[0];
-    $evening = $french->parseText('La deadline est ce soir', '2012-08-10 12:00')[0];
-    $todayAtFive = $french->parseText("La deadline est aujourd'hui 17:00", '2012-08-10 12:00')[0];
-    $tomorrowMorning = $french->parseText('La deadline est demain matin 11h', '2012-08-10 12:00')[0];
-    $noon = $french->parseText('a midi', '2012-08-10 09:00')[0];
-    $midnight = $french->parseText('à minuit', '2012-08-10 09:00')[0];
+    $now = $french->parse('La deadline est maintenant', '2012-08-10 08:09:10.011')[0];
+    $today = $french->parse("La deadline est aujourd'hui", '2012-08-10 12:00')[0];
+    $tomorrow = $french->parse('La deadline est demain', '2012-08-10 12:00')[0];
+    $yesterday = $french->parse('La deadline était hier', '2012-08-10 12:00')[0];
+    $previousDay = $french->parse('La deadline était la veille', '2012-08-10 12:00')[0];
+    $morning = $french->parse('La deadline est ce matin', '2012-08-10 12:00')[0];
+    $afternoon = $french->parse('La deadline est cet après-midi', '2012-08-10 12:00')[0];
+    $shortAfternoon = $french->parse('La deadline est cet aprem', '2012-08-10 12:00')[0];
+    $evening = $french->parse('La deadline est ce soir', '2012-08-10 12:00')[0];
+    $todayAtFive = $french->parse("La deadline est aujourd'hui 17:00", '2012-08-10 12:00')[0];
+    $tomorrowMorning = $french->parse('La deadline est demain matin 11h', '2012-08-10 12:00')[0];
+    $noon = $french->parse('a midi', '2012-08-10 09:00')[0];
+    $midnight = $french->parse('à minuit', '2012-08-10 09:00')[0];
 
     expect($now->index)->toBe(16)
         ->and($now->text)->toBe('maintenant')
@@ -35,21 +35,21 @@ it('parses french casual dates and times', function () {
         ->and($today->start->get('year'))->toBe(2012)
         ->and($today->start->get('month'))->toBe(8)
         ->and($today->start->get('day'))->toBe(10)
-        ->and($french->parseDateText("La deadline est aujourd'hui", '2012-08-10 12:00')?->toDateTimeString())
+        ->and($french->date("La deadline est aujourd'hui", '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
         ->and($tomorrow->index)->toBe(16)
         ->and($tomorrow->text)->toBe('demain')
         ->and($tomorrow->start->get('year'))->toBe(2012)
         ->and($tomorrow->start->get('month'))->toBe(8)
         ->and($tomorrow->start->get('day'))->toBe(11)
-        ->and($french->parseDateText('La deadline est demain', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($french->date('La deadline est demain', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-11 12:00:00')
         ->and($yesterday->index)->toBe(18)
         ->and($yesterday->text)->toBe('hier')
         ->and($yesterday->start->get('year'))->toBe(2012)
         ->and($yesterday->start->get('month'))->toBe(8)
         ->and($yesterday->start->get('day'))->toBe(9)
-        ->and($french->parseDateText('La deadline était hier', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($french->date('La deadline était hier', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-09 12:00:00')
         ->and($previousDay->index)->toBe(18)
         ->and($previousDay->text)->toBe('la veille')
@@ -57,7 +57,7 @@ it('parses french casual dates and times', function () {
         ->and($previousDay->start->get('month'))->toBe(8)
         ->and($previousDay->start->get('day'))->toBe(9)
         ->and($previousDay->start->get('hour'))->toBe(0)
-        ->and($french->parseDateText('La deadline était la veille', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($french->date('La deadline était la veille', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-09 00:00:00')
         ->and($morning->index)->toBe(16)
         ->and($morning->text)->toBe('ce matin')
@@ -66,7 +66,7 @@ it('parses french casual dates and times', function () {
         ->and($morning->start->get('day'))->toBe(10)
         ->and($morning->start->get('hour'))->toBe(8)
         ->and($morning->start->get('meridiem'))->toBe(Meridiem::AM)
-        ->and($french->parseDateText('La deadline est ce matin', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($french->date('La deadline est ce matin', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-10 08:00:00')
         ->and($afternoon->index)->toBe(16)
         ->and($afternoon->text)->toBe('cet après-midi')
@@ -75,13 +75,13 @@ it('parses french casual dates and times', function () {
         ->and($afternoon->start->get('day'))->toBe(10)
         ->and($afternoon->start->get('hour'))->toBe(14)
         ->and($afternoon->start->get('meridiem'))->toBe(Meridiem::PM)
-        ->and($french->parseDateText('La deadline est cet après-midi', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($french->date('La deadline est cet après-midi', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-10 14:00:00')
         ->and($shortAfternoon->index)->toBe(16)
         ->and($shortAfternoon->text)->toBe('cet aprem')
         ->and($shortAfternoon->start->get('hour'))->toBe(14)
         ->and($shortAfternoon->start->get('meridiem'))->toBe(Meridiem::PM)
-        ->and($french->parseDateText('La deadline est cet aprem', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($french->date('La deadline est cet aprem', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-10 14:00:00')
         ->and($evening->index)->toBe(16)
         ->and($evening->text)->toBe('ce soir')
@@ -90,17 +90,17 @@ it('parses french casual dates and times', function () {
         ->and($evening->start->get('day'))->toBe(10)
         ->and($evening->start->get('hour'))->toBe(18)
         ->and($evening->start->get('meridiem'))->toBe(Meridiem::PM)
-        ->and($french->parseDateText('La deadline est ce soir', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($french->date('La deadline est ce soir', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-10 18:00:00')
-        ->and($french->parseDateText('soir', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($french->date('soir', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-10 18:00:00')
-        ->and($french->parseDateText('a midi', '2012-08-10 09:00')?->toDateTimeString())
+        ->and($french->date('a midi', '2012-08-10 09:00')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
         ->and($noon->text)->toBe('a midi')
         ->and($noon->start->isCertain('hour'))->toBeTrue()
         ->and($noon->start->tags())->toContain('parser/FRCasualTimeParser')
         ->and($noon->start->isCertain('day'))->toBeFalse()
-        ->and($french->parseDateText('à minuit', '2012-08-10 09:00')?->toDateTimeString())
+        ->and($french->date('à minuit', '2012-08-10 09:00')?->toDateTimeString())
         ->toBe('2012-08-10 00:00:00')
         ->and($midnight->text)->toBe('à minuit')
         ->and($midnight->start->isCertain('hour'))->toBeTrue()
@@ -111,7 +111,7 @@ it('parses french casual dates and times', function () {
         ->and($todayAtFive->start->get('month'))->toBe(8)
         ->and($todayAtFive->start->get('day'))->toBe(10)
         ->and($todayAtFive->start->get('hour'))->toBe(17)
-        ->and($french->parseDateText("La deadline est aujourd'hui 17:00", '2012-08-10 12:00')?->toDateTimeString())
+        ->and($french->date("La deadline est aujourd'hui 17:00", '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-10 17:00:00')
         ->and($tomorrowMorning->index)->toBe(16)
         ->and($tomorrowMorning->text)->toBe('demain matin 11h')
@@ -119,6 +119,6 @@ it('parses french casual dates and times', function () {
         ->and($tomorrowMorning->start->get('month'))->toBe(8)
         ->and($tomorrowMorning->start->get('day'))->toBe(11)
         ->and($tomorrowMorning->start->get('hour'))->toBe(11)
-        ->and($french->parseDateText('La deadline est demain matin 11h', '2012-08-10 12:00')?->toDateTimeString())
+        ->and($french->date('La deadline est demain matin 11h', '2012-08-10 12:00')?->toDateTimeString())
         ->toBe('2012-08-11 11:00:00');
 });

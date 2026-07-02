@@ -4,14 +4,14 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses spanish time expressions', function () {
     $spanish = Chrono::es();
-    $single = $spanish->parseText('Estaremos a las 6.13 AM', '2012-08-10 00:00')[0];
-    $range = $spanish->parseText(' de 6:30pm a 11:00pm ', '2012-08-10 00:00')[0];
-    $alRange = $spanish->parseText('del 6:30pm al 11:00pm', '2012-08-10 00:00')[0];
-    $implied = $spanish->parseText('de 1pm a 3', '2012-08-10 00:00')[0];
-    $dotRange = $spanish->parseText('8:10 - 12.32', '2012-08-10 00:00')[0];
-    $milliseconds = $spanish->parseText('8:10:30.123', '2012-08-10 00:00')[0];
-    $dateTime = $spanish->parseText('Algo pasó el 10 de Agosto de 2012 10:12:59 pm', '2012-08-10')[0];
-    $lasTwelve = $spanish->parseText('las 12', '2012-08-10 00:00')[0];
+    $single = $spanish->parse('Estaremos a las 6.13 AM', '2012-08-10 00:00')[0];
+    $range = $spanish->parse(' de 6:30pm a 11:00pm ', '2012-08-10 00:00')[0];
+    $alRange = $spanish->parse('del 6:30pm al 11:00pm', '2012-08-10 00:00')[0];
+    $implied = $spanish->parse('de 1pm a 3', '2012-08-10 00:00')[0];
+    $dotRange = $spanish->parse('8:10 - 12.32', '2012-08-10 00:00')[0];
+    $milliseconds = $spanish->parse('8:10:30.123', '2012-08-10 00:00')[0];
+    $dateTime = $spanish->parse('Algo pasó el 10 de Agosto de 2012 10:12:59 pm', '2012-08-10')[0];
+    $lasTwelve = $spanish->parse('las 12', '2012-08-10 00:00')[0];
 
     expect($single->index)->toBe(12)
         ->and($single->text)->toBe('las 6.13 AM')
@@ -61,13 +61,13 @@ it('parses spanish time expressions', function () {
         ->and($dateTime->start->isCertain('millisecond'))->toBeFalse()
         ->and($lasTwelve->text)->toBe('las 12')
         ->and($lasTwelve->start->get('hour'))->toBe(12)
-        ->and($spanish->parseText('6pm', '2012-08-10 00:00')[0]->text)->toBe('6pm')
-        ->and($spanish->parseDateText('6pm', '2012-08-10 00:00')?->toDateTimeString())->toBe('2012-08-10 18:00:00')
-        ->and($spanish->parseText('6 pm', '2012-08-10 00:00')[0]->text)->toBe('6 pm')
-        ->and($spanish->parseDateText('7-10pm', '2012-08-10 00:00')?->toDateTimeString())->toBe('2012-08-10 19:00:00')
-        ->and($spanish->parseText('7-10pm', '2012-08-10 00:00')[0]->end?->date()->toDateTimeString())->toBe('2012-08-10 22:00:00')
-        ->and($spanish->parseText('11.1pm', '2012-08-10 00:00')[0]->text)->toBe('11.1pm')
-        ->and($spanish->parseDateText('11.1pm', '2012-08-10 00:00')?->toDateTimeString())->toBe('2012-08-10 23:01:00')
-        ->and($spanish->parseDateText('Algo pasó el 10 de Agosto de 2012 10:12:59 pm', '2012-08-10')?->toDateTimeString())
+        ->and($spanish->parse('6pm', '2012-08-10 00:00')[0]->text)->toBe('6pm')
+        ->and($spanish->date('6pm', '2012-08-10 00:00')?->toDateTimeString())->toBe('2012-08-10 18:00:00')
+        ->and($spanish->parse('6 pm', '2012-08-10 00:00')[0]->text)->toBe('6 pm')
+        ->and($spanish->date('7-10pm', '2012-08-10 00:00')?->toDateTimeString())->toBe('2012-08-10 19:00:00')
+        ->and($spanish->parse('7-10pm', '2012-08-10 00:00')[0]->end?->date()->toDateTimeString())->toBe('2012-08-10 22:00:00')
+        ->and($spanish->parse('11.1pm', '2012-08-10 00:00')[0]->text)->toBe('11.1pm')
+        ->and($spanish->date('11.1pm', '2012-08-10 00:00')?->toDateTimeString())->toBe('2012-08-10 23:01:00')
+        ->and($spanish->date('Algo pasó el 10 de Agosto de 2012 10:12:59 pm', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 22:12:59');
 });

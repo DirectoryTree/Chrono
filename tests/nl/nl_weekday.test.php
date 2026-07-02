@@ -5,32 +5,32 @@ use DirectoryTree\Chrono\Chrono;
 it('parses dutch weekday references', function () {
     $dutch = Chrono::nl();
 
-    $weekday = $dutch->parseText('Afspraak op woensdag', '2012-08-10')[0];
-    $monday = $dutch->parseText('maandag', '2012-08-09')[0];
-    $forwardMonday = $dutch->parseText('maandag', '2012-08-09', ['forwardDate' => true])[0];
-    $thursday = $dutch->parseText('donderdag', '2012-08-09')[0];
-    $sunday = $dutch->parseText('zondag', '2012-08-09')[0];
-    $lastFriday = $dutch->parseText('De deadline is vorige vrijdag...', '2012-08-09')[0];
-    $lastFridayFromSunday = $dutch->parseText('De deadline is vorige vrijdag...', '2012-08-12')[0];
-    $nextFriday = $dutch->parseText('Laten we een meeting hebben op volgende week vrijdag', '2015-04-16')[0];
-    $nextTuesday = $dutch->parseText('Ik plan een vrije dag op volgende week dinsdag', '2015-04-18')[0];
-    $weekdayTime = $dutch->parseText('Laten we op dinsdag ochtend afspreken', '2015-04-18')[0];
-    $monthOverlap = $dutch->parseText('zondag, 7 december 2014', '2012-08-09')[0];
-    $slashOverlap = $dutch->parseText('zondag 7/12/2014', '2012-08-09')[0];
-    $forwardRange = $dutch->parseText('deze vrijdag tot deze maandag', '2016-08-04', ['forwardDate' => true])[0];
+    $weekday = $dutch->parse('Afspraak op woensdag', '2012-08-10')[0];
+    $monday = $dutch->parse('maandag', '2012-08-09')[0];
+    $forwardMonday = $dutch->parse('maandag', '2012-08-09', ['forwardDate' => true])[0];
+    $thursday = $dutch->parse('donderdag', '2012-08-09')[0];
+    $sunday = $dutch->parse('zondag', '2012-08-09')[0];
+    $lastFriday = $dutch->parse('De deadline is vorige vrijdag...', '2012-08-09')[0];
+    $lastFridayFromSunday = $dutch->parse('De deadline is vorige vrijdag...', '2012-08-12')[0];
+    $nextFriday = $dutch->parse('Laten we een meeting hebben op volgende week vrijdag', '2015-04-16')[0];
+    $nextTuesday = $dutch->parse('Ik plan een vrije dag op volgende week dinsdag', '2015-04-18')[0];
+    $weekdayTime = $dutch->parse('Laten we op dinsdag ochtend afspreken', '2015-04-18')[0];
+    $monthOverlap = $dutch->parse('zondag, 7 december 2014', '2012-08-09')[0];
+    $slashOverlap = $dutch->parse('zondag 7/12/2014', '2012-08-09')[0];
+    $forwardRange = $dutch->parse('deze vrijdag tot deze maandag', '2016-08-04', ['forwardDate' => true])[0];
 
     expect($weekday->text)
         ->toBe('op woensdag')
         ->and($weekday->start->tags())->toContain('parser/NLWeekdayParser')
-        ->and($dutch->parseDateText('Afspraak op woensdag', '2012-08-10')?->toDateTimeString())
+        ->and($dutch->date('Afspraak op woensdag', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-08 12:00:00')
-        ->and($dutch->parseDateText('Afspraak volgende maandag', '2012-08-10')?->toDateTimeString())
+        ->and($dutch->date('Afspraak volgende maandag', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-13 12:00:00')
-        ->and($dutch->parseDateText('Afspraak vorige maandag', '2012-08-10')?->toDateTimeString())
+        ->and($dutch->date('Afspraak vorige maandag', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-06 12:00:00')
-        ->and($dutch->parseDateText('Afspraak deze vrijdag', '2012-08-10')?->toDateTimeString())
+        ->and($dutch->date('Afspraak deze vrijdag', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and($dutch->parseDateText('Afspraak op zo.', '2012-08-10')?->toDateTimeString())
+        ->and($dutch->date('Afspraak op zo.', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-12 12:00:00')
         ->and($monday->index)->toBe(0)
         ->and($monday->text)->toBe('maandag')

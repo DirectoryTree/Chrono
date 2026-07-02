@@ -3,9 +3,9 @@
 use DirectoryTree\Chrono\Chrono;
 
 it('parses within and in relative expressions', function () {
-    expect(Chrono::parseDate('we have to make something in five days.', '2026-06-23 09:15:30')?->toDateTimeString())
+    expect(Chrono::date('we have to make something in five days.', '2026-06-23 09:15:30')?->toDateTimeString())
         ->toBe('2026-06-28 09:15:30')
-        ->and(Chrono::parseDate('within half an hour', '2026-06-23 09:15:30')?->toDateTimeString())
+        ->and(Chrono::date('within half an hour', '2026-06-23 09:15:30')?->toDateTimeString())
         ->toBe('2026-06-23 09:45:30');
 });
 
@@ -165,10 +165,10 @@ it('marks upstream within time unit certainty', function () {
 });
 
 it('parses fuzzy within amount phrases', function () {
-    expect(Chrono::parseDate('within a few months', '2012-08-10 12:49:00')?->toDateTimeString())
+    expect(Chrono::date('within a few months', '2012-08-10 12:49:00')?->toDateTimeString())
         ->toBe('2012-11-10 12:49:00')
-        ->and(Chrono::parseDate('In several hours', '2012-08-10 12:49:00')?->toDateTimeString())
+        ->and(Chrono::date('In several hours', '2012-08-10 12:49:00')?->toDateTimeString())
         ->toBe('2012-08-10 19:49:00')
-        ->and(Chrono::parseDate('In a couple of days', '2012-08-10 12:49:00')?->toDateTimeString())
+        ->and(Chrono::date('In a couple of days', '2012-08-10 12:49:00')?->toDateTimeString())
         ->toBe('2012-08-12 12:49:00');
 });

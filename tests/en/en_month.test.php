@@ -13,30 +13,30 @@ it('parses month name dates and ranges', function () {
 it('parses month name dates with separators', function () {
     expect(Chrono::parse('August-10, 2012', '2012-08-10')[0]->text)
         ->toBe('August-10, 2012')
-        ->and(Chrono::parseDate('August/10/2012', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::date('August/10/2012', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
         ->and(Chrono::parse('10-August 2012', '2012-08-08')[0]->text)
         ->toBe('10-August 2012')
-        ->and(Chrono::parseDate('10-August 2012', '2012-08-08')?->toDateTimeString())
+        ->and(Chrono::date('10-August 2012', '2012-08-08')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and(Chrono::parseDate('10-August-2012', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::date('10-August-2012', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
         ->and(Chrono::parse('10/August 2012', '2012-08-08')[0]->text)
         ->toBe('10/August 2012')
-        ->and(Chrono::parseDate('10/August 2012', '2012-08-08')?->toDateTimeString())
+        ->and(Chrono::date('10/August 2012', '2012-08-08')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and(Chrono::parseDate('10/August/2012', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::date('10/August/2012', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00');
 });
 
 it('parses month name dates with ordinal words', function () {
     expect(Chrono::parse('May eighth, 2010', '2012-08-10')[0]->text)
         ->toBe('May eighth, 2010')
-        ->and(Chrono::parseDate('May eighth, 2010', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::date('May eighth, 2010', '2012-08-10')?->toDateTimeString())
         ->toBe('2010-05-08 12:00:00')
-        ->and(Chrono::parseDate('May twenty-fourth', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::date('May twenty-fourth', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-05-24 12:00:00')
-        ->and(Chrono::parseDate('Twenty-fourth of May', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::date('Twenty-fourth of May', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-05-24 12:00:00');
 });
 
@@ -86,7 +86,7 @@ it('parses month only expressions', function () {
         ->and($jan->start->date()->toDateTimeString())->toBe('2021-01-01 12:00:00')
         ->and($may->text)->toBe('May')
         ->and($may->start->date()->toDateTimeString())->toBe('2021-05-01 12:00:00')
-        ->and(Chrono::parseDate('I am arriving sometime in August, 2012, probably.', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::date('I am arriving sometime in August, 2012, probably.', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-01 12:00:00');
 });
 
@@ -122,7 +122,7 @@ it('parses month year expressions with alternate separators', function () {
         ->and($twoDigitYearContext->text)->toBe('Aug 96')
         ->and($twoDigitYearContext->index)->toBe(3)
         ->and($twoDigitYearContext->start->date()->toDateTimeString())->toBe('1996-08-01 12:00:00')
-        ->and(Chrono::parseDate('August 10', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::date('August 10', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
         ->and($statement->text)->toBe('Dec. 2021')
         ->and($statement->start->get('year'))->toBe(2021)
@@ -170,9 +170,9 @@ it('parses month only ranges', function () {
 });
 
 it('uses forward date option for month only expressions', function () {
-    expect(Chrono::parseDate('in December', '2023-04-09', ['forwardDate' => true])?->toDateTimeString())
+    expect(Chrono::date('in December', '2023-04-09', ['forwardDate' => true])?->toDateTimeString())
         ->toBe('2023-12-01 12:00:00')
-        ->and(Chrono::parseDate('in May', '2023-04-09', ['forwardDate' => true])?->toDateTimeString())
+        ->and(Chrono::date('in May', '2023-04-09', ['forwardDate' => true])?->toDateTimeString())
         ->toBe('2023-05-01 12:00:00');
 });
 

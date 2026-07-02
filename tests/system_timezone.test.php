@@ -57,13 +57,13 @@ it('exposes timezone-adjusted reference dates like upstream references', functio
 it('uses dutch relative reference timezones like upstream', function () {
     $dutch = Chrono::nl();
     $reference = 'Sun Nov 29 2020 13:24:13 GMT+0900 (Japan Standard Time)';
-    $now = $dutch->parseText('nu', $reference)[0];
-    $within = $dutch->parseText('binnen 10 minuten', $reference)[0];
-    $jst = $dutch->parseText('morgen om 17 uur', [
+    $now = $dutch->parse('nu', $reference)[0];
+    $within = $dutch->parse('binnen 10 minuten', $reference)[0];
+    $jst = $dutch->parse('morgen om 17 uur', [
         'instant' => $reference,
         'timezone' => 'JST',
     ])[0];
-    $pdt = $dutch->parseText('morgen om 17 uur', [
+    $pdt = $dutch->parse('morgen om 17 uur', [
         'instant' => $reference,
         'timezone' => -420,
     ])[0];
@@ -130,41 +130,41 @@ it('keeps relative instants stable across timezone reference settings like upstr
 });
 
 it('uses upstream reference timezone defaults and overrides', function () {
-    expect(Chrono::parseDate('Friday at 4pm', '2021-06-09 07:00:00')?->format('Y-m-d H:i:s P'))
+    expect(Chrono::date('Friday at 4pm', '2021-06-09 07:00:00')?->format('Y-m-d H:i:s P'))
         ->toBe('2021-06-11 16:00:00 +00:00')
-        ->and(Chrono::parseDate('Friday at 4pm', ['instant' => '2021-06-09 07:00:00'])?->format('Y-m-d H:i:s P'))
+        ->and(Chrono::date('Friday at 4pm', ['instant' => '2021-06-09 07:00:00'])?->format('Y-m-d H:i:s P'))
         ->toBe('2021-06-11 16:00:00 +00:00')
-        ->and(Chrono::parseDate('Friday at 4pm', ['instant' => '2021-06-09 07:00:00', 'timezone' => null])?->format('Y-m-d H:i:s P'))
+        ->and(Chrono::date('Friday at 4pm', ['instant' => '2021-06-09 07:00:00', 'timezone' => null])?->format('Y-m-d H:i:s P'))
         ->toBe('2021-06-11 16:00:00 +00:00')
-        ->and(Chrono::parseDate('Friday at 4pm', ['instant' => '2021-06-09 07:00:00', 'timezone' => ''])?->format('Y-m-d H:i:s P'))
+        ->and(Chrono::date('Friday at 4pm', ['instant' => '2021-06-09 07:00:00', 'timezone' => ''])?->format('Y-m-d H:i:s P'))
         ->toBe('2021-06-11 16:00:00 +00:00');
 
     $jstInstant = 'Sun Jun 06 2021 19:00:00 GMT+0900 (JST)';
 
-    expect(Chrono::parseDate('At 4pm tomorrow', ['instant' => $jstInstant, 'timezone' => 'BST'])?->format('Y-m-d H:i:s P'))
+    expect(Chrono::date('At 4pm tomorrow', ['instant' => $jstInstant, 'timezone' => 'BST'])?->format('Y-m-d H:i:s P'))
         ->toBe('2021-06-07 16:00:00 +01:00')
-        ->and(Chrono::parseDate('At 4pm tomorrow', ['instant' => $jstInstant, 'timezone' => 'JST'])?->format('Y-m-d H:i:s P'))
+        ->and(Chrono::date('At 4pm tomorrow', ['instant' => $jstInstant, 'timezone' => 'JST'])?->format('Y-m-d H:i:s P'))
         ->toBe('2021-06-07 16:00:00 +09:00')
-        ->and(Chrono::parseDate('At 4pm tomorrow', ['instant' => $jstInstant, 'timezone' => 'BBB'], [
+        ->and(Chrono::date('At 4pm tomorrow', ['instant' => $jstInstant, 'timezone' => 'BBB'], [
             'timezones' => ['BBB' => 60],
         ])?->format('Y-m-d H:i:s P'))
         ->toBe('2021-06-07 16:00:00 +01:00');
 });
 
 it('uses reference timezone for written date times without embedded offsets like upstream', function () {
-    expect(Chrono::parseDate('Sun Jun 06 2021 19:00:00', ['timezone' => 'JST'])?->format('Y-m-d H:i:s P'))
+    expect(Chrono::date('Sun Jun 06 2021 19:00:00', ['timezone' => 'JST'])?->format('Y-m-d H:i:s P'))
         ->toBe('2021-06-06 19:00:00 +09:00')
-        ->and(Chrono::parseDate('Sun Jun 06 2021 11:00:00', ['timezone' => 'BST'])?->format('Y-m-d H:i:s P'))
+        ->and(Chrono::date('Sun Jun 06 2021 11:00:00', ['timezone' => 'BST'])?->format('Y-m-d H:i:s P'))
         ->toBe('2021-06-06 11:00:00 +01:00')
-        ->and(Chrono::parseDate('Sun Jun 06 2021 11:00:00', ['timezone' => 60])?->format('Y-m-d H:i:s P'))
+        ->and(Chrono::date('Sun Jun 06 2021 11:00:00', ['timezone' => 60])?->format('Y-m-d H:i:s P'))
         ->toBe('2021-06-06 11:00:00 +01:00');
 });
 
 it('preserves precise now instants with reference timezone overrides', function () {
     $instant = 'Sat Mar 13 2021 14:22:14 GMT+0900 (Japan Standard Time)';
 
-    $jst = Chrono::parseDate('now', $instant);
-    $shifted = Chrono::parseDate('now', ['instant' => $instant, 'timezone' => -300]);
+    $jst = Chrono::date('now', $instant);
+    $shifted = Chrono::date('now', ['instant' => $instant, 'timezone' => -300]);
 
     expect($jst?->format('Y-m-d H:i:s P'))->toBe('2021-03-13 14:22:14 +09:00')
         ->and($shifted?->format('Y-m-d H:i:s P'))->toBe('2021-03-13 00:22:14 -05:00')
@@ -175,15 +175,15 @@ it('preserves explicit timezone offsets over reference timezone overrides', func
     $text = 'Sat Mar 13 2021 14:22:14 GMT+0900';
     $reference = '2026-06-23 09:00:00';
 
-    expect(Chrono::parseDate($text, $reference)?->format('Y-m-d H:i:s P'))
+    expect(Chrono::date($text, $reference)?->format('Y-m-d H:i:s P'))
         ->toBe('2021-03-13 14:22:14 +09:00')
-        ->and(Chrono::parseDate($text, ['instant' => $reference])?->format('Y-m-d H:i:s P'))
+        ->and(Chrono::date($text, ['instant' => $reference])?->format('Y-m-d H:i:s P'))
         ->toBe('2021-03-13 14:22:14 +09:00')
-        ->and(Chrono::parseDate($text, ['instant' => $reference, 'timezone' => 540])?->format('Y-m-d H:i:s P'))
+        ->and(Chrono::date($text, ['instant' => $reference, 'timezone' => 540])?->format('Y-m-d H:i:s P'))
         ->toBe('2021-03-13 14:22:14 +09:00')
-        ->and(Chrono::parseDate($text, ['instant' => $reference, 'timezone' => 'JST'])?->format('Y-m-d H:i:s P'))
+        ->and(Chrono::date($text, ['instant' => $reference, 'timezone' => 'JST'])?->format('Y-m-d H:i:s P'))
         ->toBe('2021-03-13 14:22:14 +09:00')
-        ->and(Chrono::parseDate($text, ['instant' => $reference, 'timezone' => -300])?->format('Y-m-d H:i:s P'))
+        ->and(Chrono::date($text, ['instant' => $reference, 'timezone' => -300])?->format('Y-m-d H:i:s P'))
         ->toBe('2021-03-13 14:22:14 +09:00');
 });
 
