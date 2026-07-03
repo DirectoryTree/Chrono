@@ -141,7 +141,7 @@ class ParsedComponents
     /**
      * Get a known or implied component value.
      */
-    public function get(string $component): int|string|Meridiem|null
+    public function get(string $component): Meridiem|int|string|null
     {
         return match ($component) {
             'year' => $this->componentValue('year'),
