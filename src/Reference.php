@@ -130,17 +130,6 @@ readonly class Reference
      */
     protected static function timezoneName(?int $offset): ?string
     {
-        return $offset === null ? null : self::timezoneNameFromOffset($offset);
-    }
-
-    /**
-     * Resolve the timezone offset.
-     */
-    protected static function timezoneNameFromOffset(int $offset): string
-    {
-        $sign = $offset < 0 ? '-' : '+';
-        $offset = abs($offset);
-
-        return sprintf('%s%02d:%02d', $sign, intdiv($offset, 60), $offset % 60);
+        return $offset === null ? null : Timezone::nameFromOffset($offset);
     }
 }

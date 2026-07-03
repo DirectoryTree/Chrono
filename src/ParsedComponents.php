@@ -428,7 +428,7 @@ class ParsedComponents
             'minute' => $this->date->minute($value),
             'second' => $this->date->second($value),
             'millisecond' => $this->date->millisecond($value),
-            'timezoneOffset' => $this->date->shiftTimezone($this->timezoneNameFromOffset($value)),
+            'timezoneOffset' => $this->date->shiftTimezone(Timezone::nameFromOffset($value)),
             default => $this->date,
         };
     }
@@ -483,33 +483,10 @@ class ParsedComponents
     }
 
     /**
-     * Resolve the timezone offset.
-     */
-    protected function timezoneNameFromOffset(int $offset): string
-    {
-        $sign = $offset < 0 ? '-' : '+';
-        $offset = abs($offset);
-
-        return sprintf('%s%02d:%02d', $sign, intdiv($offset, 60), $offset % 60);
-    }
-
-    /**
      * Resolve the month value.
      */
     protected function daysInMonth(int $year, int $month): int
     {
-        if ($month === 2) {
-            return $this->isLeapYear($year) ? 29 : 28;
-        }
-
-        return in_array($month, [4, 6, 9, 11], true) ? 30 : 31;
-    }
-
-    /**
-     * Determine whether the year is a leap year.
-     */
-    protected function isLeapYear(int $year): bool
-    {
-        return $year % 4 === 0 && ($year % 100 !== 0 || $year % 400 === 0);
+        return CarbonImmutable::create($year, $month)->daysInMonth;
     }
 }
