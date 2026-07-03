@@ -3,15 +3,15 @@
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use DirectoryTree\Chrono\Chrono;
-use DirectoryTree\Chrono\Month;
+use DirectoryTree\Chrono\Enums\Month;
+use DirectoryTree\Chrono\Enums\Weekday;
 use DirectoryTree\Chrono\Reference;
 use DirectoryTree\Chrono\Timezone;
-use DirectoryTree\Chrono\Weekday;
 
 it('gets timezone DST boundary dates like upstream helpers', function () {
-    $secondSunday = Timezone::getNthWeekdayOfMonth(2022, Month::MARCH, Weekday::SUNDAY, 2, 2);
-    $firstSunday = Timezone::getNthWeekdayOfMonth(2022, Month::NOVEMBER, Weekday::SUNDAY, 1, 2);
-    $lastSunday = Timezone::getLastWeekdayOfMonth(2022, Month::OCTOBER, Weekday::SUNDAY, 3);
+    $secondSunday = Timezone::getNthWeekdayOfMonth(2022, Month::March, Weekday::Sunday, 2, 2);
+    $firstSunday = Timezone::getNthWeekdayOfMonth(2022, Month::November, Weekday::Sunday, 1, 2);
+    $lastSunday = Timezone::getLastWeekdayOfMonth(2022, Month::October, Weekday::Sunday, 3);
     $lastFriday = Timezone::getLastWeekdayOfMonth(2024, 2, 5, 9);
 
     expect($secondSunday->toDateTimeString())->toBe('2022-03-13 02:00:00')

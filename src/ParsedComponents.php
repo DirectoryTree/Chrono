@@ -4,6 +4,7 @@ namespace DirectoryTree\Chrono;
 
 use Carbon\CarbonImmutable;
 use DirectoryTree\Chrono\Calculation\Duration;
+use DirectoryTree\Chrono\Enums\Meridiem;
 
 class ParsedComponents
 {

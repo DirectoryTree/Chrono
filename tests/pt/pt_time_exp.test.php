@@ -1,7 +1,7 @@
 <?php
 
 use DirectoryTree\Chrono\Chrono;
-use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\Enums\Meridiem;
 
 it('parses portuguese time expressions', function () {
     $portuguese = Chrono::pt();

@@ -1,7 +1,7 @@
 <?php
 
 use DirectoryTree\Chrono\Chrono;
-use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\Enums\Meridiem;
 
 it('parses german casual dates and times', function () {
     $german = Chrono::de();

@@ -3,13 +3,13 @@
 use Carbon\CarbonImmutable;
 use DirectoryTree\Chrono\CasualReferences;
 use DirectoryTree\Chrono\Chrono;
+use DirectoryTree\Chrono\Enums\Meridiem;
+use DirectoryTree\Chrono\Enums\Weekday;
 use DirectoryTree\Chrono\Locales\En\Refiners\EnExtractYearSuffixRefiner;
-use DirectoryTree\Chrono\Meridiem;
 use DirectoryTree\Chrono\Options;
 use DirectoryTree\Chrono\ParsedComponents;
 use DirectoryTree\Chrono\ParsedResult;
 use DirectoryTree\Chrono\Reference;
-use DirectoryTree\Chrono\Weekday;
 
 it('extracts english year suffixes from unknown-year dates', function () {
     $refiner = new EnExtractYearSuffixRefiner;
@@ -130,7 +130,7 @@ it('parses upstream casual standalone expressions', function () {
         ->and($tomorrowAfter->text)->toBe('tomorrow after 4pm')
         ->and($tomorrowAfter->start->date()->toDateTimeString())->toBe('2012-01-02 16:00:00')
         ->and($thursday->text)->toBe('thurs')
-        ->and($thursday->start->get('weekday'))->toBe(Weekday::THURSDAY->value)
+        ->and($thursday->start->get('weekday'))->toBe(Weekday::Thursday->value)
         ->and($thisEvening->text)->toBe('this evening')
         ->and($thisEvening->start->date()->toDateTimeString())->toBe('2016-10-01 20:00:00')
         ->and($yesterdayAfternoon->text)->toBe('yesterday afternoon')
@@ -224,7 +224,7 @@ it('merges weekdays followed by casual times', function () {
         ->and($prefixed->index)->toBe(10)
         ->and($prefixed->text)->toBe('on Tuesday morning')
         ->and($prefixed->start->date()->toDateTimeString())->toBe('2015-04-21 06:00:00')
-        ->and($prefixed->start->get('weekday'))->toBe(Weekday::TUESDAY->value);
+        ->and($prefixed->start->get('weekday'))->toBe(Weekday::Tuesday->value);
 });
 
 it('parses upstream later and from-now relative duration variants with exact text', function () {

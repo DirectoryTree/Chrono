@@ -2,15 +2,15 @@
 
 use Carbon\CarbonImmutable;
 use DirectoryTree\Chrono\Chrono;
+use DirectoryTree\Chrono\Enums\Month;
+use DirectoryTree\Chrono\Enums\Weekday;
 use DirectoryTree\Chrono\Locales\En\Parsers\EnTimeUnitCasualRelativeFormatParser;
-use DirectoryTree\Chrono\Month;
 use DirectoryTree\Chrono\Options;
 use DirectoryTree\Chrono\ParsedComponents;
 use DirectoryTree\Chrono\ParsedResult;
 use DirectoryTree\Chrono\Reference;
 use DirectoryTree\Chrono\Refiners\ExtractTimezoneAbbrRefiner;
 use DirectoryTree\Chrono\Timezone;
-use DirectoryTree\Chrono\Weekday;
 
 it('parses iso datetimes with timezone suffixes', function () {
     $offset = Chrono::parse('1994-11-05T08:15:30-05:30')[0];
@@ -407,8 +407,8 @@ it('uses timezone-aware reference arrays', function () {
             'XYZ' => [
                 'timezoneOffsetDuringDst' => -120,
                 'timezoneOffsetNonDst' => -180,
-                'dstStart' => fn (int $year): CarbonImmutable => Timezone::getLastWeekdayOfMonth($year, Month::MARCH, Weekday::SUNDAY, 2),
-                'dstEnd' => fn (int $year): CarbonImmutable => Timezone::getLastWeekdayOfMonth($year, Month::OCTOBER, Weekday::SUNDAY, 3),
+                'dstStart' => fn (int $year): CarbonImmutable => Timezone::getLastWeekdayOfMonth($year, Month::March, Weekday::Sunday, 2),
+                'dstEnd' => fn (int $year): CarbonImmutable => Timezone::getLastWeekdayOfMonth($year, Month::October, Weekday::Sunday, 3),
             ],
         ],
     ]);

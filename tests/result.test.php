@@ -3,7 +3,7 @@
 use Carbon\CarbonImmutable;
 use DirectoryTree\Chrono\Chrono;
 use DirectoryTree\Chrono\Dates;
-use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\Enums\Meridiem;
 use DirectoryTree\Chrono\Options;
 use DirectoryTree\Chrono\ParsedComponents;
 use DirectoryTree\Chrono\ParsedResult;

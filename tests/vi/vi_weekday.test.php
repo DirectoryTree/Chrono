@@ -1,8 +1,8 @@
 <?php
 
 use DirectoryTree\Chrono\Chrono;
-use DirectoryTree\Chrono\Meridiem;
-use DirectoryTree\Chrono\Weekday;
+use DirectoryTree\Chrono\Enums\Meridiem;
+use DirectoryTree\Chrono\Enums\Weekday;
 
 it('parses vietnamese weekday time and relative expressions', function () {
     $vietnamese = Chrono::vi();
@@ -66,25 +66,25 @@ it('parses vietnamese weekday time and relative expressions', function () {
         ->and($abbreviatedWeekday->index)->toBe(4)
         ->and($abbreviatedWeekday->text)->toBe('t2')
         ->and($abbreviatedWeekday->start->get('weekday'))->toBe(1)
-        ->and($tuesday->start->get('weekday'))->toBe(Weekday::TUESDAY->value)
-        ->and($weekday->start->get('weekday'))->toBe(Weekday::WEDNESDAY->value)
-        ->and($thursday->start->get('weekday'))->toBe(Weekday::THURSDAY->value)
-        ->and($friday->start->get('weekday'))->toBe(Weekday::FRIDAY->value)
-        ->and($saturday->start->get('weekday'))->toBe(Weekday::SATURDAY->value)
-        ->and($sunday->start->get('weekday'))->toBe(Weekday::SUNDAY->value)
+        ->and($tuesday->start->get('weekday'))->toBe(Weekday::Tuesday->value)
+        ->and($weekday->start->get('weekday'))->toBe(Weekday::Wednesday->value)
+        ->and($thursday->start->get('weekday'))->toBe(Weekday::Thursday->value)
+        ->and($friday->start->get('weekday'))->toBe(Weekday::Friday->value)
+        ->and($saturday->start->get('weekday'))->toBe(Weekday::Saturday->value)
+        ->and($sunday->start->get('weekday'))->toBe(Weekday::Sunday->value)
         ->and($vietnamese->parse('t7', '2012-08-09')[0]->start->get('weekday'))->toBe(6)
         ->and($vietnamese->parse('cn', '2012-08-09')[0]->start->get('weekday'))->toBe(0)
         ->and($nextWeekday->text)->toBe('thứ hai tới')
-        ->and($nextWeekday->start->get('weekday'))->toBe(Weekday::MONDAY->value)
+        ->and($nextWeekday->start->get('weekday'))->toBe(Weekday::Monday->value)
         ->and($nextWeekday->start->get('day'))->toBe(13)
         ->and($nextWeekday->start->date()->toDateTimeString())->toBe('2012-08-13 12:00:00')
         ->and($nextWeekday->start->isCertain('day'))->toBeFalse()
         ->and($followingWeekday->text)->toBe('thứ hai sau')
-        ->and($followingWeekday->start->get('weekday'))->toBe(Weekday::MONDAY->value)
+        ->and($followingWeekday->start->get('weekday'))->toBe(Weekday::Monday->value)
         ->and($followingWeekday->start->get('day'))->toBe(13)
         ->and($followingWeekday->start->date()->toDateTimeString())->toBe('2012-08-13 12:00:00')
         ->and($previousWeekday->text)->toBe('thứ hai qua')
-        ->and($previousWeekday->start->get('weekday'))->toBe(Weekday::MONDAY->value)
+        ->and($previousWeekday->start->get('weekday'))->toBe(Weekday::Monday->value)
         ->and($previousWeekday->start->get('day'))->toBe(6)
         ->and($previousWeekday->start->date()->toDateTimeString())->toBe('2012-08-06 12:00:00')
         ->and($weekdayBeforeConjunction->text)->toBe('thứ hai')

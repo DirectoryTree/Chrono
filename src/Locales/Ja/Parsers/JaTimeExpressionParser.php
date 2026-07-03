@@ -2,8 +2,8 @@
 
 namespace DirectoryTree\Chrono\Locales\Ja\Parsers;
 
+use DirectoryTree\Chrono\Enums\Meridiem;
 use DirectoryTree\Chrono\Locales\Ja\JaConstants;
-use DirectoryTree\Chrono\Meridiem;
 use DirectoryTree\Chrono\Options;
 use DirectoryTree\Chrono\ParsedComponents;
 use DirectoryTree\Chrono\ParsedResult;

@@ -3,6 +3,8 @@
 namespace DirectoryTree\Chrono;
 
 use Carbon\CarbonImmutable;
+use DirectoryTree\Chrono\Enums\Month;
+use DirectoryTree\Chrono\Enums\Weekday;
 
 readonly class Timezone
 {
@@ -292,8 +294,8 @@ readonly class Timezone
      */
     protected static function isNorthAmericanDst(CarbonImmutable $date): bool
     {
-        $start = self::getNthWeekdayOfMonth($date->year, Month::MARCH, Weekday::SUNDAY, 2, 2);
-        $end = self::getNthWeekdayOfMonth($date->year, Month::NOVEMBER, Weekday::SUNDAY, 1, 2);
+        $start = self::getNthWeekdayOfMonth($date->year, Month::March, Weekday::Sunday, 2, 2);
+        $end = self::getNthWeekdayOfMonth($date->year, Month::November, Weekday::Sunday, 1, 2);
 
         return $date->greaterThan($start) && ! $date->greaterThan($end);
     }
@@ -303,8 +305,8 @@ readonly class Timezone
      */
     protected static function isCentralEuropeanDst(CarbonImmutable $date): bool
     {
-        $start = self::getLastWeekdayOfMonth($date->year, Month::MARCH, Weekday::SUNDAY, 2);
-        $end = self::getLastWeekdayOfMonth($date->year, Month::OCTOBER, Weekday::SUNDAY, 3);
+        $start = self::getLastWeekdayOfMonth($date->year, Month::March, Weekday::Sunday, 2);
+        $end = self::getLastWeekdayOfMonth($date->year, Month::October, Weekday::Sunday, 3);
 
         return $date->greaterThan($start) && ! $date->greaterThan($end);
     }

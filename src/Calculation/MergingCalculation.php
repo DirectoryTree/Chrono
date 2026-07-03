@@ -3,7 +3,7 @@
 namespace DirectoryTree\Chrono\Calculation;
 
 use DirectoryTree\Chrono\Dates;
-use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\Enums\Meridiem;
 use DirectoryTree\Chrono\ParsedComponents;
 use DirectoryTree\Chrono\ParsedResult;
 

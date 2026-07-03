@@ -4,6 +4,9 @@ use Carbon\CarbonImmutable;
 use DirectoryTree\Chrono\Chrono;
 use DirectoryTree\Chrono\Configuration;
 use DirectoryTree\Chrono\ConfiguredChronoEngine;
+use DirectoryTree\Chrono\Enums\Meridiem;
+use DirectoryTree\Chrono\Enums\Month;
+use DirectoryTree\Chrono\Enums\Weekday;
 use DirectoryTree\Chrono\Locales\De\DeChrono;
 use DirectoryTree\Chrono\Locales\De\Parsers\DeCasualDateParser;
 use DirectoryTree\Chrono\Locales\De\Parsers\DeCasualTimeParser;
@@ -87,8 +90,6 @@ use DirectoryTree\Chrono\Locales\Zh\Hant\Parsers\ZhHantDateParser;
 use DirectoryTree\Chrono\Locales\Zh\ZhChrono;
 use DirectoryTree\Chrono\Locales\Zh\ZhHansChrono;
 use DirectoryTree\Chrono\Locales\Zh\ZhHantChrono;
-use DirectoryTree\Chrono\Meridiem;
-use DirectoryTree\Chrono\Month;
 use DirectoryTree\Chrono\Options;
 use DirectoryTree\Chrono\ParsedComponents;
 use DirectoryTree\Chrono\ParsedResult;
@@ -101,16 +102,15 @@ use DirectoryTree\Chrono\Refiners\ExtractTimezoneAbbrRefiner;
 use DirectoryTree\Chrono\Refiners\ExtractTimezoneOffsetRefiner;
 use DirectoryTree\Chrono\Refiners\MergeWeekdayComponentRefiner;
 use DirectoryTree\Chrono\Refiners\OverlapRemovalRefiner;
-use DirectoryTree\Chrono\Weekday;
 
 it('exposes upstream enum values', function () {
     expect(Meridiem::AM->value)->toBe(0)
         ->and(Meridiem::PM->value)->toBe(1)
-        ->and(Weekday::SUNDAY->value)->toBe(0)
-        ->and(Weekday::MONDAY->value)->toBe(1)
-        ->and(Weekday::SATURDAY->value)->toBe(6)
-        ->and(Month::JANUARY->value)->toBe(1)
-        ->and(Month::DECEMBER->value)->toBe(12);
+        ->and(Weekday::Sunday->value)->toBe(0)
+        ->and(Weekday::Monday->value)->toBe(1)
+        ->and(Weekday::Saturday->value)->toBe(6)
+        ->and(Month::January->value)->toBe(1)
+        ->and(Month::December->value)->toBe(12);
 });
 
 it('exposes source-shaped public parsing entrypoints', function () {

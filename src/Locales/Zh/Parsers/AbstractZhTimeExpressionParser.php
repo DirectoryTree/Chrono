@@ -3,8 +3,8 @@
 namespace DirectoryTree\Chrono\Locales\Zh\Parsers;
 
 use DirectoryTree\Chrono\Dates;
+use DirectoryTree\Chrono\Enums\Meridiem;
 use DirectoryTree\Chrono\Locales\Zh\ZhConstants;
-use DirectoryTree\Chrono\Meridiem;
 use DirectoryTree\Chrono\Options;
 use DirectoryTree\Chrono\ParsedComponents;
 use DirectoryTree\Chrono\ParsedResult;

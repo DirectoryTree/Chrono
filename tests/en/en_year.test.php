@@ -1,7 +1,7 @@
 <?php
 
 use DirectoryTree\Chrono\Chrono;
-use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\Enums\Meridiem;
 
 it('parses month name dates with era labels', function () {
     $bce = Chrono::parse('10 August 234 BCE', '2012-08-10')[0];

@@ -3,7 +3,7 @@
 namespace DirectoryTree\Chrono\Locales\En\Refiners;
 
 use Carbon\CarbonImmutable;
-use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\Enums\Meridiem;
 use DirectoryTree\Chrono\Options;
 use DirectoryTree\Chrono\ParsedComponents;
 use DirectoryTree\Chrono\ParsedResult;

@@ -3,8 +3,8 @@
 use Carbon\CarbonImmutable;
 use DirectoryTree\Chrono\Calculation\MergingCalculation;
 use DirectoryTree\Chrono\Chrono;
+use DirectoryTree\Chrono\Enums\Meridiem;
 use DirectoryTree\Chrono\Locales\En\Parsers\EnTimeExpressionParser;
-use DirectoryTree\Chrono\Meridiem;
 use DirectoryTree\Chrono\ParsedComponents;
 
 it('merges date and time components like upstream helpers', function () {

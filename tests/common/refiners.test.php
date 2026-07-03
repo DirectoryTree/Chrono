@@ -3,14 +3,14 @@
 use Carbon\CarbonImmutable;
 use DirectoryTree\Chrono\Calculation\MergingCalculation;
 use DirectoryTree\Chrono\Chrono;
-use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\Enums\Meridiem;
+use DirectoryTree\Chrono\Enums\Weekday;
 use DirectoryTree\Chrono\Options;
 use DirectoryTree\Chrono\ParsedComponents;
 use DirectoryTree\Chrono\ParsedResult;
 use DirectoryTree\Chrono\Reference;
 use DirectoryTree\Chrono\Refiners\ExtractTimezoneAbbrRefiner;
 use DirectoryTree\Chrono\Refiners\ForwardDateRefiner;
-use DirectoryTree\Chrono\Weekday;
 
 it('merges time followed by date in common date-time refiners', function () {
     $german = Chrono::german()->parse('um 5 Uhr am 10. August 2012', '2012-08-10')[0];
@@ -32,7 +32,7 @@ it('moves merged overnight time ranges to the next day like upstream helpers', f
         'year' => 2022,
         'month' => 8,
         'day' => 23,
-        'weekday' => Weekday::TUESDAY->value,
+        'weekday' => Weekday::Tuesday->value,
     ]));
 
     $time = new ParsedResult(
@@ -59,7 +59,7 @@ it('moves merged overnight time ranges to the next day like upstream helpers', f
 
 it('forwards same-day weekday components by a full week like upstream refiner', function () {
     $result = new ParsedResult(0, 'Friday', new ParsedComponents(CarbonImmutable::parse('2023-04-07 12:00:00'), [
-        'weekday' => Weekday::FRIDAY->value,
+        'weekday' => Weekday::Friday->value,
     ]));
 
     $results = (new ForwardDateRefiner)->refine(

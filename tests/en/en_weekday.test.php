@@ -2,8 +2,8 @@
 
 use Carbon\CarbonImmutable;
 use DirectoryTree\Chrono\Chrono;
+use DirectoryTree\Chrono\Enums\Weekday;
 use DirectoryTree\Chrono\ParsedComponents;
-use DirectoryTree\Chrono\Weekday;
 
 it('parses weekday prefixed month name dates', function () {
     $compact = Chrono::parse('Sun 15Sep', '2013-08-10')[0];
@@ -86,7 +86,7 @@ it('parses weekdays', function () {
         ->and($monday->start->get('year'))->toBe(2012)
         ->and($monday->start->get('month'))->toBe(8)
         ->and($monday->start->get('day'))->toBe(6)
-        ->and($monday->start->get('weekday'))->toBe(Weekday::MONDAY->value)
+        ->and($monday->start->get('weekday'))->toBe(Weekday::Monday->value)
         ->and($monday->start->isCertain('day'))->toBeFalse()
         ->and($monday->start->isCertain('month'))->toBeFalse()
         ->and($monday->start->isCertain('year'))->toBeFalse()
@@ -95,11 +95,11 @@ it('parses weekdays', function () {
         ->and($thursday->index)->toBe(0)
         ->and($thursday->text)->toBe('Thursday')
         ->and($thursday->start->date()->toDateTimeString())->toBe('2012-08-09 12:00:00')
-        ->and($thursday->start->get('weekday'))->toBe(Weekday::THURSDAY->value)
+        ->and($thursday->start->get('weekday'))->toBe(Weekday::Thursday->value)
         ->and($sunday->index)->toBe(0)
         ->and($sunday->text)->toBe('Sunday')
         ->and($sunday->start->date()->toDateTimeString())->toBe('2012-08-12 12:00:00')
-        ->and($sunday->start->get('weekday'))->toBe(Weekday::SUNDAY->value)
+        ->and($sunday->start->get('weekday'))->toBe(Weekday::Sunday->value)
         ->and($date?->toDateTimeString())->toBe('2026-07-03 16:00:00');
 });
 
@@ -112,19 +112,19 @@ it('parses past and postfix week weekday modifiers', function () {
     expect($last->index)->toBe(16)
         ->and($last->text)->toBe('last Friday')
         ->and($last->start->date()->toDateTimeString())->toBe('2012-08-03 12:00:00')
-        ->and($last->start->get('weekday'))->toBe(Weekday::FRIDAY->value)
+        ->and($last->start->get('weekday'))->toBe(Weekday::Friday->value)
         ->and($past->index)->toBe(16)
         ->and($past->text)->toBe('past Friday')
         ->and($past->start->date()->toDateTimeString())->toBe('2012-08-03 12:00:00')
-        ->and($past->start->get('weekday'))->toBe(Weekday::FRIDAY->value)
+        ->and($past->start->get('weekday'))->toBe(Weekday::Friday->value)
         ->and($nextWeek->index)->toBe(21)
         ->and($nextWeek->text)->toBe('on Friday next week')
         ->and($nextWeek->start->date()->toDateTimeString())->toBe('2015-04-24 12:00:00')
-        ->and($nextWeek->start->get('weekday'))->toBe(Weekday::FRIDAY->value)
+        ->and($nextWeek->start->get('weekday'))->toBe(Weekday::Friday->value)
         ->and($nextWeekWithComma->index)->toBe(29)
         ->and($nextWeekWithComma->text)->toBe('on Tuesday, next week')
         ->and($nextWeekWithComma->start->date()->toDateTimeString())->toBe('2015-04-21 12:00:00')
-        ->and($nextWeekWithComma->start->get('weekday'))->toBe(Weekday::TUESDAY->value);
+        ->and($nextWeekWithComma->start->get('weekday'))->toBe(Weekday::Tuesday->value);
 });
 
 it('parses weekdays with casual times', function () {
@@ -133,7 +133,7 @@ it('parses weekdays with casual times', function () {
     expect($result->index)->toBe(10)
         ->and($result->text)->toBe('on Tuesday morning')
         ->and($result->start->date()->toDateTimeString())->toBe('2015-04-21 06:00:00')
-        ->and($result->start->get('weekday'))->toBe(Weekday::TUESDAY->value);
+        ->and($result->start->get('weekday'))->toBe(Weekday::Tuesday->value);
 });
 
 it('merges weekday overlaps with explicit dates', function () {
@@ -142,11 +142,11 @@ it('merges weekday overlaps with explicit dates', function () {
 
     expect($monthName->text)->toBe('Sunday, December 7, 2014')
         ->and($monthName->start->date()->toDateTimeString())->toBe('2014-12-07 12:00:00')
-        ->and($monthName->start->get('weekday'))->toBe(Weekday::SUNDAY->value)
+        ->and($monthName->start->get('weekday'))->toBe(Weekday::Sunday->value)
         ->and($monthName->start->isCertain('weekday'))->toBeTrue()
         ->and($slashDate->text)->toBe('Sunday 12/7/2014')
         ->and($slashDate->start->date()->toDateTimeString())->toBe('2014-12-07 12:00:00')
-        ->and($slashDate->start->get('weekday'))->toBe(Weekday::SUNDAY->value)
+        ->and($slashDate->start->get('weekday'))->toBe(Weekday::Sunday->value)
         ->and($slashDate->start->isCertain('weekday'))->toBeTrue();
 });
 
@@ -175,12 +175,12 @@ it('uses chrono weekday modifier semantics', function () {
         ->and($monday->start->tags())->toContain('parser/ENWeekdayParser')
         ->and($thursday->text)->toBe('Thursday')
         ->and($thursday->start->date()->toDateTimeString())->toBe('2012-08-09 12:00:00')
-        ->and($thursday->start->get('weekday'))->toBe(Weekday::THURSDAY->value)
+        ->and($thursday->start->get('weekday'))->toBe(Weekday::Thursday->value)
         ->and($sunday->text)->toBe('Sunday')
         ->and($sunday->start->date()->toDateTimeString())->toBe('2012-08-12 12:00:00')
-        ->and($sunday->start->get('weekday'))->toBe(Weekday::SUNDAY->value)
+        ->and($sunday->start->get('weekday'))->toBe(Weekday::Sunday->value)
         ->and($abbreviated->text)->toBe('Mon.')
-        ->and($abbreviated->start->get('weekday'))->toBe(Weekday::MONDAY->value)
+        ->and($abbreviated->start->get('weekday'))->toBe(Weekday::Monday->value)
         ->and(Chrono::date('This Saturday', '2022-08-02')?->toDateTimeString())
         ->toBe('2022-08-06 12:00:00')
         ->and(Chrono::date('This Sunday', '2022-08-02')?->toDateTimeString())
@@ -219,7 +219,7 @@ it('uses chrono weekday modifier semantics', function () {
         ->toBe('2022-08-10 12:00:00')
         ->and($nextWeek->text)->toBe('Tuesday of next week')
         ->and($nextWeek->start->date()->toDateTimeString())->toBe('2022-08-09 12:00:00')
-        ->and($nextWeek->start->get('weekday'))->toBe(Weekday::TUESDAY->value)
+        ->and($nextWeek->start->get('weekday'))->toBe(Weekday::Tuesday->value)
         ->and($nextFriday->start->date()->toDateTimeString())->toBe('2022-08-12 12:00:00')
         ->and($nextMonday->start->date()->toDateTimeString())->toBe('2022-08-08 12:00:00')
         ->and($lastWeek->text)->toBe('Tuesday of last week')
@@ -230,7 +230,7 @@ it('uses chrono weekday modifier semantics', function () {
         ->and($thisSameDay->start->date()->toDateTimeString())->toBe('2022-08-02 12:00:00')
         ->and($nextWeekWithTime->text)->toBe('Tuesday of next week after 2pm')
         ->and($nextWeekWithTime->start->date()->toDateTimeString())->toBe('2022-08-09 14:00:00')
-        ->and($nextWeekWithTime->start->get('weekday'))->toBe(Weekday::TUESDAY->value)
+        ->and($nextWeekWithTime->start->get('weekday'))->toBe(Weekday::Tuesday->value)
         ->and($nextFridayWithTime->text)->toBe('Friday of next week at 9am')
         ->and($nextFridayWithTime->start->date()->toDateTimeString())->toBe('2022-08-12 09:00:00')
         ->and($sentence->index)->toBe(11)
@@ -260,13 +260,13 @@ it('parses weekday ranges', function () {
     $sameWeek = Chrono::parse('Monday to Friday', '2023-04-09')[0];
 
     expect($crossWeek->start->date()->toDateTimeString())->toBe('2023-04-07 12:00:00')
-        ->and($crossWeek->start->get('weekday'))->toBe(Weekday::FRIDAY->value)
+        ->and($crossWeek->start->get('weekday'))->toBe(Weekday::Friday->value)
         ->and($crossWeek->end?->date()->toDateTimeString())->toBe('2023-04-10 12:00:00')
-        ->and($crossWeek->end?->get('weekday'))->toBe(Weekday::MONDAY->value)
+        ->and($crossWeek->end?->get('weekday'))->toBe(Weekday::Monday->value)
         ->and($sameWeek->start->date()->toDateTimeString())->toBe('2023-04-10 12:00:00')
-        ->and($sameWeek->start->get('weekday'))->toBe(Weekday::MONDAY->value)
+        ->and($sameWeek->start->get('weekday'))->toBe(Weekday::Monday->value)
         ->and($sameWeek->end?->date()->toDateTimeString())->toBe('2023-04-14 12:00:00')
-        ->and($sameWeek->end?->get('weekday'))->toBe(Weekday::FRIDAY->value);
+        ->and($sameWeek->end?->get('weekday'))->toBe(Weekday::Friday->value);
 });
 
 it('parses forward weekday ranges', function () {
@@ -281,7 +281,7 @@ it('parses forward weekday ranges', function () {
         ->and($monday->start->isCertain('day'))->toBeFalse()
         ->and($sundayMorning->text)->toBe('sunday morning')
         ->and($sundayMorning->start->date()->toDateTimeString())->toBe('2021-08-22 06:00:00')
-        ->and($sundayMorning->start->get('weekday'))->toBe(Weekday::SUNDAY->value)
+        ->and($sundayMorning->start->get('weekday'))->toBe(Weekday::Sunday->value)
         ->and($sundayMorning->start->isCertain('weekday'))->toBeTrue()
         ->and($sundayMorning->start->isCertain('day'))->toBeFalse()
         ->and($result->text)->toBe('monday - friday')
