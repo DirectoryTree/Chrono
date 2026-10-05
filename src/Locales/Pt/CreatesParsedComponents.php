@@ -8,6 +8,8 @@ use DirectoryTree\Chrono\ParsedComponents;
 trait CreatesParsedComponents
 {
     /**
+     * Create parsed date components.
+     *
      * @param  array<string, int>  $known
      */
     protected function components(CarbonImmutable $date, array $known = []): ParsedComponents

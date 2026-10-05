@@ -4,14 +4,14 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses traditional chinese time expressions', function () {
     $chinese = Chrono::zhHant();
-    $single = $chinese->parseText('雞上午6點13分全部都係雞', '2012-08-10')[0];
-    $relativeDay = $chinese->parseText('我明天上午8點要打遊戲', '2012-08-10 12:00')[0];
-    $range = $chinese->parseText('雞由今朝八點十分至下午11點32分全部都係雞', '2012-08-10')[0];
-    $pmRange = $chinese->parseText('6點30pm-11點pm', '2012-08-10')[0];
-    $dateTime = $chinese->parseText('雞二零一八年十一月廿六日下午三時半五十九秒全部都係雞', '2012-08-10')[0];
-    $meridiemCarry = $chinese->parseText('1點pm到3點', '2012-08-10')[0];
-    $cantoneseFuture = $chinese->parseText('大後日下晝5點', '2012-08-10 12:00')[0];
-    $time = $chinese->parseText('聽晚10點到聽晚11點', '2012-08-10 12:00')[0];
+    $single = $chinese->parse('雞上午6點13分全部都係雞', '2012-08-10')[0];
+    $relativeDay = $chinese->parse('我明天上午8點要打遊戲', '2012-08-10 12:00')[0];
+    $range = $chinese->parse('雞由今朝八點十分至下午11點32分全部都係雞', '2012-08-10')[0];
+    $pmRange = $chinese->parse('6點30pm-11點pm', '2012-08-10')[0];
+    $dateTime = $chinese->parse('雞二零一八年十一月廿六日下午三時半五十九秒全部都係雞', '2012-08-10')[0];
+    $meridiemCarry = $chinese->parse('1點pm到3點', '2012-08-10')[0];
+    $cantoneseFuture = $chinese->parse('大後日下晝5點', '2012-08-10 12:00')[0];
+    $time = $chinese->parse('聽晚10點到聽晚11點', '2012-08-10 12:00')[0];
 
     expect($single->text)->toBe('上午6點13分')
         ->and($single->start->date()->toDateTimeString())->toBe('2012-08-10 06:13:00')
@@ -38,20 +38,20 @@ it('parses traditional chinese time expressions', function () {
 it('parses traditional chinese random date time expressions', function () {
     $chinese = Chrono::zhHant();
 
-    expect($chinese->parseText('2014年, 3月5日晏晝 6 點至 7 點', '2012-08-10')[0]->text)
+    expect($chinese->parse('2014年, 3月5日晏晝 6 點至 7 點', '2012-08-10')[0]->text)
         ->toBe('2014年, 3月5日晏晝 6 點至 7 點')
-        ->and($chinese->parseText('下星期六凌晨1點30分廿九秒', '2012-08-10')[0]->text)
+        ->and($chinese->parse('下星期六凌晨1點30分廿九秒', '2012-08-10')[0]->text)
         ->toBe('下星期六凌晨1點30分廿九秒')
-        ->and($chinese->parseText('尋日朝早六點正', '2012-08-10')[0]->text)
+        ->and($chinese->parse('尋日朝早六點正', '2012-08-10')[0]->text)
         ->toBe('尋日朝早六點正')
-        ->and($chinese->parseText('六月四日3:00am', '2012-08-10')[0]->text)
+        ->and($chinese->parse('六月四日3:00am', '2012-08-10')[0]->text)
         ->toBe('六月四日3:00am')
-        ->and($chinese->parseText('上個禮拜五16時', '2012-08-10')[0]->text)
+        ->and($chinese->parse('上個禮拜五16時', '2012-08-10')[0]->text)
         ->toBe('上個禮拜五16時')
-        ->and($chinese->parseText('3月17日 20點15', '2012-08-10')[0]->text)
+        ->and($chinese->parse('3月17日 20點15', '2012-08-10')[0]->text)
         ->toBe('3月17日 20點15')
-        ->and($chinese->parseText('10點', '2012-08-10')[0]->text)
+        ->and($chinese->parse('10點', '2012-08-10')[0]->text)
         ->toBe('10點')
-        ->and($chinese->parseText('中午12點', '2012-08-10')[0]->start->get('hour'))
+        ->and($chinese->parse('中午12點', '2012-08-10')[0]->start->get('hour'))
         ->toBe(12);
 });

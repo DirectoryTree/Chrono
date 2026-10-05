@@ -4,11 +4,11 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses swedish little-endian month names with upstream-shaped components', function () {
     $swedish = Chrono::sv();
-    $contextual = $swedish->parseText('den 15 augusti', '2012-08-10')[0];
-    $explicit = $swedish->parseText('15 augusti 2012', '2012-08-10')[0];
-    $abbreviated = $swedish->parseText('15 aug 2012', '2012-08-10')[0];
-    $hyphenRange = $swedish->parseText('15-16 augusti', '2012-08-10')[0];
-    $tillRange = $swedish->parseText('15 till 16 augusti', '2012-08-10')[0];
+    $contextual = $swedish->parse('den 15 augusti', '2012-08-10')[0];
+    $explicit = $swedish->parse('15 augusti 2012', '2012-08-10')[0];
+    $abbreviated = $swedish->parse('15 aug 2012', '2012-08-10')[0];
+    $hyphenRange = $swedish->parse('15-16 augusti', '2012-08-10')[0];
+    $tillRange = $swedish->parse('15 till 16 augusti', '2012-08-10')[0];
 
     expect($contextual->index)->toBe(0)
         ->and($contextual->text)->toBe('den 15 augusti')
@@ -44,5 +44,5 @@ it('parses swedish little-endian month names with upstream-shaped components', f
         ->and($tillRange->text)->toBe('15 till 16 augusti')
         ->and($tillRange->start->date()->toDateTimeString())->toBe('2012-08-15 12:00:00')
         ->and($tillRange->end?->date()->toDateTimeString())->toBe('2012-08-16 12:00:00')
-        ->and($swedish->parseText('32 augusti', '2012-08-10'))->toBe([]);
+        ->and($swedish->parse('32 augusti', '2012-08-10'))->toBe([]);
 });

@@ -3,18 +3,18 @@
 use DirectoryTree\Chrono\Chrono;
 
 it('parses russian month expressions', function () {
-    $dateTime = Chrono::ru()->parseText('10 августа 2012 в 6:30 вечера', '2012-08-10 09:30')[0];
-    $range = Chrono::ru()->parseText('10 августа - 12 августа', '2012-08-10 09:30')[0];
-    $monthYear = Chrono::ru()->parseText('Сентябрь 2012', '2020-11-22')[0];
-    $shortMonthYear = Chrono::ru()->parseText('сен 2012', '2020-11-22')[0];
-    $dottedMonthYear = Chrono::ru()->parseText('сен. 2012', '2020-11-22')[0];
-    $hyphenatedMonthYear = Chrono::ru()->parseText('сен-2012', '2020-11-22')[0];
-    $monthOnly = Chrono::ru()->parseText('май', '2020-11-22')[0];
-    $monthOnlyWithPreposition = Chrono::ru()->parseText('в январе', '2020-11-22')[0];
-    $shortMonthOnlyWithPreposition = Chrono::ru()->parseText('в янв', '2020-11-22')[0];
-    $contextMonth = Chrono::ru()->parseText('Это было в сентябре 2012 перед новым годом', '2020-11-22')[0];
-    $abbreviatedYear = Chrono::ru()->parseText('авг 96', '2012-08-10')[0];
-    $abbreviatedYearWithPrefix = Chrono::ru()->parseText('96 авг 96', '2012-08-10')[0];
+    $dateTime = Chrono::ru()->parse('10 августа 2012 в 6:30 вечера', '2012-08-10 09:30')[0];
+    $range = Chrono::ru()->parse('10 августа - 12 августа', '2012-08-10 09:30')[0];
+    $monthYear = Chrono::ru()->parse('Сентябрь 2012', '2020-11-22')[0];
+    $shortMonthYear = Chrono::ru()->parse('сен 2012', '2020-11-22')[0];
+    $dottedMonthYear = Chrono::ru()->parse('сен. 2012', '2020-11-22')[0];
+    $hyphenatedMonthYear = Chrono::ru()->parse('сен-2012', '2020-11-22')[0];
+    $monthOnly = Chrono::ru()->parse('май', '2020-11-22')[0];
+    $monthOnlyWithPreposition = Chrono::ru()->parse('в январе', '2020-11-22')[0];
+    $shortMonthOnlyWithPreposition = Chrono::ru()->parse('в янв', '2020-11-22')[0];
+    $contextMonth = Chrono::ru()->parse('Это было в сентябре 2012 перед новым годом', '2020-11-22')[0];
+    $abbreviatedYear = Chrono::ru()->parse('авг 96', '2012-08-10')[0];
+    $abbreviatedYearWithPrefix = Chrono::ru()->parse('96 авг 96', '2012-08-10')[0];
 
     expect($dateTime->text)->toBe('10 августа 2012 в 6:30 вечера')
         ->and($dateTime->start->date()->toDateTimeString())->toBe('2012-08-10 18:30:00')

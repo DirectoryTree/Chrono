@@ -16,6 +16,8 @@ readonly class EnMonthNameRangeParser implements Parser
     use CreatesParsedComponents;
 
     /**
+     * Parse the text into date results.
+     *
      * @return array<int, ParsedResult>
      */
     public function parse(string $text, Reference $reference, Options $options): array
@@ -30,6 +32,8 @@ readonly class EnMonthNameRangeParser implements Parser
     }
 
     /**
+     * Parse compact little-endian date time ranges.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseCompactLittleEndianDateTimeRanges(string $text, Reference $reference): array
@@ -88,6 +92,8 @@ readonly class EnMonthNameRangeParser implements Parser
     }
 
     /**
+     * Parse month-only ranges.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseMonthOnlyRanges(string $text, Reference $reference, Options $options): array
@@ -131,6 +137,8 @@ readonly class EnMonthNameRangeParser implements Parser
     }
 
     /**
+     * Parse middle-endian cross-month ranges.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseMiddleEndianCrossMonthRanges(string $text, Reference $reference): array
@@ -143,6 +151,8 @@ readonly class EnMonthNameRangeParser implements Parser
     }
 
     /**
+     * Parse cross-month ranges.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseCrossMonthRanges(string $text, Reference $reference): array
@@ -155,6 +165,8 @@ readonly class EnMonthNameRangeParser implements Parser
     }
 
     /**
+     * Create parsed results for cross-month ranges.
+     *
      * @param  array<int, array<string, array{0: string, 1: int}>>  $matches
      * @return array<int, ParsedResult>
      */
@@ -206,6 +218,8 @@ readonly class EnMonthNameRangeParser implements Parser
     }
 
     /**
+     * Parse little-endian date ranges.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseLittleEndianRanges(string $text, Reference $reference, Options $options): array

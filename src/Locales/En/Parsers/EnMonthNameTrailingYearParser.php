@@ -3,9 +3,9 @@
 namespace DirectoryTree\Chrono\Locales\En\Parsers;
 
 use Carbon\CarbonImmutable;
+use DirectoryTree\Chrono\Enums\Meridiem;
 use DirectoryTree\Chrono\Locales\En\CreatesParsedComponents;
 use DirectoryTree\Chrono\Locales\En\EnConstants;
-use DirectoryTree\Chrono\Meridiem;
 use DirectoryTree\Chrono\Options;
 use DirectoryTree\Chrono\ParsedComponents;
 use DirectoryTree\Chrono\ParsedResult;
@@ -17,6 +17,8 @@ readonly class EnMonthNameTrailingYearParser implements Parser
     use CreatesParsedComponents;
 
     /**
+     * Parse the text into date results.
+     *
      * @return array<int, ParsedResult>
      */
     public function parse(string $text, Reference $reference, Options $options): array
@@ -32,6 +34,8 @@ readonly class EnMonthNameTrailingYearParser implements Parser
     }
 
     /**
+     * Parse trailing-year day ranges.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseTrailingYearDayRanges(string $text, Reference $reference, string $monthPattern, string $weekdayPattern): array
@@ -64,6 +68,8 @@ readonly class EnMonthNameTrailingYearParser implements Parser
     }
 
     /**
+     * Parse trailing-year time ranges.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseTrailingYearTimeRanges(string $text, Reference $reference, string $monthPattern, string $weekdayPattern): array
@@ -98,6 +104,8 @@ readonly class EnMonthNameTrailingYearParser implements Parser
     }
 
     /**
+     * Parse trailing-year date times.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseTrailingYearDateTimes(string $text, Reference $reference, string $monthPattern, string $weekdayPattern): array
@@ -131,6 +139,8 @@ readonly class EnMonthNameTrailingYearParser implements Parser
     }
 
     /**
+     * Get known components for the date and time.
+     *
      * @return array<string, int>
      */
     protected function dateTimeKnown(CarbonImmutable $date): array

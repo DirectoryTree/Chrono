@@ -1,21 +1,21 @@
 <?php
 
 use DirectoryTree\Chrono\Chrono;
-use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\Enums\Meridiem;
 
 it('parses vietnamese time expressions', function () {
     $vietnamese = Chrono::vi();
-    $hour = $vietnamese->parseText('Cuộc hẹn lúc 7 giờ.', '2012-08-10 12:00')[0];
-    $morning = $vietnamese->parseText('7 giờ sáng', '2012-08-10 12:00')[0];
-    $evening = $vietnamese->parseText('7 giờ tối', '2012-08-10 12:00')[0];
-    $time = $vietnamese->parseText('lúc 7 giờ 30 phút', '2012-08-10 12:00')[0];
-    $twentyFourHour = $vietnamese->parseText('vào 15 giờ 45 phút', '2012-08-10 12:00')[0];
-    $colon = $vietnamese->parseText('Hẹn lúc 15:30.', '2012-08-10 12:00')[0];
-    $dateTime = $vietnamese->parseText('ngày 30 tháng 4 năm 1975 lúc 11 giờ', '2012-08-10 12:00')[0];
-    $afternoon = $vietnamese->parseText('3 giờ chiều', '2012-08-10 12:00')[0];
-    $night = $vietnamese->parseText('10 giờ đêm', '2012-08-10 12:00')[0];
-    $noon = $vietnamese->parseText('12 giờ trưa', '2012-08-10 12:00')[0];
-    $midnight = $vietnamese->parseText('12 giờ sáng', '2012-08-10 12:00')[0];
+    $hour = $vietnamese->parse('Cuộc hẹn lúc 7 giờ.', '2012-08-10 12:00')[0];
+    $morning = $vietnamese->parse('7 giờ sáng', '2012-08-10 12:00')[0];
+    $evening = $vietnamese->parse('7 giờ tối', '2012-08-10 12:00')[0];
+    $time = $vietnamese->parse('lúc 7 giờ 30 phút', '2012-08-10 12:00')[0];
+    $twentyFourHour = $vietnamese->parse('vào 15 giờ 45 phút', '2012-08-10 12:00')[0];
+    $colon = $vietnamese->parse('Hẹn lúc 15:30.', '2012-08-10 12:00')[0];
+    $dateTime = $vietnamese->parse('ngày 30 tháng 4 năm 1975 lúc 11 giờ', '2012-08-10 12:00')[0];
+    $afternoon = $vietnamese->parse('3 giờ chiều', '2012-08-10 12:00')[0];
+    $night = $vietnamese->parse('10 giờ đêm', '2012-08-10 12:00')[0];
+    $noon = $vietnamese->parse('12 giờ trưa', '2012-08-10 12:00')[0];
+    $midnight = $vietnamese->parse('12 giờ sáng', '2012-08-10 12:00')[0];
 
     expect($hour->text)->toBe('lúc 7 giờ')
         ->and($hour->index)->toBe(9)

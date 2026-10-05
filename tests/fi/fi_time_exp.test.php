@@ -4,14 +4,14 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses finnish time expressions and ranges', function () {
     $finnish = Chrono::fi();
-    $specific = $finnish->parseText('klo 15:00', '2012-08-10')[0];
-    $kello = $finnish->parseText('kello 8:30', '2012-08-10')[0];
-    $dotted = $finnish->parseText('klo 13.00', '2012-08-10')[0];
-    $milliseconds = $finnish->parseText('klo 8:10:30.123', '2012-08-10')[0];
-    $range = $finnish->parseText('klo 6:30 - 8:45', '2012-08-10')[0];
-    $upstreamRange = $finnish->parseText('klo 10:00-12:00', '2012-08-10')[0];
-    $compactRange = $finnish->parseText('klo 10:00-12:00', '2012-08-10')[0];
-    $dateTime = $finnish->parseText('15 elokuuta 2012 klo 14:00', '2012-08-10')[0];
+    $specific = $finnish->parse('klo 15:00', '2012-08-10')[0];
+    $kello = $finnish->parse('kello 8:30', '2012-08-10')[0];
+    $dotted = $finnish->parse('klo 13.00', '2012-08-10')[0];
+    $milliseconds = $finnish->parse('klo 8:10:30.123', '2012-08-10')[0];
+    $range = $finnish->parse('klo 6:30 - 8:45', '2012-08-10')[0];
+    $upstreamRange = $finnish->parse('klo 10:00-12:00', '2012-08-10')[0];
+    $compactRange = $finnish->parse('klo 10:00-12:00', '2012-08-10')[0];
+    $dateTime = $finnish->parse('15 elokuuta 2012 klo 14:00', '2012-08-10')[0];
 
     expect($specific->start->date()->toDateTimeString())->toBe('2012-08-10 15:00:00')
         ->and($specific->start->get('hour'))->toBe(15)
@@ -23,15 +23,15 @@ it('parses finnish time expressions and ranges', function () {
         ->and($dotted->start->get('hour'))->toBe(13)
         ->and($dotted->start->get('minute'))->toBe(0)
         ->and($milliseconds->start->date()->format('Y-m-d H:i:s.v'))->toBe('2012-08-10 08:10:30.123')
-        ->and($finnish->parseText('Nähdään klo 6:13', '2012-08-10')[0]->text)
+        ->and($finnish->parse('Nähdään klo 6:13', '2012-08-10')[0]->text)
         ->toBe('klo 6:13')
-        ->and($finnish->parseDateText('Nähdään klo 6:13', '2012-08-10')?->toDateTimeString())
+        ->and($finnish->date('Nähdään klo 6:13', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 06:13:00')
-        ->and($finnish->parseDateText('Nähdään kello 18.30', '2012-08-10')?->toDateTimeString())
+        ->and($finnish->date('Nähdään kello 18.30', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 18:30:00')
-        ->and($finnish->parseDateText('Nähdään klo 630', '2012-08-10')?->toDateTimeString())
+        ->and($finnish->date('Nähdään klo 630', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 06:30:00')
-        ->and($finnish->parseDateText('Nähdään klo 6pm', '2012-08-10')?->toDateTimeString())
+        ->and($finnish->date('Nähdään klo 6pm', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 18:00:00')
         ->and($range->text)->toBe('klo 6:30 - 8:45')
         ->and($range->start->date()->toDateTimeString())->toBe('2012-08-10 06:30:00')
@@ -47,6 +47,6 @@ it('parses finnish time expressions and ranges', function () {
         ->and($dateTime->start->get('minute'))->toBe(0)
         ->and($compactRange->text)->toBe('klo 10:00-12:00')
         ->and($compactRange->end?->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
-        ->and($finnish->parseText('Vuosi 2020', '2012-08-10'))
+        ->and($finnish->parse('Vuosi 2020', '2012-08-10'))
         ->toBe([]);
 });

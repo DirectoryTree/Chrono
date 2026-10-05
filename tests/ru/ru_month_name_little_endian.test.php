@@ -3,22 +3,22 @@
 use DirectoryTree\Chrono\Chrono;
 
 it('parses russian month name dates and ranges', function () {
-    $numericDate = Chrono::ru()->parseText('10.08.2012', '2012-08-10 12:00')[0];
-    $date = Chrono::ru()->parseText('10 августа 2012', '2012-08-10 09:30')[0];
-    $ordinalAbbreviatedYear = Chrono::ru()->parseText('третье фев 82', '2012-08-10 09:30')[0];
-    $prefixedDate = Chrono::ru()->parseText('Дедлайн 10 августа', '2012-08-10 09:30')[0];
-    $weekdayDate = Chrono::ru()->parseText('Дедлайн Четверг, 10 января', '2012-08-10 09:30')[0];
-    $range = Chrono::ru()->parseText('10-12 августа', '2012-08-10 09:30')[0];
-    $spacedRange = Chrono::ru()->parseText('10 - 22 августа 2012', '2012-08-10 09:30')[0];
-    $prepositionRange = Chrono::ru()->parseText('с 10 по 22 августа 2012', '2012-08-10 09:30')[0];
-    $crossMonth = Chrono::ru()->parseText('10 августа - 12 сентября', '2012-08-10 09:30')[0];
-    $crossMonthWithYear = Chrono::ru()->parseText('10 августа - 12 сентября 2013', '2012-08-10 09:30')[0];
-    $dateTime = Chrono::ru()->parseText('5 мая 12:00', '2012-08-10 09:30')[0];
-    $ordinalDate = Chrono::ru()->parseText('двадцать пятое мая', '2012-02-10 09:30')[0];
-    $ordinalDateWithYear = Chrono::ru()->parseText('двадцать пятое мая 2020 года', '2012-02-10 09:30')[0];
-    $dateFollowedByTime = Chrono::ru()->parseText('24го октября, 9:00', '2017-07-07 15:00')[0];
-    $abbreviatedYear = Chrono::ru()->parseText('03 авг 96', '2012-08-10 09:30')[0];
-    $month = Chrono::ru()->parseText('август 2012', '2012-08-10 09:30')[0];
+    $numericDate = Chrono::ru()->parse('10.08.2012', '2012-08-10 12:00')[0];
+    $date = Chrono::ru()->parse('10 августа 2012', '2012-08-10 09:30')[0];
+    $ordinalAbbreviatedYear = Chrono::ru()->parse('третье фев 82', '2012-08-10 09:30')[0];
+    $prefixedDate = Chrono::ru()->parse('Дедлайн 10 августа', '2012-08-10 09:30')[0];
+    $weekdayDate = Chrono::ru()->parse('Дедлайн Четверг, 10 января', '2012-08-10 09:30')[0];
+    $range = Chrono::ru()->parse('10-12 августа', '2012-08-10 09:30')[0];
+    $spacedRange = Chrono::ru()->parse('10 - 22 августа 2012', '2012-08-10 09:30')[0];
+    $prepositionRange = Chrono::ru()->parse('с 10 по 22 августа 2012', '2012-08-10 09:30')[0];
+    $crossMonth = Chrono::ru()->parse('10 августа - 12 сентября', '2012-08-10 09:30')[0];
+    $crossMonthWithYear = Chrono::ru()->parse('10 августа - 12 сентября 2013', '2012-08-10 09:30')[0];
+    $dateTime = Chrono::ru()->parse('5 мая 12:00', '2012-08-10 09:30')[0];
+    $ordinalDate = Chrono::ru()->parse('двадцать пятое мая', '2012-02-10 09:30')[0];
+    $ordinalDateWithYear = Chrono::ru()->parse('двадцать пятое мая 2020 года', '2012-02-10 09:30')[0];
+    $dateFollowedByTime = Chrono::ru()->parse('24го октября, 9:00', '2017-07-07 15:00')[0];
+    $abbreviatedYear = Chrono::ru()->parse('03 авг 96', '2012-08-10 09:30')[0];
+    $month = Chrono::ru()->parse('август 2012', '2012-08-10 09:30')[0];
 
     expect($numericDate->index)->toBe(0)
         ->and($numericDate->text)->toBe('10.08.2012')
@@ -61,10 +61,10 @@ it('parses russian month name dates and ranges', function () {
 });
 
 it('parses russian month name dates with separators', function () {
-    $hyphenated = Chrono::ru()->parseText('10-августа 2012', '2012-08-08')[0];
-    $hyphenatedYear = Chrono::ru()->parseText('10-августа-2012', '2012-08-08')[0];
-    $slashed = Chrono::ru()->parseText('10/августа 2012', '2012-08-08')[0];
-    $slashedYear = Chrono::ru()->parseText('10/августа/2012', '2012-08-08')[0];
+    $hyphenated = Chrono::ru()->parse('10-августа 2012', '2012-08-08')[0];
+    $hyphenatedYear = Chrono::ru()->parse('10-августа-2012', '2012-08-08')[0];
+    $slashed = Chrono::ru()->parse('10/августа 2012', '2012-08-08')[0];
+    $slashedYear = Chrono::ru()->parse('10/августа/2012', '2012-08-08')[0];
 
     expect($hyphenated->text)->toBe('10-августа 2012')
         ->and($hyphenated->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
@@ -77,7 +77,7 @@ it('parses russian month name dates with separators', function () {
 });
 
 it('honors russian forward dates for month name ranges', function () {
-    $range = Chrono::russian()->parseText('22-23 фев в 7', '2016-03-15', ['forwardDate' => true])[0];
+    $range = Chrono::russian()->parse('22-23 фев в 7', '2016-03-15', ['forwardDate' => true])[0];
 
     expect($range->index)->toBe(0)
         ->and($range->text)->toBe('22-23 фев в 7')
@@ -86,8 +86,8 @@ it('honors russian forward dates for month name ranges', function () {
 });
 
 it('does not parse impossible russian month name dates in strict mode', function () {
-    expect(Chrono::strictRussian()->parseText('32 августа 2014', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictRussian()->parseText('29 февраля 2014', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictRussian()->parseText('32 августа', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictRussian()->parseText('29 февраля', '2013-08-10'))->toBe([]);
+    expect(Chrono::strictRussian()->parse('32 августа 2014', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictRussian()->parse('29 февраля 2014', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictRussian()->parse('32 августа', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictRussian()->parse('29 февраля', '2013-08-10'))->toBe([]);
 });

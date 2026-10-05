@@ -31,6 +31,8 @@ readonly class DeWeekdayParser implements Parser
     }
 
     /**
+     * Parse individual weekday expressions.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseSingleWeekdays(string $text, Reference $reference, Options $options): array
@@ -53,6 +55,8 @@ readonly class DeWeekdayParser implements Parser
     }
 
     /**
+     * Parse weekday range expressions.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseWeekdayRanges(string $text, Reference $reference, Options $options): array

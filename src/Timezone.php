@@ -3,10 +3,14 @@
 namespace DirectoryTree\Chrono;
 
 use Carbon\CarbonImmutable;
+use DirectoryTree\Chrono\Enums\Month;
+use DirectoryTree\Chrono\Enums\Weekday;
 
 readonly class Timezone
 {
     /**
+     * The timezone abbreviation mappings.
+     *
      * @var array<string, int|string>
      */
     protected const ABBREVIATIONS = [
@@ -231,6 +235,20 @@ readonly class Timezone
     }
 
     /**
+     * Resolve a timezone offset to a PHP timezone name.
+     */
+    public static function nameFromOffset(int $offset): string
+    {
+        $sign = $offset < 0 ? '-' : '+';
+
+        $offset = abs($offset);
+
+        return sprintf('%s%02d:%02d', $sign, intdiv($offset, 60), $offset % 60);
+    }
+
+    /**
+     * Resolve a custom ambiguous timezone offset.
+     *
      * @param  array<string, mixed>  $timezone
      */
     protected static function customAmbiguousOffset(array $timezone, CarbonImmutable $date): ?int
@@ -242,6 +260,7 @@ readonly class Timezone
         $start = isset($timezone['dstStart']) && is_callable($timezone['dstStart'])
             ? $timezone['dstStart']($date->year)
             : null;
+
         $end = isset($timezone['dstEnd']) && is_callable($timezone['dstEnd'])
             ? $timezone['dstEnd']($date->year)
             : null;
@@ -275,8 +294,8 @@ readonly class Timezone
      */
     protected static function isNorthAmericanDst(CarbonImmutable $date): bool
     {
-        $start = self::getNthWeekdayOfMonth($date->year, Month::MARCH, Weekday::SUNDAY, 2, 2);
-        $end = self::getNthWeekdayOfMonth($date->year, Month::NOVEMBER, Weekday::SUNDAY, 1, 2);
+        $start = self::getNthWeekdayOfMonth($date->year, Month::March, Weekday::Sunday, 2, 2);
+        $end = self::getNthWeekdayOfMonth($date->year, Month::November, Weekday::Sunday, 1, 2);
 
         return $date->greaterThan($start) && ! $date->greaterThan($end);
     }
@@ -286,8 +305,8 @@ readonly class Timezone
      */
     protected static function isCentralEuropeanDst(CarbonImmutable $date): bool
     {
-        $start = self::getLastWeekdayOfMonth($date->year, Month::MARCH, Weekday::SUNDAY, 2);
-        $end = self::getLastWeekdayOfMonth($date->year, Month::OCTOBER, Weekday::SUNDAY, 3);
+        $start = self::getLastWeekdayOfMonth($date->year, Month::March, Weekday::Sunday, 2);
+        $end = self::getLastWeekdayOfMonth($date->year, Month::October, Weekday::Sunday, 3);
 
         return $date->greaterThan($start) && ! $date->greaterThan($end);
     }
@@ -297,20 +316,9 @@ readonly class Timezone
      */
     public static function getNthWeekdayOfMonth(int $year, Month|int $month, Weekday|int $weekday, int $nth, int $hour = 0): CarbonImmutable
     {
-        $date = CarbonImmutable::create($year, self::monthValue($month), 1, $hour);
-        $seen = 0;
-
-        while (true) {
-            if ($date->dayOfWeek === self::weekdayValue($weekday)) {
-                $seen++;
-
-                if ($seen === $nth) {
-                    return $date;
-                }
-            }
-
-            $date = $date->addDay();
-        }
+        return CarbonImmutable::create($year, self::monthValue($month), 1, $hour)
+            ->nthOfMonth($nth, self::weekdayValue($weekday))
+            ->hour($hour);
     }
 
     /**
@@ -318,13 +326,9 @@ readonly class Timezone
      */
     public static function getLastWeekdayOfMonth(int $year, Month|int $month, Weekday|int $weekday, int $hour = 0): CarbonImmutable
     {
-        $date = CarbonImmutable::create($year, self::monthValue($month), 1, $hour)->endOfMonth()->startOfDay()->hour($hour);
-
-        while ($date->dayOfWeek !== self::weekdayValue($weekday)) {
-            $date = $date->subDay();
-        }
-
-        return $date;
+        return CarbonImmutable::create($year, self::monthValue($month), 1, $hour)
+            ->lastOfMonth(self::weekdayValue($weekday))
+            ->hour($hour);
     }
 
     /**

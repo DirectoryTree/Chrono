@@ -12,6 +12,8 @@ readonly class EnRelativeDateFormatParser implements Parser
     use InteractsWithRelativeDates;
 
     /**
+     * Parse the text into date results.
+     *
      * @return array<int, ParsedResult>
      */
     public function parse(string $text, Reference $reference, Options $options): array

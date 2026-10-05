@@ -4,6 +4,9 @@ use Carbon\CarbonImmutable;
 use DirectoryTree\Chrono\Chrono;
 use DirectoryTree\Chrono\Configuration;
 use DirectoryTree\Chrono\ConfiguredChronoEngine;
+use DirectoryTree\Chrono\Enums\Meridiem;
+use DirectoryTree\Chrono\Enums\Month;
+use DirectoryTree\Chrono\Enums\Weekday;
 use DirectoryTree\Chrono\Locales\De\DeChrono;
 use DirectoryTree\Chrono\Locales\De\Parsers\DeCasualDateParser;
 use DirectoryTree\Chrono\Locales\De\Parsers\DeCasualTimeParser;
@@ -87,8 +90,6 @@ use DirectoryTree\Chrono\Locales\Zh\Hant\Parsers\ZhHantDateParser;
 use DirectoryTree\Chrono\Locales\Zh\ZhChrono;
 use DirectoryTree\Chrono\Locales\Zh\ZhHansChrono;
 use DirectoryTree\Chrono\Locales\Zh\ZhHantChrono;
-use DirectoryTree\Chrono\Meridiem;
-use DirectoryTree\Chrono\Month;
 use DirectoryTree\Chrono\Options;
 use DirectoryTree\Chrono\ParsedComponents;
 use DirectoryTree\Chrono\ParsedResult;
@@ -102,28 +103,32 @@ use DirectoryTree\Chrono\Refiners\ExtractTimezoneOffsetRefiner;
 use DirectoryTree\Chrono\Refiners\ForwardDateRefiner;
 use DirectoryTree\Chrono\Refiners\MergeWeekdayComponentRefiner;
 use DirectoryTree\Chrono\Refiners\OverlapRemovalRefiner;
-use DirectoryTree\Chrono\Weekday;
 
 it('exposes upstream enum values', function () {
     expect(Meridiem::AM->value)->toBe(0)
         ->and(Meridiem::PM->value)->toBe(1)
-        ->and(Weekday::SUNDAY->value)->toBe(0)
-        ->and(Weekday::MONDAY->value)->toBe(1)
-        ->and(Weekday::SATURDAY->value)->toBe(6)
-        ->and(Month::JANUARY->value)->toBe(1)
-        ->and(Month::DECEMBER->value)->toBe(12);
+        ->and(Weekday::Sunday->value)->toBe(0)
+        ->and(Weekday::Monday->value)->toBe(1)
+        ->and(Weekday::Saturday->value)->toBe(6)
+        ->and(Month::January->value)->toBe(1)
+        ->and(Month::December->value)->toBe(12);
 });
 
 it('exposes source-shaped public parsing entrypoints', function () {
-    $default = Chrono::parseDate('7:00PM July 5th, 2020');
-    $english = Chrono::en()->parseDateText('7:00PM July 5th, 2020');
-    $strict = Chrono::strict()->parseDateText('7:00PM July 5th, 2020');
-    $casual = Chrono::casual()->parseDateText('7:00PM July 5th, 2020');
+    $default = Chrono::date('7:00PM July 5th, 2020');
+    $english = Chrono::en()->date('7:00PM July 5th, 2020');
+    $strict = Chrono::strict()->date('7:00PM July 5th, 2020');
+    $casual = Chrono::casual()->date('7:00PM July 5th, 2020');
+    $dates = Chrono::dates('today and tomorrow', '2026-06-23');
 
     expect(new Chrono)->toBeInstanceOf(Chrono::class)
         ->and(Chrono::casual())->toBeInstanceOf(Chrono::class)
         ->and(Chrono::strict())->toBeInstanceOf(Chrono::class)
         ->and(Chrono::parse('7:00PM July 5th, 2020')[0])->toBeInstanceOf(ParsedResult::class)
+        ->and($dates)->toHaveCount(2)
+        ->and($dates[0])->toBeInstanceOf(CarbonImmutable::class)
+        ->and($dates[0]->toDateString())->toBe('2026-06-23')
+        ->and($dates[1]->toDateString())->toBe('2026-06-24')
         ->and($default)->toBeInstanceOf(CarbonImmutable::class)
         ->and($default?->toDateTimeString())->toBe('2020-07-05 19:00:00')
         ->and($english)->toBeInstanceOf(CarbonImmutable::class)
@@ -187,25 +192,25 @@ it('exposes source-shaped strict locale configurations separately from PHP exten
         ->toContain(ExtractTimezoneAbbrRefiner::class)
         ->and($frenchRefiners[array_search(ExtractTimezoneAbbrRefiner::class, $frenchRefiners, true) + 1])
         ->toBe(OverlapRemovalRefiner::class)
-        ->and(Chrono::strictSpanish()->parseDateText('10 Agosto 2012', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::strictSpanish()->date('10 Agosto 2012', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and(Chrono::strictSpanish()->parseText('viernes', '2012-08-10'))
+        ->and(Chrono::strictSpanish()->parse('viernes', '2012-08-10'))
         ->toBe([])
-        ->and(Chrono::strictSpanish()->parseText('2015-05-25', '2012-08-10')[0]->start->tags())
+        ->and(Chrono::strictSpanish()->parse('2015-05-25', '2012-08-10')[0]->start->tags())
         ->toContain('parser/ISOFormatParser')
-        ->and($resultTags(Chrono::strictSpanish()->parseText('Dom 15Sep', '2013-08-10')))
+        ->and($resultTags(Chrono::strictSpanish()->parse('Dom 15Sep', '2013-08-10')))
         ->not->toContain('parser/ESMonthNameParser')
-        ->and(Chrono::strictGerman()->parseDateText('10. August 2012', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::strictGerman()->date('10. August 2012', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and($resultTags(Chrono::strictGerman()->parseText('Mo 10. August 2012', '2012-08-10')))
+        ->and($resultTags(Chrono::strictGerman()->parse('Mo 10. August 2012', '2012-08-10')))
         ->not->toContain('parser/DEMonthNameParser')
-        ->and(Chrono::strictGerman()->parseText('2015-05-25', '2012-08-10')[0]->start->tags())
+        ->and(Chrono::strictGerman()->parse('2015-05-25', '2012-08-10')[0]->start->tags())
         ->toContain('parser/ISOFormatParser')
-        ->and(Chrono::strictFrench()->parseDateText('10 août 2012', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::strictFrench()->date('10 août 2012', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and(Chrono::strictFrench()->parseText('2015-05-25', '2012-08-10')[0]->start->tags())
+        ->and(Chrono::strictFrench()->parse('2015-05-25', '2012-08-10')[0]->start->tags())
         ->toContain('parser/ISOFormatParser')
-        ->and($resultTags(Chrono::strictFrench()->parseText('lundi 10 août 2012', '2012-08-10')))
+        ->and($resultTags(Chrono::strictFrench()->parse('lundi 10 août 2012', '2012-08-10')))
         ->not->toContain('parser/FRMonthNameParser');
 });
 
@@ -276,19 +281,19 @@ it('exposes source-shaped strict configurations for Finnish Portuguese and Swedi
         ])
         ->and($swedishRefiners)
         ->toContain(ExtractTimezoneAbbrRefiner::class)
-        ->and(Chrono::strictFinnish()->parseDateText('3 tammikuuta 2012', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::strictFinnish()->date('3 tammikuuta 2012', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-01-03 12:00:00')
-        ->and(Chrono::strictFinnish()->parseText('tänään', '2012-08-10'))
+        ->and(Chrono::strictFinnish()->parse('tänään', '2012-08-10'))
         ->toBe([])
-        ->and(Chrono::strictPortuguese()->parseDateText('10 Agosto 2012', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::strictPortuguese()->date('10 Agosto 2012', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and(Chrono::strictPortuguese()->parseText('2015-05-25', '2012-08-10')[0]->start->tags())
+        ->and(Chrono::strictPortuguese()->parse('2015-05-25', '2012-08-10')[0]->start->tags())
         ->toContain('parser/ISOFormatParser')
-        ->and(Chrono::strictPortuguese()->parseText('hoje', '2012-08-10'))
+        ->and(Chrono::strictPortuguese()->parse('hoje', '2012-08-10'))
         ->toBe([])
-        ->and(Chrono::strictSwedish()->parseDateText('10 augusti 2012', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::strictSwedish()->date('10 augusti 2012', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and(Chrono::strictSwedish()->parseText('idag', '2012-08-10'))
+        ->and(Chrono::strictSwedish()->parse('idag', '2012-08-10'))
         ->toBe([]);
 });
 
@@ -371,41 +376,41 @@ it('exposes source-shaped strict configurations for remaining locale engines', f
         ->toContain(ExtractTimezoneAbbrRefiner::class)
         ->and($vietnameseRefiners[array_search(ExtractTimezoneAbbrRefiner::class, $vietnameseRefiners, true) + 1])
         ->toBe(OverlapRemovalRefiner::class)
-        ->and(Chrono::strictItalian()->parseDateText('10 agosto 2012', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::strictItalian()->date('10 agosto 2012', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and(Chrono::strictItalian()->parseText('2015-05-25', '2012-08-10')[0]->start->tags())
+        ->and(Chrono::strictItalian()->parse('2015-05-25', '2012-08-10')[0]->start->tags())
         ->toContain('parser/ISOFormatParser')
-        ->and(Chrono::strictDutch()->parseDateText('10 augustus 2012', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::strictDutch()->date('10 augustus 2012', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and(Chrono::strictRussian()->parseDateText('10 августа 2012', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::strictRussian()->date('10 августа 2012', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and(Chrono::strictRussian()->parseText('2015-05-25', '2012-08-10')[0]->start->tags())
+        ->and(Chrono::strictRussian()->parse('2015-05-25', '2012-08-10')[0]->start->tags())
         ->toContain('parser/ISOFormatParser')
-        ->and(Chrono::strictUkrainian()->parseDateText('10 серпня 2012', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::strictUkrainian()->date('10 серпня 2012', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and(Chrono::strictJapanese()->parseDateText('2012年8月10日', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::strictJapanese()->date('2012年8月10日', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and(Chrono::strictJapanese()->parseText('2015-05-25', '2012-08-10')[0]->start->tags())
+        ->and(Chrono::strictJapanese()->parse('2015-05-25', '2012-08-10')[0]->start->tags())
         ->toContain('parser/ISOFormatParser')
-        ->and(Chrono::strictVietnamese()->parseDateText('ngày 30 tháng 4 năm 1975', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::strictVietnamese()->date('ngày 30 tháng 4 năm 1975', '2012-08-10')?->toDateTimeString())
         ->toBe('1975-04-30 12:00:00')
-        ->and(Chrono::strictVietnamese()->parseText('hôm nay', '2012-08-10'))
+        ->and(Chrono::strictVietnamese()->parse('hôm nay', '2012-08-10'))
         ->toBe([])
-        ->and(Chrono::strictVietnamese()->parseText('buổi sáng', '2012-08-10'))
+        ->and(Chrono::strictVietnamese()->parse('buổi sáng', '2012-08-10'))
         ->toBe([])
-        ->and(Chrono::strictVietnamese()->parseText('tuần này', '2012-08-10'))
+        ->and(Chrono::strictVietnamese()->parse('tuần này', '2012-08-10'))
         ->toBe([])
-        ->and(Chrono::strictVietnamese()->parseText('thứ hai', '2012-08-10'))
+        ->and(Chrono::strictVietnamese()->parse('thứ hai', '2012-08-10'))
         ->toBe([])
-        ->and(Chrono::strictVietnamese()->parseText('chủ nhật', '2012-08-10'))
+        ->and(Chrono::strictVietnamese()->parse('chủ nhật', '2012-08-10'))
         ->toBe([])
-        ->and(Chrono::strictVietnamese()->parseDateText('lúc 7 giờ 30 phút', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::strictVietnamese()->date('lúc 7 giờ 30 phút', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 07:30:00')
-        ->and(Chrono::strictVietnamese()->parseDateText('30/4/1975', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::strictVietnamese()->date('30/4/1975', '2012-08-10')?->toDateTimeString())
         ->toBe('1975-04-30 12:00:00')
-        ->and(Chrono::strictVietnamese()->parseDateText('3 ngày trước', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::strictVietnamese()->date('3 ngày trước', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-07 00:00:00')
-        ->and(Chrono::strictVietnamese()->parseDateText('2 tuần sau', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::strictVietnamese()->date('2 tuần sau', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-24 00:00:00');
 });
 
@@ -458,15 +463,15 @@ it('exposes source-shaped strict configurations for Chinese engines', function (
         ->toContain(MergeWeekdayComponentRefiner::class)
         ->toContain(ExtractTimezoneAbbrRefiner::class)
         ->not->toContain(ExtractTimezoneOffsetRefiner::class)
-        ->and(Chrono::strictChinese()->parseDateText('2012年8月10日', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::strictChinese()->date('2012年8月10日', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and(Chrono::strictZhHans()->parseDateText('2012年8月10日', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::strictZhHans()->date('2012年8月10日', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and(Chrono::strictZhHant()->parseDateText('2012年8月10日', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::strictZhHant()->date('2012年8月10日', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and(Chrono::strictZhHans()->parseText('今天', '2012-08-10'))
+        ->and(Chrono::strictZhHans()->parse('今天', '2012-08-10'))
         ->toBe([])
-        ->and(Chrono::strictZhHant()->parseText('今日', '2012-08-10'))
+        ->and(Chrono::strictZhHant()->parse('今日', '2012-08-10'))
         ->toBe([]);
 });
 
@@ -555,9 +560,9 @@ it('does not parse partial invalid date expressions', function () {
         ->toBe([])
         ->and(Chrono::parse('June 10 - 31, 2022', '2012-08-10'))
         ->toBe([])
-        ->and(Chrono::parseDate('4/13', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::date('4/13', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-04-13 12:00:00')
-        ->and(Chrono::parseDate('February 15 1998', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::date('February 15 1998', '2012-08-10')?->toDateTimeString())
         ->toBe('1998-02-15 12:00:00');
 });
 
@@ -613,10 +618,10 @@ it('supports casual and strict chrono variants', function () {
     $casual = Chrono::casual();
     $strict = Chrono::strict();
 
-    expect($casual->parseDateText('tomorrow', '2026-06-23 09:00')?->toDateTimeString())
+    expect($casual->date('tomorrow', '2026-06-23 09:00')?->toDateTimeString())
         ->toBe('2026-06-24 09:00:00')
-        ->and($strict->parseText('tomorrow', '2026-06-23 09:00'))->toBe([])
-        ->and($strict->parseDateText('7:00PM July 5th, 2020', '2012-08-10')?->toDateTimeString())
+        ->and($strict->parse('tomorrow', '2026-06-23 09:00'))->toBe([])
+        ->and($strict->date('7:00PM July 5th, 2020', '2012-08-10')?->toDateTimeString())
         ->toBe('2020-07-05 19:00:00');
 });
 
@@ -640,7 +645,7 @@ it('supports custom parsers that participate in refiners', function () {
     };
 
     $chrono = Chrono::casual()->withParser($christmas);
-    $result = $chrono->parseText("I'll arrive at 2:30AM on Christmas", '2017-11-19 12:00')[0];
+    $result = $chrono->parse("I'll arrive at 2:30AM on Christmas", '2017-11-19 12:00')[0];
 
     expect($result->text)->toBe('at 2:30AM on Christmas')
         ->and($result->start->date()->toDateTimeString())->toBe('2017-12-25 02:30:00')
@@ -648,7 +653,7 @@ it('supports custom parsers that participate in refiners', function () {
         ->and($result->tags())->toContain('parser/ENTimeExpressionParser')
         ->and($result->tags())->toContain('refiner/mergeTimeFollowedByDate');
 
-    $casualTime = $chrono->parseText('I will arrive at Christmas night', '2017-11-19 12:00')[0];
+    $casualTime = $chrono->parse('I will arrive at Christmas night', '2017-11-19 12:00')[0];
 
     expect($casualTime->text)->toBe('Christmas night')
         ->and($casualTime->start->date()->toDateTimeString())->toBe('2017-12-25 20:00:00')
@@ -758,11 +763,11 @@ it('clones parser and refiner configuration like upstream chrono instances', fun
     $original = Chrono::casual()->withParser($christmas);
     $clone = $original->clone()->withParser($newYears);
 
-    expect($clone->parseDateText('Christmas', '2017-11-19')?->toDateTimeString())
+    expect($clone->date('Christmas', '2017-11-19')?->toDateTimeString())
         ->toBe('2017-12-25 12:00:00')
-        ->and($clone->parseDateText('New Years', '2017-11-19')?->toDateTimeString())
+        ->and($clone->date('New Years', '2017-11-19')?->toDateTimeString())
         ->toBe('2018-01-01 12:00:00')
-        ->and($original->parseDateText('New Years', '2017-11-19'))
+        ->and($original->date('New Years', '2017-11-19'))
         ->toBeNull();
 });
 
@@ -773,13 +778,13 @@ it('removes and replaces parser configuration like upstream chrono instances', f
         ->withoutParser(EnSlashDateParser::class)
         ->withParser(new EnSlashDateParser(littleEndian: true), prepend: true);
 
-    expect($strict->parseDateText('6/10/2018', '2012-08-10')?->toDateTimeString())
+    expect($strict->date('6/10/2018', '2012-08-10')?->toDateTimeString())
         ->toBe('2018-06-10 12:00:00')
-        ->and($strict->parseText('6/10/2018', '2012-08-10')[0]->start->tags())
+        ->and($strict->parse('6/10/2018', '2012-08-10')[0]->start->tags())
         ->toContain('parser/SlashDateFormatParser')
-        ->and($replaced->parseDateText('6/10/2018', '2012-08-10')?->toDateTimeString())
+        ->and($replaced->date('6/10/2018', '2012-08-10')?->toDateTimeString())
         ->toBe('2018-10-06 12:00:00')
-        ->and($replaced->parseText('6/10/2018', '2012-08-10')[0]->start->tags())
+        ->and($replaced->parse('6/10/2018', '2012-08-10')[0]->start->tags())
         ->toContain('parser/SlashDateFormatParser');
 });
 
@@ -790,19 +795,19 @@ it('replaces casual relative time unit parser options like upstream chrono insta
         ->withParser(new EnTimeUnitCasualRelativeFormatParser(allowAbbreviations: false));
     $strictCustom = Chrono::strict()->withParser(new EnTimeUnitCasualRelativeFormatParser(allowAbbreviations: false));
 
-    expect(Chrono::parseDate('next 5m', '2016-10-01 14:52')?->toDateTimeString())
+    expect(Chrono::date('next 5m', '2016-10-01 14:52')?->toDateTimeString())
         ->toBe('2016-10-01 14:57:00')
-        ->and($custom->parseText('next 5m', '2016-10-01 14:52'))
+        ->and($custom->parse('next 5m', '2016-10-01 14:52'))
         ->toBe([])
-        ->and($custom->parseDateText('next 5 minutes', '2016-10-01 14:52')?->toDateTimeString())
+        ->and($custom->date('next 5 minutes', '2016-10-01 14:52')?->toDateTimeString())
         ->toBe('2016-10-01 14:57:00')
-        ->and($strictCustom->parseText('-3y', '2016-10-01 12:00'))
+        ->and($strictCustom->parse('-3y', '2016-10-01 12:00'))
         ->toBe([])
-        ->and($strictCustom->parseText('last 2m', '2016-10-01 12:00'))
+        ->and($strictCustom->parse('last 2m', '2016-10-01 12:00'))
         ->toBe([])
-        ->and($strictCustom->parseText('-2 hours 5 minutes', '2016-10-01 12:00')[0]->text)
+        ->and($strictCustom->parse('-2 hours 5 minutes', '2016-10-01 12:00')[0]->text)
         ->toBe('-2 hours 5 minutes')
-        ->and($strictCustom->parseDateText('-2 hours 5 minutes', '2016-10-01 12:00')?->toDateTimeString())
+        ->and($strictCustom->date('-2 hours 5 minutes', '2016-10-01 12:00')?->toDateTimeString())
         ->toBe('2016-10-01 09:55:00');
 });
 
@@ -822,9 +827,9 @@ it('removes refiner configuration like upstream chrono instances', function () {
     $custom = Chrono::casual()->withRefiner($forceYear);
     $withoutRefiner = $custom->clone()->withoutRefiner($forceYear::class);
 
-    expect($custom->parseDateText('tomorrow', '2012-08-10')?->toDateTimeString())
+    expect($custom->date('tomorrow', '2012-08-10')?->toDateTimeString())
         ->toBe('2030-08-11 00:00:00')
-        ->and($withoutRefiner->parseDateText('tomorrow', '2012-08-10')?->toDateTimeString())
+        ->and($withoutRefiner->date('tomorrow', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-11 00:00:00');
 });
 
@@ -850,11 +855,11 @@ it('supports custom refiners', function () {
 
     $ambiguousTime = Chrono::casual()
         ->withRefiner($afternoonAmbiguousTimes)
-        ->parseText('This is at 2.30', '2026-06-23 09:00')[0];
+        ->parse('This is at 2.30', '2026-06-23 09:00')[0];
 
     $explicitMorning = Chrono::casual()
         ->withRefiner($afternoonAmbiguousTimes)
-        ->parseText('This is at 2.30 AM', '2026-06-23 09:00')[0];
+        ->parse('This is at 2.30 AM', '2026-06-23 09:00')[0];
 
     $onlyTomorrow = new class implements Refiner
     {
@@ -866,7 +871,7 @@ it('supports custom refiners', function () {
 
     $results = Chrono::casual()
         ->withRefiner($onlyTomorrow)
-        ->parseText('today and tomorrow', '2026-06-23 09:00');
+        ->parse('today and tomorrow', '2026-06-23 09:00');
 
     expect($ambiguousTime->text)->toBe('at 2.30')
         ->and($ambiguousTime->start->date()->toDateTimeString())->toBe('2026-06-23 14:30:00')
@@ -884,7 +889,7 @@ it('rejects unlikely loose English time guesses', function () {
         ->and(Chrono::parse("I'm at 10.1 - 10.12", '2012-08-10 12:00'))->toBe([])
         ->and(Chrono::parse("I'm at 10 - 10.1", '2012-08-10 12:00'))->toBe([])
         ->and(Chrono::parse('1a', '2012-08-10 12:00'))->toBe([])
-        ->and(Chrono::parseDate('1am', '2012-08-10 12:00')?->toDateTimeString())->toBe('2012-08-10 01:00:00')
+        ->and(Chrono::date('1am', '2012-08-10 12:00')?->toDateTimeString())->toBe('2012-08-10 01:00:00')
         ->and(Chrono::parse('8pm - 11', '2012-08-10 12:00')[0]->text)->toBe('8pm - 11');
 });
 

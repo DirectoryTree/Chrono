@@ -75,6 +75,8 @@ abstract readonly class AbstractMergeDateRangeRefiner extends MergingRefiner
     }
 
     /**
+     * Order the parsed range results.
+     *
      * @return array{0: ParsedResult, 1: ParsedResult}
      */
     protected function orderedRange(ParsedResult $start, ParsedResult $end): array

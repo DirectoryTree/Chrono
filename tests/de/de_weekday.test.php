@@ -4,13 +4,13 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses german weekdays', function () {
     $german = Chrono::de();
-    $monday = $german->parseText('Montag', '2012-08-09')[0];
-    $lastFriday = $german->parseText('Die Deadline war letzten Freitag...', '2012-08-09')[0];
-    $nextFriday = $german->parseText('Treffen wir uns am Freitag nächste Woche', '2015-04-18')[0];
-    $nextTuesday = $german->parseText('Ich habe vor, am Dienstag nächste Woche freizunehmen', '2015-04-18')[0];
-    $range = $german->parseText('diesen Freitag bis diesen Montag', '2016-08-04', ['forwardDate' => true])[0];
-    $monthOverlap = $german->parseText('Sonntag, den 7. Dezember 2014', '2012-08-09')[0];
-    $dashOverlap = $german->parseText('Sonntag 7.12.2014', '2012-08-09')[0];
+    $monday = $german->parse('Montag', '2012-08-09')[0];
+    $lastFriday = $german->parse('Die Deadline war letzten Freitag...', '2012-08-09')[0];
+    $nextFriday = $german->parse('Treffen wir uns am Freitag nächste Woche', '2015-04-18')[0];
+    $nextTuesday = $german->parse('Ich habe vor, am Dienstag nächste Woche freizunehmen', '2015-04-18')[0];
+    $range = $german->parse('diesen Freitag bis diesen Montag', '2016-08-04', ['forwardDate' => true])[0];
+    $monthOverlap = $german->parse('Sonntag, den 7. Dezember 2014', '2012-08-09')[0];
+    $dashOverlap = $german->parse('Sonntag 7.12.2014', '2012-08-09')[0];
 
     expect($monday->text)->toBe('Montag')
         ->and($monday->index)->toBe(0)
@@ -22,12 +22,12 @@ it('parses german weekdays', function () {
         ->and($monday->start->isCertain('month'))->toBeFalse()
         ->and($monday->start->isCertain('year'))->toBeFalse()
         ->and($monday->start->isCertain('weekday'))->toBeTrue()
-        ->and($german->parseText('am Donnerstag', '2012-08-09')[0]->text)->toBe('am Donnerstag')
-        ->and($german->parseDateText('am Donnerstag', '2012-08-09')?->toDateTimeString())
+        ->and($german->parse('am Donnerstag', '2012-08-09')[0]->text)->toBe('am Donnerstag')
+        ->and($german->date('am Donnerstag', '2012-08-09')?->toDateTimeString())
         ->toBe('2012-08-09 12:00:00')
-        ->and($german->parseText('Sonntag', '2012-08-09')[0]->text)->toBe('Sonntag')
-        ->and($german->parseText('Sonntag', '2012-08-09')[0]->start->get('weekday'))->toBe(0)
-        ->and($german->parseDateText('Sonntag', '2012-08-09')?->toDateTimeString())
+        ->and($german->parse('Sonntag', '2012-08-09')[0]->text)->toBe('Sonntag')
+        ->and($german->parse('Sonntag', '2012-08-09')[0]->start->get('weekday'))->toBe(0)
+        ->and($german->date('Sonntag', '2012-08-09')?->toDateTimeString())
         ->toBe('2012-08-12 12:00:00')
         ->and($lastFriday->index)->toBe(17)
         ->and($lastFriday->text)
@@ -70,15 +70,15 @@ it('parses german weekdays', function () {
 
 it('parses german weekdays with upstream-shaped certainty', function () {
     $german = Chrono::de();
-    $monday = $german->parseText('Montag', '2012-08-09')[0];
-    $thursday = $german->parseText('am Donnerstag', '2012-08-09')[0];
-    $sunday = $german->parseText('Sonntag', '2012-08-09')[0];
-    $lastFriday = $german->parseText('Die Deadline war letzten Freitag...', '2012-08-09')[0];
-    $nextFriday = $german->parseText('Treffen wir uns am Freitag nächste Woche', '2015-04-18')[0];
-    $nextTuesday = $german->parseText('Ich habe vor, am Dienstag nächste Woche freizunehmen', '2015-04-18')[0];
-    $range = $german->parseText('diesen Freitag bis diesen Montag', '2016-08-04', ['forwardDate' => true])[0];
-    $monthOverlap = $german->parseText('Sonntag, den 7. Dezember 2014', '2012-08-09')[0];
-    $dashOverlap = $german->parseText('Sonntag 7.12.2014', '2012-08-09')[0];
+    $monday = $german->parse('Montag', '2012-08-09')[0];
+    $thursday = $german->parse('am Donnerstag', '2012-08-09')[0];
+    $sunday = $german->parse('Sonntag', '2012-08-09')[0];
+    $lastFriday = $german->parse('Die Deadline war letzten Freitag...', '2012-08-09')[0];
+    $nextFriday = $german->parse('Treffen wir uns am Freitag nächste Woche', '2015-04-18')[0];
+    $nextTuesday = $german->parse('Ich habe vor, am Dienstag nächste Woche freizunehmen', '2015-04-18')[0];
+    $range = $german->parse('diesen Freitag bis diesen Montag', '2016-08-04', ['forwardDate' => true])[0];
+    $monthOverlap = $german->parse('Sonntag, den 7. Dezember 2014', '2012-08-09')[0];
+    $dashOverlap = $german->parse('Sonntag 7.12.2014', '2012-08-09')[0];
 
     expect($monday->index)->toBe(0)
         ->and($monday->text)->toBe('Montag')
@@ -141,11 +141,11 @@ it('parses german weekdays with upstream-shaped certainty', function () {
 
 it('parses german timezones and weekday times', function () {
     $german = Chrono::de();
-    $cet = $german->parseText('um 14 Uhr CET', '2016-02-28')[0];
-    $cest = $german->parseText('14 Uhr cet', '2016-05-28')[0];
-    $falsePositive = $german->parseText('am Freitag um 14 Uhr cetteln wir etwas an', '2016-02-28')[0];
-    $weekdayTime = $german->parseText('Freitag um 14 Uhr CET', '2016-05-28')[0];
-    $plain = $german->parseText('um 14 Uhr', '2016-02-28')[0];
+    $cet = $german->parse('um 14 Uhr CET', '2016-02-28')[0];
+    $cest = $german->parse('14 Uhr cet', '2016-05-28')[0];
+    $falsePositive = $german->parse('am Freitag um 14 Uhr cetteln wir etwas an', '2016-02-28')[0];
+    $weekdayTime = $german->parse('Freitag um 14 Uhr CET', '2016-05-28')[0];
+    $plain = $german->parse('um 14 Uhr', '2016-02-28')[0];
 
     expect($plain->text)->toBe('um 14 Uhr')
         ->and($plain->start->isCertain('timezoneOffset'))->toBeFalse()

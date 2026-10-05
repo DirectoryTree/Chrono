@@ -1,7 +1,7 @@
 <?php
 
 use DirectoryTree\Chrono\Chrono;
-use DirectoryTree\Chrono\Weekday;
+use DirectoryTree\Chrono\Enums\Weekday;
 
 it('merges relative durations before and after parsed dates', function () {
     $afterYesterday = Chrono::parse('2 weeks after yesterday', '2022-02-02 00:00')[0];
@@ -13,7 +13,7 @@ it('merges relative durations before and after parsed dates', function () {
         ->and($afterYesterday->start->get('year'))->toBe(2022)
         ->and($afterYesterday->start->get('month'))->toBe(2)
         ->and($afterYesterday->start->get('day'))->toBe(15)
-        ->and($afterYesterday->start->get('weekday'))->toBe(Weekday::TUESDAY->value)
+        ->and($afterYesterday->start->get('weekday'))->toBe(Weekday::Tuesday->value)
         ->and($afterYesterday->start->isCertain('year'))->toBeTrue()
         ->and($afterYesterday->start->isCertain('month'))->toBeTrue()
         ->and($afterYesterday->start->isCertain('day'))->toBeTrue()

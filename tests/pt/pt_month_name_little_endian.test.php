@@ -4,22 +4,22 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses portuguese month name dates and ranges', function () {
     $portuguese = Chrono::pt();
-    $explicit = $portuguese->parseText('10 de agosto de 2012', '2012-08-10')[0];
-    $beforeCommonEra = $portuguese->parseText('10 Agosto 234 AC', '2012-08-10')[0];
-    $commonEra = $portuguese->parseText('10 Agosto 88 d. C.', '2012-08-10')[0];
-    $weekdayMonth = $portuguese->parseText('Dom 15Set', '2013-08-10')[0];
-    $upperWeekdayMonth = $portuguese->parseText('DOM 15SET', '2013-08-10')[0];
-    $prefixedMonth = $portuguese->parseText('O prazo é 10 Agosto', '2012-08-10')[0];
-    $weekdayPrefixedMonth = $portuguese->parseText('O prazo é terça-feira, 10 de janeiro', '2012-08-10')[0];
-    $abbreviatedWeekdayPrefixedMonth = $portuguese->parseText('O prazo é Qua, 10 Janeiro', '2012-08-10')[0];
-    $range = $portuguese->parseText('10-12 de agosto', '2012-08-10')[0];
-    $dashRange = $portuguese->parseText('10 - 22 Agosto 2012', '2012-08-10')[0];
-    $aRange = $portuguese->parseText('10 a 22 Agosto 2012', '2012-08-10')[0];
-    $untilRange = $portuguese->parseText('15 até 16 agosto', '2012-08-10')[0];
-    $crossMonthRange = $portuguese->parseText('10 Agosto - 12 Setembro', '2012-08-10')[0];
-    $crossMonthWithYear = $portuguese->parseText('10 Agosto - 12 Setembro 2013', '2012-08-10')[0];
-    $dateTime = $portuguese->parseText('12 de Julho às 19:00', '2012-08-10')[0];
-    $explicitWithoutDe = $portuguese->parseText('10 Agosto 2012', '2012-08-10')[0];
+    $explicit = $portuguese->parse('10 de agosto de 2012', '2012-08-10')[0];
+    $beforeCommonEra = $portuguese->parse('10 Agosto 234 AC', '2012-08-10')[0];
+    $commonEra = $portuguese->parse('10 Agosto 88 d. C.', '2012-08-10')[0];
+    $weekdayMonth = $portuguese->parse('Dom 15Set', '2013-08-10')[0];
+    $upperWeekdayMonth = $portuguese->parse('DOM 15SET', '2013-08-10')[0];
+    $prefixedMonth = $portuguese->parse('O prazo é 10 Agosto', '2012-08-10')[0];
+    $weekdayPrefixedMonth = $portuguese->parse('O prazo é terça-feira, 10 de janeiro', '2012-08-10')[0];
+    $abbreviatedWeekdayPrefixedMonth = $portuguese->parse('O prazo é Qua, 10 Janeiro', '2012-08-10')[0];
+    $range = $portuguese->parse('10-12 de agosto', '2012-08-10')[0];
+    $dashRange = $portuguese->parse('10 - 22 Agosto 2012', '2012-08-10')[0];
+    $aRange = $portuguese->parse('10 a 22 Agosto 2012', '2012-08-10')[0];
+    $untilRange = $portuguese->parse('15 até 16 agosto', '2012-08-10')[0];
+    $crossMonthRange = $portuguese->parse('10 Agosto - 12 Setembro', '2012-08-10')[0];
+    $crossMonthWithYear = $portuguese->parse('10 Agosto - 12 Setembro 2013', '2012-08-10')[0];
+    $dateTime = $portuguese->parse('12 de Julho às 19:00', '2012-08-10')[0];
+    $explicitWithoutDe = $portuguese->parse('10 Agosto 2012', '2012-08-10')[0];
 
     expect($explicit->index)->toBe(0)
         ->and($explicit->text)->toBe('10 de agosto de 2012')
@@ -88,7 +88,7 @@ it('parses portuguese month name dates and ranges', function () {
         ->and($crossMonthWithYear->end?->date()->toDateTimeString())->toBe('2013-09-12 12:00:00')
         ->and($dateTime->text)->toBe('12 de Julho às 19:00')
         ->and($dateTime->start->date()->toDateTimeString())->toBe('2012-07-12 19:00:00')
-        ->and($portuguese->parseText('32 Agosto 2014', '2012-08-10'))->toBe([])
-        ->and($portuguese->parseText('29 Fevereiro 2014', '2012-08-10'))->toBe([])
-        ->and(Chrono::strictPortuguese()->parseText('32 Agosto', '2012-08-10'))->toBe([]);
+        ->and($portuguese->parse('32 Agosto 2014', '2012-08-10'))->toBe([])
+        ->and($portuguese->parse('29 Fevereiro 2014', '2012-08-10'))->toBe([])
+        ->and(Chrono::strictPortuguese()->parse('32 Agosto', '2012-08-10'))->toBe([]);
 });

@@ -4,27 +4,27 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses vietnamese standard month year and year expressions', function () {
     $vietnamese = Chrono::vi();
-    $standard = $vietnamese->parseText('ngày 15 tháng 3 năm 1975', '2012-08-10')[0];
-    $prefixedStandard = $vietnamese->parseText('Ngày 30 tháng 4 năm 1975 là ngày giải phóng.', '2012-08-10 12:00')[0];
-    $embeddedStandard = $vietnamese->parseText('Hiệp định được ký ngày 27 tháng 1 năm 1973.', '2012-08-10 12:00')[0];
-    $noPrefixStandard = $vietnamese->parseText('7 tháng 5 năm 1954 là ngày chấm dứt trận Điện Biên Phủ.', '2012-08-10 12:00')[0];
-    $impliedYear = $vietnamese->parseText('ngày 15 tháng 3', '2012-08-10 12:00')[0];
-    $positionedStandard = $vietnamese->parseText('Sự kiện ngày 30 tháng 4 năm 1975 quan trọng.', '2012-08-10 12:00')[0];
-    $bcStandard = $vietnamese->parseText('ngày 1 tháng 1 năm 300 TCN', '2012-08-10')[0];
-    $month = $vietnamese->parseText('tháng chạp năm 1975', '2012-08-10')[0];
-    $numberedMonth = $vietnamese->parseText('tháng 4 năm 1975', '2012-08-10')[0];
-    $slashMonth = $vietnamese->parseText('tháng 3/1975', '2012-08-10')[0];
-    $impliedYearMonth = $vietnamese->parseText('tháng 3', '2012-08-10')[0];
-    $year = $vietnamese->parseText('năm 1975', '2012-08-10')[0];
-    $embeddedYear = $vietnamese->parseText('Việt Nam thống nhất vào năm 1976.', '2012-08-10')[0];
-    $accentedEmbeddedYear = $vietnamese->parseText('Cách mạng năm 1789.', '2012-08-10')[0];
-    $bcYear = $vietnamese->parseText('Năm 179 TCN, triều Điệt bị diệt.', '2012-08-10')[0];
-    $largeBcYear = $vietnamese->parseText('Văn minh có từ năm 3000 TCN.', '2012-08-10')[0];
-    $threeDigitYear = $vietnamese->parseText('năm 938 là năm độc lập.', '2012-08-10')[0];
-    $slash = $vietnamese->parseText('Ngày 30/04/1975.', '2012-08-10')[0];
-    $embeddedSlash = $vietnamese->parseText('Hội nghị 01/01/1954', '2012-08-10')[0];
-    $shortSlash = $vietnamese->parseText('3/5/1968', '2012-08-10')[0];
-    $iso = $vietnamese->parseText('Ngày 2024-03-15 là quan trọng.', '2012-08-10')[0];
+    $standard = $vietnamese->parse('ngày 15 tháng 3 năm 1975', '2012-08-10')[0];
+    $prefixedStandard = $vietnamese->parse('Ngày 30 tháng 4 năm 1975 là ngày giải phóng.', '2012-08-10 12:00')[0];
+    $embeddedStandard = $vietnamese->parse('Hiệp định được ký ngày 27 tháng 1 năm 1973.', '2012-08-10 12:00')[0];
+    $noPrefixStandard = $vietnamese->parse('7 tháng 5 năm 1954 là ngày chấm dứt trận Điện Biên Phủ.', '2012-08-10 12:00')[0];
+    $impliedYear = $vietnamese->parse('ngày 15 tháng 3', '2012-08-10 12:00')[0];
+    $positionedStandard = $vietnamese->parse('Sự kiện ngày 30 tháng 4 năm 1975 quan trọng.', '2012-08-10 12:00')[0];
+    $bcStandard = $vietnamese->parse('ngày 1 tháng 1 năm 300 TCN', '2012-08-10')[0];
+    $month = $vietnamese->parse('tháng chạp năm 1975', '2012-08-10')[0];
+    $numberedMonth = $vietnamese->parse('tháng 4 năm 1975', '2012-08-10')[0];
+    $slashMonth = $vietnamese->parse('tháng 3/1975', '2012-08-10')[0];
+    $impliedYearMonth = $vietnamese->parse('tháng 3', '2012-08-10')[0];
+    $year = $vietnamese->parse('năm 1975', '2012-08-10')[0];
+    $embeddedYear = $vietnamese->parse('Việt Nam thống nhất vào năm 1976.', '2012-08-10')[0];
+    $accentedEmbeddedYear = $vietnamese->parse('Cách mạng năm 1789.', '2012-08-10')[0];
+    $bcYear = $vietnamese->parse('Năm 179 TCN, triều Điệt bị diệt.', '2012-08-10')[0];
+    $largeBcYear = $vietnamese->parse('Văn minh có từ năm 3000 TCN.', '2012-08-10')[0];
+    $threeDigitYear = $vietnamese->parse('năm 938 là năm độc lập.', '2012-08-10')[0];
+    $slash = $vietnamese->parse('Ngày 30/04/1975.', '2012-08-10')[0];
+    $embeddedSlash = $vietnamese->parse('Hội nghị 01/01/1954', '2012-08-10')[0];
+    $shortSlash = $vietnamese->parse('3/5/1968', '2012-08-10')[0];
+    $iso = $vietnamese->parse('Ngày 2024-03-15 là quan trọng.', '2012-08-10')[0];
 
     expect($standard->start->date()->toDateTimeString())->toBe('1975-03-15 12:00:00')
         ->and($standard->start->tags())->toContain('parser/VIStandardParser')
@@ -94,8 +94,8 @@ it('parses vietnamese standard month year and year expressions', function () {
         ->and($iso->start->get('month'))->toBe(3)
         ->and($iso->start->get('year'))->toBe(2024)
         ->and($iso->start->date()->toDateTimeString())->toBe('2024-03-15 12:00:00')
-        ->and($vietnamese->parseText('ngày 1 tháng 13', '2012-08-10'))->toBe([])
-        ->and($vietnamese->parseText('tháng 13', '2012-08-10'))->toBe([])
-        ->and($vietnamese->parseText('tháng 0', '2012-08-10'))->toBe([])
-        ->and($vietnamese->parseText('Có 1975 người tham gia.', '2012-08-10'))->toBe([]);
+        ->and($vietnamese->parse('ngày 1 tháng 13', '2012-08-10'))->toBe([])
+        ->and($vietnamese->parse('tháng 13', '2012-08-10'))->toBe([])
+        ->and($vietnamese->parse('tháng 0', '2012-08-10'))->toBe([])
+        ->and($vietnamese->parse('Có 1975 người tham gia.', '2012-08-10'))->toBe([]);
 });

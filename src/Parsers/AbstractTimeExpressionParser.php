@@ -3,7 +3,7 @@
 namespace DirectoryTree\Chrono\Parsers;
 
 use Carbon\CarbonImmutable;
-use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\Enums\Meridiem;
 use DirectoryTree\Chrono\Options;
 use DirectoryTree\Chrono\ParsedComponents;
 use DirectoryTree\Chrono\ParsedResult;
@@ -179,6 +179,8 @@ abstract class AbstractTimeExpressionParser implements Parser
     }
 
     /**
+     * Parse matched time components.
+     *
      * @return array{hour: int, minute: int, second: int, millisecond: int, meridiem: int, meridiemCertain: bool}|null
      */
     protected function time(array $match, bool $following): ?array
@@ -266,6 +268,8 @@ abstract class AbstractTimeExpressionParser implements Parser
     }
 
     /**
+     * Create parsed date components.
+     *
      * @param  array{hour: int, minute: int, second: int, millisecond: int, meridiem: int, meridiemCertain: bool}  $time
      */
     protected function components(CarbonImmutable $date, array $time): ParsedComponents
@@ -322,6 +326,8 @@ abstract class AbstractTimeExpressionParser implements Parser
     }
 
     /**
+     * Remove timezone offset captures from the match.
+     *
      * @return array<string, array{0: string}>
      */
     protected function offsetlessMatch(array $match): array

@@ -81,9 +81,9 @@ it('parses multiple english date results', function () {
 });
 
 it('parses english variants in strict mode and regional slash modes', function () {
-    expect(Chrono::strict()->parseText('Tuesday'))->toBe([])
-        ->and(Chrono::en()->parseText('6/10/2018')[0]->start->date()->toDateTimeString())
+    expect(Chrono::strict()->parse('Tuesday'))->toBe([])
+        ->and(Chrono::en()->parse('6/10/2018')[0]->start->date()->toDateTimeString())
         ->toBe('2018-06-10 12:00:00')
-        ->and(Chrono::enGb()->parseText('6/10/2018')[0]->start->date()->toDateTimeString())
+        ->and(Chrono::enGb()->parse('6/10/2018')[0]->start->date()->toDateTimeString())
         ->toBe('2018-10-06 12:00:00');
 });

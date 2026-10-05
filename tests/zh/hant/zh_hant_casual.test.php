@@ -4,18 +4,18 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses traditional chinese casual dates', function () {
     $chinese = Chrono::zhHant();
-    $now = $chinese->parseText('雞而家全部都係雞', '2012-08-10 08:09:10.011')[0];
-    $today = $chinese->parseText('雞今日全部都係雞', '2012-08-10 12:00')[0];
-    $tomorrow = $chinese->parseText('雞聽日全部都係雞', '2012-08-10 12:00')[0];
-    $lateNightTomorrow = $chinese->parseText('雞明天全部都係雞', '2012-08-10 01:00')[0];
-    $dayAfterTomorrowMorning = $chinese->parseText('雞後天凌晨全部都係雞', '2012-08-10 00:00')[0];
-    $threeDaysAgoMorning = $chinese->parseText('雞大前天凌晨全部都係雞', '2012-08-10 00:00')[0];
-    $dayBeforeYesterday = $chinese->parseText('雞前日全部都係雞', '2012-08-10 12:00')[0];
-    $yesterday = $chinese->parseText('雞琴日全部都係雞', '2012-08-10 12:00')[0];
-    $morning = $chinese->parseText('雞今日朝早全部都係雞', '2012-08-10 12:00')[0];
-    $afternoon = $chinese->parseText('雞晏晝全部都係雞', '2012-08-10 12:00')[0];
-    $tonight = $chinese->parseText('雞今晚全部都係雞', '2012-08-10 12:00')[0];
-    $lastNight = $chinese->parseText('雞昨天晚上全部都係雞', '2012-08-10 12:00')[0];
+    $now = $chinese->parse('雞而家全部都係雞', '2012-08-10 08:09:10.011')[0];
+    $today = $chinese->parse('雞今日全部都係雞', '2012-08-10 12:00')[0];
+    $tomorrow = $chinese->parse('雞聽日全部都係雞', '2012-08-10 12:00')[0];
+    $lateNightTomorrow = $chinese->parse('雞明天全部都係雞', '2012-08-10 01:00')[0];
+    $dayAfterTomorrowMorning = $chinese->parse('雞後天凌晨全部都係雞', '2012-08-10 00:00')[0];
+    $threeDaysAgoMorning = $chinese->parse('雞大前天凌晨全部都係雞', '2012-08-10 00:00')[0];
+    $dayBeforeYesterday = $chinese->parse('雞前日全部都係雞', '2012-08-10 12:00')[0];
+    $yesterday = $chinese->parse('雞琴日全部都係雞', '2012-08-10 12:00')[0];
+    $morning = $chinese->parse('雞今日朝早全部都係雞', '2012-08-10 12:00')[0];
+    $afternoon = $chinese->parse('雞晏晝全部都係雞', '2012-08-10 12:00')[0];
+    $tonight = $chinese->parse('雞今晚全部都係雞', '2012-08-10 12:00')[0];
+    $lastNight = $chinese->parse('雞昨天晚上全部都係雞', '2012-08-10 12:00')[0];
 
     expect($now->text)->toBe('而家')
         ->and($now->start->date()->format('Y-m-d H:i:s.v'))->toBe('2012-08-10 08:09:10.011')
@@ -45,13 +45,13 @@ it('parses traditional chinese casual dates', function () {
 
 it('parses traditional chinese casual date ranges and random casual text', function () {
     $chinese = Chrono::zhHant();
-    $combined = $chinese->parseText('雞今日晏晝5點全部都係雞', '2012-08-10 12:00')[0];
-    $earlyRange = $chinese->parseText('雞今日 - 下禮拜五全部都係雞', '2012-08-04 12:00')[0];
-    $sameDayRange = $chinese->parseText('雞今日 - 下禮拜五全部都係雞', '2012-08-10 12:00')[0];
-    $night = $chinese->parseText('今日夜晚', '2012-01-01 12:00')[0];
-    $eveningTime = $chinese->parseText('今晚8點正', '2012-01-01 12:00')[0];
-    $evening = $chinese->parseText('晚上8點', '2012-01-01 12:00')[0];
-    $weekday = $chinese->parseText('星期四')[0];
+    $combined = $chinese->parse('雞今日晏晝5點全部都係雞', '2012-08-10 12:00')[0];
+    $earlyRange = $chinese->parse('雞今日 - 下禮拜五全部都係雞', '2012-08-04 12:00')[0];
+    $sameDayRange = $chinese->parse('雞今日 - 下禮拜五全部都係雞', '2012-08-10 12:00')[0];
+    $night = $chinese->parse('今日夜晚', '2012-01-01 12:00')[0];
+    $eveningTime = $chinese->parse('今晚8點正', '2012-01-01 12:00')[0];
+    $evening = $chinese->parse('晚上8點', '2012-01-01 12:00')[0];
+    $weekday = $chinese->parse('星期四')[0];
 
     expect($combined->text)->toBe('今日晏晝5點')
         ->and($combined->start->date()->toDateTimeString())->toBe('2012-08-10 17:00:00')

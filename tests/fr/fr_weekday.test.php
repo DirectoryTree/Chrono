@@ -4,13 +4,13 @@ use DirectoryTree\Chrono\Chrono;
 
 it('extracts french timezones from weekday time expressions', function () {
     $french = Chrono::fr();
-    $plain = $french->parseText('Vendredi à 2 pm', '2016-04-28')[0];
-    $est = $french->parseText('vendredi 2 pm EST', '2016-04-28')[0];
-    $cet = $french->parseText('vendredi 15h CET', '2016-02-28')[0];
-    $cest = $french->parseText('vendredi 15h cest', '2016-02-28')[0];
-    $lowerEst = $french->parseText('Vendredi à 2 pm est', '2016-04-28')[0];
-    $sentence = $french->parseText("Vendredi à 2 pm j'ai rdv...", '2016-04-28')[0];
-    $sentenceWords = $french->parseText('Vendredi à 2 pm je vais faire quelque chose', '2016-04-28')[0];
+    $plain = $french->parse('Vendredi à 2 pm', '2016-04-28')[0];
+    $est = $french->parse('vendredi 2 pm EST', '2016-04-28')[0];
+    $cet = $french->parse('vendredi 15h CET', '2016-02-28')[0];
+    $cest = $french->parse('vendredi 15h cest', '2016-02-28')[0];
+    $lowerEst = $french->parse('Vendredi à 2 pm est', '2016-04-28')[0];
+    $sentence = $french->parse("Vendredi à 2 pm j'ai rdv...", '2016-04-28')[0];
+    $sentenceWords = $french->parse('Vendredi à 2 pm je vais faire quelque chose', '2016-04-28')[0];
 
     expect($plain->text)->toBe('Vendredi à 2 pm')
         ->and($plain->start->timezoneOffset())->toBeNull()
@@ -36,14 +36,14 @@ it('extracts french timezones from weekday time expressions', function () {
 
 it('parses french weekdays', function () {
     $french = Chrono::fr();
-    $monday = $french->parseText('Lundi', '2012-08-09')[0];
-    $forwardMonday = $french->parseText('Lundi', '2012-08-09', ['forwardDate' => true])[0];
-    $thursday = $french->parseText('Jeudi', '2012-08-09')[0];
-    $sunday = $french->parseText('Dimanche', '2012-08-09')[0];
-    $lastFriday = $french->parseText('la deadline était vendredi dernier...', '2012-08-09')[0];
-    $nextFriday = $french->parseText('Planifions une réuinion vendredi prochain', '2015-04-18')[0];
-    $monthOverlap = $french->parseText('Dimanche 7 décembre 2014', '2012-08-09')[0];
-    $slashOverlap = $french->parseText('Dimanche 7/12/2014', '2012-08-09')[0];
+    $monday = $french->parse('Lundi', '2012-08-09')[0];
+    $forwardMonday = $french->parse('Lundi', '2012-08-09', ['forwardDate' => true])[0];
+    $thursday = $french->parse('Jeudi', '2012-08-09')[0];
+    $sunday = $french->parse('Dimanche', '2012-08-09')[0];
+    $lastFriday = $french->parse('la deadline était vendredi dernier...', '2012-08-09')[0];
+    $nextFriday = $french->parse('Planifions une réuinion vendredi prochain', '2015-04-18')[0];
+    $monthOverlap = $french->parse('Dimanche 7 décembre 2014', '2012-08-09')[0];
+    $slashOverlap = $french->parse('Dimanche 7/12/2014', '2012-08-09')[0];
 
     expect($monday->text)->toBe('Lundi')
         ->and($monday->index)->toBe(0)

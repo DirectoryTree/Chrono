@@ -38,6 +38,8 @@ trait InteractsWithEnglishRefiners
     }
 
     /**
+     * Parse the relative duration text.
+     *
      * @return array<string, int>
      */
     protected function relativeDuration(string $text): array
@@ -65,6 +67,8 @@ trait InteractsWithEnglishRefiners
     }
 
     /**
+     * Apply the duration to the given date.
+     *
      * @param  array<string, int>  $duration
      */
     protected function applyDuration(CarbonImmutable $date, array $duration, int $direction): CarbonImmutable

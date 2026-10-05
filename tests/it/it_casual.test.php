@@ -4,9 +4,9 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses italian casual dates', function () {
     $italian = Chrono::it();
-    $now = $italian->parseText('La scadenza è ora', '2012-08-10 08:09:10.011')[0];
-    $today = $italian->parseText('La scadenza è oggi', '2012-08-10 14:12')[0];
-    $tomorrow = $italian->parseText('La scadenza è domani', '2012-08-10 17:10')[0];
+    $now = $italian->parse('La scadenza è ora', '2012-08-10 08:09:10.011')[0];
+    $today = $italian->parse('La scadenza è oggi', '2012-08-10 14:12')[0];
+    $tomorrow = $italian->parse('La scadenza è domani', '2012-08-10 17:10')[0];
 
     expect($now->index)->toBe(14)
         ->and($now->text)->toBe('ora')
@@ -35,26 +35,26 @@ it('parses italian casual dates', function () {
         ->and($tomorrow->start->get('year'))->toBe(2012)
         ->and($tomorrow->start->get('month'))->toBe(8)
         ->and($tomorrow->start->get('day'))->toBe(11)
-        ->and($italian->parseDateText('La scadenza è dmn', '2012-08-10 17:10')?->toDateTimeString())
+        ->and($italian->date('La scadenza è dmn', '2012-08-10 17:10')?->toDateTimeString())
         ->toBe('2012-08-11 17:10:00')
-        ->and($italian->parseDateText('Ci vediamo questa sera', '2012-08-10 17:10')?->toDateTimeString())
+        ->and($italian->date('Ci vediamo questa sera', '2012-08-10 17:10')?->toDateTimeString())
         ->toBe('2012-08-10 20:00:00')
-        ->and($italian->parseDateText('Ci vediamo ieri sera', '2012-08-10 17:10')?->toDateTimeString())
+        ->and($italian->date('Ci vediamo ieri sera', '2012-08-10 17:10')?->toDateTimeString())
         ->toBe('2012-08-09 00:00:00');
 });
 
 it('parses italian casual times', function () {
     $italian = Chrono::it();
 
-    expect($italian->parseDateText('Ci vediamo questa mattina', '2012-08-10 09:30')?->toDateTimeString())
+    expect($italian->date('Ci vediamo questa mattina', '2012-08-10 09:30')?->toDateTimeString())
         ->toBe('2012-08-10 06:00:00')
-        ->and($italian->parseText('Ci vediamo questa mattina', '2012-08-10 09:30')[0]->start->tags())->toContain('parser/ITCasualTimeParser')
-        ->and($italian->parseDateText('Ci vediamo pomeriggio', '2012-08-10 09:30')?->toDateTimeString())
+        ->and($italian->parse('Ci vediamo questa mattina', '2012-08-10 09:30')[0]->start->tags())->toContain('parser/ITCasualTimeParser')
+        ->and($italian->date('Ci vediamo pomeriggio', '2012-08-10 09:30')?->toDateTimeString())
         ->toBe('2012-08-10 15:00:00')
-        ->and($italian->parseDateText('Ci vediamo sera', '2012-08-10 09:30')?->toDateTimeString())
+        ->and($italian->date('Ci vediamo sera', '2012-08-10 09:30')?->toDateTimeString())
         ->toBe('2012-08-10 20:00:00')
-        ->and($italian->parseDateText('Ci vediamo mezzogiorno', '2012-08-10 09:30')?->toDateTimeString())
+        ->and($italian->date('Ci vediamo mezzogiorno', '2012-08-10 09:30')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and($italian->parseDateText('Ci vediamo mezzanotte', '2012-08-10 09:30')?->toDateTimeString())
+        ->and($italian->date('Ci vediamo mezzanotte', '2012-08-10 09:30')?->toDateTimeString())
         ->toBe('2012-08-11 00:00:00');
 });

@@ -5,6 +5,8 @@ namespace DirectoryTree\Chrono;
 class BufferedDebugHandler implements DebugHandler
 {
     /**
+     * The buffered debug entries.
+     *
      * @var array<int, callable>
      */
     protected array $buffer = [];

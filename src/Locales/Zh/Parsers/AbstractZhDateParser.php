@@ -15,6 +15,8 @@ abstract readonly class AbstractZhDateParser implements Parser
     use CreatesParsedComponents;
 
     /**
+     * Get the locale number mappings.
+     *
      * @return array<string, int>
      */
     abstract protected function numbers(): array;

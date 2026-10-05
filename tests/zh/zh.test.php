@@ -4,9 +4,9 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses default chinese engine international and simplified traditional input', function () {
     $chinese = Chrono::zh();
-    $iso = $chinese->parseText('1994-11-05T08:15:30-05:30', '2012-08-08')[0];
-    $simplified = $chinese->parseText('明天早上8点', '2012-08-08 12:00')[0];
-    $traditional = $chinese->parseText('明天早上8點', '2012-08-08 12:00')[0];
+    $iso = $chinese->parse('1994-11-05T08:15:30-05:30', '2012-08-08')[0];
+    $simplified = $chinese->parse('明天早上8点', '2012-08-08 12:00')[0];
+    $traditional = $chinese->parse('明天早上8點', '2012-08-08 12:00')[0];
 
     expect($iso->text)->toBe('1994-11-05T08:15:30-05:30')
         ->and($iso->start->get('year'))->toBe(1994)
@@ -33,18 +33,18 @@ it('parses default chinese engine international and simplified traditional input
 
 it('parses chinese time expressions and merges date ranges', function () {
     $chinese = Chrono::zh();
-    $iso = $chinese->parseText('1994-11-05T08:15:30-05:30', '2012-08-08')[0];
-    $simplifiedDateTime = $chinese->parseText('明天早上8点', '2012-08-08 12:00')[0];
-    $traditionalDateTime = $chinese->parseText('明天早上8點', '2012-08-08 12:00')[0];
-    $time = $chinese->parseText('下午3点半到5点', '2012-08-10')[0];
-    $dateTime = $chinese->parseText('2014年7月12日下午3点', '2012-08-10')[0];
-    $range = $chinese->parseText('7月12日到7月14日', '2012-08-10')[0];
-    $endYearRange = $chinese->parseText('7月12日到2014年7月14日', '2012-08-10')[0];
-    $explicitEndDayRange = Chrono::zhHans()->parseText('今晚10点 - 明天早上6点', '2012-08-10')[0];
-    $explicitEndDayRangeWithShortDay = Chrono::zhHans()->parseText('今晚10点 - 明早6点', '2012-08-10 12:00')[0];
-    $multiDayTimeRange = Chrono::zhHans()->parseText('今天早上9点 - 后天凌晨3点', '2012-08-10')[0];
-    $hantCantoneseRange = Chrono::zhHant()->parseText('聽晚10點到聽晚11點', '2012-08-10 12:00')[0];
-    $hantYesterdayMorning = Chrono::zhHant()->parseText('尋日朝早六點正', '2012-08-10')[0];
+    $iso = $chinese->parse('1994-11-05T08:15:30-05:30', '2012-08-08')[0];
+    $simplifiedDateTime = $chinese->parse('明天早上8点', '2012-08-08 12:00')[0];
+    $traditionalDateTime = $chinese->parse('明天早上8點', '2012-08-08 12:00')[0];
+    $time = $chinese->parse('下午3点半到5点', '2012-08-10')[0];
+    $dateTime = $chinese->parse('2014年7月12日下午3点', '2012-08-10')[0];
+    $range = $chinese->parse('7月12日到7月14日', '2012-08-10')[0];
+    $endYearRange = $chinese->parse('7月12日到2014年7月14日', '2012-08-10')[0];
+    $explicitEndDayRange = Chrono::zhHans()->parse('今晚10点 - 明天早上6点', '2012-08-10')[0];
+    $explicitEndDayRangeWithShortDay = Chrono::zhHans()->parse('今晚10点 - 明早6点', '2012-08-10 12:00')[0];
+    $multiDayTimeRange = Chrono::zhHans()->parse('今天早上9点 - 后天凌晨3点', '2012-08-10')[0];
+    $hantCantoneseRange = Chrono::zhHant()->parse('聽晚10點到聽晚11點', '2012-08-10 12:00')[0];
+    $hantYesterdayMorning = Chrono::zhHant()->parse('尋日朝早六點正', '2012-08-10')[0];
 
     expect($iso->text)->toBe('1994-11-05T08:15:30-05:30')
         ->and($iso->start->timezoneOffset())->toBe(-330)
@@ -79,48 +79,48 @@ it('parses chinese time expressions and merges date ranges', function () {
 
 it('parses simplified chinese casual dates dates weekdays and deadlines', function () {
     $chinese = Chrono::zhHans();
-    $today = $chinese->parseText('我今天要打游戏', '2012-08-10 12:00')[0];
-    $tomorrowLateNight = $chinese->parseText('我明天要打游戏', '2012-08-10 01:00')[0];
-    $dayAfterTomorrow = $chinese->parseText('我后天凌晨要打游戏', '2012-08-10 00:00')[0];
-    $threeDaysAgo = $chinese->parseText('我大前天凌晨要打游戏', '2012-08-10 00:00')[0];
-    $lastNight = $chinese->parseText('我昨天晚上要打游戏', '2012-08-10 12:00')[0];
-    $casual = $chinese->parseText('明天上午', '2012-08-10 09:30')[0];
-    $combined = $chinese->parseText('我今天下午5点要打游戏', '2012-08-10 12:00')[0];
-    $casualRange = $chinese->parseText('我今天 - 下周五要打游戏', '2012-08-04 12:00')[0];
-    $night = $chinese->parseText('今日夜晚', '2012-01-01 12:00')[0];
-    $date = $chinese->parseText('2014年7月12日', '2012-08-10')[0];
-    $prefixedDate = $chinese->parseText('我2016年9月3号要打游戏', '2012-08-10')[0];
-    $hanDate = $chinese->parseText('我二零一六年，九月三号要打游戏', '2012-08-10')[0];
-    $yearlessDate = $chinese->parseText('我九月三号要打游戏', '2014-08-10')[0];
-    $dateRange = $chinese->parseText('2016年9月3号-2017年10月24号', '2012-08-10')[0];
-    $weekday = $chinese->parseText('下个星期一', '2012-08-10')[0];
-    $lastWeekday = $chinese->parseText('我上个礼拜三在打游戏', '2016-09-02')[0];
-    $nextSunday = $chinese->parseText('我下星期天打游戏', '2016-09-02')[0];
-    $thisMonday = $chinese->parseText('我这个星期一要打游戏', '2012-08-10')[0];
-    $weekdayRange = $chinese->parseText('星期六至星期一', '2016-09-02', ['forwardDate' => true])[0];
-    $weekdayRangeTo = $chinese->parseText('星期六到星期一', '2016-09-02', ['forwardDate' => true])[0];
-    $weekdayRangeTilde = $chinese->parseText('星期六~星期一', '2016-09-02', ['forwardDate' => true])[0];
-    $weekdayRangeFullWidthTilde = $chinese->parseText('星期六～星期一', '2016-09-02', ['forwardDate' => true])[0];
-    $weekdayRangeFullWidthDash = $chinese->parseText('星期六－星期一', '2016-09-02', ['forwardDate' => true])[0];
-    $weekdayRangeJapaneseDash = $chinese->parseText('星期六ー星期一', '2016-09-02', ['forwardDate' => true])[0];
-    $deadline = $chinese->parseText('3天后', '2012-08-10 09:30')[0];
-    $daysWithin = $chinese->parseText('五日内我要通关游戏', '2012-08-10')[0];
-    $digitsDaysWithin = $chinese->parseText('5日之内我要通关游戏', '2012-08-10')[0];
-    $tenDaysWithin = $chinese->parseText('十日内我要通关游戏', '2012-08-10')[0];
-    $minutesLater = $chinese->parseText('五分钟后', '2012-08-10 12:14')[0];
-    $clockWithin = $chinese->parseText('一个钟之内', '2012-08-10 12:14')[0];
-    $digitsMinutesLater = $chinese->parseText('5分钟之后出门', '2012-08-10 12:14')[0];
-    $secondsLater = $chinese->parseText('我要5秒之后出门', '2012-08-10 12:14')[0];
-    $halfHour = $chinese->parseText('半小时之内', '2012-08-10 12:14')[0];
-    $twoWeeksWithin = $chinese->parseText('两个礼拜内答复我', '2012-08-10 12:14')[0];
-    $oneMonthWithin = $chinese->parseText('1个月之内答复我', '2012-08-10 12:14')[0];
-    $monthsWithin = $chinese->parseText('几个月之内答复我', '2012-08-10 12:14')[0];
-    $yearWithin = $chinese->parseText('一年内答复我', '2012-08-10 12:14')[0];
-    $digitsYearWithin = $chinese->parseText('1年之内答复我', '2012-08-10 12:14')[0];
-    $secondsClockLater = $chinese->parseText('5秒钟后', '2012-08-10 12:14')[0];
-    $hoursLater = $chinese->parseText('2小时后', '2012-08-10 12:14')[0];
-    $weeksLater = $chinese->parseText('2星期后', '2012-08-10 12:14')[0];
-    $minutesAfter = $chinese->parseText('5分钟过后', '2012-08-10 12:14')[0];
+    $today = $chinese->parse('我今天要打游戏', '2012-08-10 12:00')[0];
+    $tomorrowLateNight = $chinese->parse('我明天要打游戏', '2012-08-10 01:00')[0];
+    $dayAfterTomorrow = $chinese->parse('我后天凌晨要打游戏', '2012-08-10 00:00')[0];
+    $threeDaysAgo = $chinese->parse('我大前天凌晨要打游戏', '2012-08-10 00:00')[0];
+    $lastNight = $chinese->parse('我昨天晚上要打游戏', '2012-08-10 12:00')[0];
+    $casual = $chinese->parse('明天上午', '2012-08-10 09:30')[0];
+    $combined = $chinese->parse('我今天下午5点要打游戏', '2012-08-10 12:00')[0];
+    $casualRange = $chinese->parse('我今天 - 下周五要打游戏', '2012-08-04 12:00')[0];
+    $night = $chinese->parse('今日夜晚', '2012-01-01 12:00')[0];
+    $date = $chinese->parse('2014年7月12日', '2012-08-10')[0];
+    $prefixedDate = $chinese->parse('我2016年9月3号要打游戏', '2012-08-10')[0];
+    $hanDate = $chinese->parse('我二零一六年，九月三号要打游戏', '2012-08-10')[0];
+    $yearlessDate = $chinese->parse('我九月三号要打游戏', '2014-08-10')[0];
+    $dateRange = $chinese->parse('2016年9月3号-2017年10月24号', '2012-08-10')[0];
+    $weekday = $chinese->parse('下个星期一', '2012-08-10')[0];
+    $lastWeekday = $chinese->parse('我上个礼拜三在打游戏', '2016-09-02')[0];
+    $nextSunday = $chinese->parse('我下星期天打游戏', '2016-09-02')[0];
+    $thisMonday = $chinese->parse('我这个星期一要打游戏', '2012-08-10')[0];
+    $weekdayRange = $chinese->parse('星期六至星期一', '2016-09-02', ['forwardDate' => true])[0];
+    $weekdayRangeTo = $chinese->parse('星期六到星期一', '2016-09-02', ['forwardDate' => true])[0];
+    $weekdayRangeTilde = $chinese->parse('星期六~星期一', '2016-09-02', ['forwardDate' => true])[0];
+    $weekdayRangeFullWidthTilde = $chinese->parse('星期六～星期一', '2016-09-02', ['forwardDate' => true])[0];
+    $weekdayRangeFullWidthDash = $chinese->parse('星期六－星期一', '2016-09-02', ['forwardDate' => true])[0];
+    $weekdayRangeJapaneseDash = $chinese->parse('星期六ー星期一', '2016-09-02', ['forwardDate' => true])[0];
+    $deadline = $chinese->parse('3天后', '2012-08-10 09:30')[0];
+    $daysWithin = $chinese->parse('五日内我要通关游戏', '2012-08-10')[0];
+    $digitsDaysWithin = $chinese->parse('5日之内我要通关游戏', '2012-08-10')[0];
+    $tenDaysWithin = $chinese->parse('十日内我要通关游戏', '2012-08-10')[0];
+    $minutesLater = $chinese->parse('五分钟后', '2012-08-10 12:14')[0];
+    $clockWithin = $chinese->parse('一个钟之内', '2012-08-10 12:14')[0];
+    $digitsMinutesLater = $chinese->parse('5分钟之后出门', '2012-08-10 12:14')[0];
+    $secondsLater = $chinese->parse('我要5秒之后出门', '2012-08-10 12:14')[0];
+    $halfHour = $chinese->parse('半小时之内', '2012-08-10 12:14')[0];
+    $twoWeeksWithin = $chinese->parse('两个礼拜内答复我', '2012-08-10 12:14')[0];
+    $oneMonthWithin = $chinese->parse('1个月之内答复我', '2012-08-10 12:14')[0];
+    $monthsWithin = $chinese->parse('几个月之内答复我', '2012-08-10 12:14')[0];
+    $yearWithin = $chinese->parse('一年内答复我', '2012-08-10 12:14')[0];
+    $digitsYearWithin = $chinese->parse('1年之内答复我', '2012-08-10 12:14')[0];
+    $secondsClockLater = $chinese->parse('5秒钟后', '2012-08-10 12:14')[0];
+    $hoursLater = $chinese->parse('2小时后', '2012-08-10 12:14')[0];
+    $weeksLater = $chinese->parse('2星期后', '2012-08-10 12:14')[0];
+    $minutesAfter = $chinese->parse('5分钟过后', '2012-08-10 12:14')[0];
 
     expect($today->index)->toBe(1)
         ->and($today->text)->toBe('今天')
@@ -229,38 +229,38 @@ it('parses simplified chinese casual dates dates weekdays and deadlines', functi
 
 it('parses traditional chinese casual dates dates weekdays and deadlines', function () {
     $chinese = Chrono::zhHant();
-    $now = $chinese->parseText('雞而家全部都係雞', '2012-08-10 08:09:10.011')[0];
-    $today = $chinese->parseText('雞今日全部都係雞', '2012-08-10 12:00')[0];
-    $tomorrowLateNight = $chinese->parseText('雞明天全部都係雞', '2012-08-10 01:00')[0];
-    $dayAfterTomorrow = $chinese->parseText('雞後天凌晨全部都係雞', '2012-08-10 00:00')[0];
-    $threeDaysAgo = $chinese->parseText('雞大前天凌晨全部都係雞', '2012-08-10 00:00')[0];
-    $lastNight = $chinese->parseText('雞昨天晚上全部都係雞', '2012-08-10 12:00')[0];
-    $casual = $chinese->parseText('聽日下午', '2012-08-10 09:30')[0];
-    $combined = $chinese->parseText('雞今日晏晝5點全部都係雞', '2012-08-10 12:00')[0];
-    $casualRange = $chinese->parseText('雞今日 - 下禮拜五全部都係雞', '2012-08-04 12:00')[0];
-    $date = $chinese->parseText('二零一四年七月十二日', '2012-08-10')[0];
-    $prefixedDate = $chinese->parseText('雞2016年9月3號全部都係雞', '2012-08-10')[0];
-    $hanDate = $chinese->parseText('雞二零一六年，九月三號全部都係雞', '2012-08-10')[0];
-    $yearlessDate = $chinese->parseText('雞九月三號全部都係雞', '2014-08-10')[0];
-    $dateRange = $chinese->parseText('二零一六年九月三號ー2017年10月24號', '2012-08-10')[0];
-    $weekday = $chinese->parseText('下個星期一', '2012-08-10')[0];
-    $lastWeekday = $chinese->parseText('雞上個禮拜三全部都係雞', '2016-09-02')[0];
-    $thisMonday = $chinese->parseText('我這個星期一要打遊戲', '2012-08-10')[0];
-    $weekdayRange = $chinese->parseText('星期六-星期一', '2016-09-02', ['forwardDate' => true])[0];
-    $deadline = $chinese->parseText('三天後', '2012-08-10 09:30')[0];
-    $daysWithin = $chinese->parseText('五日內我地有d野做', '2012-08-10')[0];
-    $digitsDaysWithin = $chinese->parseText('5日之內我地有d野做', '2012-08-10')[0];
-    $tenDaysWithin = $chinese->parseText('十日內我地有d野做', '2012-08-10')[0];
-    $minutesLater = $chinese->parseText('五分鐘後', '2012-08-10 12:14')[0];
-    $clockWithin = $chinese->parseText('一個鐘之內', '2012-08-10 12:14')[0];
-    $digitsMinutesLater = $chinese->parseText('5分鐘之後我就收皮', '2012-08-10 12:14')[0];
-    $secondsLater = $chinese->parseText('係5秒之後你就會收皮', '2012-08-10 12:14')[0];
-    $halfHour = $chinese->parseText('半小時之內', '2012-08-10 12:14')[0];
-    $twoWeeksWithin = $chinese->parseText('兩個禮拜內答覆我', '2012-08-10 12:14')[0];
-    $oneMonthWithin = $chinese->parseText('1個月之內答覆我', '2012-08-10 12:14')[0];
-    $monthsWithin = $chinese->parseText('幾個月之內答覆我', '2012-08-10 12:14')[0];
-    $yearWithin = $chinese->parseText('一年內答覆我', '2012-08-10 12:14')[0];
-    $digitsYearWithin = $chinese->parseText('1年之內答覆我', '2012-08-10 12:14')[0];
+    $now = $chinese->parse('雞而家全部都係雞', '2012-08-10 08:09:10.011')[0];
+    $today = $chinese->parse('雞今日全部都係雞', '2012-08-10 12:00')[0];
+    $tomorrowLateNight = $chinese->parse('雞明天全部都係雞', '2012-08-10 01:00')[0];
+    $dayAfterTomorrow = $chinese->parse('雞後天凌晨全部都係雞', '2012-08-10 00:00')[0];
+    $threeDaysAgo = $chinese->parse('雞大前天凌晨全部都係雞', '2012-08-10 00:00')[0];
+    $lastNight = $chinese->parse('雞昨天晚上全部都係雞', '2012-08-10 12:00')[0];
+    $casual = $chinese->parse('聽日下午', '2012-08-10 09:30')[0];
+    $combined = $chinese->parse('雞今日晏晝5點全部都係雞', '2012-08-10 12:00')[0];
+    $casualRange = $chinese->parse('雞今日 - 下禮拜五全部都係雞', '2012-08-04 12:00')[0];
+    $date = $chinese->parse('二零一四年七月十二日', '2012-08-10')[0];
+    $prefixedDate = $chinese->parse('雞2016年9月3號全部都係雞', '2012-08-10')[0];
+    $hanDate = $chinese->parse('雞二零一六年，九月三號全部都係雞', '2012-08-10')[0];
+    $yearlessDate = $chinese->parse('雞九月三號全部都係雞', '2014-08-10')[0];
+    $dateRange = $chinese->parse('二零一六年九月三號ー2017年10月24號', '2012-08-10')[0];
+    $weekday = $chinese->parse('下個星期一', '2012-08-10')[0];
+    $lastWeekday = $chinese->parse('雞上個禮拜三全部都係雞', '2016-09-02')[0];
+    $thisMonday = $chinese->parse('我這個星期一要打遊戲', '2012-08-10')[0];
+    $weekdayRange = $chinese->parse('星期六-星期一', '2016-09-02', ['forwardDate' => true])[0];
+    $deadline = $chinese->parse('三天後', '2012-08-10 09:30')[0];
+    $daysWithin = $chinese->parse('五日內我地有d野做', '2012-08-10')[0];
+    $digitsDaysWithin = $chinese->parse('5日之內我地有d野做', '2012-08-10')[0];
+    $tenDaysWithin = $chinese->parse('十日內我地有d野做', '2012-08-10')[0];
+    $minutesLater = $chinese->parse('五分鐘後', '2012-08-10 12:14')[0];
+    $clockWithin = $chinese->parse('一個鐘之內', '2012-08-10 12:14')[0];
+    $digitsMinutesLater = $chinese->parse('5分鐘之後我就收皮', '2012-08-10 12:14')[0];
+    $secondsLater = $chinese->parse('係5秒之後你就會收皮', '2012-08-10 12:14')[0];
+    $halfHour = $chinese->parse('半小時之內', '2012-08-10 12:14')[0];
+    $twoWeeksWithin = $chinese->parse('兩個禮拜內答覆我', '2012-08-10 12:14')[0];
+    $oneMonthWithin = $chinese->parse('1個月之內答覆我', '2012-08-10 12:14')[0];
+    $monthsWithin = $chinese->parse('幾個月之內答覆我', '2012-08-10 12:14')[0];
+    $yearWithin = $chinese->parse('一年內答覆我', '2012-08-10 12:14')[0];
+    $digitsYearWithin = $chinese->parse('1年之內答覆我', '2012-08-10 12:14')[0];
 
     expect($now->index)->toBe(1)
         ->and($now->text)->toBe('而家')

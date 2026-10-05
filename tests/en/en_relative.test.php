@@ -12,7 +12,7 @@ it('parses relative dates', function () {
 });
 
 it('parses relative dates with abbreviated units', function () {
-    $date = Chrono::parseDate('3w later', '2026-06-23 09:15:30');
+    $date = Chrono::date('3w later', '2026-06-23 09:15:30');
 
     expect($date?->toDateTimeString())->toBe('2026-07-14 09:15:30');
 });
@@ -25,30 +25,30 @@ it('does not parse for the unit phases as relative dates', function () {
 it('parses relative duration aliases and decimal amounts', function () {
     expect(Chrono::parse('5 days from now, we did something', '2012-08-10 00:00')[0]->text)
         ->toBe('5 days from now')
-        ->and(Chrono::parseDate('15 minutes earlier', '2012-08-10 12:14')?->toDateTimeString())
+        ->and(Chrono::date('15 minutes earlier', '2012-08-10 12:14')?->toDateTimeString())
         ->toBe('2012-08-10 11:59:00')
-        ->and(Chrono::parseDate('15 minute out', '2012-08-10 12:14')?->toDateTimeString())
+        ->and(Chrono::date('15 minute out', '2012-08-10 12:14')?->toDateTimeString())
         ->toBe('2012-08-10 12:29:00')
-        ->and(Chrono::parseDate('3 quarters ago', '2012-08-10 12:14')?->toDateTimeString())
+        ->and(Chrono::date('3 quarters ago', '2012-08-10 12:14')?->toDateTimeString())
         ->toBe('2011-11-10 12:14:00')
-        ->and(Chrono::parseDate('2 qtrs later', '2012-08-10 12:14')?->toDateTimeString())
+        ->and(Chrono::date('2 qtrs later', '2012-08-10 12:14')?->toDateTimeString())
         ->toBe('2013-02-10 12:14:00')
-        ->and(Chrono::parseDate('in 1.5 hours', '2012-08-10 12:40')?->toDateTimeString())
+        ->and(Chrono::date('in 1.5 hours', '2012-08-10 12:40')?->toDateTimeString())
         ->toBe('2012-08-10 14:10:00');
 });
 
 it('rejects abbreviated relative units in strict mode', function () {
     $strict = Chrono::strict();
 
-    expect($strict->parseDateText('in 2hour', '2016-10-01 14:52')?->toDateTimeString())
+    expect($strict->date('in 2hour', '2016-10-01 14:52')?->toDateTimeString())
         ->toBe('2016-10-01 16:52:00')
-        ->and($strict->parseText('in 15m', '2016-10-01 14:52'))->toBe([])
-        ->and($strict->parseText('within 5hr', '2016-10-01 14:52'))->toBe([])
-        ->and($strict->parseText('5m ago', '2016-10-01 14:52'))->toBe([]);
+        ->and($strict->parse('in 15m', '2016-10-01 14:52'))->toBe([])
+        ->and($strict->parse('within 5hr', '2016-10-01 14:52'))->toBe([])
+        ->and($strict->parse('5m ago', '2016-10-01 14:52'))->toBe([]);
 });
 
 it('parses multiple relative time units', function () {
-    $date = Chrono::parseDate('set a timer for 1 hour, 5 minutes, and 30 seconds', '2026-06-23 09:15:30');
+    $date = Chrono::date('set a timer for 1 hour, 5 minutes, and 30 seconds', '2026-06-23 09:15:30');
 
     expect($date?->toDateTimeString())->toBe('2026-06-23 10:21:00');
 });
@@ -68,29 +68,29 @@ it('parses bare relative durations with the forward date option', function () {
 it('parses this last and next unit expressions', function () {
     $nextMonth = Chrono::parse('next month', '2016-10-01 12:00:00')[0];
 
-    expect(Chrono::parseDate('this week', '2017-11-19 12:00:00')?->toDateTimeString())
+    expect(Chrono::date('this week', '2017-11-19 12:00:00')?->toDateTimeString())
         ->toBe('2017-11-19 12:00:00')
-        ->and(Chrono::parseDate('this month', '2017-11-19 12:00:00')?->toDateTimeString())
+        ->and(Chrono::date('this month', '2017-11-19 12:00:00')?->toDateTimeString())
         ->toBe('2017-11-01 12:00:00')
-        ->and(Chrono::parseDate('this month', '2017-11-01 12:00:00')?->toDateTimeString())
+        ->and(Chrono::date('this month', '2017-11-01 12:00:00')?->toDateTimeString())
         ->toBe('2017-11-01 12:00:00')
-        ->and(Chrono::parseDate('this year', '2017-11-19 12:00:00')?->toDateTimeString())
+        ->and(Chrono::date('this year', '2017-11-19 12:00:00')?->toDateTimeString())
         ->toBe('2017-01-01 12:00:00')
-        ->and(Chrono::parseDate('last week', '2016-10-01 12:00:00')?->toDateTimeString())
+        ->and(Chrono::date('last week', '2016-10-01 12:00:00')?->toDateTimeString())
         ->toBe('2016-09-24 12:00:00')
-        ->and(Chrono::parseDate('lastmonth', '2016-10-01 12:00:00')?->toDateTimeString())
+        ->and(Chrono::date('lastmonth', '2016-10-01 12:00:00')?->toDateTimeString())
         ->toBe('2016-09-01 12:00:00')
-        ->and(Chrono::parseDate('last day', '2016-10-01 12:00:00')?->toDateTimeString())
+        ->and(Chrono::date('last day', '2016-10-01 12:00:00')?->toDateTimeString())
         ->toBe('2016-09-30 12:00:00')
-        ->and(Chrono::parseDate('last month', '2016-10-01 12:00:00')?->toDateTimeString())
+        ->and(Chrono::date('last month', '2016-10-01 12:00:00')?->toDateTimeString())
         ->toBe('2016-09-01 12:00:00')
-        ->and(Chrono::parseDate('past week', '2016-10-01 12:00:00')?->toDateTimeString())
+        ->and(Chrono::date('past week', '2016-10-01 12:00:00')?->toDateTimeString())
         ->toBe('2016-09-24 12:00:00')
-        ->and(Chrono::parseDate('next hour', '2016-10-01 12:00:00')?->toDateTimeString())
+        ->and(Chrono::date('next hour', '2016-10-01 12:00:00')?->toDateTimeString())
         ->toBe('2016-10-01 13:00:00')
-        ->and(Chrono::parseDate('next week', '2016-10-01 12:00:00')?->toDateTimeString())
+        ->and(Chrono::date('next week', '2016-10-01 12:00:00')?->toDateTimeString())
         ->toBe('2016-10-08 12:00:00')
-        ->and(Chrono::parseDate('next day', '2016-10-01 12:00:00')?->toDateTimeString())
+        ->and(Chrono::date('next day', '2016-10-01 12:00:00')?->toDateTimeString())
         ->toBe('2016-10-02 12:00:00')
         ->and($nextMonth->text)->toBe('next month')
         ->and($nextMonth->start->date()->toDateTimeString())->toBe('2016-11-01 12:00:00')

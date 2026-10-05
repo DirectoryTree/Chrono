@@ -120,6 +120,7 @@ class ParsedResult
     public function __toString(): string
     {
         $tags = $this->tags();
+
         sort($tags);
 
         return sprintf("[ParsedResult {index: %d, text: '%s', tags: %s ...}]", $this->index, $this->text, json_encode($tags, JSON_UNESCAPED_SLASHES));

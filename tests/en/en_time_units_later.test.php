@@ -1,7 +1,7 @@
 <?php
 
 use DirectoryTree\Chrono\Chrono;
-use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\Enums\Meridiem;
 
 it('parses later relative expressions with upstream-shaped components', function () {
     $days = Chrono::parse('2 days later', '2012-08-10 12:00')[0];
@@ -93,15 +93,15 @@ it('parses later relative expressions with upstream-shaped components', function
 });
 
 it('parses later relative expressions in strict mode like upstream', function () {
-    $fromNow = Chrono::strict()->parseText('15 minutes from now', '2012-08-10 12:14')[0];
-    $later = Chrono::strict()->parseText('25 minutes later', '2012-08-10 12:40')[0];
+    $fromNow = Chrono::strict()->parse('15 minutes from now', '2012-08-10 12:14')[0];
+    $later = Chrono::strict()->parse('25 minutes later', '2012-08-10 12:40')[0];
 
     expect($fromNow->text)->toBe('15 minutes from now')
         ->and($fromNow->start->date()->toDateTimeString())->toBe('2012-08-10 12:29:00')
         ->and($later->text)->toBe('25 minutes later')
         ->and($later->start->date()->toDateTimeString())->toBe('2012-08-10 13:05:00')
-        ->and(Chrono::strict()->parseText('15m from now', '2012-08-10 12:14'))->toBe([])
-        ->and(Chrono::strict()->parseText('15s later', '2012-08-10 12:14'))->toBe([]);
+        ->and(Chrono::strict()->parse('15m from now', '2012-08-10 12:14'))->toBe([])
+        ->and(Chrono::strict()->parse('15s later', '2012-08-10 12:14'))->toBe([]);
 });
 
 it('merges later durations before and after parsed references', function () {

@@ -61,13 +61,13 @@ it('parses little endian weekday-prefixed month name dates', function () {
 });
 
 it('parses little endian month name dates with separators', function () {
-    expect(Chrono::parseDate('10-August 2012', '2012-08-08')?->toDateTimeString())
+    expect(Chrono::date('10-August 2012', '2012-08-08')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and(Chrono::parseDate('10-August-2012', '2012-08-08')?->toDateTimeString())
+        ->and(Chrono::date('10-August-2012', '2012-08-08')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and(Chrono::parseDate('10/August 2012', '2012-08-08')?->toDateTimeString())
+        ->and(Chrono::date('10/August 2012', '2012-08-08')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00')
-        ->and(Chrono::parseDate('10/August/2012', '2012-08-08')?->toDateTimeString())
+        ->and(Chrono::date('10/August/2012', '2012-08-08')?->toDateTimeString())
         ->toBe('2012-08-10 12:00:00');
 });
 
@@ -121,35 +121,35 @@ it('parses little endian month name dates followed by times', function () {
         ->toBe('12th of July at 19:00')
         ->and(Chrono::parse('12th August', '2012-08-10')[0]->text)
         ->toBe('12th August')
-        ->and(Chrono::parseDate('12 August', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::date('12 August', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-12 12:00:00')
-        ->and(Chrono::parseDate('12th of August', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::date('12th of August', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-12 12:00:00')
-        ->and(Chrono::parseDate('12th of July at 19:00', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::date('12th of July at 19:00', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-07-12 19:00:00')
-        ->and(Chrono::parseDate('5 May 12:00', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::date('5 May 12:00', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-05-05 12:00:00')
-        ->and(Chrono::parseDate('7 May 11:00', '2012-08-10')?->toDateTimeString())
+        ->and(Chrono::date('7 May 11:00', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-05-07 11:00:00')
-        ->and(Chrono::parseDate('24th October, 9 am', '2017-07-07 15:00')?->toDateTimeString())
+        ->and(Chrono::date('24th October, 9 am', '2017-07-07 15:00')?->toDateTimeString())
         ->toBe('2017-10-24 09:00:00')
-        ->and(Chrono::parseDate('24th October, 9 pm', '2017-07-07 15:00')?->toDateTimeString())
+        ->and(Chrono::date('24th October, 9 pm', '2017-07-07 15:00')?->toDateTimeString())
         ->toBe('2017-10-24 21:00:00')
         ->and(Chrono::parse('24 October, 9 pm', '2017-07-07 15:00')[0]->text)
         ->toBe('24 October, 9 pm')
-        ->and(Chrono::parseDate('24 October, 9 pm', '2017-07-07 15:00')?->toDateTimeString())
+        ->and(Chrono::date('24 October, 9 pm', '2017-07-07 15:00')?->toDateTimeString())
         ->toBe('2017-10-24 21:00:00')
         ->and(Chrono::parse('24 October, 9 p.m.', '2017-07-07 15:00')[0]->text)
         ->toBe('24 October, 9 p.m.')
-        ->and(Chrono::parseDate('24 October, 9 p.m.', '2017-07-07 15:00')?->toDateTimeString())
+        ->and(Chrono::date('24 October, 9 p.m.', '2017-07-07 15:00')?->toDateTimeString())
         ->toBe('2017-10-24 21:00:00')
-        ->and(Chrono::parseDate('24 October 10 o clock', '2017-07-07 15:00')?->toDateTimeString())
+        ->and(Chrono::date('24 October 10 o clock', '2017-07-07 15:00')?->toDateTimeString())
         ->toBe('2017-10-24 10:00:00');
 });
 
 it('moves little endian ranges forward when requested', function () {
-    $normal = Chrono::casual()->parseText('22-23 Feb at 7pm', '2016-03-15')[0];
-    $forward = Chrono::casual()->parseText('22-23 Feb at 7pm', '2016-03-15', ['forwardDate' => true])[0];
+    $normal = Chrono::casual()->parse('22-23 Feb at 7pm', '2016-03-15')[0];
+    $forward = Chrono::casual()->parse('22-23 Feb at 7pm', '2016-03-15', ['forwardDate' => true])[0];
     $explicitRange = Chrono::parse('17 August 2013 - 19 August 2013', '2012-08-10')[0];
 
     expect($normal->start->date()->toDateTimeString())->toBe('2016-02-22 19:00:00')
@@ -161,10 +161,10 @@ it('moves little endian ranges forward when requested', function () {
 });
 
 it('rejects impossible little endian month name dates in strict mode', function () {
-    expect(Chrono::strict()->parseText('32 August 2014', '2012-08-10'))->toBe([])
-        ->and(Chrono::strict()->parseText('29 February 2014', '2012-08-10'))->toBe([])
-        ->and(Chrono::strict()->parseText('32 August', '2012-08-10'))->toBe([])
-        ->and(Chrono::strict()->parseText('29 February', '2013-08-10'))->toBe([]);
+    expect(Chrono::strict()->parse('32 August 2014', '2012-08-10'))->toBe([])
+        ->and(Chrono::strict()->parse('29 February 2014', '2012-08-10'))->toBe([])
+        ->and(Chrono::strict()->parse('32 August', '2012-08-10'))->toBe([])
+        ->and(Chrono::strict()->parse('29 February', '2013-08-10'))->toBe([]);
 });
 
 it('parses little endian year 3000 and current-year dates with times', function () {

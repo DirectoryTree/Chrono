@@ -4,10 +4,10 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses dutch later relative durations', function () {
     $dutch = Chrono::nl();
-    $fromNow = $dutch->parseText('5 dagen vanaf nu', '2012-08-10 00:00')[0];
-    $minutesFromNow = $dutch->parseText('15 minuten vanaf nu', '2012-08-10 12:14')[0];
-    $minutesOut = $dutch->parseText('15 minuten uit', '2012-08-10 12:14')[0];
-    $secondsFromNow = $dutch->parseText('Over 12 seconden', '2012-08-10 12:14')[0];
+    $fromNow = $dutch->parse('5 dagen vanaf nu', '2012-08-10 00:00')[0];
+    $minutesFromNow = $dutch->parse('15 minuten vanaf nu', '2012-08-10 12:14')[0];
+    $minutesOut = $dutch->parse('15 minuten uit', '2012-08-10 12:14')[0];
+    $secondsFromNow = $dutch->parse('Over 12 seconden', '2012-08-10 12:14')[0];
 
     expect($fromNow->text)->toBe('5 dagen vanaf nu')
         ->and($fromNow->start->date()->toDateTimeString())->toBe('2012-08-15 00:00:00')
@@ -19,7 +19,7 @@ it('parses dutch later relative durations', function () {
 });
 
 it('matches upstream dutch later relative duration examples', function (string $text, string $reference, string $expectedText, string $expectedDate, int $expectedIndex = 0) {
-    $result = Chrono::nl()->parseText($text, $reference)[0];
+    $result = Chrono::nl()->parse($text, $reference)[0];
 
     expect($result->index)->toBe($expectedIndex)
         ->and($result->text)->toBe($expectedText)
@@ -44,7 +44,7 @@ it('matches upstream dutch later relative duration examples', function (string $
 ]);
 
 it('matches upstream dutch strict later relative duration examples', function (string $text, string $reference, string $expectedDate) {
-    $result = Chrono::strictDutch()->parseText($text, $reference)[0];
+    $result = Chrono::strictDutch()->parse($text, $reference)[0];
 
     expect($result->text)->toBe($text)
         ->and($result->start->date()->toDateTimeString())->toBe($expectedDate);

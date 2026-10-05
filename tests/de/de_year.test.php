@@ -5,13 +5,13 @@ use DirectoryTree\Chrono\Chrono;
 it('parses german year numbers with era labels', function () {
     $german = Chrono::de();
 
-    $beforeCommonEra = $german->parseText('10. August 234 v.u.Z.', '2012-08-10')[0];
-    $commonEra = $german->parseText('10. August 88 nuZ', '2012-08-10')[0];
-    $commonEraShort = $german->parseText('10. August 88 uZ', '2012-08-10')[0];
-    $christBefore = $german->parseText('10. August 234 v.Chr.', '2012-08-10')[0];
-    $christAfter = $german->parseText('10. August 88 nC', '2012-08-10')[0];
-    $beforeCurrentEra = $german->parseText('10. August 234 v.d.Z.', '2012-08-10')[0];
-    $currentEra = $german->parseText('10. August 88 ndZ', '2012-08-10')[0];
+    $beforeCommonEra = $german->parse('10. August 234 v.u.Z.', '2012-08-10')[0];
+    $commonEra = $german->parse('10. August 88 nuZ', '2012-08-10')[0];
+    $commonEraShort = $german->parse('10. August 88 uZ', '2012-08-10')[0];
+    $christBefore = $german->parse('10. August 234 v.Chr.', '2012-08-10')[0];
+    $christAfter = $german->parse('10. August 88 nC', '2012-08-10')[0];
+    $beforeCurrentEra = $german->parse('10. August 234 v.d.Z.', '2012-08-10')[0];
+    $currentEra = $german->parse('10. August 88 ndZ', '2012-08-10')[0];
 
     expect($beforeCommonEra->index)->toBe(0)
         ->and($beforeCommonEra->text)->toBe('10. August 234 v.u.Z.')

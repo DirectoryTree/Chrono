@@ -4,13 +4,13 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses japanese slash dates', function () {
     $japanese = Chrono::ja();
-    $slash = $japanese->parseText('2020/7/12', '2012-08-10')[0];
-    $fullSlash = $japanese->parseText('2012/3/31', '2012-08-10')[0];
-    $monthDaySlash = $japanese->parseText('12/31', '2012-08-10')[0];
-    $earlyMonthDaySlash = $japanese->parseText('8/5', '2012-08-10')[0];
-    $slashDateTime = $japanese->parseText('12/9の16:00', '2025-12-10 12:00')[0];
-    $fullWidth = $japanese->parseText('２０２０／７／１２', '2012-08-10')[0];
-    $slashRange = $japanese->parseText('2013/12/26~2014/1/7', '2012-08-10')[0];
+    $slash = $japanese->parse('2020/7/12', '2012-08-10')[0];
+    $fullSlash = $japanese->parse('2012/3/31', '2012-08-10')[0];
+    $monthDaySlash = $japanese->parse('12/31', '2012-08-10')[0];
+    $earlyMonthDaySlash = $japanese->parse('8/5', '2012-08-10')[0];
+    $slashDateTime = $japanese->parse('12/9の16:00', '2025-12-10 12:00')[0];
+    $fullWidth = $japanese->parse('２０２０／７／１２', '2012-08-10')[0];
+    $slashRange = $japanese->parse('2013/12/26~2014/1/7', '2012-08-10')[0];
 
     expect($slash->start->date()->toDateTimeString())->toBe('2020-07-12 12:00:00')
         ->and($slash->start->tags())->toContain('parser/JPSlashDateFormatParser')

@@ -4,56 +4,56 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses finnish time unit relative expressions', function () {
     $finnish = Chrono::fi();
-    $fiveDaysAgo = $finnish->parseText('5 päivää sitten tehtiin jotain', '2012-08-10')[0];
-    $tenDaysAgo = $finnish->parseText('10 päivää sitten tehtiin jotain', '2012-08-10 13:30')[0];
-    $minutesAgo = $finnish->parseText('15 minuuttia sitten', '2012-08-10 12:14')[0];
-    $prefixedHoursAgo = $finnish->parseText('   12 tuntia sitten', '2012-08-10 12:14')[0];
-    $hoursAgo = $finnish->parseText('12 tuntia sitten tapahtui jotain', '2012-08-10 12:14')[0];
-    $monthsAgo = $finnish->parseText('5 kuukautta sitten tehtiin jotain', '2012-10-10')[0];
-    $yearsAgo = $finnish->parseText('5 vuotta sitten tehtiin jotain', '2012-08-10 22:22')[0];
-    $weekAgo = $finnish->parseText('yksi viikkoa sitten tehtiin jotain', '2012-08-03 08:34')[0];
-    $withinDays = $finnish->parseText('pitää tehdä jotain 5 päivää sisällä', '2012-08-10')[0];
-    $withinMinutes = $finnish->parseText('5 minuuttia sisällä', '2012-08-10 12:14')[0];
-    $withinHours = $finnish->parseText('1 tuntia sisällä', '2012-08-10 12:14')[0];
-    $withinWeeks = $finnish->parseText('2 viikkoa sisällä', '2012-08-10 12:14')[0];
-    $duringDays = $finnish->parseText('5 päivää kuluessa', '2012-08-10')[0];
-    $duringYears = $finnish->parseText('yksi vuotta kuluessa', '2012-08-10 12:14')[0];
-    $fromNowMinutes = $finnish->parseText('5 minuuttia päästä', '2012-08-10 12:14')[0];
-    $fromNowDays = $finnish->parseText('3 päivää päästä', '2012-08-10 12:14')[0];
-    $fromNowWeeks = $finnish->parseText('2 viikkoa päästä', '2016-10-01')[0];
-    $nextTwoWeeks = $finnish->parseText('seuraavat 2 viikkoa', '2016-10-01 12:00')[0];
-    $nextTwoDays = $finnish->parseText('seuraavat 2 päivää', '2016-10-01 12:00')[0];
-    $nextTwoYears = $finnish->parseText('seuraavat kaksi vuotta', '2016-10-01 12:00')[0];
-    $compoundFuture = $finnish->parseText('seuraavat 2 viikkoa 3 päivää', '2016-10-01 12:00')[0];
-    $nextOneYear = $finnish->parseText('seuraava yksi vuotta', '2016-10-01 12:00')[0];
-    $previousTwoWeeks = $finnish->parseText('edelliset 2 viikkoa', '2016-10-01 12:00')[0];
-    $lastTwoDays = $finnish->parseText('viimeiset 2 päivää', '2016-10-01 12:00')[0];
-    $pastTwoWeeks = $finnish->parseText('kuluneet kaksi viikkoa', '2016-10-01 12:00')[0];
-    $compoundPlus = $finnish->parseText('+2 kuukautta 5 päivää', '2016-10-01 12:00')[0];
-    $plusMinutes = $finnish->parseText('+15 minuuttia', '2012-07-10 12:14')[0];
-    $plusCompactMinutes = $finnish->parseText('+15min', '2012-07-10 12:14')[0];
-    $plusCompound = $finnish->parseText('+1 päivä 2 tuntia', '2012-07-10 12:14')[0];
-    $minusYears = $finnish->parseText('-3vuotta', '2015-07-10 12:14')[0];
+    $fiveDaysAgo = $finnish->parse('5 päivää sitten tehtiin jotain', '2012-08-10')[0];
+    $tenDaysAgo = $finnish->parse('10 päivää sitten tehtiin jotain', '2012-08-10 13:30')[0];
+    $minutesAgo = $finnish->parse('15 minuuttia sitten', '2012-08-10 12:14')[0];
+    $prefixedHoursAgo = $finnish->parse('   12 tuntia sitten', '2012-08-10 12:14')[0];
+    $hoursAgo = $finnish->parse('12 tuntia sitten tapahtui jotain', '2012-08-10 12:14')[0];
+    $monthsAgo = $finnish->parse('5 kuukautta sitten tehtiin jotain', '2012-10-10')[0];
+    $yearsAgo = $finnish->parse('5 vuotta sitten tehtiin jotain', '2012-08-10 22:22')[0];
+    $weekAgo = $finnish->parse('yksi viikkoa sitten tehtiin jotain', '2012-08-03 08:34')[0];
+    $withinDays = $finnish->parse('pitää tehdä jotain 5 päivää sisällä', '2012-08-10')[0];
+    $withinMinutes = $finnish->parse('5 minuuttia sisällä', '2012-08-10 12:14')[0];
+    $withinHours = $finnish->parse('1 tuntia sisällä', '2012-08-10 12:14')[0];
+    $withinWeeks = $finnish->parse('2 viikkoa sisällä', '2012-08-10 12:14')[0];
+    $duringDays = $finnish->parse('5 päivää kuluessa', '2012-08-10')[0];
+    $duringYears = $finnish->parse('yksi vuotta kuluessa', '2012-08-10 12:14')[0];
+    $fromNowMinutes = $finnish->parse('5 minuuttia päästä', '2012-08-10 12:14')[0];
+    $fromNowDays = $finnish->parse('3 päivää päästä', '2012-08-10 12:14')[0];
+    $fromNowWeeks = $finnish->parse('2 viikkoa päästä', '2016-10-01')[0];
+    $nextTwoWeeks = $finnish->parse('seuraavat 2 viikkoa', '2016-10-01 12:00')[0];
+    $nextTwoDays = $finnish->parse('seuraavat 2 päivää', '2016-10-01 12:00')[0];
+    $nextTwoYears = $finnish->parse('seuraavat kaksi vuotta', '2016-10-01 12:00')[0];
+    $compoundFuture = $finnish->parse('seuraavat 2 viikkoa 3 päivää', '2016-10-01 12:00')[0];
+    $nextOneYear = $finnish->parse('seuraava yksi vuotta', '2016-10-01 12:00')[0];
+    $previousTwoWeeks = $finnish->parse('edelliset 2 viikkoa', '2016-10-01 12:00')[0];
+    $lastTwoDays = $finnish->parse('viimeiset 2 päivää', '2016-10-01 12:00')[0];
+    $pastTwoWeeks = $finnish->parse('kuluneet kaksi viikkoa', '2016-10-01 12:00')[0];
+    $compoundPlus = $finnish->parse('+2 kuukautta 5 päivää', '2016-10-01 12:00')[0];
+    $plusMinutes = $finnish->parse('+15 minuuttia', '2012-07-10 12:14')[0];
+    $plusCompactMinutes = $finnish->parse('+15min', '2012-07-10 12:14')[0];
+    $plusCompound = $finnish->parse('+1 päivä 2 tuntia', '2012-07-10 12:14')[0];
+    $minusYears = $finnish->parse('-3vuotta', '2015-07-10 12:14')[0];
 
-    expect($finnish->parseText('Nähdään 2 päivän päästä', '2012-08-10 09:30')[0]->text)
+    expect($finnish->parse('Nähdään 2 päivän päästä', '2012-08-10 09:30')[0]->text)
         ->toBe('2 päivän päästä')
-        ->and($finnish->parseDateText('Nähdään 2 päivän päästä', '2012-08-10 09:30')?->toDateTimeString())
+        ->and($finnish->date('Nähdään 2 päivän päästä', '2012-08-10 09:30')?->toDateTimeString())
         ->toBe('2012-08-12 09:30:00')
-        ->and($finnish->parseDateText('Nähtiin 3 päivää sitten', '2012-08-10 09:30')?->toDateTimeString())
+        ->and($finnish->date('Nähtiin 3 päivää sitten', '2012-08-10 09:30')?->toDateTimeString())
         ->toBe('2012-08-07 09:30:00')
-        ->and($finnish->parseDateText('Nähdään seuraavat 2 viikkoa', '2012-08-10 09:30')?->toDateTimeString())
+        ->and($finnish->date('Nähdään seuraavat 2 viikkoa', '2012-08-10 09:30')?->toDateTimeString())
         ->toBe('2012-08-24 09:30:00')
-        ->and($finnish->parseDateText('Nähdään seuraava yksi vuotta', '2016-10-01 12:00')?->toDateTimeString())
+        ->and($finnish->date('Nähdään seuraava yksi vuotta', '2016-10-01 12:00')?->toDateTimeString())
         ->toBe('2017-10-01 12:00:00')
-        ->and($finnish->parseDateText('Nähtiin edelliset 2 viikkoa', '2012-08-10 09:30')?->toDateTimeString())
+        ->and($finnish->date('Nähtiin edelliset 2 viikkoa', '2012-08-10 09:30')?->toDateTimeString())
         ->toBe('2012-07-27 09:30:00')
-        ->and($finnish->parseDateText('Kuluneet kaksi viikkoa', '2016-10-01 12:00')?->toDateTimeString())
+        ->and($finnish->date('Kuluneet kaksi viikkoa', '2016-10-01 12:00')?->toDateTimeString())
         ->toBe('2016-09-17 12:00:00')
-        ->and($finnish->parseDateText('+15min', '2012-07-10 12:14')?->toDateTimeString())
+        ->and($finnish->date('+15min', '2012-07-10 12:14')?->toDateTimeString())
         ->toBe('2012-07-10 12:29:00')
-        ->and($finnish->parseDateText('-3vuotta', '2015-07-10 12:14')?->toDateTimeString())
+        ->and($finnish->date('-3vuotta', '2015-07-10 12:14')?->toDateTimeString())
         ->toBe('2012-07-10 12:14:00')
-        ->and($finnish->parseDateText('Nähdään kahden tunnin päästä', '2012-08-10 09:30')?->toDateTimeString())
+        ->and($finnish->date('Nähdään kahden tunnin päästä', '2012-08-10 09:30')?->toDateTimeString())
         ->toBe('2012-08-10 11:30:00')
         ->and($fiveDaysAgo->index)->toBe(0)
         ->and($fiveDaysAgo->text)->toBe('5 päivää sitten')

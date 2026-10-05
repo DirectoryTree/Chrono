@@ -1,31 +1,31 @@
 <?php
 
 use DirectoryTree\Chrono\Chrono;
-use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\Enums\Meridiem;
 
 it('parses japanese time expressions and ranges', function () {
     $japanese = Chrono::ja();
-    $prefixedMinuteTime = $japanese->parseText('私は午前6時13分に起きた', '2012-08-10')[0];
-    $prefixedHourTime = $japanese->parseText('私は午前8時に起きる', '2012-08-10 12:00')[0];
-    $time = $japanese->parseText('午後3時半', '2012-08-10')[0];
-    $eveningTime = $japanese->parseText('午後8時', '2012-08-10 12:00')[0];
-    $fullWidthDateTime = $japanese->parseText('１２月９日の１６：３０', '2025-12-10 12:00')[0];
-    $range = $japanese->parseText('午後10時から1時', '2012-08-10')[0];
-    $japaneseNumeralRange = $japanese->parseText('私は本日午前八時十分から午後11時32分までゲームをした', '2012-08-10')[0];
-    $asciiMeridiemRange = $japanese->parseText('6時30分PM-11時PM', '2012-08-10')[0];
-    $dateTimeWithSeconds = $japanese->parseText('僕は2018年11月26日午後三時半五十九秒にゲームを始めた', '2012-08-10')[0];
-    $impliedMeridiemRange = $japanese->parseText('午後1時30分から3時10分', '2012-08-10')[0];
-    $dottedMeridiemRange = $japanese->parseText('1時20分P.M.から3時', '2012-08-10')[0];
-    $fullWidthMeridiemRange = $japanese->parseText('午後６時半－１１時', '2012-08-10')[0];
-    $overnightMeridiemRange = $japanese->parseText('午後１１時半－１時', '2012-08-10')[0];
-    $overnightTwentyFourHourRange = $japanese->parseText('23時20分から2時', '2012-08-10')[0];
-    $randomDateRange = $japanese->parseText('2014年3月5日午前 6 時から 7 時', '2012-08-10')[0];
-    $randomWeekdayTime = $japanese->parseText('次の土曜日1時30分二十九秒', '2012-08-10')[0];
-    $randomCasualTime = $japanese->parseText('昨日午前六時', '2012-08-10')[0];
-    $randomMonthTime = $japanese->parseText('６月４日3:00am', '2012-08-10')[0];
-    $randomPreviousWeekdayTime = $japanese->parseText('前の金曜日16時', '2012-08-10')[0];
-    $randomStandardTime = $japanese->parseText('3月17日 20時15', '2012-08-10')[0];
-    $weekdayTime = $japanese->parseText('水曜日 22時', '2012-08-10')[0];
+    $prefixedMinuteTime = $japanese->parse('私は午前6時13分に起きた', '2012-08-10')[0];
+    $prefixedHourTime = $japanese->parse('私は午前8時に起きる', '2012-08-10 12:00')[0];
+    $time = $japanese->parse('午後3時半', '2012-08-10')[0];
+    $eveningTime = $japanese->parse('午後8時', '2012-08-10 12:00')[0];
+    $fullWidthDateTime = $japanese->parse('１２月９日の１６：３０', '2025-12-10 12:00')[0];
+    $range = $japanese->parse('午後10時から1時', '2012-08-10')[0];
+    $japaneseNumeralRange = $japanese->parse('私は本日午前八時十分から午後11時32分までゲームをした', '2012-08-10')[0];
+    $asciiMeridiemRange = $japanese->parse('6時30分PM-11時PM', '2012-08-10')[0];
+    $dateTimeWithSeconds = $japanese->parse('僕は2018年11月26日午後三時半五十九秒にゲームを始めた', '2012-08-10')[0];
+    $impliedMeridiemRange = $japanese->parse('午後1時30分から3時10分', '2012-08-10')[0];
+    $dottedMeridiemRange = $japanese->parse('1時20分P.M.から3時', '2012-08-10')[0];
+    $fullWidthMeridiemRange = $japanese->parse('午後６時半－１１時', '2012-08-10')[0];
+    $overnightMeridiemRange = $japanese->parse('午後１１時半－１時', '2012-08-10')[0];
+    $overnightTwentyFourHourRange = $japanese->parse('23時20分から2時', '2012-08-10')[0];
+    $randomDateRange = $japanese->parse('2014年3月5日午前 6 時から 7 時', '2012-08-10')[0];
+    $randomWeekdayTime = $japanese->parse('次の土曜日1時30分二十九秒', '2012-08-10')[0];
+    $randomCasualTime = $japanese->parse('昨日午前六時', '2012-08-10')[0];
+    $randomMonthTime = $japanese->parse('６月４日3:00am', '2012-08-10')[0];
+    $randomPreviousWeekdayTime = $japanese->parse('前の金曜日16時', '2012-08-10')[0];
+    $randomStandardTime = $japanese->parse('3月17日 20時15', '2012-08-10')[0];
+    $weekdayTime = $japanese->parse('水曜日 22時', '2012-08-10')[0];
 
     expect($prefixedMinuteTime->index)->toBe(2)
         ->and($prefixedMinuteTime->text)->toBe('午前6時13分')
@@ -123,18 +123,18 @@ it('parses japanese time expressions and ranges', function () {
         ->and($weekdayTime->text)->toBe('水曜日 22時')
         ->and($weekdayTime->start->date()->toDateTimeString())->toBe('2012-08-08 22:00:00')
         ->and($weekdayTime->tags())->toContain('refiner/mergeDateFollowedByTime')
-        ->and($japanese->parseText('10時', '2012-08-10')[0]->text)->toBe('10時')
-        ->and($japanese->parseText('12時', '2012-08-10')[0]->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
-        ->and($japanese->parseText('午後１3時', '2012-08-10'))->toBe([])
-        ->and($japanese->parseText('25時', '2012-08-10'))->toBe([])
-        ->and($japanese->parseText('5時70分', '2012-08-10'))->toBe([])
-        ->and($japanese->parseText('5時30分65秒', '2012-08-10'))->toBe([])
-        ->and($japanese->parseText('23時-25時', '2012-08-10'))->toBe([])
-        ->and($japanese->parseText('3時-5時70分', '2012-08-10'))->toBe([])
-        ->and($japanese->parseText('3時-5時30分65秒', '2012-08-10'))->toBe([])
-        ->and($japanese->parseText('1', '2012-08-10'))->toBe([])
-        ->and($japanese->parseText('12', '2012-08-10'))->toBe([])
-        ->and($japanese->parseText('12a', '2012-08-10'))->toBe([])
-        ->and($japanese->parseText('1時間', '2012-08-10'))->toBe([])
-        ->and($japanese->parseText('25時間', '2012-08-10'))->toBe([]);
+        ->and($japanese->parse('10時', '2012-08-10')[0]->text)->toBe('10時')
+        ->and($japanese->parse('12時', '2012-08-10')[0]->start->date()->toDateTimeString())->toBe('2012-08-10 12:00:00')
+        ->and($japanese->parse('午後１3時', '2012-08-10'))->toBe([])
+        ->and($japanese->parse('25時', '2012-08-10'))->toBe([])
+        ->and($japanese->parse('5時70分', '2012-08-10'))->toBe([])
+        ->and($japanese->parse('5時30分65秒', '2012-08-10'))->toBe([])
+        ->and($japanese->parse('23時-25時', '2012-08-10'))->toBe([])
+        ->and($japanese->parse('3時-5時70分', '2012-08-10'))->toBe([])
+        ->and($japanese->parse('3時-5時30分65秒', '2012-08-10'))->toBe([])
+        ->and($japanese->parse('1', '2012-08-10'))->toBe([])
+        ->and($japanese->parse('12', '2012-08-10'))->toBe([])
+        ->and($japanese->parse('12a', '2012-08-10'))->toBe([])
+        ->and($japanese->parse('1時間', '2012-08-10'))->toBe([])
+        ->and($japanese->parse('25時間', '2012-08-10'))->toBe([]);
 });

@@ -1,6 +1,6 @@
 <?php
 
-namespace DirectoryTree\Chrono;
+namespace DirectoryTree\Chrono\Enums;
 
 enum Meridiem: int
 {

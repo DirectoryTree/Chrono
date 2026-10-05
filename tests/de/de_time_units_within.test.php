@@ -4,20 +4,20 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses german within time units with upstream-shaped components', function () {
     $german = Chrono::de();
-    $fiveDays = $german->parseText('Wir müssen etwas in 5 Tagen erledigen.', '2012-08-10')[0];
-    $fiveDaysWord = $german->parseText('Wir müssen etwas in fünf Tagen erledigen.', '2012-08-10 11:12')[0];
-    $minutes = $german->parseText('in 5 Minuten', '2012-08-10 12:14')[0];
-    $forMinutes = $german->parseText('für 5 minuten', '2012-08-10 12:14')[0];
-    $hour = $german->parseText('in einer Stunde', '2012-08-10 12:14')[0];
-    $timer = $german->parseText('starte einen Timer für 5 Minuten', '2012-08-10 12:14')[0];
-    $home = $german->parseText('In 5 Minuten gehe ich nach Hause', '2012-08-10 12:14')[0];
-    $seconds = $german->parseText('In 5 Sekunden wird ein Auto fahren', '2012-08-10 12:14')[0];
-    $weeks = $german->parseText('in zwei Wochen', '2012-08-10 12:14')[0];
-    $month = $german->parseText('in einem Monat', '2012-08-10 07:14')[0];
-    $months = $german->parseText('in einigen Monaten', '2012-07-10 22:14')[0];
-    $year = $german->parseText('in einem Jahr', '2012-08-10 12:14')[0];
-    $years = $german->parseText('in 20 Jahren', '2012-08-10 12:14')[0];
-    $abbreviated = $german->parseText('In 5 Min wird ein Auto fahren', '2012-08-10 12:14')[0];
+    $fiveDays = $german->parse('Wir müssen etwas in 5 Tagen erledigen.', '2012-08-10')[0];
+    $fiveDaysWord = $german->parse('Wir müssen etwas in fünf Tagen erledigen.', '2012-08-10 11:12')[0];
+    $minutes = $german->parse('in 5 Minuten', '2012-08-10 12:14')[0];
+    $forMinutes = $german->parse('für 5 minuten', '2012-08-10 12:14')[0];
+    $hour = $german->parse('in einer Stunde', '2012-08-10 12:14')[0];
+    $timer = $german->parse('starte einen Timer für 5 Minuten', '2012-08-10 12:14')[0];
+    $home = $german->parse('In 5 Minuten gehe ich nach Hause', '2012-08-10 12:14')[0];
+    $seconds = $german->parse('In 5 Sekunden wird ein Auto fahren', '2012-08-10 12:14')[0];
+    $weeks = $german->parse('in zwei Wochen', '2012-08-10 12:14')[0];
+    $month = $german->parse('in einem Monat', '2012-08-10 07:14')[0];
+    $months = $german->parse('in einigen Monaten', '2012-07-10 22:14')[0];
+    $year = $german->parse('in einem Jahr', '2012-08-10 12:14')[0];
+    $years = $german->parse('in 20 Jahren', '2012-08-10 12:14')[0];
+    $abbreviated = $german->parse('In 5 Min wird ein Auto fahren', '2012-08-10 12:14')[0];
 
     expect($fiveDays->index)->toBe(17)
         ->and($fiveDays->text)->toBe('in 5 Tagen')

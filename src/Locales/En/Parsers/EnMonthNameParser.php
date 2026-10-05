@@ -16,6 +16,8 @@ readonly class EnMonthNameParser implements Parser
     use CreatesParsedComponents;
 
     /**
+     * The month names that require full-word matching.
+     *
      * @var array<string, bool>
      */
     public const FULL_MONTHS = [
@@ -34,6 +36,8 @@ readonly class EnMonthNameParser implements Parser
     ];
 
     /**
+     * Parse the text into date results.
+     *
      * @return array<int, ParsedResult>
      */
     public function parse(string $text, Reference $reference, Options $options): array
@@ -45,6 +49,8 @@ readonly class EnMonthNameParser implements Parser
     }
 
     /**
+     * Parse month and year expressions.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseMonthYear(string $text, Reference $reference): array
@@ -100,6 +106,8 @@ readonly class EnMonthNameParser implements Parser
     }
 
     /**
+     * Parse month-only expressions.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseMonthOnly(string $text, Reference $reference, Options $options): array

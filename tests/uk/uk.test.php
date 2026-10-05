@@ -3,11 +3,11 @@
 use DirectoryTree\Chrono\Chrono;
 
 it('merges ukrainian dates with times and ranges', function () {
-    $dateTime = Chrono::uk()->parseText('10 серпня 2012 о 6:30 вечора', '2012-08-10 09:30')[0];
-    $commaTime = Chrono::uk()->parseText('24го жовтня, 9:00', '2017-07-07 15:00')[0];
-    $forwardRangeTime = Chrono::uk()->parseText('22-23 лют в 7', '2016-03-15', ['forwardDate' => true])[0];
-    $range = Chrono::uk()->parseText('10 серпня - 12 серпня', '2012-08-10 09:30')[0];
-    $crossMonthWithYear = Chrono::uk()->parseText('10 серпня - 12 вересня 2013', '2012-08-10 09:30')[0];
+    $dateTime = Chrono::uk()->parse('10 серпня 2012 о 6:30 вечора', '2012-08-10 09:30')[0];
+    $commaTime = Chrono::uk()->parse('24го жовтня, 9:00', '2017-07-07 15:00')[0];
+    $forwardRangeTime = Chrono::uk()->parse('22-23 лют в 7', '2016-03-15', ['forwardDate' => true])[0];
+    $range = Chrono::uk()->parse('10 серпня - 12 серпня', '2012-08-10 09:30')[0];
+    $crossMonthWithYear = Chrono::uk()->parse('10 серпня - 12 вересня 2013', '2012-08-10 09:30')[0];
 
     expect($dateTime->text)->toBe('10 серпня 2012 о 6:30 вечора')
         ->and($dateTime->start->date()->toDateTimeString())->toBe('2012-08-10 18:30:00')

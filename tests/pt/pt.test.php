@@ -4,8 +4,8 @@ use DirectoryTree\Chrono\Chrono;
 
 it('merges portuguese dates with times and date ranges', function () {
     $portuguese = Chrono::pt();
-    $dateTime = $portuguese->parseText('10 de agosto de 2012 às 6:30', '2012-08-10')[0];
-    $dateRange = $portuguese->parseText('10 de agosto - 12 de agosto', '2012-08-10')[0];
+    $dateTime = $portuguese->parse('10 de agosto de 2012 às 6:30', '2012-08-10')[0];
+    $dateRange = $portuguese->parse('10 de agosto - 12 de agosto', '2012-08-10')[0];
 
     expect($dateTime->text)->toBe('10 de agosto de 2012 às 6:30')
         ->and($dateTime->start->date()->toDateTimeString())->toBe('2012-08-10 06:30:00')

@@ -3,9 +3,9 @@
 namespace DirectoryTree\Chrono\Calculation;
 
 use Carbon\CarbonImmutable;
+use DirectoryTree\Chrono\Enums\Weekday;
 use DirectoryTree\Chrono\ParsedComponents;
 use DirectoryTree\Chrono\Reference;
-use DirectoryTree\Chrono\Weekday;
 
 readonly class Weekdays
 {
@@ -88,19 +88,19 @@ readonly class Weekdays
     {
         $referenceWeekday = $date->dayOfWeek;
 
-        if ($referenceWeekday === Weekday::SUNDAY->value) {
-            return $weekday === Weekday::SUNDAY->value ? 7 : $weekday;
+        if ($referenceWeekday === Weekday::Sunday->value) {
+            return $weekday === Weekday::Sunday->value ? 7 : $weekday;
         }
 
-        if ($referenceWeekday === Weekday::SATURDAY->value) {
+        if ($referenceWeekday === Weekday::Saturday->value) {
             return match ($weekday) {
-                Weekday::SATURDAY->value => 7,
-                Weekday::SUNDAY->value => 8,
+                Weekday::Saturday->value => 7,
+                Weekday::Sunday->value => 8,
                 default => 1 + $weekday,
             };
         }
 
-        return ($weekday < $referenceWeekday && $weekday !== Weekday::SUNDAY->value)
+        return ($weekday < $referenceWeekday && $weekday !== Weekday::Sunday->value)
             ? self::getDaysForwardToWeekday($date, $weekday)
             : self::getDaysForwardToWeekday($date, $weekday) + 7;
     }

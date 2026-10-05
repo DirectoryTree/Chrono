@@ -4,19 +4,19 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses french past relative durations', function () {
     $french = Chrono::fr();
-    $tenDays = $french->parseText('il y a 10 jours, on a fait quelque chose', '2012-08-10 13:30')[0];
-    $fifteenMinutes = $french->parseText('il y a 15 minutes', '2012-08-10 12:14')[0];
-    $spacedHours = $french->parseText('   il y a    12 heures', '2012-08-10 12:14')[0];
-    $sentenceHours = $french->parseText("il y a 12 heures il s'est passé quelque chose", '2012-08-10 12:14')[0];
-    $oneWeek = $french->parseText('il y a une semaine, on a fait quelque chose', '2012-08-03 08:34')[0];
+    $tenDays = $french->parse('il y a 10 jours, on a fait quelque chose', '2012-08-10 13:30')[0];
+    $fifteenMinutes = $french->parse('il y a 15 minutes', '2012-08-10 12:14')[0];
+    $spacedHours = $french->parse('   il y a    12 heures', '2012-08-10 12:14')[0];
+    $sentenceHours = $french->parse("il y a 12 heures il s'est passé quelque chose", '2012-08-10 12:14')[0];
+    $oneWeek = $french->parse('il y a une semaine, on a fait quelque chose', '2012-08-03 08:34')[0];
 
-    expect($french->parseText('il y a 5 jours, on a fait quelque chose', '2012-08-10')[0]->text)
+    expect($french->parse('il y a 5 jours, on a fait quelque chose', '2012-08-10')[0]->text)
         ->toBe('il y a 5 jours')
-        ->and($french->parseText('il y a 5 jours, on a fait quelque chose', '2012-08-10')[0]->index)
+        ->and($french->parse('il y a 5 jours, on a fait quelque chose', '2012-08-10')[0]->index)
         ->toBe(0)
-        ->and($french->parseText('il y a 5 jours, on a fait quelque chose', '2012-08-10')[0]->tags())
+        ->and($french->parse('il y a 5 jours, on a fait quelque chose', '2012-08-10')[0]->tags())
         ->toContain('parser/FRTimeUnitAgoFormatParser')
-        ->and($french->parseDateText('il y a 5 jours, on a fait quelque chose', '2012-08-10')?->toDateTimeString())
+        ->and($french->date('il y a 5 jours, on a fait quelque chose', '2012-08-10')?->toDateTimeString())
         ->toBe('2012-08-05 00:00:00')
         ->and($tenDays->text)
         ->toBe('il y a 10 jours')
@@ -38,9 +38,9 @@ it('parses french past relative durations', function () {
         ->toBe('il y a 12 heures')
         ->and($sentenceHours->start->date()->toDateTimeString())
         ->toBe('2012-08-10 00:14:00')
-        ->and($french->parseDateText('il y a 5 mois, on a fait quelque chose', '2012-10-10')?->toDateTimeString())
+        ->and($french->date('il y a 5 mois, on a fait quelque chose', '2012-10-10')?->toDateTimeString())
         ->toBe('2012-05-10 00:00:00')
-        ->and($french->parseDateText('il y a 5 ans, on a fait quelque chose', '2012-08-10 22:22')?->toDateTimeString())
+        ->and($french->date('il y a 5 ans, on a fait quelque chose', '2012-08-10 22:22')?->toDateTimeString())
         ->toBe('2007-08-10 22:22:00')
         ->and($oneWeek->text)
         ->toBe('il y a une semaine')

@@ -5,15 +5,15 @@ use DirectoryTree\Chrono\Chrono;
 it('parses finnish within time unit expressions', function () {
     $finnish = Chrono::fi();
 
-    $withinDays = $finnish->parseText('pitää tehdä jotain 5 päivää sisällä', '2012-08-10')[0];
-    $withinMinutes = $finnish->parseText('5 minuuttia sisällä', '2012-08-10 12:14')[0];
-    $withinHours = $finnish->parseText('1 tuntia sisällä', '2012-08-10 12:14')[0];
-    $withinWeeks = $finnish->parseText('2 viikkoa sisällä', '2012-08-10 12:14')[0];
-    $duringDays = $finnish->parseText('5 päivää kuluessa', '2012-08-10')[0];
-    $duringYears = $finnish->parseText('yksi vuotta kuluessa', '2012-08-10 12:14')[0];
-    $fromNowMinutes = $finnish->parseText('5 minuuttia päästä', '2012-08-10 12:14')[0];
-    $fromNowDays = $finnish->parseText('3 päivää päästä', '2012-08-10 12:14')[0];
-    $fromNowWeeks = $finnish->parseText('2 viikkoa päästä', '2016-10-01')[0];
+    $withinDays = $finnish->parse('pitää tehdä jotain 5 päivää sisällä', '2012-08-10')[0];
+    $withinMinutes = $finnish->parse('5 minuuttia sisällä', '2012-08-10 12:14')[0];
+    $withinHours = $finnish->parse('1 tuntia sisällä', '2012-08-10 12:14')[0];
+    $withinWeeks = $finnish->parse('2 viikkoa sisällä', '2012-08-10 12:14')[0];
+    $duringDays = $finnish->parse('5 päivää kuluessa', '2012-08-10')[0];
+    $duringYears = $finnish->parse('yksi vuotta kuluessa', '2012-08-10 12:14')[0];
+    $fromNowMinutes = $finnish->parse('5 minuuttia päästä', '2012-08-10 12:14')[0];
+    $fromNowDays = $finnish->parse('3 päivää päästä', '2012-08-10 12:14')[0];
+    $fromNowWeeks = $finnish->parse('2 viikkoa päästä', '2016-10-01')[0];
 
     expect($withinDays->text)->toBe('5 päivää sisällä')
         ->and($withinDays->start->date()->toDateString())->toBe('2012-08-15')

@@ -2,7 +2,7 @@
 
 namespace DirectoryTree\Chrono\Locales\Uk\Parsers;
 
-use DirectoryTree\Chrono\Meridiem;
+use DirectoryTree\Chrono\Enums\Meridiem;
 use DirectoryTree\Chrono\ParsedComponents;
 use DirectoryTree\Chrono\ParsedResult;
 use DirectoryTree\Chrono\Parsers\AbstractTimeExpressionParser;

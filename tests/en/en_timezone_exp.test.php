@@ -2,15 +2,15 @@
 
 use Carbon\CarbonImmutable;
 use DirectoryTree\Chrono\Chrono;
+use DirectoryTree\Chrono\Enums\Month;
+use DirectoryTree\Chrono\Enums\Weekday;
 use DirectoryTree\Chrono\Locales\En\Parsers\EnTimeUnitCasualRelativeFormatParser;
-use DirectoryTree\Chrono\Month;
 use DirectoryTree\Chrono\Options;
 use DirectoryTree\Chrono\ParsedComponents;
 use DirectoryTree\Chrono\ParsedResult;
 use DirectoryTree\Chrono\Reference;
 use DirectoryTree\Chrono\Refiners\ExtractTimezoneAbbrRefiner;
 use DirectoryTree\Chrono\Timezone;
-use DirectoryTree\Chrono\Weekday;
 
 it('parses iso datetimes with timezone suffixes', function () {
     $offset = Chrono::parse('1994-11-05T08:15:30-05:30')[0];
@@ -74,7 +74,7 @@ it('skips unlikely bare month abbreviations', function () {
         ->and($context->start->date()->toDateTimeString())->toBe('2019-11-01 12:00:00')
         ->and(Chrono::parse('Mar', '2012-08-10'))->toBe([])
         ->and(Chrono::parse('in Jan', '2020-11-22')[0]->text)->toBe('Jan')
-        ->and(Chrono::parseDate('in Jan', '2020-11-22')?->toDateTimeString())->toBe('2021-01-01 12:00:00');
+        ->and(Chrono::date('in Jan', '2020-11-22')?->toDateTimeString())->toBe('2021-01-01 12:00:00');
 });
 
 it('does not attach timezone abbreviations to month only expressions', function () {
@@ -125,10 +125,10 @@ it('parses casual times with timezone abbreviations', function () {
 
 it('honors upstream casual relative abbreviation parser options', function () {
     $custom = Chrono::strict()->withParser(new EnTimeUnitCasualRelativeFormatParser(false));
-    $spelled = $custom->parseText('-2 hours 5 minutes', '2016-10-01 12:00')[0];
+    $spelled = $custom->parse('-2 hours 5 minutes', '2016-10-01 12:00')[0];
 
-    expect($custom->parseText('-3y', '2016-10-01 12:00'))->toBe([])
-        ->and($custom->parseText('last 2m', '2016-10-01 12:00'))->toBe([])
+    expect($custom->parse('-3y', '2016-10-01 12:00'))->toBe([])
+        ->and($custom->parse('last 2m', '2016-10-01 12:00'))->toBe([])
         ->and($spelled->text)->toBe('-2 hours 5 minutes')
         ->and($spelled->start->date()->toDateTimeString())->toBe('2016-10-01 09:55:00');
 });
@@ -377,29 +377,29 @@ it('parses date ranges with timezone abbreviations on both endpoints', function 
 });
 
 it('uses timezone-aware reference arrays', function () {
-    $bst = Chrono::parseDate('At 4pm tomorrow', [
+    $bst = Chrono::date('At 4pm tomorrow', [
         'instant' => '2021-06-06T19:00:00+09:00',
         'timezone' => 'BST',
     ]);
 
-    $jst = Chrono::parseDate('At 4pm tomorrow', [
+    $jst = Chrono::date('At 4pm tomorrow', [
         'instant' => '2021-06-06T19:00:00+09:00',
         'timezone' => 'JST',
     ]);
 
-    $custom = Chrono::parseDate('At 4pm tomorrow', [
+    $custom = Chrono::date('At 4pm tomorrow', [
         'instant' => '2021-06-06T19:00:00+09:00',
         'timezone' => 'BBB',
     ], [
         'timezones' => ['BBB' => 60],
     ]);
 
-    $npt = Chrono::parseDate('At 4pm tomorrow', [
+    $npt = Chrono::date('At 4pm tomorrow', [
         'instant' => '2021-06-06T19:00:00+09:00',
         'timezone' => 'NPT',
     ]);
 
-    $ambiguous = Chrono::parseDate('At 4pm tomorrow', [
+    $ambiguous = Chrono::date('At 4pm tomorrow', [
         'instant' => '2021-06-06T19:00:00+09:00',
         'timezone' => 'XYZ',
     ], [
@@ -407,18 +407,18 @@ it('uses timezone-aware reference arrays', function () {
             'XYZ' => [
                 'timezoneOffsetDuringDst' => -120,
                 'timezoneOffsetNonDst' => -180,
-                'dstStart' => fn (int $year): CarbonImmutable => Timezone::getLastWeekdayOfMonth($year, Month::MARCH, Weekday::SUNDAY, 2),
-                'dstEnd' => fn (int $year): CarbonImmutable => Timezone::getLastWeekdayOfMonth($year, Month::OCTOBER, Weekday::SUNDAY, 3),
+                'dstStart' => fn (int $year): CarbonImmutable => Timezone::getLastWeekdayOfMonth($year, Month::March, Weekday::Sunday, 2),
+                'dstEnd' => fn (int $year): CarbonImmutable => Timezone::getLastWeekdayOfMonth($year, Month::October, Weekday::Sunday, 3),
             ],
         ],
     ]);
 
-    $jsDateString = Chrono::parseDate('Friday at 4pm', [
+    $jsDateString = Chrono::date('Friday at 4pm', [
         'instant' => 'Wed Jun 09 2021 07:00:00 GMT-0500 (CDT)',
         'timezone' => 'CDT',
     ]);
 
-    $jsDateStringTime = Chrono::parseDate('1am', [
+    $jsDateStringTime = Chrono::date('1am', [
         'instant' => 'Wed May 26 2022 01:57:00 GMT-0500 (CDT)',
         'timezone' => 'CDT',
     ]);

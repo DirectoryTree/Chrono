@@ -4,24 +4,24 @@ use DirectoryTree\Chrono\Chrono;
 
 it('parses simplified chinese deadline expressions', function () {
     $chinese = Chrono::zhHans();
-    $daysWithin = $chinese->parseText('五日内我要通关游戏', '2012-08-10')[0];
-    $numericDaysWithin = $chinese->parseText('5日之内我要通关游戏', '2012-08-10')[0];
-    $tenDaysWithin = $chinese->parseText('十日内我要通关游戏', '2012-08-10')[0];
-    $fiveMinutesLater = $chinese->parseText('五分钟后', '2012-08-10 12:14')[0];
-    $oneHourWithin = $chinese->parseText('一个钟之内', '2012-08-10 12:14')[0];
-    $numericMinutesLater = $chinese->parseText('5分钟之后出门', '2012-08-10 12:14')[0];
-    $secondsLater = $chinese->parseText('我要5秒之后出门', '2012-08-10 12:14')[0];
-    $halfHourWithin = $chinese->parseText('半小时之内', '2012-08-10 12:14')[0];
-    $weeksWithin = $chinese->parseText('两个礼拜内答复我', '2012-08-10 12:14')[0];
-    $monthWithin = $chinese->parseText('1个月之内答复我', '2012-08-10 12:14')[0];
-    $fewMonthsWithin = $chinese->parseText('几个月之内答复我', '2012-08-10 12:14')[0];
-    $yearWithin = $chinese->parseText('一年内答复我', '2012-08-10 12:14')[0];
-    $numericYearWithin = $chinese->parseText('1年之内答复我', '2012-08-10 12:14')[0];
-    $secondsWithMeasureWord = $chinese->parseText('5秒钟后', '2012-08-10 12:14')[0];
-    $hoursLater = $chinese->parseText('2小时后', '2012-08-10 12:14')[0];
-    $daysLater = $chinese->parseText('3天后', '2012-08-10 12:14')[0];
-    $weeksLater = $chinese->parseText('2星期后', '2012-08-10 12:14')[0];
-    $minutesAfterward = $chinese->parseText('5分钟过后', '2012-08-10 12:14')[0];
+    $daysWithin = $chinese->parse('五日内我要通关游戏', '2012-08-10')[0];
+    $numericDaysWithin = $chinese->parse('5日之内我要通关游戏', '2012-08-10')[0];
+    $tenDaysWithin = $chinese->parse('十日内我要通关游戏', '2012-08-10')[0];
+    $fiveMinutesLater = $chinese->parse('五分钟后', '2012-08-10 12:14')[0];
+    $oneHourWithin = $chinese->parse('一个钟之内', '2012-08-10 12:14')[0];
+    $numericMinutesLater = $chinese->parse('5分钟之后出门', '2012-08-10 12:14')[0];
+    $secondsLater = $chinese->parse('我要5秒之后出门', '2012-08-10 12:14')[0];
+    $halfHourWithin = $chinese->parse('半小时之内', '2012-08-10 12:14')[0];
+    $weeksWithin = $chinese->parse('两个礼拜内答复我', '2012-08-10 12:14')[0];
+    $monthWithin = $chinese->parse('1个月之内答复我', '2012-08-10 12:14')[0];
+    $fewMonthsWithin = $chinese->parse('几个月之内答复我', '2012-08-10 12:14')[0];
+    $yearWithin = $chinese->parse('一年内答复我', '2012-08-10 12:14')[0];
+    $numericYearWithin = $chinese->parse('1年之内答复我', '2012-08-10 12:14')[0];
+    $secondsWithMeasureWord = $chinese->parse('5秒钟后', '2012-08-10 12:14')[0];
+    $hoursLater = $chinese->parse('2小时后', '2012-08-10 12:14')[0];
+    $daysLater = $chinese->parse('3天后', '2012-08-10 12:14')[0];
+    $weeksLater = $chinese->parse('2星期后', '2012-08-10 12:14')[0];
+    $minutesAfterward = $chinese->parse('5分钟过后', '2012-08-10 12:14')[0];
 
     expect($daysWithin->text)->toBe('五日内')
         ->and($daysWithin->start->date()->toDateTimeString())->toBe('2012-08-15 12:00:00')

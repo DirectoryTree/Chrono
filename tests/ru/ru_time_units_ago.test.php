@@ -3,7 +3,7 @@
 use DirectoryTree\Chrono\Chrono;
 
 it('matches upstream russian ago time unit expressions', function (string $text, string $expectedText, string $expectedDate) {
-    $result = Chrono::ru()->parseText($text, '2012-07-10 00:00')[0];
+    $result = Chrono::ru()->parse($text, '2012-07-10 00:00')[0];
 
     expect($result->index)->toBe(0)
         ->and($result->text)->toBe($expectedText)
@@ -19,7 +19,7 @@ it('matches upstream russian ago time unit expressions', function (string $text,
 ]);
 
 it('does not parse incomplete russian ago time unit expressions', function (string $text) {
-    expect(Chrono::ru()->parseText($text, '2012-07-10 00:00'))->toBe([]);
+    expect(Chrono::ru()->parse($text, '2012-07-10 00:00'))->toBe([]);
 })->with([
     '15 часов 29 мин',
     'несколько часов',

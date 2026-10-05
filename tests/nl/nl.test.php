@@ -4,11 +4,11 @@ use DirectoryTree\Chrono\Chrono;
 
 it('merges dutch dates with times and date ranges', function () {
     $dutch = Chrono::nl();
-    $dateTime = $dutch->parseText('Afspraak 10 augustus 2012 om 6:30', '2012-08-10')[0];
-    $timeRange = $dutch->parseText('Afspraak 10 augustus 2012 om 6:30 - 8:45', '2012-08-10')[0];
-    $dateRange = $dutch->parseText('Evenement 10 augustus 2012 tot 12 augustus 2012', '2012-08-10')[0];
-    $dashRange = $dutch->parseText('Evenement woensdag - vrijdag', '2012-08-10')[0];
-    $casualRange = $dutch->parseText('vandaag tot morgennamiddag', '2012-08-04 12:00')[0];
+    $dateTime = $dutch->parse('Afspraak 10 augustus 2012 om 6:30', '2012-08-10')[0];
+    $timeRange = $dutch->parse('Afspraak 10 augustus 2012 om 6:30 - 8:45', '2012-08-10')[0];
+    $dateRange = $dutch->parse('Evenement 10 augustus 2012 tot 12 augustus 2012', '2012-08-10')[0];
+    $dashRange = $dutch->parse('Evenement woensdag - vrijdag', '2012-08-10')[0];
+    $casualRange = $dutch->parse('vandaag tot morgennamiddag', '2012-08-04 12:00')[0];
 
     expect($dateTime->text)->toBe('10 augustus 2012 om 6:30')
         ->and($dateTime->start->date()->toDateTimeString())->toBe('2012-08-10 06:30:00')

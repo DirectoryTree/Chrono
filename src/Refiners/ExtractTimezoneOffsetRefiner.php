@@ -10,6 +10,8 @@ use DirectoryTree\Chrono\Refiner;
 readonly class ExtractTimezoneOffsetRefiner implements Refiner
 {
     /**
+     * Refine the parsed date results.
+     *
      * @param  array<int, ParsedResult>  $results
      * @return array<int, ParsedResult>
      */

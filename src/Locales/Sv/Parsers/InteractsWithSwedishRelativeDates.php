@@ -8,6 +8,8 @@ use DirectoryTree\Chrono\Pattern;
 trait InteractsWithSwedishRelativeDates
 {
     /**
+     * Parse the duration text into date units.
+     *
      * @return array<string, int|float>
      */
     protected function duration(string $duration, bool $allowAbbreviations = true): array

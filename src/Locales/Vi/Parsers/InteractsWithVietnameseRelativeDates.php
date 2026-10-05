@@ -10,6 +10,8 @@ use DirectoryTree\Chrono\Pattern;
 trait InteractsWithVietnameseRelativeDates
 {
     /**
+     * Create parsed components for a relative date.
+     *
      * @param  array<string, int>  $known
      */
     protected function relativeComponents(CarbonImmutable $date, array $known): ParsedComponents
@@ -24,6 +26,8 @@ trait InteractsWithVietnameseRelativeDates
     }
 
     /**
+     * Create known date components for the given unit.
+     *
      * @return array<string, int>
      */
     protected function certainComponents(CarbonImmutable $date, string $unit): array
@@ -40,6 +44,8 @@ trait InteractsWithVietnameseRelativeDates
     }
 
     /**
+     * Apply the duration to the given date.
+     *
      * @param  array<string, int|float>  $duration
      */
     protected function applyDuration(CarbonImmutable $date, array $duration, int $direction): CarbonImmutable
@@ -52,6 +58,8 @@ trait InteractsWithVietnameseRelativeDates
     }
 
     /**
+     * Parse the duration text into date units.
+     *
      * @return array<string, int|float>
      */
     protected function duration(string $duration): array
@@ -87,6 +95,8 @@ trait InteractsWithVietnameseRelativeDates
     }
 
     /**
+     * Determine the most specific duration unit.
+     *
      * @param  array<string, int|float>  $duration
      */
     protected function mostSpecificUnit(array $duration): string

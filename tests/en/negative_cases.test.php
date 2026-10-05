@@ -11,7 +11,7 @@ it('does not parse reporting-period prose as a relative duration', function () {
 
 it('swaps year month day order when month is impossible and day can be month', function () {
     $result = Chrono::parse('2024/13/1', '2012-08-10')[0];
-    $strict = Chrono::strict()->parseText('2024/13/1', '2012-08-10');
+    $strict = Chrono::strict()->parse('2024/13/1', '2012-08-10');
 
     expect($result->start->get('year'))->toBe(2024)
         ->and($result->start->get('month'))->toBe(1)
@@ -41,8 +41,8 @@ it('rejects upstream casual false positives', function () {
         ->and(Chrono::parse('do I have the money'))->toBe([])
         ->and(Chrono::parse('I may by here. May the force be with you. Theresa may become PM soon.'))->toBe([])
         ->and(Chrono::parse('XXX is set to be released in the second half of 2025'))->toBe([])
-        ->and(Chrono::casual()->parseText('do I have the money'))->toBe([])
-        ->and(Chrono::gb()->parseText('do I have the money'))->toBe([]);
+        ->and(Chrono::casual()->parse('do I have the money'))->toBe([])
+        ->and(Chrono::gb()->parse('do I have the money'))->toBe([]);
 });
 
 it('rejects upstream random non-date patterns', function () {
@@ -155,10 +155,10 @@ it('does not parse version numbers as dates', function () {
 it('rejects upstream casual relative negative cases', function () {
     $casual = Chrono::casual();
 
-    expect($casual->parseText('3y', '2015-07-10 12:14'))->toBe([])
-        ->and($casual->parseText('1 m', '2015-07-10 12:14'))->toBe([])
-        ->and($casual->parseText('the day', '2015-07-10 12:14'))->toBe([])
-        ->and($casual->parseText('a day', '2015-07-10 12:14'))->toBe([])
+    expect($casual->parse('3y', '2015-07-10 12:14'))->toBe([])
+        ->and($casual->parse('1 m', '2015-07-10 12:14'))->toBe([])
+        ->and($casual->parse('the day', '2015-07-10 12:14'))->toBe([])
+        ->and($casual->parse('a day', '2015-07-10 12:14'))->toBe([])
         ->and(Chrono::parse('+am'))->toBe([])
         ->and(Chrono::parse('+them'))->toBe([]);
 });
@@ -169,13 +169,13 @@ it('rejects upstream year-like and strict time expression false positives', func
     expect(Chrono::parse('2020'))->toBe([])
         ->and(Chrono::parse('2020  '))->toBe([])
         ->and(Chrono::parse('2019 to 2020'))->toBe([])
-        ->and($strict->parseText("I'm at 101,194 points!"))->toBe([])
-        ->and($strict->parseText("I'm at 101 points!"))->toBe([])
-        ->and($strict->parseText("I'm at 10.1"))->toBe([])
-        ->and($strict->parseText("I'm at 10"))->toBe([])
-        ->and($strict->parseText('2020'))->toBe([])
-        ->and($strict->parseText("I'm at 10.1 - 10.12"))->toBe([])
-        ->and($strict->parseText("I'm at 10 - 10.1"))->toBe([])
-        ->and($strict->parseText("I'm at 10 - 20"))->toBe([])
-        ->and($strict->parseText('7-730'))->toBe([]);
+        ->and($strict->parse("I'm at 101,194 points!"))->toBe([])
+        ->and($strict->parse("I'm at 101 points!"))->toBe([])
+        ->and($strict->parse("I'm at 10.1"))->toBe([])
+        ->and($strict->parse("I'm at 10"))->toBe([])
+        ->and($strict->parse('2020'))->toBe([])
+        ->and($strict->parse("I'm at 10.1 - 10.12"))->toBe([])
+        ->and($strict->parse("I'm at 10 - 10.1"))->toBe([])
+        ->and($strict->parse("I'm at 10 - 20"))->toBe([])
+        ->and($strict->parse('7-730'))->toBe([]);
 });

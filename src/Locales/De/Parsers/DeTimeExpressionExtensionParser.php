@@ -52,6 +52,8 @@ readonly class DeTimeExpressionExtensionParser implements Parser
     }
 
     /**
+     * Parse date and time ranges.
+     *
      * @return array<int, ParsedResult>
      */
     protected function parseRanges(string $text, Reference $reference, string $suffix): array
@@ -103,6 +105,8 @@ readonly class DeTimeExpressionExtensionParser implements Parser
     }
 
     /**
+     * Parse matched time components.
+     *
      * @return array{hour: int, minute: int, meridiemCertain: bool}|null
      */
     protected function time(array $match, string $prefix, string $pairedSuffix): ?array

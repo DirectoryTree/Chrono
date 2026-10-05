@@ -5,13 +5,13 @@ use DirectoryTree\Chrono\Chrono;
 it('parses standalone finnish casual time expressions', function () {
     $finnish = Chrono::fi();
 
-    $morning = $finnish->parseText('aamulla', '2012-08-10 14:00')[0];
-    $lateMorning = $finnish->parseText('aamupäivällä', '2012-08-10 14:00')[0];
-    $noon = $finnish->parseText('päivällä', '2012-08-10 14:00')[0];
-    $afternoon = $finnish->parseText('iltapäivällä', '2012-08-10 14:00')[0];
-    $evening = $finnish->parseText('illalla', '2012-08-10 14:00')[0];
-    $night = $finnish->parseText('yöllä', '2012-08-10 14:00')[0];
-    $midnight = $finnish->parseText('keskiyöllä', '2012-08-10 14:00')[0];
+    $morning = $finnish->parse('aamulla', '2012-08-10 14:00')[0];
+    $lateMorning = $finnish->parse('aamupäivällä', '2012-08-10 14:00')[0];
+    $noon = $finnish->parse('päivällä', '2012-08-10 14:00')[0];
+    $afternoon = $finnish->parse('iltapäivällä', '2012-08-10 14:00')[0];
+    $evening = $finnish->parse('illalla', '2012-08-10 14:00')[0];
+    $night = $finnish->parse('yöllä', '2012-08-10 14:00')[0];
+    $midnight = $finnish->parse('keskiyöllä', '2012-08-10 14:00')[0];
 
     expect($morning->text)->toBe('aamulla')
         ->and($morning->start->get('hour'))->toBe(6)
@@ -37,7 +37,7 @@ it('parses standalone finnish casual time expressions', function () {
 });
 
 it('parses finnish last night', function () {
-    $result = Chrono::fi()->parseText('viime yönä', '2012-08-10 14:00')[0];
+    $result = Chrono::fi()->parse('viime yönä', '2012-08-10 14:00')[0];
 
     expect($result->text)->toBe('viime yönä')
         ->and($result->start->get('year'))->toBe(2012)

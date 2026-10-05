@@ -4,9 +4,9 @@ use DirectoryTree\Chrono\Chrono;
 
 it('merges finnish dates with times and date ranges', function () {
     $finnish = Chrono::fi();
-    $dateTime = $finnish->parseText('Nähdään 10. elokuuta 2012 klo 6:30', '2012-08-10')[0];
-    $timeRange = $finnish->parseText('Nähdään 10. elokuuta 2012 klo 6:30 - 8:45', '2012-08-10')[0];
-    $dateRange = $finnish->parseText('Tapahtuma 10. elokuuta 2012 - 12. elokuuta 2012', '2012-08-10')[0];
+    $dateTime = $finnish->parse('Nähdään 10. elokuuta 2012 klo 6:30', '2012-08-10')[0];
+    $timeRange = $finnish->parse('Nähdään 10. elokuuta 2012 klo 6:30 - 8:45', '2012-08-10')[0];
+    $dateRange = $finnish->parse('Tapahtuma 10. elokuuta 2012 - 12. elokuuta 2012', '2012-08-10')[0];
 
     expect($dateTime->text)->toBe('10. elokuuta 2012 klo 6:30')
         ->and($dateTime->start->date()->toDateTimeString())->toBe('2012-08-10 06:30:00')

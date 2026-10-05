@@ -2,8 +2,8 @@
 
 namespace DirectoryTree\Chrono\Locales\Ja\Parsers;
 
+use DirectoryTree\Chrono\Enums\Meridiem;
 use DirectoryTree\Chrono\Locales\Ja\JaConstants;
-use DirectoryTree\Chrono\Meridiem;
 use DirectoryTree\Chrono\Options;
 use DirectoryTree\Chrono\ParsedComponents;
 use DirectoryTree\Chrono\ParsedResult;
@@ -164,6 +164,8 @@ readonly class JaTimeExpressionParser implements Parser
     }
 
     /**
+     * Remove timezone offset captures from the match.
+     *
      * @return array<string, array{0: string, 1: int}>
      */
     protected function offsetlessMatch(array $match): array

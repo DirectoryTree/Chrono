@@ -7,6 +7,8 @@ use DirectoryTree\Chrono\Pattern;
 readonly class EsConstants
 {
     /**
+     * The month name mappings.
+     *
      * @var array<string, int>
      */
     public const MONTHS = [
@@ -51,6 +53,8 @@ readonly class EsConstants
     ];
 
     /**
+     * The weekday name mappings.
+     *
      * @var array<string, int>
      */
     public const WEEKDAYS = [

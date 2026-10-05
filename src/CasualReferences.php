@@ -2,6 +2,8 @@
 
 namespace DirectoryTree\Chrono;
 
+use DirectoryTree\Chrono\Enums\Meridiem;
+
 readonly class CasualReferences
 {
     /**

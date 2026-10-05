@@ -22,8 +22,8 @@ readonly class Configuration
      * @param  array<int, Refiner>  $refiners
      */
     public function __construct(
-        protected readonly array $parsers = [],
-        protected readonly array $refiners = [],
+        public readonly array $parsers = [],
+        public readonly array $refiners = [],
     ) {}
 
     /**

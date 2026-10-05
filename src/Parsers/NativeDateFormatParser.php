@@ -3,6 +3,7 @@
 namespace DirectoryTree\Chrono\Parsers;
 
 use Carbon\CarbonImmutable;
+use DateTimeImmutable;
 use DirectoryTree\Chrono\Locales\En\CreatesParsedComponents;
 use DirectoryTree\Chrono\Options;
 use DirectoryTree\Chrono\ParsedResult;
@@ -81,7 +82,7 @@ readonly class NativeDateFormatParser implements Parser
         $normalized = preg_replace('/\s*\([^)]*\)\s*$/', '', trim($text)) ?? trim($text);
 
         if (preg_match('/^\d{1,2}\/\d{1,2}\/\d{4}\s+/', $normalized) === 1) {
-            $date = \DateTimeImmutable::createFromFormat('!m/d/Y h:i:s.u A', $this->normalizeFractionalSeconds($normalized));
+            $date = DateTimeImmutable::createFromFormat('!m/d/Y h:i:s.u A', $this->normalizeFractionalSeconds($normalized));
 
             return $date === false ? null : CarbonImmutable::instance($date);
         }
