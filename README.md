@@ -1,12 +1,25 @@
-# Chrono
+<h1 align="center">Chrono</h1>
+
+<p align="center">Parse natural language dates into immutable Carbon instances.</p>
 
 <p align="center">
-<a href="https://github.com/DirectoryTree/Chrono/actions"><img src="https://img.shields.io/github/actions/workflow/status/DirectoryTree/Chrono/run-tests.yml?branch=master&label=tests&style=flat-square" alt="Tests"></a>
-<a href="https://github.com/DirectoryTree/Chrono/actions"><img src="https://img.shields.io/github/actions/workflow/status/DirectoryTree/Chrono/fix-style.yml?branch=master&label=style&style=flat-square" alt="Style"></a>
-<a href="https://packagist.org/packages/directorytree/chrono"><img src="https://img.shields.io/packagist/v/directorytree/chrono.svg?style=flat-square" alt="Latest Version"></a>
-<a href="https://packagist.org/packages/directorytree/chrono"><img src="https://img.shields.io/packagist/dt/directorytree/chrono.svg?style=flat-square" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/directorytree/chrono"><img src="https://img.shields.io/packagist/l/directorytree/chrono.svg?style=flat-square" alt="License"></a>
+    <a href="https://github.com/DirectoryTree/Chrono/actions/workflows/run-tests.yml"><img src="https://img.shields.io/github/actions/workflow/status/DirectoryTree/Chrono/run-tests.yml?branch=master&amp;style=flat-square" alt="Tests"></a>
+    <a href="https://packagist.org/packages/directorytree/chrono"><img src="https://img.shields.io/packagist/dt/directorytree/chrono.svg?style=flat-square" alt="Total Downloads"></a>
+    <a href="https://packagist.org/packages/directorytree/chrono"><img src="https://img.shields.io/packagist/v/directorytree/chrono.svg?style=flat-square" alt="Latest Version"></a>
+    <a href="https://packagist.org/packages/directorytree/chrono"><img src="https://img.shields.io/packagist/l/directorytree/chrono.svg?style=flat-square" alt="License"></a>
 </p>
+
+<p align="center">
+    <a href="#installation">Installation</a>
+    <span> · </span>
+    <a href="#usage">Usage</a>
+    <span> · </span>
+    <a href="#locales">Locales</a>
+    <span> · </span>
+    <a href="#testing">Testing</a>
+</p>
+
+---
 
 Chrono is a PHP natural language date parser inspired by [`wanasit/chrono`](https://github.com/wanasit/chrono).
 
