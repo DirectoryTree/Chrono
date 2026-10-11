@@ -3,6 +3,7 @@
 namespace DirectoryTree\Chrono\Locales\Es\Parsers;
 
 use Carbon\CarbonImmutable;
+use Carbon\CarbonInterface;
 use DirectoryTree\Chrono\ParsedComponents;
 
 trait InteractsWithSpanishRelativeDates
@@ -57,7 +58,7 @@ trait InteractsWithSpanishRelativeDates
      *
      * @return array<string, int>
      */
-    protected function certainComponents(CarbonImmutable $date, string $unit): array
+    protected function certainComponents(CarbonInterface $date, string $unit): array
     {
         return match ($unit) {
             'second' => ['year' => $date->year, 'month' => $date->month, 'day' => $date->day, 'hour' => $date->hour, 'minute' => $date->minute, 'second' => $date->second],

@@ -2,7 +2,7 @@
 
 namespace DirectoryTree\Chrono\Refiners;
 
-use Carbon\CarbonImmutable;
+use Carbon\CarbonInterface;
 use DirectoryTree\Chrono\Calculation\Duration;
 use DirectoryTree\Chrono\Calculation\Weekdays;
 use DirectoryTree\Chrono\Options;
@@ -95,7 +95,7 @@ readonly class ForwardDateRefiner implements Refiner
     /**
      * Imply the date components from the given Carbon date.
      */
-    protected function implyDate(ParsedComponents $components, CarbonImmutable $date): void
+    protected function implyDate(ParsedComponents $components, CarbonInterface $date): void
     {
         $components
             ->imply('year', $date->year)

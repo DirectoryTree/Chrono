@@ -2,7 +2,7 @@
 
 namespace DirectoryTree\Chrono;
 
-use Carbon\CarbonImmutable;
+use Carbon\CarbonInterface;
 use DirectoryTree\Chrono\Enums\Meridiem;
 
 readonly class Dates
@@ -10,7 +10,7 @@ readonly class Dates
     /**
      * Assign date components from a matching Carbon date.
      */
-    public static function assignSimilarDate(ParsedComponents $components, CarbonImmutable $date): void
+    public static function assignSimilarDate(ParsedComponents $components, CarbonInterface $date): void
     {
         $components
             ->assign('day', $date->day)
@@ -21,7 +21,7 @@ readonly class Dates
     /**
      * Assign time components from a matching Carbon date.
      */
-    public static function assignSimilarTime(ParsedComponents $components, CarbonImmutable $date): void
+    public static function assignSimilarTime(ParsedComponents $components, CarbonInterface $date): void
     {
         $components
             ->assign('hour', $date->hour)
@@ -34,7 +34,7 @@ readonly class Dates
     /**
      * Imply date components from a matching Carbon date.
      */
-    public static function implySimilarDate(ParsedComponents $components, CarbonImmutable $date): void
+    public static function implySimilarDate(ParsedComponents $components, CarbonInterface $date): void
     {
         $components
             ->imply('day', $date->day)
@@ -45,7 +45,7 @@ readonly class Dates
     /**
      * Imply time components from a matching Carbon date.
      */
-    public static function implySimilarTime(ParsedComponents $components, CarbonImmutable $date): void
+    public static function implySimilarTime(ParsedComponents $components, CarbonInterface $date): void
     {
         $components
             ->imply('hour', $date->hour)

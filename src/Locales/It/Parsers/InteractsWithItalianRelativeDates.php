@@ -3,6 +3,7 @@
 namespace DirectoryTree\Chrono\Locales\It\Parsers;
 
 use Carbon\CarbonImmutable;
+use Carbon\CarbonInterface;
 use DirectoryTree\Chrono\Dates;
 use DirectoryTree\Chrono\Locales\It\ItConstants;
 use DirectoryTree\Chrono\ParsedComponents;
@@ -31,7 +32,7 @@ trait InteractsWithItalianRelativeDates
      *
      * @return array<string, int>
      */
-    protected function certainComponents(CarbonImmutable $date, string $unit): array
+    protected function certainComponents(CarbonInterface $date, string $unit): array
     {
         return match ($unit) {
             'second' => ['year' => $date->year, 'month' => $date->month, 'day' => $date->day, 'hour' => $date->hour, 'minute' => $date->minute, 'second' => $date->second],

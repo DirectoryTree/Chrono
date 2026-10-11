@@ -112,7 +112,7 @@ readonly class Reference
     /**
      * Resolve a Chrono-compatible timezone into an offset in minutes.
      */
-    protected static function timezoneOffset(int|string|null $timezone, CarbonImmutable $date, ?Options $options): ?int
+    protected static function timezoneOffset(int|string|null $timezone, CarbonInterface $date, ?Options $options): ?int
     {
         if ($timezone === null || $timezone === '') {
             return null;

@@ -3,6 +3,7 @@
 namespace DirectoryTree\Chrono;
 
 use Carbon\CarbonImmutable;
+use Carbon\CarbonInterface;
 use DirectoryTree\Chrono\Enums\Month;
 use DirectoryTree\Chrono\Enums\Weekday;
 
@@ -212,7 +213,7 @@ readonly class Timezone
     /**
      * Resolve a timezone abbreviation to an offset in minutes.
      */
-    public static function offset(string $abbr, CarbonImmutable $date, ?Options $options = null): ?int
+    public static function offset(string $abbr, CarbonInterface $date, ?Options $options = null): ?int
     {
         $abbr = strtoupper($abbr);
         $custom = $options?->timezones()[$abbr] ?? null;
@@ -251,7 +252,7 @@ readonly class Timezone
      *
      * @param  array<string, mixed>  $timezone
      */
-    protected static function customAmbiguousOffset(array $timezone, CarbonImmutable $date): ?int
+    protected static function customAmbiguousOffset(array $timezone, CarbonInterface $date): ?int
     {
         if (! isset($timezone['timezoneOffsetDuringDst'], $timezone['timezoneOffsetNonDst'])) {
             return null;
@@ -277,7 +278,7 @@ readonly class Timezone
     /**
      * Resolve the timezone offset.
      */
-    protected static function ambiguousOffset(string $timezone, CarbonImmutable $date): ?int
+    protected static function ambiguousOffset(string $timezone, CarbonInterface $date): ?int
     {
         return match ($timezone) {
             'ET' => self::isNorthAmericanDst($date) ? -240 : -300,
@@ -292,7 +293,7 @@ readonly class Timezone
     /**
      * Determine whether the date is in North American daylight saving time.
      */
-    protected static function isNorthAmericanDst(CarbonImmutable $date): bool
+    protected static function isNorthAmericanDst(CarbonInterface $date): bool
     {
         $start = self::getNthWeekdayOfMonth($date->year, Month::March, Weekday::Sunday, 2, 2);
         $end = self::getNthWeekdayOfMonth($date->year, Month::November, Weekday::Sunday, 1, 2);
@@ -303,7 +304,7 @@ readonly class Timezone
     /**
      * Determine whether the date is in Central European daylight saving time.
      */
-    protected static function isCentralEuropeanDst(CarbonImmutable $date): bool
+    protected static function isCentralEuropeanDst(CarbonInterface $date): bool
     {
         $start = self::getLastWeekdayOfMonth($date->year, Month::March, Weekday::Sunday, 2);
         $end = self::getLastWeekdayOfMonth($date->year, Month::October, Weekday::Sunday, 3);

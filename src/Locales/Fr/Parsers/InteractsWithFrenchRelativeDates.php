@@ -3,6 +3,7 @@
 namespace DirectoryTree\Chrono\Locales\Fr\Parsers;
 
 use Carbon\CarbonImmutable;
+use Carbon\CarbonInterface;
 use DirectoryTree\Chrono\ParsedComponents;
 
 trait InteractsWithFrenchRelativeDates
@@ -57,7 +58,7 @@ trait InteractsWithFrenchRelativeDates
      *
      * @return array<string, int>
      */
-    protected function certainComponents(CarbonImmutable $date, string $unit): array
+    protected function certainComponents(CarbonInterface $date, string $unit): array
     {
         return match ($unit) {
             'second' => ['year' => $date->year, 'month' => $date->month, 'day' => $date->day, 'hour' => $date->hour, 'minute' => $date->minute, 'second' => $date->second],
@@ -75,7 +76,7 @@ trait InteractsWithFrenchRelativeDates
      *
      * @return array<string, int>
      */
-    protected function casualCertainComponents(CarbonImmutable $date, string $unit): array
+    protected function casualCertainComponents(CarbonInterface $date, string $unit): array
     {
         if (in_array($unit, ['quarter', 'year'], true)) {
             return ['year' => $date->year];

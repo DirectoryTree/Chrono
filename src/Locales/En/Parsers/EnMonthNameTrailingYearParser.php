@@ -3,6 +3,7 @@
 namespace DirectoryTree\Chrono\Locales\En\Parsers;
 
 use Carbon\CarbonImmutable;
+use Carbon\CarbonInterface;
 use DirectoryTree\Chrono\Enums\Meridiem;
 use DirectoryTree\Chrono\Locales\En\CreatesParsedComponents;
 use DirectoryTree\Chrono\Locales\En\EnConstants;
@@ -143,7 +144,7 @@ readonly class EnMonthNameTrailingYearParser implements Parser
      *
      * @return array<string, int>
      */
-    protected function dateTimeKnown(CarbonImmutable $date): array
+    protected function dateTimeKnown(CarbonInterface $date): array
     {
         return [
             'year' => $date->year,

@@ -2,7 +2,7 @@
 
 namespace DirectoryTree\Chrono\Locales\En\Refiners;
 
-use Carbon\CarbonImmutable;
+use Carbon\CarbonInterface;
 use DirectoryTree\Chrono\Enums\Meridiem;
 use DirectoryTree\Chrono\Options;
 use DirectoryTree\Chrono\ParsedComponents;
@@ -113,7 +113,7 @@ readonly class EnMergeDateTimeRefiner extends MergingRefiner
     /**
      * Merge the parsed results.
      */
-    protected function mergeDateComponents(ParsedComponents $target, ParsedComponents $source, ?CarbonImmutable $date = null): void
+    protected function mergeDateComponents(ParsedComponents $target, ParsedComponents $source, ?CarbonInterface $date = null): void
     {
         $date ??= $source->date();
 

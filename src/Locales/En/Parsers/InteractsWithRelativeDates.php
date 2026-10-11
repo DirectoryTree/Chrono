@@ -3,6 +3,7 @@
 namespace DirectoryTree\Chrono\Locales\En\Parsers;
 
 use Carbon\CarbonImmutable;
+use Carbon\CarbonInterface;
 use DirectoryTree\Chrono\Dates;
 use DirectoryTree\Chrono\ParsedComponents;
 
@@ -30,7 +31,7 @@ trait InteractsWithRelativeDates
      *
      * @return array<string, int>
      */
-    protected function certainComponents(CarbonImmutable $date, string $unit): array
+    protected function certainComponents(CarbonInterface $date, string $unit): array
     {
         return match ($unit) {
             'second' => [

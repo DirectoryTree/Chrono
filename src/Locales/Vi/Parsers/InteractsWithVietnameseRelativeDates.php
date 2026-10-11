@@ -3,6 +3,7 @@
 namespace DirectoryTree\Chrono\Locales\Vi\Parsers;
 
 use Carbon\CarbonImmutable;
+use Carbon\CarbonInterface;
 use DirectoryTree\Chrono\Locales\Vi\ViConstants;
 use DirectoryTree\Chrono\ParsedComponents;
 use DirectoryTree\Chrono\Pattern;
@@ -30,7 +31,7 @@ trait InteractsWithVietnameseRelativeDates
      *
      * @return array<string, int>
      */
-    protected function certainComponents(CarbonImmutable $date, string $unit): array
+    protected function certainComponents(CarbonInterface $date, string $unit): array
     {
         return match ($unit) {
             'second' => ['year' => $date->year, 'month' => $date->month, 'day' => $date->day, 'hour' => $date->hour, 'minute' => $date->minute, 'second' => $date->second],
